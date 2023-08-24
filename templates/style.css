@@ -1,0 +1,171 @@
+body{
+  	min-height : 100vh;
+  	background-image : url("https://coc-ancient-ruins-website--lightning-presi.repl.co/static/bg_img.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-position:center;
+  	display : flex;
+  	justify-content : center;
+  	align-items : center;
+	font-family:"Roboto Condensed";
+}
+.container{
+	width:90%;
+}
+table,th,td{
+  	border-collapse : collapse;
+  	padding : 1rem;
+  	text-align : left;
+}
+.table-body{
+  	width : 95%;
+  	max-height : 20rem;
+  	background-color : #fffb;
+  	margin : .8rem auto; 
+  	border-radius : .6rem;
+  	overflow-y : auto;
+}
+.main-table,.main-not-member-table,.main-clan-table{
+  	width : auto;
+  	height : auto;
+  	background-color : #fff5;
+  	backdrop-filter : blur(7px);
+  	box-shadow : 0 .4rem .8rem #0005;
+  	border-radius : .8rem;
+  	overflow : hidden;
+}
+.table-header h2{
+  	margin : 0px;
+  	width : 100%;
+  	height : auto;
+  	background-color : #fff4;
+  	padding : .8rem 1rem;
+}
+.table-body{
+  	width : 95%;
+  	max-height : 20rem;
+  	background-color : #fffb;
+  	margin : .8rem auto;
+  	border-radius : .6rem;
+  	overflow : auto;
+}
+.table-body::-webkit-scrollbar{
+  	width : 0.5rem;
+  	height : 0.5rem;
+}
+.table-body::-webkit-scrollbar-thumb{
+  	border-radius : .5rem;
+  	background-color : #0004;
+  	visibility : hidden;
+}
+.table-body:hover::-webkit-scrollbar-thumb{
+  	visibility : visible;
+}
+	table{
+  	width : 100%;
+}
+thead{
+  	position : sticky;
+  	top : 0;
+  	left : 0;
+  	background-color : #d5d1defe;
+  	border-radius : 5px;
+}
+.table-body tr:nth-child(even){
+  	background-color : #0002;
+}
+.table-body tr:nth-child(odd){
+  	background-color : #000000b;
+}
+.status{
+  	padding : .4rem 1;
+  	border-radius : 2rem;
+  	text-align : center;
+	color : black;
+}
+.status.leader{
+  	background-color : #86e49d;
+}
+.status.co-leader{
+  	background-color : #d893a3;
+}
+.status.elder{
+  	background-color : #6fcaea;
+}
+.clan-table-body th{
+  	text-align : right;
+}
+.data-box{
+  	display : flex;
+  	margin-right : .3rem;
+}
+.img-box{
+  	height : auto;
+  	width : auto;
+  	background-color : #fffb;
+  	border-radius : .6rem;
+	margin : .8rem auto;
+	margin-right : .3rem;
+ 	margin-left : .3rem;
+ 	align-items : center;
+  	display : flex;
+  	flex-direction : column;
+}
+.main-clan-table,.main-table,.main-not-member-table{
+  	margin-bottom : 15px;
+}
+
+.p-data{
+   	font-size : 12px;
+	text-align : center;
+}
+.disclaimers li{
+	font-size : 20px;
+	margin-right : 10px;
+}
+p{
+	padding-left:20px;
+	padding-right:20px;
+}
+
+@media (max-width: 650px){
+.container{
+	width : 90vw;
+	align-items : center;
+}
+p{
+	overflow:auto;
+}
+.p-data{
+	font-size : 18px;
+}
+.table-header{
+  	width : 100%;
+  }
+  .data-box{
+    	flex-direction : column;
+    	margin-left : .8rem;
+    	align-items: center;
+  }
+  
+  .img-box{
+    	align-items : center;
+    	margin-left : .3rem;
+    	width : 95%;
+  }
+.main-clan-table{
+  	overflow-y :auto;
+}
+.main-clan-table::-webkit-scrollbar{
+  	width : 0.5rem;
+  	height : 0.5rem;
+}
+.main-clan-table::-webkit-scrollbar-thumb{
+  	border-radius : .5rem;
+  	background-color : #0004;
+  	visibility : hidden;
+}
+.main-clan-table:hover::-webkit-scrollbar-thumb{
+  	visibility : visible
+}
+}
