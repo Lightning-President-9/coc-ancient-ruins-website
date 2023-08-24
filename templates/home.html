@@ -299,136 +299,20 @@ p{
    </tr>
    </thead>
    <tbody>
+     {% for datam in DM %}
    <tr>
-   <td>1</td>
-   <td>KAI HIWATARI</td>
-   <td>IN</td>
-   <td>122</td>
-   <td>24</td>
-   <td>6</td>
-   <td>3</td>
-   <td class="status leader">Leader</td>
+   <td>{{datam['Unique ID']}}</td>
+   <td>{{datam['Name']}}</td>
+   <td>{{datam['WAR']}}</td>
+   <td>{{datam['War Attack']}}</td>
+   <td>{{datam['Clan Capital Attack']}}</td>
+   <td>{{datam['Clan Games']}}</td>
+   <td>{{datam['Clan Capital Maxed']}}</td>
+   <td class="status {% if datam['Status'] == 'Leader' %}leader{% elif datam['Status'] == 'Co-leader' %}co-leader{% else %}elder{% endif %}">
+                {{datam['Status']}}
+    </td>
    </tr>
-   <tr>
-   <td>2</td>
-   <td>MASTER SERVESH</td>
-   <td>IN</td>
-   <td>132</td>
-   <td>13</td>
-   <td>6</td>
-   <td>0</td>
-   <td class="status co-leader">Co-leader</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>GOD OF UNDEAD</td>
-   <td>IN</td>
-   <td>0</td>
-   <td>122</td>
-   <td>1</td>
-   <td>0</td>
-   <td class="status elder">Elder</td>
-   </tr>
+     {% endfor %}
    </tbody>
    </table>
    </section>
@@ -450,62 +334,16 @@ p{
    </tr>
    </thead>
    <tbody>
+  {% for datam in DNM %}
    <tr>
-   <td>1</td>
-   <td>KING SEENU</td>
-   <td>40</td>
-   <td>0</td>
-   <td>0</td>
-   <td>0</td>
+   <td>{{datam['Unique ID']}}</td>
+   <td>{{datam['Name']}}</td>
+   <td>{{datam['War Attack']}}</td>
+   <td>{{datam['Clan Capital Attack']}}</td>
+   <td>{{datam['Clan Games']}}</td>
+   <td>{{datam['Clan Capital Maxed']}}</td>
    </tr>
-   <tr>
-   <td>2</td>
-   <td>TOFITA</td>
-   <td>25</td>
-   <td>11</td>
-   <td>4</td>
-   <td>0</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>erase</td>
-   <td>5</td>
-   <td>5</td>
-   <td>1</td>
-   <td>1</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>erase</td>
-   <td>5</td>
-   <td>5</td>
-   <td>1</td>
-   <td>1</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>erase</td>
-   <td>5</td>
-   <td>5</td>
-   <td>1</td>
-   <td>1</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>erase</td>
-   <td>5</td>
-   <td>5</td>
-   <td>1</td>
-   <td>1</td>
-   </tr>
-   <tr>
-   <td>3</td>
-   <td>erase</td>
-   <td>5</td>
-   <td>5</td>
-   <td>1</td>
-   <td>1</td>
-   </tr>
+  {% endfor %}
    </tbody>
    </table>
    </section>
