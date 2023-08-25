@@ -288,7 +288,7 @@ p{
    <table>
    <thead>
    <tr>
-   <th>Unique ID</th>
+   <th>Srno</th>
    <th>Name</th>
    <th>War</th>
    <th>War Attack</th>
@@ -301,13 +301,13 @@ p{
    <tbody>
      {% for datam in DM %}
    <tr>
-   <td>{{datam['Unique ID']}}</td>
+   <td>{{datam['Srno']}}</td>
    <td>{{datam['Name']}}</td>
    <td>{{datam['WAR']}}</td>
-   <td>{{datam['War Attack']}}</td>
-   <td>{{datam['Clan Capital Attack']}}</td>
-   <td>{{datam['Clan Games']}}</td>
-   <td>{{datam['Clan Capital Maxed']}}</td>
+   <td>{{datam['WarAttack']}}</td>
+   <td>{{datam['ClanCapitalAttack']}}</td>
+   <td>{{datam['ClanGames']}}</td>
+   <td>{{datam['ClanCapitalMaxed']}}</td>
    <td class="status {% if datam['Status'] == 'Leader' %}leader{% elif datam['Status'] == 'Co-leader' %}co-leader{% else %}elder{% endif %}">
                 {{datam['Status']}}
     </td>
