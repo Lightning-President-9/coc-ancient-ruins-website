@@ -11,8 +11,14 @@ engine = create_engine(db_connection_string,
                        }
                       )
 
-def load_from_db():
+def load_from_db_mem():
   with engine.connect() as conn:
     result = conn.execute(text("select * from ClanMembers"))
     mem_list= result.all()
     return mem_list
+
+def load_from_db_fmem():
+  with engine.connect() as conn:
+    result = conn.execute(text("select * from ClanMembers"))
+    fmem_list= result.all()
+    return fmem_list

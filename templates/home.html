@@ -89,13 +89,13 @@ thead{
 	color : black;
 }
 .status.leader{
-  	background-color : #FFD700;
+  	background-color : #00D0FF;
 }
 .status.co-leader{
-  	background-color : #C0C0C0;
+  	background-color : #FFD700;
 }
 .status.elder{
-  	background-color : #CC6A00;
+  	background-color : #BCC6CC;
 }
 .clan-table-body th{
   	text-align : right;
@@ -325,7 +325,7 @@ p{
    <table>
    <thead>
    <tr>
-   <th>Unique ID</th>
+   <th>Srno</th>
    <th>Name</th>
    <th>War Attack</th>
    <th>Clan Capital</th>
@@ -336,12 +336,12 @@ p{
    <tbody>
   {% for datam in DNM %}
    <tr>
-   <td>{{datam['Unique ID']}}</td>
+   <td>{{datam['Srno']}}</td>
    <td>{{datam['Name']}}</td>
-   <td>{{datam['War Attack']}}</td>
-   <td>{{datam['Clan Capital Attack']}}</td>
-   <td>{{datam['Clan Games']}}</td>
-   <td>{{datam['Clan Capital Maxed']}}</td>
+   <td>{{datam['WarAttack']}}</td>
+   <td>{{datam['ClanCapitalAttack']}}</td>
+   <td>{{datam['ClanGames']}}</td>
+   <td>{{datam['ClanCapitalMaxed']}}</td>
    </tr>
   {% endfor %}
    </tbody>
