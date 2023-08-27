@@ -1,4 +1,4 @@
-body{
+ body{
   	min-height : 100vh;
   	background-image : url("https://coc-ancient-ruins-website--lightning-presi.repl.co/static/bg_img.jpg");
 	background-repeat:no-repeat;
@@ -84,13 +84,13 @@ thead{
 	color : black;
 }
 .status.leader{
-  	background-color : #86e49d;
+  	background-color : #00D0FF;
 }
 .status.co-leader{
-  	background-color : #d893a3;
+  	background-color : #FFD700;
 }
 .status.elder{
-  	background-color : #6fcaea;
+  	background-color : #BCC6CC;
 }
 .clan-table-body th{
   	text-align : right;

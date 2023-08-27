@@ -19,6 +19,6 @@ def load_from_db_mem():
 
 def load_from_db_fmem():
   with engine.connect() as conn:
-    result = conn.execute(text("select * from ClanMembers"))
+    result = conn.execute(text("select * from FormerMembers"))
     fmem_list= result.all()
     return fmem_list

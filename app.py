@@ -10,6 +10,5 @@ def coc_ancient_ruins():
     fmem_list=load_from_db_fmem()
     return render_template('home.html',DM=mem_list,DNM=fmem_list)
 
-
 if __name__ == '__main__':
   app.run(host='0.0.0.0',debug=True)
