@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Ancient Ruins</title>
+      <link rel="icon" href="https://coc-ancient-ruins-website--lightning-presi.repl.co/static/clan-badge.png">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+   </head>
+   <body>
+     <h2>FORMER CLAN MEMBERS</h2>
+     <div>[</div>
+      {% for datam in DNM %}
+     <div>{</div>
+   <tr>
+   <td>Srno:{{datam['Srno']}}</td><br />
+   <td>Unique ID:{{datam['UniqueID']}}</td><br />
+   <td>Name:{{datam['Name']}}</td><br />
+   <td>War Attack:{{datam['WarAttack']}}</td><br />
+   <td>Clan Capital Attack:{{datam['ClanCapitalAttack']}}</td><br />
+   <td>Clan Games:{{datam['ClanGames']}}</td><br />
+   <td>Clan Games Maxed:{{datam['ClanCapitalMaxed']}}</td><br />
+   </tr>
+     <div>}</div>
+     {% endfor %}
+     <div>]</div>
+   </body>
