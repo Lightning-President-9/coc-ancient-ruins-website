@@ -9,21 +9,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
    </head>
+  <style>
+    {% include 'style_tab.css' %}
+  </style>
    <body>
      <h2>FORMER CLAN MEMBERS</h2>
-     <div>[</div>
-      {% for datam in DNM %}
-     <div>{</div>
-   <tr>
-   <td>Srno:{{datam['Srno']}}</td><br />
-   <td>Unique ID:{{datam['UniqueID']}}</td><br />
-   <td>Name:{{datam['Name']}}</td><br />
-   <td>War Attack:{{datam['WarAttack']}}</td><br />
-   <td>Clan Capital Attack:{{datam['ClanCapitalAttack']}}</td><br />
-   <td>Clan Games:{{datam['ClanGames']}}</td><br />
-   <td>Clan Games Maxed:{{datam['ClanCapitalMaxed']}}</td><br />
-   </tr>
-     <div>}</div>
-     {% endfor %}
-     <div>]</div>
+     <div class="tab">
+       <div>[</div>
+        {% for datam in DNM %}
+       <div id="cur">{</div>
+     <tr>
+     <td>Srno:{{datam['Srno']}}</td><br />
+     <td>Unique ID:{{datam['UniqueID']}}</td><br />
+     <td>Name:{{datam['Name']}}</td><br />
+     <td>War Attack:{{datam['WarAttack']}}</td><br />
+     <td>Clan Capital Attack:{{datam['ClanCapitalAttack']}}</td><br />
+     <td>Clan Games:{{datam['ClanGames']}}</td><br />
+     <td>Clan Games Maxed:{{datam['ClanCapitalMaxed']}}</td><br />
+     </tr>
+       <div id="cur">}</div>
+       {% endfor %}
+       <div>]</div>
+     </div>
    </body>
