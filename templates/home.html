@@ -85,7 +85,7 @@
                   </tr>
                   <tr>
                      <td><strong>Wars Won:</strong></td>
-                     <th>98</th>
+                     <th>99</th>
                   </tr>
                   <tr>
                      <td><strong>Clan Leader:</strong></td>
@@ -110,7 +110,7 @@
    </div>
    <main class="main-table">
    <section class="table-header">
-   <h2>Current Clan Members</h2>
+   <h2>Clan Members*</h2>
    </section>
    <section class="table-body">
    <table>
@@ -123,6 +123,8 @@
    <th>Clan Capital</th>
    <th>Clan Games</th>
    <th>Clan Games Maxed</th>
+   <th><span class="tooltip">Clan Score
+      <span class="tooltiptext">Clan Score=War Attack+Clan Capital+Clan Games*(if Clan Games Maxed=0 return 1 else return Clan Games Maxed)</span></th>
    <th>Status</th>
    </tr>
    </thead>
@@ -136,6 +138,7 @@
    <td>{{datam['ClanCapitalAttack']}}</td>
    <td>{{datam['ClanGames']}}</td>
    <td>{{datam['ClanCapitalMaxed']}}</td>
+   <td>{{datam['ClanScore']}}</td>
    <td class="status {% if datam['Status'] == 'Leader' %}leader{% elif datam['Status'] == 'Co-leader' %}co-leader{% else %}elder{% endif %}">
                 {{datam['Status']}}
     </td>
@@ -159,6 +162,9 @@
    <th>Clan Capital</th>
    <th>Clan Games</th>
    <th>Clan Games Maxed</th>
+   <th><span class="tooltip">Clan Score
+         <span class="tooltiptext">Clan Score=War Attack+Clan Capital+Clan Games*(if Clan Games Maxed=0 return 1 else return Clan Games Maxed)</span>
+     </span></th>
    </tr>
    </thead>
    <tbody>
@@ -170,24 +176,61 @@
    <td>{{datam['ClanCapitalAttack']}}</td>
    <td>{{datam['ClanGames']}}</td>
    <td>{{datam['ClanCapitalMaxed']}}</td>
+   <td>{{datam['ClanScore']}}</td>
    </tr>
   {% endfor %}
    </tbody>
    </table>
+     
    </section>
    </main>
-   <div class="main-table">
-   <section class="table-header">  
-   <h2>Disclaimers</h2>
-   </section>
-   <div class="disclaimers">
-   <ul>
-   <li>This website is intended for personal and non-commercial use only.</li>
-   <li>The information provided on this website may not be accurate, current, or complete.</li>
-   <li>Unauthorized use or reproduction of content is prohibited.</li>
-   </ul>
-   </div>
-   </div>
+      <main class="main-table">
+        <section class="table-header">
+        <h2>TOP CLAN CONTRIBUTORS</h2>
+        </section>
+        <section class="table-body">
+        <table>
+        <thead>
+        <tr>
+        <th>Name</th>
+        <th><span class="tooltip">Clan Score
+             <span class="tooltiptext">if Clan Score > 50</span></th>
+        </tr>
+        </thead>
+        <tbody>
+          {% for datam in DM %}
+          {% if datam['ClanScore'] > 50 %}
+        <tr>
+        <td>{{datam['Name']}}*</td>
+        <td>{{datam['ClanScore']}}</td>
+        </tr>
+          {% endif %}
+          {% endfor %}
+          {% for datam in DNM %}
+          {% if datam['ClanScore'] > 50 %}
+          <tr>
+          <td>{{datam['Name']}}</td>
+          <td>{{datam['ClanScore']}}</td>
+          </tr>
+          {% endif %}
+            {% endfor %}
+        </tbody>
+        </table>
+        </section>
+  </main>
+
+<div class="main-table">
+ <section class="table-header">  
+    <h2>Disclaimers</h2>
+  </section>
+<div class="disclaimers">
+  <ul>
+  <li>This website is intended for personal and non-commercial use only.</li>
+  <li>The information provided on this website may not be accurate, current, or complete.</li>
+  <li>Unauthorized use or reproduction of content is prohibited.</li>
+  </ul>
+</div>
+  </div>
    </div>
      <script>
        {% include 'script.js' %}
