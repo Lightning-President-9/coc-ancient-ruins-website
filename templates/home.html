@@ -133,7 +133,7 @@
    <tr>
    <td>{{datam['Srno']}}</td>
    <td><a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{datam['PlayerTag']}}" target="_blank" rel="TEST">{{datam['Name']}}</td>
-   <td>{{datam['WAR']}}</td>
+   <td class="war {% if datam['WAR'] == 'IN' %}in{% else %}out{% endif %}">{{datam['WAR']}}</td>
    <td>{{datam['WarAttack']}}</td>
    <td>{{datam['ClanCapitalAttack']}}</td>
    <td>{{datam['ClanGames']}}</td>

@@ -92,6 +92,18 @@ thead{
 .status.elder{
   	background-color : #BCC6CC;
 }
+.war{
+  padding : .4rem 1;
+  border-radius : 2rem;
+  text-align : center;
+  color : black;
+}
+.war.in{
+  background-color : #32CD32;
+}
+.war.out{
+background-color : #FF4500;
+}
 .clan-table-body th{
   	text-align : right;
 }
