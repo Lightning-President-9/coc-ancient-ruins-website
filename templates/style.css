@@ -208,7 +208,11 @@ p{
         left: 50%;
         transform: translateX(-50%);
 }
-    
+/*For Hiding Visit Counter*/
+.visit-counter {
+  visibility: hidden;
+}
+  
 @media (max-width: 650px){
 .container{
 	width : 90vw;

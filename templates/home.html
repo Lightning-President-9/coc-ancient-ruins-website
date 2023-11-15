@@ -2,23 +2,23 @@
 <html lang="en">
    <head>
       <title>Ancient Ruins</title>
-     <style>
-    {% include 'style.css' %}
-     </style>
+      <style>
+         {% include 'style.css' %}
+      </style>
       <link rel="icon" href="https://coc-ancient-ruins-website--lightning-presi.repl.co/static/clan-badge_12.png">
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
    </head>
-   <body>	
-   <div class="container">
-   <main class="main-clan-table">
-      <section class="table-header">
-         <h2>Ancient Ruins</h2>
-      </section>
-      <div class="data-box">
+   <body>
+      <div class="container">
+      <main class="main-clan-table">
+         <section class="table-header">
+            <h2>Ancient Ruins</h2>
+         </section>
+         <div class="data-box">
          <div class="img-box">
             <div class="img">
                <img src="https://coc-ancient-ruins-website--lightning-presi.repl.co/static/clan-badge_12.png" alt="Clan-Badge-Image"/>
@@ -98,152 +98,158 @@
                </thead>
             </table>
          </section>
-   </main>
-    <div class="main-table">
-   <section class="table-header">  
-   <h2>Clan Link</h2>
-   </section>
-   <div class="isclaimers">
-	<p><strong><a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=2PP0P22CQ" target="_blank" rel="TEST">https://link.clashofclans.com/en?action=OpenClanProfile&tag=2PP0P22CQ</a>
-	</strong></p>
-   </div>
-   </div>
-   <main class="main-table">
-   <section class="table-header">
-   <h2>Clan Members*</h2>
-     <div class="input-group">
-        <input type="search" placeholder="Search Data...">
-        <img src="https://coc-ancient-ruins-website--lightning-presi.repl.co/static/search_img_final.png" alt="">
+      </main>
+      <div class="main-table">
+         <section class="table-header">
+            <h2>Clan Link</h2>
+         </section>
+         <div class="isclaimers">
+            <p><strong><a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=2PP0P22CQ" target="_blank" rel="TEST">https://link.clashofclans.com/en?action=OpenClanProfile&tag=2PP0P22CQ</a>
+               </strong>
+            </p>
+         </div>
       </div>
-   </section>
-   <section class="table-body">
-   <table>
-   <thead>
-   <tr>
-   <th>Srno</th>
-   <th>Name</th>
-   <th>War</th>
-   <th>War Attack</th>
-   <th>Clan Capital</th>
-   <th>Clan Games</th>
-   <th>Clan Games Maxed</th>
-   <th><span class="tooltip">Clan Score
-      <span class="tooltiptext">Clan Score=War Attack+Clan Capital+Clan Games*(if Clan Games Maxed=0 return 1 else return Clan Games Maxed)</span></th>
-   <th>Status</th>
-   </tr>
-   </thead>
-   <tbody>
-     {% for datam in DM %}
-   <tr>
-   <td>{{datam['Srno']}}</td>
-   <td><a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{datam['PlayerTag']}}" target="_blank" rel="TEST">{{datam['Name']}}</td>
-   <td class="war {% if datam['WAR'] == 'IN' %}in{% else %}out{% endif %}">{{datam['WAR']}}</td>
-   <td>{{datam['WarAttack']}}</td>
-   <td>{{datam['ClanCapitalAttack']}}</td>
-   <td>{{datam['ClanGames']}}</td>
-   <td>{{datam['ClanCapitalMaxed']}}</td>
-   <td>{{datam['ClanScore']}}</td>
-   <td class="status {% if datam['Status'] == 'Leader' %}leader{% elif datam['Status'] == 'Co-leader' %}co-leader{% else %}elder{% endif %}">
-                {{datam['Status']}}
-    </td>
-   </tr>
-     {% endfor %}
-   </tbody>
-   </table>
-   </section>
-   </main>
-   <main class="main-not-member-table">
-   <section class="table-header">
-   <h2>Former Clan Members</h2>
-     <div class="input-group">
-       <input type="search" placeholder="Search Data...">
-       <img src="https://coc-ancient-ruins-website--lightning-presi.repl.co/static/search_img_final.png" alt="">
-     </div>
-   </section>
-   <section class="table-body">
-   <table>
-   <thead>
-   <tr>
-   <th>Srno</th>
-   <th>Name</th>
-   <th>War Attack</th>
-   <th>Clan Capital</th>
-   <th>Clan Games</th>
-   <th>Clan Games Maxed</th>
-   <th><span class="tooltip">Clan Score
-         <span class="tooltiptext">Clan Score=War Attack+Clan Capital+Clan Games*(if Clan Games Maxed=0 return 1 else return Clan Games Maxed)</span>
-     </span></th>
-   </tr>
-   </thead>
-   <tbody>
-  {% for datam in DNM %}
-   <tr>
-   <td>{{datam['Srno']}}</td>
-   <td>{{datam['Name']}}</td>
-   <td>{{datam['WarAttack']}}</td>
-   <td>{{datam['ClanCapitalAttack']}}</td>
-   <td>{{datam['ClanGames']}}</td>
-   <td>{{datam['ClanCapitalMaxed']}}</td>
-   <td>{{datam['ClanScore']}}</td>
-   </tr>
-  {% endfor %}
-   </tbody>
-   </table>
-     
-   </section>
-   </main>
+      <main class="main-table">
+         <section class="table-header">
+            <h2>Clan Members*</h2>
+            <div class="input-group">
+               <input type="search" placeholder="Search Data...">
+               <img src="https://coc-ancient-ruins-website--lightning-presi.repl.co/static/search_img_final.png" alt="">
+            </div>
+         </section>
+         <section class="table-body">
+            <table>
+               <thead>
+                  <tr>
+                     <th>Srno</th>
+                     <th>Name</th>
+                     <th>War</th>
+                     <th>War Attack</th>
+                     <th>Clan Capital</th>
+                     <th>Clan Games</th>
+                     <th>Clan Games Maxed</th>
+                     <th><span class="tooltip">Clan Score
+                        <span class="tooltiptext">Clan Score=War Attack+Clan Capital+Clan Games*(if Clan Games Maxed=0 return 1 else return Clan Games Maxed)</span>
+                     </th>
+                     <th>Status</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for datam in DM %}
+                  <tr>
+                     <td>{{datam['Srno']}}</td>
+                     <td><a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{datam['PlayerTag']}}" target="_blank" rel="TEST">{{datam['Name']}}</td>
+                     <td class="war {% if datam['WAR'] == 'IN' %}in{% else %}out{% endif %}">{{datam['WAR']}}</td>
+                     <td>{{datam['WarAttack']}}</td>
+                     <td>{{datam['ClanCapitalAttack']}}</td>
+                     <td>{{datam['ClanGames']}}</td>
+                     <td>{{datam['ClanCapitalMaxed']}}</td>
+                     <td>{{datam['ClanScore']}}</td>
+                     <td class="status {% if datam['Status'] == 'Leader' %}leader{% elif datam['Status'] == 'Co-leader' %}co-leader{% else %}elder{% endif %}">
+                        {{datam['Status']}}
+                     </td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </section>
+      </main>
+      <main class="main-not-member-table">
+         <section class="table-header">
+            <h2>Former Clan Members</h2>
+            <div class="input-group">
+               <input type="search" placeholder="Search Data...">
+               <img src="https://coc-ancient-ruins-website--lightning-presi.repl.co/static/search_img_final.png" alt="">
+            </div>
+         </section>
+         <section class="table-body">
+            <table>
+               <thead>
+                  <tr>
+                     <th>Srno</th>
+                     <th>Name</th>
+                     <th>War Attack</th>
+                     <th>Clan Capital</th>
+                     <th>Clan Games</th>
+                     <th>Clan Games Maxed</th>
+                     <th><span class="tooltip">Clan Score
+                        <span class="tooltiptext">Clan Score=War Attack+Clan Capital+Clan Games*(if Clan Games Maxed=0 return 1 else return Clan Games Maxed)</span>
+                        </span>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for datam in DNM %}
+                  <tr>
+                     <td>{{datam['Srno']}}</td>
+                     <td>{{datam['Name']}}</td>
+                     <td>{{datam['WarAttack']}}</td>
+                     <td>{{datam['ClanCapitalAttack']}}</td>
+                     <td>{{datam['ClanGames']}}</td>
+                     <td>{{datam['ClanCapitalMaxed']}}</td>
+                     <td>{{datam['ClanScore']}}</td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </section>
+      </main>
       <main class="score-table">
-        <section class="table-header">
-        <h2>TOP CLAN CONTRIBUTORS</h2>
-          <div class="input-group">
-            <input type="search" placeholder="Search Data...">
-            <img src="https://coc-ancient-ruins-website--lightning-presi.repl.co/static/search_img_final.png" alt="">
-          </div>
-        </section>
-        <section class="table-body">
-        <table>
-        <thead>
-        <tr>
-        <th>Name</th>
-        <th><span class="tooltip">Clan Score
-             <span class="tooltiptext">if Clan Score > 50</span></th>
-        </tr>
-        </thead>
-        <tbody>
-          {% for datam in DM %}
-          {% if datam['ClanScore'] > 50 %}
-        <tr>
-        <td>{{datam['Name']}}*</td>
-        <td>{{datam['ClanScore']}}</td>
-        </tr>
-          {% endif %}
-          {% endfor %}
-          {% for datam in DNM %}
-          {% if datam['ClanScore'] > 50 %}
-          <tr>
-          <td>{{datam['Name']}}</td>
-          <td>{{datam['ClanScore']}}</td>
-          </tr>
-          {% endif %}
-            {% endfor %}
-        </tbody>
-        </table>
-        </section>
-  </main>
-
-<div class="main-table">
- <section class="table-header">  
-    <h2>Disclaimers</h2>
-  </section>
-<div class="disclaimers">
-  <ul>
-  <li>This website is intended for personal and non-commercial use only.</li>
-  <li>The information provided on this website may not be accurate, current, or complete.</li>
-  <li>Unauthorized use or reproduction of content is prohibited.</li>
-  </ul>
-</div>
-     <script>
-       {% include 'script.js' %}
-     </script>
+         <section class="table-header">
+            <h2>TOP CLAN CONTRIBUTORS</h2>
+            <div class="input-group">
+               <input type="search" placeholder="Search Data...">
+               <img src="https://coc-ancient-ruins-website--lightning-presi.repl.co/static/search_img_final.png" alt="">
+            </div>
+         </section>
+         <section class="table-body">
+            <table>
+               <thead>
+                  <tr>
+                     <th>Name</th>
+                     <th><span class="tooltip">Clan Score
+                        <span class="tooltiptext">if Clan Score > 50</span>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for datam in DM %}
+                  {% if datam['ClanScore'] > 50 %}
+                  <tr>
+                     <td>{{datam['Name']}}*</td>
+                     <td>{{datam['ClanScore']}}</td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}
+                  {% for datam in DNM %}
+                  {% if datam['ClanScore'] > 50 %}
+                  <tr>
+                     <td>{{datam['Name']}}</td>
+                     <td>{{datam['ClanScore']}}</td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}
+               </tbody>
+            </table>
+         </section>
+      </main>
+      <div class="main-table">
+         <section class="table-header">
+            <h2>Disclaimers</h2>
+         </section>
+         <div class="disclaimers">
+            <ul>
+               <li>This website is intended for personal and non-commercial use only.</li>
+               <li>The information provided on this website may not be accurate, current, or complete.</li>
+               <li>Unauthorized use or reproduction of content is prohibited.</li>
+            </ul>
+         </div>
+      </div>
+      <div class="visit-counter">
+         <p id="visitor-count">Total Visitors: 0</p>
+      </div>
+      <script>
+         {% include 'script.js' %}
+      </script>
    </body>
 </html>
