@@ -127,7 +127,6 @@ thead{
   	background-color : #0002;
 }
 
-
 .table-body tr:nth-child(odd){
   	background-color : #000000b;
 }
@@ -214,6 +213,9 @@ p{
 }
   
 @media (max-width: 650px){
+body{
+    background-attachment: scroll;
+}
 .container{
 	width : 90vw;
 	align-items : center;
