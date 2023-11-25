@@ -208,13 +208,13 @@
                   <tr>
                      <th>Name</th>
                      <th><span class="tooltip">Clan Score
-                        <span class="tooltiptext">if Clan Score > 50</span>
+                        <span class="tooltiptext">if Clan Score > 75</span>
                      </th>
                   </tr>
                </thead>
                <tbody>
                   {% for datam in DM %}
-                  {% if datam['ClanScore'] > 50 %}
+                  {% if datam['ClanScore'] > 75 %}
                   <tr>
                      <td>{{datam['Name']}}*</td>
                      <td>{{datam['ClanScore']}}</td>
@@ -222,7 +222,7 @@
                   {% endif %}
                   {% endfor %}
                   {% for datam in DNM %}
-                  {% if datam['ClanScore'] > 50 %}
+                  {% if datam['ClanScore'] > 75 %}
                   <tr>
                      <td>{{datam['Name']}}</td>
                      <td>{{datam['ClanScore']}}</td>
