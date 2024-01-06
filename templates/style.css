@@ -1,6 +1,6 @@
  body{
   	min-height : 100vh;
-  	background-image : url("https://coc-ancient-ruins-website--lightning-presi.repl.co/static/bg_img.jpg");
+  	background-image : url("static/bg_img.jpg");
 	background-repeat:no-repeat;
 	background-size:cover;
 	background-position:center;
