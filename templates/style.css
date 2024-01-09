@@ -207,6 +207,54 @@ p{
         left: 50%;
         transform: translateX(-50%);
 }
+
+/**/
+thead th span.icon-arrow{
+  display:inline-block;
+  width:1.3rem;
+  height:1.3rem;
+  border:1.4px solid transparent;
+  border-radius:50%;
+  text-align:center;
+  font-size:1rem;
+  margin-left:.5rem;
+  transition:.2s ease-in-out;
+}
+
+thead th{
+  cursor:pointer;
+}
+
+thead th.active,tbody td.active{
+  color:#6c00bd;
+}
+
+thead th:hover span.icon-arrow{
+  border:1.4px solid #6c00bd;
+}
+
+thead th:hover{
+  color:#6c00bd;
+}
+    
+thead th.active span.icon-arrow{
+  background-color:#6c00bd;
+  color:#fff;
+}
+
+thead th.asc span.icon-arrow{
+  transform:rotate(180deg);
+}
+
+.sortable-header {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  display: inline-block;
+}
+
+/**/
+    
 /*For Hiding Visit Counter*/
 .visit-counter {
   visibility: hidden;

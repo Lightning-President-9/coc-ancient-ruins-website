@@ -46,3 +46,63 @@ function handleSearch(tableClass) {
 handleSearch('main-table');
 handleSearch('main-not-member-table');
 handleSearch('score-table');
+
+// Sorting | Ordering data of HTML table
+
+document.addEventListener('DOMContentLoaded', function () {
+    const tableHeaders = document.querySelectorAll('.table-body th');
+
+    tableHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const table = header.closest('table');
+            const tbody = table.querySelector('tbody');
+            const headerIndex = Array.prototype.indexOf.call(header.parentNode.children, header);
+            const currentOrder = header.getAttribute('data-order') || 'asc';
+
+            // Remove active class and arrow icon from other headers
+            tableHeaders.forEach(th => {
+                th.classList.remove('active');
+                th.removeAttribute('data-order');
+
+                // Reset arrow styles
+                const arrowIcon = th.querySelector('span.icon-arrow');
+                if (arrowIcon) {
+                    arrowIcon.style.transform = '';
+                }
+            });
+
+            // Sort the table rows based on the clicked header
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const sortedRows = rows.sort((a, b) => {
+                const aValue = a.children[headerIndex].textContent.trim();
+                const bValue = b.children[headerIndex].textContent.trim();
+
+                if (isNaN(aValue) || isNaN(bValue)) {
+                    return currentOrder === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+                } else {
+                    return currentOrder === 'asc' ? aValue - bValue : bValue - aValue;
+                }
+            });
+
+            // Toggle between ascending and descending order
+            const newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
+            header.setAttribute('data-order', newOrder);
+
+            // Add active class to the clicked header
+            header.classList.add('active');
+
+            // Update arrow styles
+            const arrowIcon = header.querySelector('span.icon-arrow');
+            if (arrowIcon) {
+                arrowIcon.style.transform = currentOrder === 'asc' ? 'rotate(180deg)' : '';
+            }
+
+            // Append sorted rows back to the table
+            tbody.innerHTML = '';
+            sortedRows.forEach(row => {
+                tbody.appendChild(row);
+            });
+        });
+    });
+});
+
