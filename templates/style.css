@@ -252,9 +252,88 @@ thead th.asc span.icon-arrow{
   position: relative;
   display: inline-block;
 }
+/**/
 
 /**/
-    
+.export__file {
+    position: relative;
+}
+
+.export__file .export__file-btn {
+    display: block;
+    width: 3.3rem;
+    height: 3.3rem;
+    background: #fff6 url(static/export_img_final.png) center / 80% no-repeat;
+    /*border-radius: 50%;*/
+    border-radius: .6rem;
+    transition: .2s ease-in-out;
+}
+
+.export__file .export__file-btn:hover { 
+    background-color: #fffb;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.export__file input {
+    display: none;
+}
+
+.export__file .export__file-options {
+    position: absolute;
+    right: 0;
+
+    width: 12rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    text-align: center;
+
+    opacity: 0;
+    transform: scale(.8);
+    transform-origin: top right;
+
+    box-shadow: 0 .2rem .5rem #0004;
+
+    transition: .2s;
+}
+
+.export__file input:checked + .export__file-options {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 100;
+}
+
+.export__file .export__file-options label{
+    display: block;
+    width: 100%;
+    padding: .6rem 0;
+    background-color: #f2f2f2;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    transition: .2s ease-in-out;
+}
+
+.export__file .export__file-options label:first-of-type{
+    padding: 1rem 0;
+    background-color: #54CAE8 !important;
+}
+
+.export__file .export__file-options label:hover{
+    transform: scale(1.05);
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.export__file .export__file-options img{
+    width: 2rem;
+    height: auto;
+}
+/**/
+
+
 /*For Hiding Visit Counter*/
 .visit-counter {
   visibility: hidden;
@@ -303,4 +382,9 @@ p{
 .main-clan-table:hover::-webkit-scrollbar-thumb{
   	visibility : visible
 }
+  .export__file .export__file-btn {
+      width: 5.3rem;
+      height: 5.3rem;
+      background: #fff6 url(static/export_img_final.png) center / 65% no-repeat;
+  }
 }
