@@ -25,7 +25,7 @@
             </div>
             <div class="p-data">
                <strong>
-                  <p>SINCE WHEN HAS DATA BEEN RECORDED</p>
+                  <p><u>SINCE WHEN HAS DATA BEEN RECORDED</u></p>
                   <p>WAR SINCE 15TH OCTOBER 2022</p>
                   <p>CLAN CAPITAL SINCE 21ST FEBRUARY 2023</p>
                   <p>CLAN GAMES SINCE 28TH FEBRUARY 2023</p>
@@ -49,7 +49,7 @@
                   </tr>
                   <tr>
                      <td><strong>Description:</strong></td>
-                     <th>Clan Website:https://coc-ancient-ruins-website.onrender.com .Be active and chat with respect.Website will be updated every Saturday.You will be KICKED,if you are not active!</th>
+                     <th>.Be active and chat with respect.You will be KICKED,if you are not active.Website temporally shut down.</th>
                   </tr>
                   <tr>
                      <td><strong>Clan War League:</strong></td>
@@ -161,16 +161,16 @@
                <tbody>
                   {% for datam in DM %}
                   <tr>
-                     <td>{{datam['Srno']}}</td>
-                     <td><a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{datam['PlayerTag']}}" target="_blank" rel="TEST">{{datam['Name']}}</td>
-                     <td class="war {% if datam['WAR'] == 'IN' %}in{% else %}out{% endif %}">{{datam['WAR']}}</td>
-                     <td>{{datam['WarAttack']}}</td>
-                     <td>{{datam['ClanCapitalAttack']}}</td>
-                     <td>{{datam['ClanGames']}}</td>
-                     <td>{{datam['ClanCapitalMaxed']}}</td>
-                     <td>{{datam['ClanScore']}}</td>
-                     <td class="status {% if datam['Status'] == 'Leader' %}leader{% elif datam['Status'] == 'Co-leader' %}co-leader{% else %}elder{% endif %}">
-                        {{datam['Status']}}
+                     <td>{{datam['srno']}}</td>
+                     <td><a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{datam['PlayerTag']}}" target="_blank" rel="TEST">{{datam['name']}}</td>
+                     <td class="war {% if datam['war'] == 'IN' %}in{% else %}out{% endif %}">{{datam['war']}}</td>
+                     <td>{{datam['warattack']}}</td>
+                     <td>{{datam['clancapitalattack']}}</td>
+                     <td>{{datam['clangames']}}</td>
+                     <td>{{datam['clangamesmaxed']}}</td>
+                     <td>{{datam['clanscore']}}</td>
+                     <td class="status {% if datam['status'] == 'Leader' %}leader{% elif datam['status'] == 'Co-leader' %}co-leader{% else %}elder{% endif %}">
+                        {{datam['status']}}
                      </td>
                   </tr>
                   {% endfor %}
@@ -219,13 +219,13 @@
                <tbody>
                   {% for datam in DNM %}
                   <tr>
-                     <td>{{datam['Srno']}}</td>
-                     <td>{{datam['Name']}}</td>
-                     <td>{{datam['WarAttack']}}</td>
-                     <td>{{datam['ClanCapitalAttack']}}</td>
-                     <td>{{datam['ClanGames']}}</td>
-                     <td>{{datam['ClanCapitalMaxed']}}</td>
-                     <td>{{datam['ClanScore']}}</td>
+                     <td>{{datam['srno']}}</td>
+                     <td>{{datam['name']}}</td>
+                     <td>{{datam['warattack']}}</td>
+                     <td>{{datam['clancapitalattack']}}</td>
+                     <td>{{datam['clangames']}}</td>
+                     <td>{{datam['clangamesmaxed']}}</td>
+                     <td>{{datam['clanscore']}}</td>
                   </tr>
                   {% endfor %}
                </tbody>
@@ -268,18 +268,18 @@
                </thead>
                <tbody>
                   {% for datam in DM %}
-                  {% if datam['ClanScore'] > 75 %}
+                  {% if datam['clanscore'] > 75 %}
                   <tr>
-                     <td>{{datam['Name']}}</td>
-                     <td>{{datam['ClanScore']}}</td>
+                     <td>{{datam['name']}}</td>
+                     <td>{{datam['clanscore']}}</td>
                   </tr>
                   {% endif %}
                   {% endfor %}
                   {% for datam in DNM %}
-                  {% if datam['ClanScore'] > 75 %}
+                  {% if datam['clanscore'] > 75 %}
                   <tr>
-                     <td>{{datam['Name']}}</td>
-                     <td>{{datam['ClanScore']}}</td>
+                     <td>{{datam['name']}}</td>
+                     <td>{{datam['clanscore']}}</td>
                   </tr>
                   {% endif %}
                   {% endfor %}
