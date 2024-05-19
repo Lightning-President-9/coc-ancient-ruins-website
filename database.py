@@ -6,13 +6,23 @@ db_connection_string=os.environ['DB_CONNECTION_STRING']
 engine = create_engine(db_connection_string)
 
 def load_from_db_mem():
-      with engine.connect() as conn:
-        result = conn.execute(text("select * from ClanMembers"))
-        mem_list= result.all()
-        return mem_list
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT * FROM ClanMembers"))
+        mem_dicts = []
+        for row in result.fetchall():
+            row_dict = {}
+            for column, value in zip(result.keys(), row):
+                row_dict[column] = value
+            mem_dicts.append(row_dict)
+    return mem_dicts
 
 def load_from_db_fmem():
-      with engine.connect() as conn:
-        result = conn.execute(text("select * from FormerMembers"))
-        fmem_list= result.all()
-        return fmem_list
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT * FROM FormerMembers"))
+        fmem_dicts = []
+        for row in result.fetchall():
+            row_dict = {}
+            for column, value in zip(result.keys(), row):
+                row_dict[column] = value
+            fmem_dicts.append(row_dict)
+    return fmem_dicts
