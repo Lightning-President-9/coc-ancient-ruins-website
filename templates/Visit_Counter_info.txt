@@ -1,3 +1,0 @@
-//Should be before the end of the last div.
-<p id="visitor-count">Total Visitors: 0</p>
-Added on 11/11/23.

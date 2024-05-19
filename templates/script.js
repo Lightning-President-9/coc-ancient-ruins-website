@@ -1,25 +1,3 @@
-
-  // Check if the visitor count is stored in local storage
-  let visitorCount = localStorage.getItem('visitorCount');
-
-  // If not, initialize the count to 0
-  if (visitorCount === null) {
-    visitorCount = 0;
-  } else {
-    // If yes, parse the count as an integer
-    visitorCount = parseInt(visitorCount);
-  }
-
-  // Increment the visitor count
-  visitorCount++;
-
-  // Update the local storage and display the count
-  localStorage.setItem('visitorCount', visitorCount);
-  document.getElementById('visitor-count').textContent = `Total Visitors: ${visitorCount}`;
-console.log("Visitor Count:"+visitorCount);
-
-
-
 // Function to handle the search logic for a given table class
 function handleSearch(tableClass) {
     // Get the search input and table rows for the specified table class
