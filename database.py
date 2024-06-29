@@ -7,7 +7,7 @@ engine = create_engine(db_connection_string)
 
 def load_from_db_mem():
     with engine.connect() as conn:
-        result = conn.execute(text("SELECT * FROM ClanMembers"))
+        result = conn.execute(text(os.environ['ClanMembers_Query']))
         mem_dicts = []
         for row in result.fetchall():
             row_dict = {}
@@ -18,7 +18,7 @@ def load_from_db_mem():
 
 def load_from_db_fmem():
     with engine.connect() as conn:
-        result = conn.execute(text("SELECT * FROM FormerMembers"))
+        result = conn.execute(text((os.environ['FormerMembers_Query'])))
         fmem_dicts = []
         for row in result.fetchall():
             row_dict = {}
