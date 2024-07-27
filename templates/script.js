@@ -186,103 +186,111 @@ document.getElementById('toPDFClanScore').addEventListener('click', function() {
 //Converting HTML table to JSON
 // Function to convert table data to formatted JSON
 function tableToJson(tableId) {
-    var table = document.querySelector(tableId);
-    var data = [];
+  let table = document.querySelector(tableId);
+  let data = [];
 
-    // Remove specified text content from table headers
-    var headers = table.querySelectorAll('th');
-    headers.forEach(function(header) {
-        header.textContent = header.textContent.replace('↑', ''); // Remove '↑'
-        header.textContent = header.textContent.replace('Clan Score >75', ''); // Remove "Clan Score >75"
-        header.textContent = header.textContent.replace('Clan Score = War Attack + Clan Capital + Clan Games * (if Clan Games Maxed = 0 return 1 else return Clan Games Maxed)', ''); // Remove explanation
-        header.textContent = header.textContent.replace(/\n/g, ''); // Remove line breaks
-    });
+  // Remove specified text content from table headers and format headers
+  let headers = table.querySelectorAll('th');
+  headers.forEach(function(header, index) {
+    let headerText = header.textContent
+      .replace('↑', '') // Remove '↑'
+      .replace('Clan Score >75', '') // Remove "Clan Score >75"
+      .replace('Clan Score = War Attack + Clan Capital + Clan Games * (if Clan Games Maxed = 0 return 1 else return Clan Games Maxed)', '') // Remove explanation
+      .replace(/\n/g, '') // Remove line breaks
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ''); // Remove spaces and convert to lowercase
 
-    // Iterate over each row in the table body
-    for (var i = 0; i < table.rows.length; i++) {
-        var row = table.rows[i];
-        var rowData = {};
+    header.textContent = headerText; // Set the cleaned header text
+  });
 
-        // Check if the row has null values, skip if any null value is found
-        var hasNull = false;
-        for (var j = 0; j < row.cells.length; j++) {
-            var cell = row.cells[j];
-            if (cell.textContent.trim() === '') {
-                hasNull = true;
-                break;
-            }
-        }
-        if (hasNull) {
-            continue;
-        }
+  // Iterate over each row in the table body
+  for (let i = 1; i < table.rows.length; i++) { // Start from 1 to skip headers row
+    let row = table.rows[i];
+    let rowData = {};
 
-        // Iterate over each cell in the row
-        for (var j = 0; j < row.cells.length; j++) {
-            var cell = row.cells[j];
-            var cellData = cell.textContent.trim();
-
-            // Extract data from cells and add it to the rowData object
-            rowData[table.rows[0].cells[j].textContent.trim()] = cellData;
-        }
-
-        // Push rowData object to the data array
-        data.push(rowData);
+    // Check if the row has null values, skip if any null value is found
+    let hasNull = false;
+    for (let j = 0; j < row.cells.length; j++) {
+      let cell = row.cells[j];
+      if (cell.textContent.trim() === '') {
+        hasNull = true;
+        break;
+      }
+    }
+    if (hasNull) {
+      continue;
     }
 
-    // Convert data array to formatted JSON format
-    var jsonData = JSON.stringify(data, null, 4); // Use 4 spaces for indentation
+    // Iterate over each cell in the row
+    for (let j = 0; j < row.cells.length; j++) {
+      let cell = row.cells[j];
+      let cellData = cell.textContent.trim();
 
-    return jsonData;
+      // Extract data from cells and add it to the rowData object
+      rowData[headers[j].textContent] = cellData;
+    }
+
+    // Push rowData object to the data array
+    data.push(rowData);
+  }
+
+  // Convert data array to formatted JSON format
+  let jsonData = JSON.stringify(data, null, 4); // Use 4 spaces for indentation
+
+  return jsonData;
 }
 
 // Function to trigger download of JSON file
 function downloadJsonFile(jsonData, fileName) {
-    var blob = new Blob([jsonData], { type: 'application/json' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  let blob = new Blob([jsonData], { type: 'application/json' });
+  let url = URL.createObjectURL(blob);
+  let a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 // Event listener to trigger conversion and download for each table
 document.querySelector('#toJSONMainMemberTable').addEventListener('click', function() {
-    var jsonData = tableToJson('.main-table table');
+    let jsonData = tableToJson('.main-table table');
     downloadJsonFile(jsonData, 'clan_members_table_data.json');
 });
 
 document.querySelector('#toJSONNotMemberTable').addEventListener('click', function() {
-    var jsonData = tableToJson('.main-not-member-table table');
+    let jsonData = tableToJson('.main-not-member-table table');
     downloadJsonFile(jsonData, 'former_clan_members_table_data.json');
 });
 
 document.querySelector('#toJSONClanScore').addEventListener('click', function() {
-    var jsonData = tableToJson('.score-table table');
+    let jsonData = tableToJson('.score-table table');
     downloadJsonFile(jsonData, 'top_clan_contributors_data.json');
 });
 
 //Converting HTML table to CSV File
 // Function to convert table data to CSV format
 function tableToCsv(tableId) {
-    var table = document.querySelector(tableId);
-    var csv = [];
+    let table = document.querySelector(tableId);
+    let csv = [];
 
-    // Remove specified text content from table headers
-    var headers = Array.from(table.querySelectorAll('th')).map(function(header) {
-        var cleanedHeader = header.textContent.trim()
+    // Remove specified text content from table headers and format headers
+    let headers = Array.from(table.querySelectorAll('th')).map(function(header) {
+        let cleanedHeader = header.textContent.trim()
             .replace('↑', '') // Remove '↑'
             .replace('Clan Score >75', '') // Remove "Clan Score >75"
             .replace('Clan Score = War Attack + Clan Capital + Clan Games * (if Clan Games Maxed = 0 return 1 else return Clan Games Maxed)', '') // Remove explanation
-            .replace(/\n/g, ''); // Remove line breaks
+            .replace(/\n/g, '') // Remove line breaks
+            .toLowerCase()
+            .replace(/\s+/g, ''); // Remove spaces and convert to lowercase
         return cleanedHeader;
     });
     csv.push(headers.join(','));
 
     // Add rows to CSV array
-    var rows = Array.from(table.querySelectorAll('tbody tr')).map(function(row) {
+    let rows = Array.from(table.querySelectorAll('tbody tr')).map(function(row) {
         return Array.from(row.querySelectorAll('td')).map(function(cell) {
             return cell.textContent.trim();
         }).join(',');
@@ -294,9 +302,9 @@ function tableToCsv(tableId) {
 
 // Function to trigger download of CSV file
 function downloadCsvFile(csvData, fileName) {
-    var blob = new Blob([csvData], { type: 'text/csv' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
+    let blob = new Blob([csvData], { type: 'text/csv' });
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement('a');
     a.href = url;
     a.download = fileName;
     document.body.appendChild(a);
@@ -307,17 +315,17 @@ function downloadCsvFile(csvData, fileName) {
 
 // Event listener to trigger conversion and download for each CSV label
 document.querySelector('#toCSVMainMemberTable').addEventListener('click', function() {
-    var csvData = tableToCsv('.main-table table');
+    let csvData = tableToCsv('.main-table table');
     downloadCsvFile(csvData, 'clan_members_table_data.csv');
 });
 
 document.querySelector('#toCSVNotMemberTable').addEventListener('click', function() {
-    var csvData = tableToCsv('.main-not-member-table table');
+    let csvData = tableToCsv('.main-not-member-table table');
     downloadCsvFile(csvData, 'former_clan_members_table_data.csv');
 });
 
 document.querySelector('#toCSVClanScore').addEventListener('click', function() {
-    var csvData = tableToCsv('.score-table table');
+    let csvData = tableToCsv('.score-table table');
     downloadCsvFile(csvData, 'top_clan_contributors_data.csv');
 });
 
