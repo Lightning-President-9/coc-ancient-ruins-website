@@ -85,4 +85,4 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 
 - [Flask](https://flask.palletsprojects.com/)
 - [PostgreSQL](https://www.postgresql.org/)
-- [JavaScript Libraries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
+- [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/)
