@@ -148,112 +148,112 @@ def graph_mem_waterfall_charts():
 def graph_fmem_bar():
   figures = fmg_obj.create_bar_graphs()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Bar Graph"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Bar Graph"
     )
 
 @app.route("/graph/fmem/piechart")
 def graph_fmem_pie_chart():
   figures = fmg_obj.create_pie_charts()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Pie Chart"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Pie Chart"
     )
 
 @app.route("/graph/fmem/linechart")
 def graph_fmem_line_chart():
   figures = fmg_obj.create_line_charts()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Line Chart"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Line Chart"
     )
 
 @app.route("/graph/fmem/scatterplot")
 def graph_fmem_scatter_plot():
   figures = fmg_obj.create_scatter_plots()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Scatter Plot"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Scatter Plot"
     )
 
 @app.route("/graph/fmem/histogram")
 def graph_fmem_histogram():
   figures = fmg_obj.create_histograms()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Histogram"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Histogram"
     )
 
 @app.route("/graph/fmem/boxplot")
 def graph_fmem_box_plots():
   figures = fmg_obj.create_box_plots()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Box Plot"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Box Plot"
     )
 
 @app.route("/graph/fmem/violinplot")
 def graph_fmem_violin_plots():
   figures = fmg_obj.create_violin_plots()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Violen Plot"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Violen Plot"
     )
 
 @app.route("/graph/fmem/heatmap")
 def graph_fmem_heatmaps():
   figures = fmg_obj.create_heatmaps()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Heatmap"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Heatmap"
     )
 
 @app.route("/graph/fmem/treemap")
 def graph_fmem_treemaps():
   figures = fmg_obj.create_treemaps()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Treemap"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Treemap"
     )
 
 @app.route("/graph/fmem/sunburstchart")
 def graph_fmem_sunburst_charts():
   figures = fmg_obj.create_sunburst_charts()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Sunburst Chart"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Sunburst Chart"
     )
 
 @app.route("/graph/fmem/densityplot")
 def graph_fmem_density_plots():
   figures = fmg_obj.create_density_plots()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Density Plot"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Density Plot"
     )
 
 @app.route("/graph/fmem/3dscatterplot")
 def graph_fmem_3d_scatter_plots():
   figures = fmg_obj.create_3d_scatter_plots()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem 3D Scatter Plot"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem 3D Scatter Plot"
     )
 
 @app.route("/graph/fmem/areagraph")
 def graph_fmem_area_graphs():
   figures = fmg_obj.create_area_graphs()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Area Graph"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Area Graph"
     )
 
 @app.route("/graph/fmem/polarchart")
 def graph_fmem_polar_charts():
   figures = fmg_obj.create_polar_charts()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Polar Chart"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Polar Chart"
     )
 
 @app.route("/graph/fmem/funnelchart")
 def graph_fmem_funnel_charts():
   figures = fmg_obj.create_funnel_charts()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Funnel Chart"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Funnel Chart"
     )
 
 @app.route("/graph/fmem/waterfallchart")
 def graph_fmem_waterfall_charts():
   figures = fmg_obj.create_waterfall_charts()
   graphJSON_list = [fig.to_json() for fig in figures]
-  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="FMem Waterfall Chart"
+  return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Waterfall Chart"
     )
 
 if __name__ == '__main__':
