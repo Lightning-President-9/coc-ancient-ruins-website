@@ -67,7 +67,7 @@ To run this project locally, follow these steps:
    ```
 
 5. **Configure the database:**
-   - Update the `config.py` file with your PostgreSQL database credentials.
+   - Update the `config.py` file with your database credentials.
 
 6. **Run the application:**
 
