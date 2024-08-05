@@ -93,5 +93,9 @@ start = "pylsp"
 run = ["sh", "-c", "python3 app.py"]
 
 [[ports]]
+localPort = 4000
+externalPort = 3000
+
+[[ports]]
 localPort = 5000
 externalPort = 80
