@@ -36,6 +36,7 @@ Welcome to the Clash of Clans Clan Website repository! This project is dedicated
 - **4/8/24:** Added various graphs for visualizing data:
   - [Clan Members Graphs](https://coc-ancient-ruins-website.onrender.com/graph/mem)
   - [Former Members Graphs](https://coc-ancient-ruins-website.onrender.com/graph/fmem)
+- **5/8/24:** Removed the `requests` library, as it was taking a lot of time to fetch the data from the API, making the site load infinitely. Alternatively, used [ClanDataRepo](https://github.com/Lightning-President-9/ClanDataRepo) repository. This repo has CSV, JSON, XLS, and PDF files for Clan Members , Former Clan Members and Top Clan Contributors uploaded every month. Using the CSV file for accessing the data for graphs.
 
 ## Getting Started
 

@@ -1,14 +1,14 @@
 from flask import Flask , render_template,jsonify
 from database import load_from_db_mem,load_from_db_fmem
-#from graph import ClanMemberGraph as cmg
-#from graph import FormerMemberGraph as fmg
+from graph import ClanMemberGraph as cmg
+from graph import FormerMemberGraph as fmg
 
 app = Flask(__name__)
 
 mem_list=load_from_db_mem()
 fmem_list=load_from_db_fmem()
-#cmg_obj = cmg()
-#fmg_obj = fmg()
+cmg_obj = cmg()
+fmg_obj = fmg()
 
 @app.route("/")
 def coc_ancient_ruins():
@@ -16,12 +16,10 @@ def coc_ancient_ruins():
 
 @app.route("/api/mem")
 def data_mem():
-  #return render_template('mem.html',DM=mem_list,DNM=fmem_list)
   return jsonify(mem_list)
 
 @app.route("/api/fmem")
 def data_fmem():
-  #return render_template('fmem.html',DM=mem_list,DNM=fmem_list)
   return jsonify(fmem_list)
 
 @app.route("/graph/mem")
@@ -31,7 +29,7 @@ def graph_mem():
 @app.route("/graph/fmem")
 def graph_fmem():
   return render_template('fmem_graph.html')
-'''
+
 @app.route("/graph/mem/bar")
 def graph_mem_bar():
   figures = cmg_obj.create_bar_graphs()
@@ -255,6 +253,6 @@ def graph_fmem_waterfall_charts():
   graphJSON_list = [fig.to_json() for fig in figures]
   return render_template('./graph.html', graphJSON_list=graphJSON_list,graph_name ="Fmem Waterfall Chart"
     )
-'''
+
 if __name__ == '__main__':
   app.run(host='0.0.0.0',port=4000,debug=True)

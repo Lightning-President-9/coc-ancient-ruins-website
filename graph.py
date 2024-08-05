@@ -5,19 +5,20 @@ import requests
 
 class ClanMemberGraph:
     def __init__(self):
-        self.data_url = 'https://coc-ancient-ruins-website.onrender.com/api/mem'
-        # self.data = self.fetch_data()
-        # self.df = pd.DataFrame(self.data)
+        self.data_url = 'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/JUL_2024.json'
+        # Fetch JSON data
         self.response = requests.get(self.data_url)
-        self.data = self.response.json()
-        self.df = pd.DataFrame(self.data)
+        self.json_data = self.response.json()
+        # Load JSON data into a DataFrame
+        self.df = pd.DataFrame(self.json_data)
+        # Convert string columns to numeric
+        for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
+            self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
+
+        # Filter data
         self.df_in = self.df[self.df['war'] == 'IN']
         self.df_out = self.df[self.df['war'] == 'OUT']
         self.numerical_df = self.df.select_dtypes(include=['number'])
-
-    # def fetch_data(self):
-    #     response = requests.get(self.data_url)
-    #     return response.json()
 
     def create_bar_graphs(self):
         # 1. Vertical Bar Chart of War Attack
@@ -659,12 +660,15 @@ class ClanMemberGraph:
 
 class FormerMemberGraph:
     def __init__(self):
-        self.data_url = 'https://coc-ancient-ruins-website.onrender.com/api/fmem'
-        # self.data = self.fetch_data()
-        # self.df = pd.DataFrame(self.data)
+        self.data_url = 'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/JUL_2024.json'
+        # Fetch JSON data
         self.response = requests.get(self.data_url)
-        self.data = self.response.json()
-        self.df = pd.DataFrame(self.data)
+        self.json_data = self.response.json()
+        # Load JSON data into a DataFrame
+        self.df = pd.DataFrame(self.json_data)
+        # Convert string columns to numeric
+        for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
+            self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
         self.numerical_df = self.df.select_dtypes(include=['number'])
 
     def create_bar_graphs(self):
