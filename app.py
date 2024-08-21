@@ -1,14 +1,21 @@
 from flask import Flask , render_template,jsonify
-from database import load_from_db_mem,load_from_db_fmem
+import pickle
+# from database import load_from_db_mem,load_from_db_fmem
 from graph import ClanMemberGraph as cmg
 from graph import FormerMemberGraph as fmg
 
 app = Flask(__name__)
 
-mem_list=load_from_db_mem()
-fmem_list=load_from_db_fmem()
+# mem_list=load_from_db_mem()
+# fmem_list=load_from_db_fmem()
 cmg_obj = cmg()
 fmg_obj = fmg()
+
+# with open('data_file.pickle', 'wb') as f:
+#   pickle.dump([mem_list, fmem_list], f)
+
+with open('data_file.pickle', 'rb') as f:
+  mem_list, fmem_list = pickle.load(f)
 
 @app.route("/")
 def coc_ancient_ruins():
