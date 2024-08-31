@@ -5,7 +5,7 @@ import requests
 
 class ClanMemberGraph:
     def __init__(self):
-        self.data_url = 'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/JUL_2024.json'
+        self.data_url = 'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/AUG_2024.json'
         # Fetch JSON data
         self.response = requests.get(self.data_url)
         self.json_data = self.response.json()
@@ -660,7 +660,7 @@ class ClanMemberGraph:
 
 class FormerMemberGraph:
     def __init__(self):
-        self.data_url = 'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/JUL_2024.json'
+        self.data_url = 'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/AUG_2024.json'
         # Fetch JSON data
         self.response = requests.get(self.data_url)
         self.json_data = self.response.json()
