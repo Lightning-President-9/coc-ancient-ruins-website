@@ -5,12 +5,20 @@ import requests
 
 class ClanMemberGraph:
     def __init__(self):
-        self.data_url = 'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/AUG_2024.json'
-        # Fetch JSON data
+        self.data_url = ''
+        self.df = None
+
+    def update_data_url(self, month_year):
+        # Update the data URL dynamically based on month and year
+        self.data_url = f'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/{month_year}.json'
+
+        # Fetch the updated data
         self.response = requests.get(self.data_url)
         self.json_data = self.response.json()
+
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
+
         # Convert string columns to numeric
         for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
             self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
@@ -660,15 +668,25 @@ class ClanMemberGraph:
 
 class FormerMemberGraph:
     def __init__(self):
-        self.data_url = 'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/AUG_2024.json'
-        # Fetch JSON data
+        self.data_url = ''
+        self.df = None
+
+    def update_data_url(self, month_year):
+        # Update the data URL dynamically based on the selected month and year
+        self.data_url = f'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/{month_year}.json'
+
+        # Fetch JSON data from the updated URL
         self.response = requests.get(self.data_url)
         self.json_data = self.response.json()
+
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
-        # Convert string columns to numeric
+
+        # Convert string columns to numeric where necessary
         for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
             self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
+
+        # Select numerical columns for later use
         self.numerical_df = self.df.select_dtypes(include=['number'])
 
     def create_bar_graphs(self):

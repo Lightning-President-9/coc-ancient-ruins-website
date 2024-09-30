@@ -24,31 +24,58 @@
             font-weight: 700;
             margin-bottom: 40px;
             color: #000;
-
-            width : auto;
-            height : auto;
-            background-color : #fff5;
-            backdrop-filter : blur(7px);
-            box-shadow : 0 .4rem .8rem #0005;
-            border-radius : .8rem;
-            overflow : hidden;
-
+            width: auto;
+            height: auto;
+            background-color: #fff5;
+            backdrop-filter: blur(7px);
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: .8rem;
+            overflow: hidden;
+        }
+        #controls-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #fff5;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: auto;
+            height: auto;
+            backdrop-filter: blur(7px);
+        }
+        select:hover, button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #DBE1E2;
         }
         #charts-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 20px;
-            overflow-x: auto; /* Horizontal scrollbar if needed */
+            overflow-x: auto;
             width: 100%;
         }
         .chart {
             width: 95%;
-            max-width: 95vw; /* Ensure charts don't overflow the viewport width */
-            height: 95vh; /* 95% of the viewport height */
+            max-width: 95vw;
+            height: 95vh;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* To maintain the border radius */
+            overflow: hidden;
             box-sizing: border-box;
             transition: transform 0.3s, box-shadow 0.3s;
         }
@@ -61,23 +88,46 @@
 </head>
 <body>
     <h1>Graphs</h1>
+    
+    <div id="controls-container">
+        <form id="fetch-data-form" method="GET">
+            <select id="month-year-select" name="month-year" aria-label="Select month">
+                <option value="JUL_2024">July 2024</option>
+                <option value="AUG_2024">August 2024</option>
+            </select>
+            
+            <button type="submit" id="fetch-button">Fetch Data</button>
+        </form>
+    </div>
+
     <div id="charts-container"></div>
 
     <script>
         let graphJSON_list = {{ graphJSON_list | tojson | safe }};
-
         let container = document.getElementById('charts-container');
 
-        graphJSON_list.forEach((graphJSON, index) => {
-            let chartDiv = document.createElement('div');
-            chartDiv.id = 'chart' + (index + 1);
-            chartDiv.classList.add('chart');
+        function renderCharts(graphJSON_list) {
+            container.innerHTML = ''; // Clear previous charts
+            graphJSON_list.forEach((graphJSON, index) => {
+                let chartDiv = document.createElement('div');
+                chartDiv.id = 'chart' + (index + 1);
+                chartDiv.classList.add('chart');
+                container.appendChild(chartDiv);
+                let graph = JSON.parse(graphJSON);
+                Plotly.newPlot(chartDiv.id, graph.data, graph.layout, {responsive: true});
+            });
+        }
 
-            container.appendChild(chartDiv);
+        document.getElementById('fetch-data-form').action = window.location.href;
+        
+        document.getElementById('fetch-button').addEventListener('click', function() {
+            let selectedMonthAndYear = document.getElementById('month-year-select').value;
 
-            let graph = JSON.parse(graphJSON);
-            Plotly.newPlot(chartDiv.id, graph.data, graph.layout, {responsive: true});
+            renderCharts(graphJSON_list); // Re-render the charts with updated data
         });
+
+        // Initial rendering of charts
+        renderCharts(graphJSON_list);
     </script>
 </body>
 </html>
