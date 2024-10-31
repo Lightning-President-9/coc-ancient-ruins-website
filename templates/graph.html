@@ -18,6 +18,7 @@
             padding: 20px;
             box-sizing: border-box;
             color: #333;
+            padding-top: 70px; /* Adjust this value based on the height of the navbar */
         }
         h1 {
             text-align: center;
@@ -83,20 +84,140 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
+        /* Basic Navbar Styles */
+        .navbar {
+            /* width: 100%; */
+            display: flex;
+            /* justify-content: space-around; */
+            /* align-items: center; */
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* padding: 10px 20px; */
+            margin-bottom: 10px;
+            /* box-sizing: border-box; */
+            position: fixed; /* Fixed positioning */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it’s above other content */
+            padding: 10px; /* Adjust padding as needed */
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        /* Image Icons */
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+            /* margin: 0 10px; */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
     </style>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
+    <nav class="navbar">
+         <!-- Home -->
+         <a href="https://coc-ancient-ruins-website.onrender.com/" class="nav-item">
+             <img src="/static/home_img.png" alt="Home" class="nav-icon">
+         </a>
+
+         <!-- API -->
+         <div class="dropdown">
+             <a class="nav-item">
+                 <img src="/static/api_img.png" alt="API" class="nav-icon">
+             </a>
+             <div class="dropdown-content">
+                 <a href="https://coc-ancient-ruins-website.onrender.com/api/mem">Clan Members API</a>
+                 <a href="https://coc-ancient-ruins-website.onrender.com/api/fmem">Former Members API</a>
+                 <a href="https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/JUL_2024.json">Clan Members JSON</a>
+                 <a href="https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/JUL_2024.json">Former Clan Members JSON</a>
+             </div>
+         </div>
+
+         <!-- Graph -->
+         <div class="dropdown">
+             <a class="nav-item">
+                 <img src="/static/graph_img.png" alt="Graph" class="nav-icon">
+             </a>
+             <div class="dropdown-content">
+                 <a href="https://coc-ancient-ruins-website.onrender.com/graph/mem">Clan Members Graph</a>
+                 <a href="https://coc-ancient-ruins-website.onrender.com/graph/fmem">Former Clan Members Graph</a>
+             </div>
+         </div>
+
+         <!-- GitHub -->
+         <div class="dropdown">
+             <a class="nav-item">
+                 <img src="/static/github_img.png" alt="GitHub" class="nav-icon">
+             </a>
+             <div class="dropdown-content">
+                 <a href="https://github.com/Lightning-President-9/coc-ancient-ruins-website">Website Repo</a>
+                 <a href="https://github.com/Lightning-President-9/ClanDataRepo">Clan Data Repo</a>
+                 <a href="https://github.com/Lightning-President-9/ClanDataRetriveFromAPI">API Retrieve Repo</a>
+             </div>
+         </div>
+
+         <!-- Invite -->
+         <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=2PP0P22CQ" class="nav-item">
+             <img src="/static/invite_img.png" alt="Invite" class="nav-icon"> <!-- Replace with actual image source -->
+         </a>
+
+         <!-- Discord -->
+         <a href="https://discord.gg/5CFpPmA2Gv" class="nav-item">
+             <img src="/static/discord_img.png" alt="Discord" class="nav-icon"> <!-- Replace with actual image source -->
+         </a>
+     </nav>
     <h1>Graphs</h1>
-    
+
     <div id="controls-container">
         <form id="fetch-data-form" method="GET">
             <select id="month-year-select" name="month-year" aria-label="Select month">
                 <option value="JUL_2024">July 2024</option>
                 <option value="AUG_2024">August 2024</option>
-                <option value="SEP_2024">September 2024</option>
             </select>
-            
+
             <button type="submit" id="fetch-button">Fetch Data</button>
         </form>
     </div>
@@ -120,7 +241,7 @@
         }
 
         document.getElementById('fetch-data-form').action = window.location.href;
-        
+
         document.getElementById('fetch-button').addEventListener('click', function() {
             let selectedMonthAndYear = document.getElementById('month-year-select').value;
 

@@ -1,40 +1,41 @@
  body{
-  	min-height : 100vh;
-  	background-image : url(".././static/bg_img_2.png");
-	background-repeat:no-repeat;
-	background-size:cover;
-	background-position:center;
+    min-height : 100vh;
+    background-image : url(".././static/bg_img_2.png");
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
    background-attachment: fixed; 
-  	display : flex;
-  	justify-content : center;
-  	align-items : center;
-	font-family:"Roboto Condensed";
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    font-family:"Roboto Condensed";
+     padding-top: 70px; /* Adjust this value based on the height of the navbar */
 }
 .container{
-	width:90%;
+    width:90%;
 }
 table,th,td{
-  	border-collapse : collapse;
-  	padding : 1rem;
-  	text-align : left;
+    border-collapse : collapse;
+    padding : 1rem;
+    text-align : left;
 }
 .table-body{
-  	width : 95%;
-  	max-height : 20rem;
-  	background-color : #fffb;
-  	margin : .8rem auto; 
-  	border-radius : .6rem;
-  	overflow-y : auto;
+    width : 95%;
+    max-height : 20rem;
+    background-color : #fffb;
+    margin : .8rem auto; 
+    border-radius : .6rem;
+    overflow-y : auto;
 
 }
 .main-table,.main-not-member-table,.main-clan-table,.main-score-table,.score-table{
-  	width : auto;
-  	height : auto;
-  	background-color : #fff5;
-  	backdrop-filter : blur(7px);
-  	box-shadow : 0 .4rem .8rem #0005;
+    width : auto;
+    height : auto;
+    background-color : #fff5;
+    backdrop-filter : blur(7px);
+    box-shadow : 0 .4rem .8rem #0005;
     border-radius : .8rem;
-  	overflow : hidden;
+    overflow : hidden;
 
 }
 /*For Search*/
@@ -53,7 +54,7 @@ table,th,td{
 
   /*height : 100%;*/
   align-items: stretch;
-  
+
   background-color: #fff4;
   padding:0 .8rem;
   border-radius :1rem;
@@ -85,65 +86,65 @@ table,th,td{
   align-items:centre;
 }
 .table-header h2{
-  	margin : 0px;
-  	width : 100%;
-  	height : auto;
-  	background-color : #fff4;
-  	padding : .8rem 1rem;
-  
+    margin : 0px;
+    width : 100%;
+    height : auto;
+    background-color : #fff4;
+    padding : .8rem 1rem;
+
     border-radius :1rem;
 }
 .table-body{
-  	width : 95%;
-  	max-height : 20rem;
-  	background-color : #fffb;
-  	margin : .8rem auto;
-  	border-radius : .6rem;
-  	overflow : auto;
+    width : 95%;
+    max-height : 20rem;
+    background-color : #fffb;
+    margin : .8rem auto;
+    border-radius : .6rem;
+    overflow : auto;
 }
 .table-body::-webkit-scrollbar{
-  	width : 0.5rem;
-  	height : 0.5rem;
+    width : 0.5rem;
+    height : 0.5rem;
 }
 .table-body::-webkit-scrollbar-thumb{
-  	border-radius : .5rem;
-  	background-color : #0004;
-  	visibility : hidden;
+    border-radius : .5rem;
+    background-color : #0004;
+    visibility : hidden;
 }
 .table-body:hover::-webkit-scrollbar-thumb{
-  	visibility : visible;
+    visibility : visible;
 }
-	table{
-  	width : 100%;
+    table{
+    width : 100%;
 }
 thead{
-  	position : sticky;
-  	top : 0;
-  	left : 0;
-  	background-color : #d5d1defe;
-  	border-radius : 5px;
+    position : sticky;
+    top : 0;
+    left : 0;
+    background-color : #d5d1defe;
+    border-radius : 5px;
 }
 .table-body tr:nth-child(even){
-  	background-color : #0002;
+    background-color : #0002;
 }
 
 .table-body tr:nth-child(odd){
-  	background-color : #000000b;
+    background-color : #000000b;
 }
 .status,.war{
-  	padding : .4rem 1;
+    padding : .4rem 1;
     border-radius : 1rem;
-  	text-align : center;
-	color : black;
+    text-align : center;
+    color : black;
 }
 .status.leader{
-  	background-color : #00D0FF;
+    background-color : #00D0FF;
 }
 .status.co-leader{
-  	background-color : #FFD700;
+    background-color : #FFD700;
 }
 .status.elder{
-  	background-color : #BCC6CC;
+    background-color : #BCC6CC;
 }
 .war.in{
   background-color : #32CD32;
@@ -152,39 +153,39 @@ thead{
 background-color : #FF4500;
 }
 .clan-table-body th{
-  	text-align : right;
+    text-align : right;
 }
 .data-box{
-  	display : flex;
-  	margin-right : .3rem;
+    display : flex;
+    margin-right : .3rem;
 }
 .img-box{
-  	height : auto;
-  	width : auto;
-  	background-color : #fffb;
-  	border-radius : .6rem;
-	margin : .8rem auto;
-	margin-right : .3rem;
- 	margin-left : .3rem;
- 	align-items : center;
-  	display : flex;
-  	flex-direction : column;
+    height : auto;
+    width : auto;
+    background-color : #fffb;
+    border-radius : .6rem;
+    margin : .8rem auto;
+    margin-right : .3rem;
+    margin-left : .3rem;
+    align-items : center;
+    display : flex;
+    flex-direction : column;
 }
 .main-clan-table,.main-table,.main-not-member-table,.main-score-table,.score-table{
-  	margin-bottom : 15px;
+    margin-bottom : 15px;
 }
 
 .p-data{
-   	font-size : 12px;
-	text-align : center;
+    font-size : 12px;
+    text-align : center;
 }
 .disclaimers li{
-	font-size : 20px;
-	margin-right : 10px;
+    font-size : 20px;
+    margin-right : 10px;
 }
 p{
-	padding-left:20px;
-	padding-right:20px;
+    padding-left:20px;
+    padding-right:20px;
 }
 .tooltip {
         position: relative;
@@ -236,7 +237,7 @@ thead th:hover span.icon-arrow{
 thead th:hover{
   color:#6c00bd;
 }
-    
+
 thead th.active span.icon-arrow{
   background-color:#6c00bd;
   color:#fff;
@@ -331,60 +332,123 @@ thead th.asc span.icon-arrow{
     width: 2rem;
     height: auto;
 }
-/**/
 
-
-/*For Hiding Visit Counter*/
-.visit-counter {
-  visibility: hidden;
+/* Basic Navbar Styles */
+.navbar {
+    /* width: 100%; */
+    display: flex;
+    /* justify-content: space-around; */
+    /* align-items: center; */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* padding: 10px 20px; */
+    margin-bottom: 10px;
+    /* box-sizing: border-box; */
+    position: fixed; /* Fixed positioning */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it’s above other content */
+    padding: 10px; /* Adjust padding as needed */
 }
-  
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar a {
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+/* Image Icons */
+.nav-icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    /* margin: 0 10px; */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 4px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 @media (max-width: 650px){
 body{
     background-attachment: scroll;
 }
 .container{
-	width : 90vw;
-	align-items : center;
+    width : 90vw;
+    align-items : center;
 }
 p{
-	overflow:auto;
+    overflow:auto;
 }
 .p-data{
-	font-size : 18px;
+    font-size : 18px;
 }
 .table-header{
-  	width : 100%;
+    width : 100%;
   }
   .data-box{
-    	flex-direction : column;
-    	margin-left : .8rem;
-    	align-items: center;
+        flex-direction : column;
+        margin-left : .8rem;
+        align-items: center;
   }
-  
+
   .img-box{
-    	align-items : center;
-    	margin-left : .3rem;
-    	width : 95%;
+        align-items : center;
+        margin-left : .3rem;
+        width : 95%;
   }
 .main-clan-table{
-  	overflow-y :auto;
+    overflow-y :auto;
 }
 .main-clan-table::-webkit-scrollbar{
-  	width : 0.5rem;
-  	height : 0.5rem;
+    width : 0.5rem;
+    height : 0.5rem;
 }
 .main-clan-table::-webkit-scrollbar-thumb{
-  	border-radius : .5rem;
-  	background-color : #0004;
-  	visibility : hidden;
+    border-radius : .5rem;
+    background-color : #0004;
+    visibility : hidden;
 }
 .main-clan-table:hover::-webkit-scrollbar-thumb{
-  	visibility : visible
+    visibility : visible
 }
   .export__file .export__file-btn {
       width: 5.3rem;
       height: 5.3rem;
       background: #fff6 url(.././static/export_img_final.png) center / 65% no-repeat;
-  }
+  }    
 }
