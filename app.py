@@ -37,33 +37,45 @@ def graph_mem():
 def graph_fmem():
   return render_template('fmem_graph.html')
 
-# Function to handle graph routes dynamically
-def generate_graph(graph_type, graph_object, month_year):
-    graph_object.update_data_url(month_year)
-    graph_method = getattr(graph_object, f'create_{graph_type}_graphs')
-    figures = graph_method()
+# Mapping for graph types and their respective methods
+GRAPH_METHODS = {
+    "bar": "create_bar_graphs",
+    "piechart": "create_pie_charts",
+    "linechart": "create_line_charts",
+    "scatterplot": "create_scatter_plots",
+    "histogram": "create_histograms",
+    "boxplot": "create_box_plots",
+    "violinplot": "create_violin_plots",
+    "heatmap": "create_heatmaps",
+    "treemap": "create_treemaps",
+    "sunburstchart": "create_sunburst_charts",
+    "densityplot": "create_density_plots",
+    "3dscatterplot": "create_3d_scatter_plots",
+    "areagraph": "create_area_graphs",
+    "polarchart": "create_polar_charts",
+    "funnelchart": "create_funnel_charts",
+    "waterfallchart": "create_waterfall_charts",
+}
+
+def render_graph(graph_type, obj_type):
+    month_year = request.args.get('month-year', 'NOV_2024')  # Default to November 2024
+    graph_obj = cmg_obj if obj_type == "mem" else fmg_obj
+    graph_obj.update_data_url(month_year)
+
+    # Get the corresponding method for the graph type
+    method_name = GRAPH_METHODS.get(graph_type)
+    if not method_name:
+        return f"Graph type '{graph_type}' not found", 404
+
+    figures = getattr(graph_obj, method_name)()
     graphJSON_list = [fig.to_json() for fig in figures]
-    return render_template('./graph.html', graphJSON_list=graphJSON_list, graph_name=f"{graph_type.capitalize()} Graph")
+    return render_template('./graph.html', graphJSON_list=graphJSON_list, graph_name=f"{obj_type.upper()} {graph_type.capitalize()} Chart")
 
-@app.route("/graph/<entity>/<graph_type>", methods=['GET'])
-def graph(entity, graph_type):
-    valid_graphs = [
-        'bar', 'piechart', 'linechart', 'scatterplot', 'histogram', 'boxplot',
-        'violinplot', 'heatmap', 'treemap', 'sunburstchart', 'densityplot', 
-        '3dscatterplot', 'areagraph', 'polarchart', 'funnelchart', 'waterfallchart'
-    ]
-
-    # Validate the graph type and entity
-    if graph_type not in valid_graphs or entity not in ['mem', 'fmem']:
-        return "Invalid graph type or entity", 400
-
-    # Choose graph object based on the entity
-    graph_object = cmg_obj if entity == 'mem' else fmg_obj
-
-    # Default to OCT_2024 if no month-year is provided
-    month_year = request.args.get('month-year', 'OCT_2024')
-
-    return generate_graph(graph_type, graph_object, month_year)
+@app.route("/graph/<obj_type>/<graph_type>", methods=['GET'])
+def graph_handler(obj_type, graph_type):
+    if obj_type not in ["mem", "fmem"]:
+        return f"Invalid object type '{obj_type}'", 404
+    return render_graph(graph_type, obj_type)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0',port=4000,debug=True)
