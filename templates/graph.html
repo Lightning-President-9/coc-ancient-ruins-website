@@ -162,7 +162,6 @@
          <a href="https://coc-ancient-ruins-website.onrender.com/" class="nav-item">
              <img src="/static/home_img.png" alt="Home" class="nav-icon">
          </a>
-
          <!-- API -->
          <div class="dropdown">
              <a class="nav-item">
@@ -171,11 +170,10 @@
              <div class="dropdown-content">
                  <a href="https://coc-ancient-ruins-website.onrender.com/api/mem">Clan Members API</a>
                  <a href="https://coc-ancient-ruins-website.onrender.com/api/fmem">Former Members API</a>
-                 <a href="https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/NOV_2024.json">Clan Members JSON</a>
-                 <a href="https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/NOV_2024.json">Former Clan Members JSON</a>
+                 <a href="https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/DEC_2024.json">Clan Members JSON</a>
+                 <a href="https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/DEC_2024.json">Former Clan Members JSON</a>
              </div>
          </div>
-
          <!-- Graph -->
          <div class="dropdown">
              <a class="nav-item">
@@ -186,7 +184,6 @@
                  <a href="https://coc-ancient-ruins-website.onrender.com/graph/fmem">Former Clan Members Graph</a>
              </div>
          </div>
-
          <!-- GitHub -->
          <div class="dropdown">
              <a class="nav-item">
@@ -203,14 +200,12 @@
          <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=2PP0P22CQ" class="nav-item">
              <img src="/static/invite_img.png" alt="Invite" class="nav-icon"> <!-- Replace with actual image source -->
          </a>
-
          <!-- Discord -->
          <a href="https://discord.gg/5CFpPmA2Gv" class="nav-item">
              <img src="/static/discord_img.png" alt="Discord" class="nav-icon"> <!-- Replace with actual image source -->
          </a>
      </nav>
     <h1>Graphs</h1>
-
     <div id="controls-container">
         <form id="fetch-data-form" method="GET">
             <select id="month-year-select" name="month-year" aria-label="Select month">
@@ -219,14 +214,12 @@
                 <option value="SEP_2024">September 2024</option>
                 <option value="OCT_2024">October 2024</option>
                 <option value="NOV_2024">November 2024</option>
+                <option value="DEC_2024">December 2024</option>
             </select>
-
             <button type="submit" id="fetch-button">Fetch Data</button>
         </form>
     </div>
-
     <div id="charts-container"></div>
-
     <script>
         let graphJSON_list = {{ graphJSON_list | tojson | safe }};
         let container = document.getElementById('charts-container');
@@ -242,7 +235,6 @@
                 Plotly.newPlot(chartDiv.id, graph.data, graph.layout, {responsive: true});
             });
         }
-
         document.getElementById('fetch-data-form').action = window.location.href;
 
         document.getElementById('fetch-button').addEventListener('click', function() {
@@ -250,7 +242,6 @@
 
             renderCharts(graphJSON_list); // Re-render the charts with updated data
         });
-
         // Initial rendering of charts
         renderCharts(graphJSON_list);
     </script>
