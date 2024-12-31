@@ -12,7 +12,7 @@ cmg_obj = cmg()
 fmg_obj = fmg()
 
 # with open('data_file.pickle', 'wb') as f:
-  # pickle.dump([mem_list, fmem_list], f)
+#   pickle.dump([mem_list, fmem_list], f)
 
 with open('data_file.pickle', 'rb') as f:
   mem_list, fmem_list = pickle.load(f)

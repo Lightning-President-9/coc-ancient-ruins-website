@@ -40,46 +40,6 @@ Welcome to the Clash of Clans Clan Website repository! This project is dedicated
 - **30/9/24:** Added Dropdown for fetching data for respective given month in graphs.
 - **31/10/24:** Added Navigation Bar.
 
-## Getting Started
-
-To run this project locally, follow these steps:
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/Lightning-President-9/coc-ancient-ruins-website.git
-   ```
-
-2. **Navigate to the project directory:**
-
-   ```bash
-   cd coc-ancient-ruins-website
-   ```
-
-3. **Set up a virtual environment (recommended):**
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-4. **Install the required dependencies:**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-5. **Configure the database:**
-   - Update the `database.py` file with your database credentials.
-
-6. **Run the application:**
-
-   ```bash
-   python app.py
-   ```
-
-   By default, the application will be accessible at `http://127.0.0.1:5000/`.
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE) file for details.
