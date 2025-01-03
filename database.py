@@ -1,13 +1,15 @@
 from sqlalchemy import create_engine,text
+# from dotenv import load_dotenv
 import os
 
-db_connection_string=os.environ['DB_CONNECTION_STRING']
+# load_dotenv()  # This loads the variables from .env into os.environ
 
+db_connection_string=os.environ.get('DB_CONNECTION_STRING')
 engine = create_engine(db_connection_string)
 
 def load_from_db_mem():
     with engine.connect() as conn:
-        result = conn.execute(text(os.environ['ClanMembers_Query']))
+        result = conn.execute(text(os.environ.get('ClanMembers_Query')))
         mem_dicts = []
         for row in result.fetchall():
             row_dict = {}
@@ -18,7 +20,7 @@ def load_from_db_mem():
 
 def load_from_db_fmem():
     with engine.connect() as conn:
-        result = conn.execute(text((os.environ['FormerMembers_Query'])))
+        result = conn.execute(text(os.environ.get('FormerMembers_Query')))
         fmem_dicts = []
         for row in result.fetchall():
             row_dict = {}
