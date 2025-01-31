@@ -215,7 +215,7 @@
                   {% for datam in DM %}
                   <tr>
                      <td>{{datam['srno']}}</td>
-                      <td><a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{datam['playertag']}}" target="_blank" rel="TEST"></a>{{datam['name']}}</td>
+                      <td><a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{datam['playertag']}}" target="_blank" rel="TEST">{{datam['name']}}</a></td>
                      <td class="war {% if datam['war'] == 'IN' %}in{% else %}out{% endif %}">{{datam['war']}}</td>
                      <td>{{datam['warattack']}}</td>
                      <td>{{datam['clancapital']}}</td>
