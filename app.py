@@ -78,4 +78,4 @@ def graph_handler(obj_type, graph_type):
     return render_graph(graph_type, obj_type)
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0',port=4000,debug=True)
+  app.run(host='0.0.0.0',port=10000,debug=True)
