@@ -58,7 +58,7 @@ GRAPH_METHODS = {
 }
 
 def render_graph(graph_type, obj_type):
-    month_year = request.args.get('month-year', 'NOV_2024')  # Default to November 2024
+    month_year = request.args.get('month-year', 'JAN_2025')  # Default to January 2025
     graph_obj = cmg_obj if obj_type == "mem" else fmg_obj
     graph_obj.update_data_url(month_year)
 
