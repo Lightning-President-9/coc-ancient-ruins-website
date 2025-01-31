@@ -63,7 +63,7 @@
 
              <!-- Discord -->
              <a href="https://discord.gg/5CFpPmA2Gv" class="nav-item">
-                 <img src=".././static/discord_img.png" alt="Discord" class="nav-icon"> <!-- Replace with actual image source -->
+                 <img src=".././static/discord_img.png" alt="Discord" class="nav-icon">
              </a>
          </nav>
       <main class="main-clan-table">
@@ -137,7 +137,7 @@
                   </tr>
                   <tr>
                      <td><strong>Wars Won:</strong></td>
-                     <th>147</th>
+                     <th>149</th>
                   </tr>
                   <tr>
                      <td><strong>Clan Leader:</strong></td>
@@ -150,6 +150,7 @@
                </thead>
             </table>
          </section>
+         </div>
       </main>
       <div class="main-table">
          <section class="table-header">
@@ -214,7 +215,7 @@
                   {% for datam in DM %}
                   <tr>
                      <td>{{datam['srno']}}</td>
-                     <td><a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{datam['playertag']}}" target="_blank" rel="TEST">{{datam['name']}}</td>
+                      <td><a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{datam['playertag']}}" target="_blank" rel="TEST"></a>{{datam['name']}}</td>
                      <td class="war {% if datam['war'] == 'IN' %}in{% else %}out{% endif %}">{{datam['war']}}</td>
                      <td>{{datam['warattack']}}</td>
                      <td>{{datam['clancapital']}}</td>
@@ -314,8 +315,6 @@
                            </span>
                            <span class="icon-arrow">&UpArrow;</span>
                        </th>
-
-                     </th>
                   </tr>
                </thead>
                <tbody>
@@ -389,6 +388,7 @@
                <li>Unauthorized use or reproduction of content is prohibited.</li>
             </ul>
          </div>
+      </div>
       </div>
       <script>
          {% include 'script.js' %}
