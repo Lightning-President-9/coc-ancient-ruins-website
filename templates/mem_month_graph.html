@@ -154,7 +154,7 @@
             display: block;
         }
     </style>
-    <script src="https://cdn.plot.ly/plotly-3.0.0.min.js" charset="utf-8"></script>
+    <script src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -211,13 +211,14 @@
     <div id="controls-container">
         <form id="fetch-data-form" method="GET">
             <select id="month-year-select" name="month-year" aria-label="Select month">
-                <option value="JUL_2024">July 2024</option>
-                <option value="AUG_2024">August 2024</option>
-                <option value="SEP_2024">September 2024</option>
-                <option value="OCT_2024">October 2024</option>
-                <option value="NOV_2024">November 2024</option>
-                <option value="DEC_2024">December 2024</option>
-                <option value="JAN_2025">January 2025</option>
+                <option value="MAY-JUN_2024">MAY-JUN 2024</option>
+                <option value="JUN-JUL_2024">JUN-JUL 2024</option>
+                <option value="JUL-AUG_2024">JUL-AUG 2024</option>
+                <option value="AUG-SEP_2024">AUG-SEP 2024</option>
+                <option value="SEP-OCT_2024">SEP-OCT 2024</option>
+                <option value="OCT-NOV_2024">OCT-NOV 2024</option>
+                <option value="NOV-DEC_2024">NOV-DEC 2024</option>
+                <option value="DEC-JAN_2025">DEC-JAN 2025</option>
             </select>
             <button type="submit" id="fetch-button">Fetch Data</button>
         </form>

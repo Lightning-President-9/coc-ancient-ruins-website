@@ -154,18 +154,18 @@
             display: block;
         }
     </style>
-    <script src="https://cdn.plot.ly/plotly-3.0.0.min.js" charset="utf-8"></script>
+    <script src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
          <!-- Home -->
          <a href="https://coc-ancient-ruins-website.onrender.com/" class="nav-item">
-             <img src="/static/nav-bar-icons/home_img.png" alt="Home" class="nav-icon">
+             <img src=".././static/nav-bar-icons/home_img.png" alt="Home" class="nav-icon">
          </a>
          <!-- API -->
          <div class="dropdown">
              <a class="nav-item">
-                 <img src="/static/nav-bar-icons/api_img.png" alt="API" class="nav-icon">
+                 <img src=".././static/nav-bar-icons/api_img.png" alt="API" class="nav-icon">
              </a>
              <div class="dropdown-content">
                  <a href="https://coc-ancient-ruins-website.onrender.com/api/mem">Clan Members API</a>
@@ -177,7 +177,7 @@
          <!-- Graph -->
          <div class="dropdown">
              <a class="nav-item">
-                 <img src="/static/nav-bar-icons/graph_img.png" alt="Graph" class="nav-icon">
+                 <img src=".././static/nav-bar-icons/graph_img.png" alt="Graph" class="nav-icon">
              </a>
              <div class="dropdown-content">
                  <a href="https://coc-ancient-ruins-website.onrender.com/graph/mem">Clan Members Graph</a>
@@ -189,7 +189,7 @@
          <!-- GitHub -->
          <div class="dropdown">
              <a class="nav-item">
-                 <img src="/static/nav-bar-icons/github_img.png" alt="GitHub" class="nav-icon">
+                 <img src=".././static/nav-bar-icons/github_img.png" alt="GitHub" class="nav-icon">
              </a>
              <div class="dropdown-content">
                  <a href="https://github.com/Lightning-President-9/coc-ancient-ruins-website">Website Repo</a>
@@ -200,28 +200,14 @@
 
          <!-- Invite -->
          <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=2PP0P22CQ" class="nav-item">
-             <img src="/static/nav-bar-icons/invite_img.png" alt="Invite" class="nav-icon"> <!-- Replace with actual image source -->
+             <img src=".././static/nav-bar-icons/invite_img.png" alt="Invite" class="nav-icon">
          </a>
          <!-- Discord -->
          <a href="https://discord.gg/5CFpPmA2Gv" class="nav-item">
-             <img src="/static/nav-bar-icons/discord_img.png" alt="Discord" class="nav-icon"> <!-- Replace with actual image source -->
+             <img src=".././static/nav-bar-icons/discord_img.png" alt="Discord" class="nav-icon">
          </a>
      </nav>
-    <h1>Graphs</h1>
-    <div id="controls-container">
-        <form id="fetch-data-form" method="GET">
-            <select id="month-year-select" name="month-year" aria-label="Select month">
-                <option value="JUL_2024">July 2024</option>
-                <option value="AUG_2024">August 2024</option>
-                <option value="SEP_2024">September 2024</option>
-                <option value="OCT_2024">October 2024</option>
-                <option value="NOV_2024">November 2024</option>
-                <option value="DEC_2024">December 2024</option>
-                <option value="JAN_2025">January 2025</option>
-            </select>
-            <button type="submit" id="fetch-button">Fetch Data</button>
-        </form>
-    </div>
+    <h1>All Month Analysis Graphs</h1>
     <div id="charts-container"></div>
     <script>
         let graphJSON_list = {{ graphJSON_list | tojson | safe }};
@@ -238,14 +224,8 @@
                 Plotly.newPlot(chartDiv.id, graph.data, graph.layout, {responsive: true});
             });
         }
-        document.getElementById('fetch-data-form').action = window.location.href;
 
-        document.getElementById('fetch-button').addEventListener('click', function() {
-            let selectedMonthAndYear = document.getElementById('month-year-select').value;
-
-            renderCharts(graphJSON_list); // Re-render the charts with updated data
-        });
-        // Initial rendering of charts
+        // Render charts on page load
         renderCharts(graphJSON_list);
     </script>
 </body>

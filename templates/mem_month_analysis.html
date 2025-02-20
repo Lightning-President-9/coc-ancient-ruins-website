@@ -70,12 +70,12 @@
          </nav>
       <div class="main-table">
          <section class="table-header">
-            <h2>Clan Members Graphs</h2>
+            <h2>Clan Members Monthly Analysis</h2>
          </section>
          <div class="graphs-container">
     {% for graph in ["bar", "piechart", "linechart", "scatterplot", "histogram", "boxplot", "violinplot", "heatmap", "treemap", "sunburstchart", "densityplot", "3dscatterplot", "areagraph", "polarchart", "funnelchart", "waterfallchart"] %}
     <div class="graph-item">
-        <a href="https://coc-ancient-ruins-website.onrender.com/graph/mem/{{ graph }}" target="_self" rel="self">
+        <a href="https://coc-ancient-ruins-website.onrender.com/graph/mag/{{ graph }}" target="_self" rel="self">
             <img src="../static/graph-icons/{{ graph }}.png" alt="{{ graph|capitalize }} Chart" class="graph-icon">
         </a>
         <p class="graph-label">{{ graph|capitalize }}</p>

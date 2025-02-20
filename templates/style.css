@@ -452,3 +452,24 @@ p{
       background: #fff6 url(.././static/export_img_final.png) center / 65% no-repeat;
   }    
 }
+
+.graphs-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+}
+.graph-item {
+        text-align: center;
+}
+.graph-icon {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+}
+.graph-label {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 8px;
+}

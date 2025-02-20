@@ -3,6 +3,8 @@ import pickle
 # from database import load_from_db_mem,load_from_db_fmem
 from graph import ClanMemberGraph as cmg
 from graph import FormerMemberGraph as fmg
+from graph import MonthlyAnalysisGraph as mag
+from graph import AllMonthGraph as amg
 
 app = Flask(__name__)
 
@@ -10,6 +12,8 @@ app = Flask(__name__)
 # fmem_list=load_from_db_fmem()
 cmg_obj = cmg()
 fmg_obj = fmg()
+mag_obj = mag()
+amg_obj = amg()
 
 # with open('data_file.pickle', 'wb') as f:
 #   pickle.dump([mem_list, fmem_list], f)
@@ -37,6 +41,21 @@ def graph_mem():
 def graph_fmem():
   return render_template('fmem_graph.html')
 
+@app.route("/graph/mag")
+def graph_mag():
+  return render_template('mem_month_analysis.html')
+
+@app.route("/all-mon-ana-graph")
+def all_mon_ana_graph():
+    clan_data = amg_obj.fetch_data()
+    df = amg_obj.process_data(clan_data)
+    graphs = amg_obj.plot_graphs(df)
+
+    # Convert Plotly figures to JSON
+    graphJSON_list = [fig.to_json() for fig in graphs]
+
+    return render_template("all_month_graph.html", graphJSON_list=graphJSON_list, graph_name="All Month Analysis")
+
 # Mapping for graph types and their respective methods
 GRAPH_METHODS = {
     "bar": "create_bar_graphs",
@@ -58,8 +77,21 @@ GRAPH_METHODS = {
 }
 
 def render_graph(graph_type, obj_type):
-    month_year = request.args.get('month-year', 'DEC_2024')  # Default to January 2025
-    graph_obj = cmg_obj if obj_type == "mem" else fmg_obj
+    if obj_type == "mem":
+        graph_obj = cmg_obj
+        month_year = request.args.get('month-year', 'JAN_2025')  # Default to January 2025
+        template_name = './graph.html'
+    elif obj_type == "fmem":
+        graph_obj = fmg_obj
+        month_year = request.args.get('month-year', 'JAN_2025')  # Default to January 2025
+        template_name = './graph.html'
+    elif obj_type == "mag":
+        graph_obj = mag_obj
+        month_year = request.args.get('month-year', 'DEC-JAN_2025')  # Default for Dec-Jan 2025
+        template_name = './mem_month_graph.html'
+    else:
+        return f"Invalid object type '{obj_type}'", 404
+
     graph_obj.update_data_url(month_year)
 
     # Get the corresponding method for the graph type
@@ -69,11 +101,11 @@ def render_graph(graph_type, obj_type):
 
     figures = getattr(graph_obj, method_name)()
     graphJSON_list = [fig.to_json() for fig in figures]
-    return render_template('./graph.html', graphJSON_list=graphJSON_list, graph_name=f"{obj_type.upper()} {graph_type.capitalize()} Chart")
+    return render_template(template_name, graphJSON_list=graphJSON_list, graph_name=f"{obj_type.upper()} {graph_type.capitalize()} Chart")
 
 @app.route("/graph/<obj_type>/<graph_type>", methods=['GET'])
 def graph_handler(obj_type, graph_type):
-    if obj_type not in ["mem", "fmem"]:
+    if obj_type not in ["mem", "fmem", "mag"]:
         return f"Invalid object type '{obj_type}'", 404
     return render_graph(graph_type, obj_type)
 
