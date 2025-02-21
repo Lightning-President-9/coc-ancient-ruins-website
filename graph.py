@@ -1783,15 +1783,17 @@ class AllMonthGraph:
             total_values = {
                 "month": month,
                 "warattack": 0,
-                "clangames": 0,
                 "clancapital": 0,
+                "clangames": 0,
+                "clangamesmaxed": 0,
                 "clanscore": 0,
             }
 
             for record in records:
                 total_values["warattack"] += int(record.get("warattack", 0))
-                total_values["clangames"] += int(record.get("clangames", 0))
                 total_values["clancapital"] += int(record.get("clancapital", 0))
+                total_values["clangames"] += int(record.get("clangames", 0))
+                total_values["clangamesmaxed"] += int(record.get("clangamesmaxed", 0))
                 total_values["clanscore"] += int(record.get("clanscore", 0))
 
             monthly_totals.append(total_values)
