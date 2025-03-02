@@ -1759,7 +1759,7 @@ class AllMonthGraph:
     def __init__(self):
         self.base_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Monthly%20Analysis%20JSON/"
         self.months = [
-            "MAY-JUN_2024", "JUN-JUL_2024", "JUL-AUG_2024",
+            "JUN-JUL_2024", "JUL-AUG_2024",
             "AUG-SEP_2024", "SEP-OCT_2024", "OCT-NOV_2024",
             "NOV-DEC_2024", "DEC-JAN_2025", "JAN-FEB_2025"
         ]
