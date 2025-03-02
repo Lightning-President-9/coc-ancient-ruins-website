@@ -1761,7 +1761,7 @@ class AllMonthGraph:
         self.months = [
             "MAY-JUN_2024", "JUN-JUL_2024", "JUL-AUG_2024",
             "AUG-SEP_2024", "SEP-OCT_2024", "OCT-NOV_2024",
-            "NOV-DEC_2024", "DEC-JAN_2025"
+            "NOV-DEC_2024", "DEC-JAN_2025", "JAN-FEB_2025"
         ]
 
     def fetch_data(self):
