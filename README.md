@@ -45,3 +45,4 @@ This project is licensed under the [MIT License](https://github.com/Lightning-Pr
 - [Flask](https://flask.palletsprojects.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/)
+- [Plotly Express](https://plotly.com/python/plotly-express/)
