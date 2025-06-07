@@ -3,6 +3,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import warnings
+
+from sklearn.linear_model import LinearRegression
+
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 class ClanMemberGraph:
@@ -1803,6 +1806,53 @@ class AllMonthGraph:
         df["month"] = pd.Categorical(df["month"], categories=self.months, ordered=True)
         return df
 
+    def generate_heatmap_figures(self):
+        # Load JSON data from the URL
+        url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance.json"
+        response = requests.get(url)
+        response.raise_for_status()  # Raise error if request fails
+
+        data = response.json()
+        df = pd.DataFrame(data)
+
+        # List of metric prefixes
+        metrics = ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']
+
+        # Container for figures
+        figures = []
+
+        for metric in metrics:
+            heatmap_df = df.set_index("name")[[col for col in df.columns if col.startswith(metric + "_")]]
+            heatmap_df.replace(-1, None, inplace=True)
+
+            fig = px.imshow(
+                heatmap_df,
+                labels=dict(
+                    x="Month",
+                    y="Player",
+                    color=metric.replace("clangamesmaxed", "Clan Games Maxed").capitalize().replace("_", " ")
+                ),
+                x=[col.replace(f"{metric}_", "") for col in heatmap_df.columns],
+                y=heatmap_df.index,
+                title=f"Heatmap of {metric.replace('clangamesmaxed', 'Clan Games Maxed').capitalize()} per Month",
+                aspect="auto",
+                color_continuous_scale='Plasma'
+            )
+
+            fig.update_layout(
+                autosize=True,
+                height=800,
+                margin=dict(l=50, r=50, t=60, b=60),
+                font=dict(size=11)
+            )
+            fig.update_yaxes(tickfont=dict(size=10))
+
+            figures.append(fig)
+
+        # Assign to named variables for consistency
+        fig1, fig2, fig3, fig4, fig5 = figures
+        return [fig1, fig2, fig3, fig4, fig5]
+
     def plot_graphs(self, df):
         # Convert DataFrame to long format for plotting
         df_long = df.melt(id_vars=["month"], var_name="Category", value_name="Total")
@@ -1826,3 +1876,90 @@ class AllMonthGraph:
                        title="Monthly Clan Performance (Area Chart)")
 
         return [fig1, fig2, fig3, fig4]
+
+class AI_PRED:
+    def __init__(self):
+        # URLs are hardcoded inside the class
+        self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance.json"
+        self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/MAY_2025.json"
+
+        self.custom_order = [
+            'jul-aug', 'aug-sep', 'sep-oct', 'oct-nov', 'nov-dec',
+            'dec-jan', 'jan-feb', 'feb-mar', 'mar-apr', 'apr-may'
+        ]
+        self.df_filtered = self._load_and_filter_data()
+
+    def _load_and_filter_data(self):
+        main_data = requests.get(self.main_data_url).json()
+        df = pd.DataFrame(main_data)
+        df.replace(-1, 0, inplace=True)
+
+        may_data = requests.get(self.filter_names_url).json()
+        valid_names_upper = {entry['name'].strip().upper() for entry in may_data}
+
+        df_filtered = df[df['name'].str.strip().str.upper().isin(valid_names_upper)].copy()
+        df_filtered.reset_index(drop=True, inplace=True)
+        return df_filtered
+
+    def _get_period_key(self, col, prefix):
+        return col.replace(prefix, "").split("_")[0].lower()
+
+    def forecast_plot(self, prefix):
+        df = self.df_filtered
+        metric_cols = [col for col in df.columns if col.startswith(prefix)]
+        sorted_cols = sorted(metric_cols, key=lambda col: self.custom_order.index(self._get_period_key(col, prefix)))
+        periods = [col.replace(prefix, "") for col in sorted_cols] + ["MAY-JUN_2025"]
+
+        fig = go.Figure()
+        buttons = []
+
+        for i, name in enumerate(df['name']):
+            row = df[df['name'] == name]
+            values = row[sorted_cols].values.flatten()
+            X = list(range(len(values)))
+            model = LinearRegression().fit(pd.DataFrame(X), values)
+            forecast = model.predict([[len(X)]])[0]
+            pred_line = model.predict(pd.DataFrame(X + [len(X)]))
+
+            trace1 = go.Scatter(x=periods[:-1], y=values, mode='lines+markers', name="Actual")
+            trace2 = go.Scatter(x=periods, y=pred_line, mode='lines', name="Linear Fit")
+            trace3 = go.Scatter(x=[periods[-1]], y=[forecast], mode='markers+text', name="Forecast",
+                                marker=dict(size=10, color="green"),
+                                text=[f"{forecast:.1f}"], textposition="top center")
+
+            fig.add_trace(trace1)
+            fig.add_trace(trace2)
+            fig.add_trace(trace3)
+
+            vis = [False] * len(df['name']) * 3
+            vis[i * 3:i * 3 + 3] = [True, True, True]
+            buttons.append(dict(label=name, method="update",
+                                args=[{"visible": vis},
+                                      {"title": f"{prefix[:-1].capitalize()} Forecast for {name}"}]))
+
+        for j in range(len(df['name']) * 3):
+            fig.data[j].visible = j < 3
+
+        fig.update_layout(
+            updatemenus=[dict(
+                buttons=buttons,
+                direction="down",
+                x=1.05,
+                y=1.15,
+                xanchor="left",
+                yanchor="top"
+            )],
+            title=f"{prefix[:-1].capitalize()} Forecast for {df['name'].iloc[0]}",
+            xaxis_title="Period",
+            yaxis_title=prefix[:-1].capitalize()
+        )
+        return fig
+
+    def forecast_all(self):
+        fig1 = self.forecast_plot("warattack_")
+        fig2 = self.forecast_plot("clancapital_")
+        fig3 = self.forecast_plot("clangames_")
+        fig4 = self.forecast_plot("clangamesmaxed_")
+        fig5 = self.forecast_plot("clanscore_")
+
+        return [fig1, fig2, fig3, fig4, fig5]

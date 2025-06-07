@@ -207,7 +207,7 @@
              <img src=".././static/nav-bar-icons/discord_img.png" alt="Discord" class="nav-icon">
          </a>
      </nav>
-    <h1>All Month Analysis Graphs</h1>
+    <h1>{{graph_name}}</h1>
     <div id="charts-container"></div>
     <script>
         let graphJSON_list = {{ graphJSON_list | tojson | safe }};

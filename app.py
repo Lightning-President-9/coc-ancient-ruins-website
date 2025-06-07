@@ -5,6 +5,7 @@ from graph import ClanMemberGraph as cmg
 from graph import FormerMemberGraph as fmg
 from graph import MonthlyAnalysisGraph as mag
 from graph import AllMonthGraph as amg
+from graph import AI_PRED as ai_pred
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ cmg_obj = cmg()
 fmg_obj = fmg()
 mag_obj = mag()
 amg_obj = amg()
+ai_pred_obj = ai_pred()
 
 # with open('data_file.pickle', 'wb') as f:
 #   pickle.dump([mem_list, fmem_list], f)
@@ -49,10 +51,12 @@ def graph_mag():
 def all_mon_ana_graph():
     clan_data = amg_obj.fetch_data()
     df = amg_obj.process_data(clan_data)
-    graphs = amg_obj.plot_graphs(df)
+    plot_graphs = amg_obj.plot_graphs(df)
+    heatmap_graphs = amg_obj.generate_heatmap_figures()
+    all_graphs =plot_graphs + heatmap_graphs
 
     # Convert Plotly figures to JSON
-    graphJSON_list = [fig.to_json() for fig in graphs]
+    graphJSON_list = [fig.to_json() for fig in all_graphs]
 
     return render_template("all_month_graph.html", graphJSON_list=graphJSON_list, graph_name="All Month Analysis")
 
@@ -108,6 +112,13 @@ def graph_handler(obj_type, graph_type):
     if obj_type not in ["mem", "fmem", "mag"]:
         return f"Invalid object type '{obj_type}'", 404
     return render_graph(graph_type, obj_type)
+
+@app.route("/ai/prediction")
+def ai_prediction():
+    graphs = ai_pred_obj.forecast_all()
+    graphJSON_list = [fig.to_json() for fig in graphs]
+
+    return render_template("all_month_graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0',port=10000,debug=True)

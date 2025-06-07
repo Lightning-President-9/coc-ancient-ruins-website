@@ -6,3 +6,4 @@ psycopg2-binary
 pandas
 plotly
 requests
+sklearn.linear_model
