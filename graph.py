@@ -25,8 +25,11 @@ class ClanMemberGraph:
         self.df = pd.DataFrame(self.json_data)
 
         # Convert string columns to numeric
-        for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
-            self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
+        try:
+            for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
+                self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
+        except KeyError:
+            self.update_data_url('MAY_2025')
 
         # Filter data
         self.df_in = self.df[self.df['war'] == 'IN']
@@ -688,8 +691,11 @@ class FormerMemberGraph:
         self.df = pd.DataFrame(self.json_data)
 
         # Convert string columns to numeric where necessary
-        for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
-            self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
+        try :
+            for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
+                self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
+        except KeyError:
+            self.update_data_url('MAY_2025')
 
         # Select numerical columns for later use
         self.numerical_df = self.df.select_dtypes(include=['number'])
@@ -1232,8 +1238,11 @@ class MonthlyAnalysisGraph:
         self.df = pd.DataFrame(self.json_data)
 
         # Convert string columns to numeric
-        for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
-            self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
+        try:
+            for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
+                self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
+        except KeyError:
+            self.update_data_url('APR-MAY_2025')
 
         self.numerical_df = self.df.select_dtypes(include=['number'])
 
