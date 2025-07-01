@@ -1774,7 +1774,8 @@ class AllMonthGraph:
             "JUN-JUL_2024", "JUL-AUG_2024",
             "AUG-SEP_2024", "SEP-OCT_2024", "OCT-NOV_2024",
             "NOV-DEC_2024", "DEC-JAN_2025", "JAN-FEB_2025",
-            "FEB-MAR_2025", "MAR-APR_2025", "APR-MAY_2025"
+            "FEB-MAR_2025", "MAR-APR_2025", "APR-MAY_2025",
+            "MAY-JUN_2025"
         ]
 
     def fetch_data(self):
@@ -1894,7 +1895,8 @@ class AI_PRED:
 
         self.custom_order = [
             'jul-aug', 'aug-sep', 'sep-oct', 'oct-nov', 'nov-dec',
-            'dec-jan', 'jan-feb', 'feb-mar', 'mar-apr', 'apr-may'
+            'dec-jan', 'jan-feb', 'feb-mar', 'mar-apr', 'apr-may',
+            'may-jun'
         ]
         self.df_filtered = self._load_and_filter_data()
 
@@ -1917,7 +1919,7 @@ class AI_PRED:
         df = self.df_filtered
         metric_cols = [col for col in df.columns if col.startswith(prefix)]
         sorted_cols = sorted(metric_cols, key=lambda col: self.custom_order.index(self._get_period_key(col, prefix)))
-        periods = [col.replace(prefix, "") for col in sorted_cols] + ["MAY-JUN_2025"]
+        periods = [col.replace(prefix, "") for col in sorted_cols] + ["JUN-JUL_2025"]
 
         fig = go.Figure()
         buttons = []
