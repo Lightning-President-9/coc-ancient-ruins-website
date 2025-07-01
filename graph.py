@@ -1818,7 +1818,7 @@ class AllMonthGraph:
 
     def generate_heatmap_figures(self):
         # Load JSON data from the URL
-        url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance.json"
+        url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_JUN_2025.json"
         response = requests.get(url)
         response.raise_for_status()  # Raise error if request fails
 
