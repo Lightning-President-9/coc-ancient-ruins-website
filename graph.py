@@ -1890,8 +1890,8 @@ class AllMonthGraph:
 class AI_PRED:
     def __init__(self):
         # URLs are hardcoded inside the class
-        self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance.json"
-        self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/MAY_2025.json"
+        self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_JUN_2025.json"
+        self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/JUN_2025.json"
 
         self.custom_order = [
             'jul-aug', 'aug-sep', 'sep-oct', 'oct-nov', 'nov-dec',
