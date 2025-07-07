@@ -1,6 +1,6 @@
  body{
-    min-height : 100vh;
-    background-image : url(".././static/bg_img_2.png");
+    min-height : 70vh;
+    background-image : url("/static/bg_img_2.png");
     background-repeat:no-repeat;
     background-size:cover;
     background-position:center;

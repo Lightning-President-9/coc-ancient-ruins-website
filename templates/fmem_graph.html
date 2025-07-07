@@ -14,60 +14,9 @@
    </head>
    <body>
       <div class="container">
-         <nav class="navbar">
-             <!-- Home -->
-             <a href="https://coc-ancient-ruins-website.onrender.com/" class="nav-item">
-                 <img src=".././static/nav-bar-icons/home_img.png" alt="Home" class="nav-icon">
-             </a>
+         <!-- Include the navbar -->
+        {% include "navbar.html" %}
 
-             <!-- API -->
-             <div class="dropdown">
-                 <a class="nav-item">
-                     <img src=".././static/nav-bar-icons/api_img.png" alt="API" class="nav-icon">
-                 </a>
-                 <div class="dropdown-content">
-                     <a href="https://coc-ancient-ruins-website.onrender.com/api/mem">Clan Members API</a>
-                     <a href="https://coc-ancient-ruins-website.onrender.com/api/fmem">Former Members API</a>
-                     <a href="https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/JUN_2025.json">Clan Members JSON</a>
-                     <a href="https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/JUN_2025.json">Former Clan Members JSON</a>
-                 </div>
-             </div>
-
-             <!-- Graph -->
-             <div class="dropdown">
-                 <a class="nav-item">
-                     <img src=".././static/nav-bar-icons/graph_img.png" alt="Graph" class="nav-icon">
-                 </a>
-                 <div class="dropdown-content">
-                     <a href="https://coc-ancient-ruins-website.onrender.com/graph/mem">Clan Members Graph</a>
-                     <a href="https://coc-ancient-ruins-website.onrender.com/graph/fmem">Former Clan Members Graph</a>
-                     <a href="https://coc-ancient-ruins-website.onrender.com/graph/mag">Clan Members Months Graphs</a>
-                     <a href="https://coc-ancient-ruins-website.onrender.com/all-mon-ana-graph">All Months Analysis Graphs</a>
-                 </div>
-             </div>
-
-             <!-- GitHub -->
-             <div class="dropdown">
-                 <a class="nav-item">
-                     <img src=".././static/nav-bar-icons/github_img.png" alt="GitHub" class="nav-icon">
-                 </a>
-                 <div class="dropdown-content">
-                     <a href="https://github.com/Lightning-President-9/coc-ancient-ruins-website">Website Repo</a>
-                     <a href="https://github.com/Lightning-President-9/ClanDataRepo">Clan Data Repo</a>
-                     <a href="https://github.com/Lightning-President-9/ClanDataRetriveFromAPI">API Retrieve Repo</a>
-                 </div>
-             </div>
-
-             <!-- Invite -->
-             <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=2PP0P22CQ" class="nav-item">
-                 <img src=".././static/nav-bar-icons/invite_img.png" alt="Invite" class="nav-icon"> <!-- Replace with actual image source -->
-             </a>
-
-             <!-- Discord -->
-             <a href="https://discord.gg/5CFpPmA2Gv" class="nav-item">
-                 <img src=".././static/nav-bar-icons/discord_img.png" alt="Discord" class="nav-icon"> <!-- Replace with actual image source -->
-             </a>
-         </nav>
       <div class="main-table">
          <section class="table-header">
             <h2>Former Clan Members Graphs</h2>
@@ -76,7 +25,7 @@
     {% for graph in ["bar", "piechart", "linechart", "scatterplot", "histogram", "boxplot", "violinplot", "heatmap", "treemap", "sunburstchart", "densityplot", "3dscatterplot", "areagraph", "polarchart", "funnelchart", "waterfallchart"] %}
     <div class="graph-item">
         <a href="https://coc-ancient-ruins-website.onrender.com/graph/fmem/{{ graph }}" target="_self" rel="self">
-            <img src="../static/graph-icons/{{ graph }}.png" alt="{{ graph|capitalize }} Chart" class="graph-icon">
+            <img src="/static/graph-icons/{{ graph }}.png" alt="{{ graph|capitalize }} Chart" class="graph-icon">
         </a>
         <p class="graph-label">{{ graph|capitalize }}</p>
     </div>

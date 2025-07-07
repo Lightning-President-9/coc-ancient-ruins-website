@@ -38,6 +38,7 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **3/1/25:** Transferred from Replit to PyCharm Community 2024.3.1.1.
 - **20/2/25:** Added 'Clan Member Month' and 'All Month Analysis' graphs, and updated the icons for nav-bar and graph-selection.
 - **7/6/25:**  Added Heatmaps in 'All Month Analysis' graphs and AI Prediction visuals for performance trends and future forecasts across key metrics.
+- **7/7/25:**  Added 404 and reusable navbar templates, included navbar.html to reduce redundancy, updated image URLs in CSS, adjusted min-height styling, and standardized all @app.route paths with trailing slashes
 
 ## License
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.
