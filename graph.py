@@ -600,39 +600,55 @@ class ClanMemberGraph:
         return [fig1, fig2, fig3, fig4, fig5, fig6, fig7]
 
     def create_funnel_charts(self):
+        figures = []
+
         # 1. Funnel Chart for Clan Capital
+        df_sorted = self.df.sort_values(by='clancapital', ascending=False)
         fig1 = go.Figure()
-        fig1.add_trace(go.Funnel(y=self.df['name'], x=self.df['clancapital'], textinfo="value+percent initial"))
+        fig1.add_trace(go.Funnel(y=df_sorted['name'], x=df_sorted['clancapital'], textinfo="value+percent initial"))
         fig1.update_layout(title='Funnel Chart for Clan Capital', yaxis_title='Name', xaxis_title='Clan Capital')
+        figures.append(fig1)
 
         # 2. Funnel Chart for Clan Games
+        df_sorted = self.df.sort_values(by='clangames', ascending=False)
         fig2 = go.Figure()
-        fig2.add_trace(go.Funnel(y=self.df['name'], x=self.df['clangames'], textinfo="value+percent initial"))
+        fig2.add_trace(go.Funnel(y=df_sorted['name'], x=df_sorted['clangames'], textinfo="value+percent initial"))
         fig2.update_layout(title='Funnel Chart for Clan Games', yaxis_title='Name', xaxis_title='Clan Games')
+        figures.append(fig2)
 
         # 3. Funnel Chart for Clan Games Maxed
+        df_sorted = self.df.sort_values(by='clangamesmaxed', ascending=False)
         fig3 = go.Figure()
-        fig3.add_trace(go.Funnel(y=self.df['name'], x=self.df['clangamesmaxed'], textinfo="value+percent initial"))
-        fig3.update_layout(title='Funnel Chart for Clan Games Maxed', yaxis_title='Name', xaxis_title='Clan Games Maxed')
+        fig3.add_trace(go.Funnel(y=df_sorted['name'], x=df_sorted['clangamesmaxed'], textinfo="value+percent initial"))
+        fig3.update_layout(title='Funnel Chart for Clan Games Maxed', yaxis_title='Name',
+                           xaxis_title='Clan Games Maxed')
+        figures.append(fig3)
 
         # 4. Funnel Chart for Clan Score
+        df_sorted = self.df.sort_values(by='clanscore', ascending=False)
         fig4 = go.Figure()
-        fig4.add_trace(go.Funnel(y=self.df['name'], x=self.df['clanscore'], textinfo="value+percent initial"))
+        fig4.add_trace(go.Funnel(y=df_sorted['name'], x=df_sorted['clanscore'], textinfo="value+percent initial"))
         fig4.update_layout(title='Funnel Chart for Clan Score', yaxis_title='Name', xaxis_title='Clan Score')
+        figures.append(fig4)
 
         # 5. Funnel Chart for War Attack
+        df_sorted = self.df.sort_values(by='warattack', ascending=False)
         fig5 = go.Figure()
-        fig5.add_trace(go.Funnel(y=self.df['name'], x=self.df['warattack'], textinfo="value+percent initial"))
+        fig5.add_trace(go.Funnel(y=df_sorted['name'], x=df_sorted['warattack'], textinfo="value+percent initial"))
         fig5.update_layout(title='Funnel Chart for War Attack', yaxis_title='Name', xaxis_title='War Attack')
+        figures.append(fig5)
 
         # 6. Stacked Funnel Chart of Numerical Values
         fig6 = go.Figure()
         for column in self.numerical_df.columns:
-            if column not in ['srno']:  # Exclude 'srno'
-                fig6.add_trace(go.Funnel(name=column, y=self.df['name'], x=self.df[column], textinfo="value+percent initial"))
+            if column != 'srno':
+                df_sorted = self.df.sort_values(by=column, ascending=False)
+                fig6.add_trace(
+                    go.Funnel(name=column, y=df_sorted['name'], x=df_sorted[column], textinfo="value+percent initial"))
         fig6.update_layout(title='Stacked Funnel Chart of Numerical Values', yaxis_title='Name', xaxis_title='Values')
+        figures.append(fig6)
 
-        return [fig1, fig2, fig3, fig4, fig5, fig6]
+        return figures
 
     def create_waterfall_charts(self):
         # 1. Waterfall Chart for Clan Capital
@@ -1153,35 +1169,44 @@ class FormerMemberGraph:
 
     def create_funnel_charts(self):
         # 1. Funnel Chart for Clan Capital
+        sorted_df1 = self.df.sort_values(by='clancapital', ascending=False)
         fig1 = go.Figure()
-        fig1.add_trace(go.Funnel(y=self.df['name'], x=self.df['clancapital'], textinfo="value+percent initial"))
+        fig1.add_trace(go.Funnel(y=sorted_df1['name'], x=sorted_df1['clancapital'], textinfo="value+percent initial"))
         fig1.update_layout(title='Funnel Chart for Clan Capital', yaxis_title='Name', xaxis_title='Clan Capital')
 
         # 2. Funnel Chart for Clan Games
+        sorted_df2 = self.df.sort_values(by='clangames', ascending=False)
         fig2 = go.Figure()
-        fig2.add_trace(go.Funnel(y=self.df['name'], x=self.df['clangames'], textinfo="value+percent initial"))
+        fig2.add_trace(go.Funnel(y=sorted_df2['name'], x=sorted_df2['clangames'], textinfo="value+percent initial"))
         fig2.update_layout(title='Funnel Chart for Clan Games', yaxis_title='Name', xaxis_title='Clan Games')
 
         # 3. Funnel Chart for Clan Games Maxed
+        sorted_df3 = self.df.sort_values(by='clangamesmaxed', ascending=False)
         fig3 = go.Figure()
-        fig3.add_trace(go.Funnel(y=self.df['name'], x=self.df['clangamesmaxed'], textinfo="value+percent initial"))
-        fig3.update_layout(title='Funnel Chart for Clan Games Maxed', yaxis_title='Name', xaxis_title='Clan Games Maxed')
+        fig3.add_trace(
+            go.Funnel(y=sorted_df3['name'], x=sorted_df3['clangamesmaxed'], textinfo="value+percent initial"))
+        fig3.update_layout(title='Funnel Chart for Clan Games Maxed', yaxis_title='Name',
+                           xaxis_title='Clan Games Maxed')
 
         # 4. Funnel Chart for Clan Score
+        sorted_df4 = self.df.sort_values(by='clanscore', ascending=False)
         fig4 = go.Figure()
-        fig4.add_trace(go.Funnel(y=self.df['name'], x=self.df['clanscore'], textinfo="value+percent initial"))
+        fig4.add_trace(go.Funnel(y=sorted_df4['name'], x=sorted_df4['clanscore'], textinfo="value+percent initial"))
         fig4.update_layout(title='Funnel Chart for Clan Score', yaxis_title='Name', xaxis_title='Clan Score')
 
         # 5. Funnel Chart for War Attack
+        sorted_df5 = self.df.sort_values(by='warattack', ascending=False)
         fig5 = go.Figure()
-        fig5.add_trace(go.Funnel(y=self.df['name'], x=self.df['warattack'], textinfo="value+percent initial"))
+        fig5.add_trace(go.Funnel(y=sorted_df5['name'], x=sorted_df5['warattack'], textinfo="value+percent initial"))
         fig5.update_layout(title='Funnel Chart for War Attack', yaxis_title='Name', xaxis_title='War Attack')
 
         # 6. Stacked Funnel Chart of Numerical Values
         fig6 = go.Figure()
         for column in self.numerical_df.columns:
             if column not in ['srno']:  # Exclude 'srno'
-                fig6.add_trace(go.Funnel(name=column, y=self.df['name'], x=self.df[column], textinfo="value+percent initial"))
+                sorted_df_col = self.df.sort_values(by=column, ascending=False)
+                fig6.add_trace(go.Funnel(name=column, y=sorted_df_col['name'], x=sorted_df_col[column],
+                                         textinfo="value+percent initial"))
         fig6.update_layout(title='Stacked Funnel Chart of Numerical Values', yaxis_title='Name', xaxis_title='Values')
 
         return [fig1, fig2, fig3, fig4, fig5, fig6]
@@ -1699,35 +1724,43 @@ class MonthlyAnalysisGraph:
 
     def create_funnel_charts(self):
         # 1. Funnel Chart for Clan Capital
+        df1 = self.df.sort_values(by='clancapital', ascending=False)
         fig1 = go.Figure()
-        fig1.add_trace(go.Funnel(y=self.df['name'], x=self.df['clancapital'], textinfo="value+percent initial"))
+        fig1.add_trace(go.Funnel(y=df1['name'], x=df1['clancapital'], textinfo="value+percent initial"))
         fig1.update_layout(title='Funnel Chart for Clan Capital', yaxis_title='Name', xaxis_title='Clan Capital')
 
         # 2. Funnel Chart for Clan Games
+        df2 = self.df.sort_values(by='clangames', ascending=False)
         fig2 = go.Figure()
-        fig2.add_trace(go.Funnel(y=self.df['name'], x=self.df['clangames'], textinfo="value+percent initial"))
+        fig2.add_trace(go.Funnel(y=df2['name'], x=df2['clangames'], textinfo="value+percent initial"))
         fig2.update_layout(title='Funnel Chart for Clan Games', yaxis_title='Name', xaxis_title='Clan Games')
 
         # 3. Funnel Chart for Clan Games Maxed
+        df3 = self.df.sort_values(by='clangamesmaxed', ascending=False)
         fig3 = go.Figure()
-        fig3.add_trace(go.Funnel(y=self.df['name'], x=self.df['clangamesmaxed'], textinfo="value+percent initial"))
-        fig3.update_layout(title='Funnel Chart for Clan Games Maxed', yaxis_title='Name', xaxis_title='Clan Games Maxed')
+        fig3.add_trace(go.Funnel(y=df3['name'], x=df3['clangamesmaxed'], textinfo="value+percent initial"))
+        fig3.update_layout(title='Funnel Chart for Clan Games Maxed', yaxis_title='Name',
+                           xaxis_title='Clan Games Maxed')
 
         # 4. Funnel Chart for Clan Score
+        df4 = self.df.sort_values(by='clanscore', ascending=False)
         fig4 = go.Figure()
-        fig4.add_trace(go.Funnel(y=self.df['name'], x=self.df['clanscore'], textinfo="value+percent initial"))
+        fig4.add_trace(go.Funnel(y=df4['name'], x=df4['clanscore'], textinfo="value+percent initial"))
         fig4.update_layout(title='Funnel Chart for Clan Score', yaxis_title='Name', xaxis_title='Clan Score')
 
         # 5. Funnel Chart for War Attack
+        df5 = self.df.sort_values(by='warattack', ascending=False)
         fig5 = go.Figure()
-        fig5.add_trace(go.Funnel(y=self.df['name'], x=self.df['warattack'], textinfo="value+percent initial"))
+        fig5.add_trace(go.Funnel(y=df5['name'], x=df5['warattack'], textinfo="value+percent initial"))
         fig5.update_layout(title='Funnel Chart for War Attack', yaxis_title='Name', xaxis_title='War Attack')
 
         # 6. Stacked Funnel Chart of Numerical Values
         fig6 = go.Figure()
         for column in self.numerical_df.columns:
             if column not in ['srno']:  # Exclude 'srno'
-                fig6.add_trace(go.Funnel(name=column, y=self.df['name'], x=self.df[column], textinfo="value+percent initial"))
+                df_sorted = self.df.sort_values(by=column, ascending=False)
+                fig6.add_trace(
+                    go.Funnel(name=column, y=df_sorted['name'], x=df_sorted[column], textinfo="value+percent initial"))
         fig6.update_layout(title='Stacked Funnel Chart of Numerical Values', yaxis_title='Name', xaxis_title='Values')
 
         return [fig1, fig2, fig3, fig4, fig5, fig6]
