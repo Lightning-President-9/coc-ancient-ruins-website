@@ -85,15 +85,15 @@ GRAPH_METHODS = {
 def render_graph(graph_type, obj_type):
     if obj_type == "mem":
         graph_obj = cmg_obj
-        month_year = request.args.get('month-year', 'JUN_2025')  # Default to January 2025
+        month_year = request.args.get('month-year', 'JUN_2025')
         template_name = './graph.html'
     elif obj_type == "fmem":
         graph_obj = fmg_obj
-        month_year = request.args.get('month-year', 'JUN_2025')  # Default to January 2025
+        month_year = request.args.get('month-year', 'JUN_2025')
         template_name = './graph.html'
     elif obj_type == "mag":
         graph_obj = mag_obj
-        month_year = request.args.get('month-year', 'MAY-JUN_2025')  # Default for Dec-Jan 2025
+        month_year = request.args.get('month-year', 'MAY-JUN_2025')
         template_name = './mem_month_graph.html'
     else:
         return render_template("404.html"), 404
@@ -107,7 +107,7 @@ def render_graph(graph_type, obj_type):
 
     figures = getattr(graph_obj, method_name)()
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in figures]
-    return render_template(template_name, graphJSON_list=graphJSON_list, graph_name=f"{obj_type.upper()} {graph_type.capitalize()} Chart")
+    return render_template(template_name,month_year=month_year, graphJSON_list=graphJSON_list, graph_name=f"{obj_type.upper()} {graph_type.capitalize()} Chart")
 
 @app.route("/graph/<obj_type>/<graph_type>/", methods=['GET'])
 def graph_handler(obj_type, graph_type):

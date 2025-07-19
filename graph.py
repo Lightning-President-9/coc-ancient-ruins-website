@@ -1882,12 +1882,12 @@ class AllMonthGraph:
                 color_continuous_scale='Plasma'
             )
 
-            fig.update_layout(
-                autosize=True,
-                height=800,
-                margin=dict(l=50, r=50, t=60, b=60),
-                font=dict(size=11)
-            )
+            # fig.update_layout(
+            #     autosize=True,
+            #     height=800,
+            #     margin=dict(l=50, r=50, t=60, b=60),
+            #     font=dict(size=11)
+            # )
             fig.update_yaxes(tickfont=dict(size=10))
 
             figures.append(fig)
