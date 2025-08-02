@@ -1808,7 +1808,7 @@ class AllMonthGraph:
             "AUG-SEP_2024", "SEP-OCT_2024", "OCT-NOV_2024",
             "NOV-DEC_2024", "DEC-JAN_2025", "JAN-FEB_2025",
             "FEB-MAR_2025", "MAR-APR_2025", "APR-MAY_2025",
-            "MAY-JUN_2025"
+            "MAY-JUN_2025", "JUN-JUL_2025"
         ]
 
     def fetch_data(self):
@@ -1851,7 +1851,7 @@ class AllMonthGraph:
 
     def generate_heatmap_figures(self):
         # Load JSON data from the URL
-        url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_JUN_2025.json"
+        url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_JUL_2025.json"
         response = requests.get(url)
         response.raise_for_status()  # Raise error if request fails
 
@@ -1881,13 +1881,6 @@ class AllMonthGraph:
                 aspect="auto",
                 color_continuous_scale='Plasma'
             )
-
-            # fig.update_layout(
-            #     autosize=True,
-            #     height=800,
-            #     margin=dict(l=50, r=50, t=60, b=60),
-            #     font=dict(size=11)
-            # )
             fig.update_yaxes(tickfont=dict(size=10))
 
             figures.append(fig)
@@ -1923,13 +1916,13 @@ class AllMonthGraph:
 class AI_PRED:
     def __init__(self):
         # URLs are hardcoded inside the class
-        self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_JUN_2025.json"
-        self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/JUN_2025.json"
+        self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_JUL_2025.json"
+        self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/JUL_2025.json"
 
         self.custom_order = [
             'jul-aug', 'aug-sep', 'sep-oct', 'oct-nov', 'nov-dec',
             'dec-jan', 'jan-feb', 'feb-mar', 'mar-apr', 'apr-may',
-            'may-jun'
+            'may-jun', 'jun-jul'
         ]
         self.df_filtered = self._load_and_filter_data()
 
@@ -1952,7 +1945,7 @@ class AI_PRED:
         df = self.df_filtered
         metric_cols = [col for col in df.columns if col.startswith(prefix)]
         sorted_cols = sorted(metric_cols, key=lambda col: self.custom_order.index(self._get_period_key(col, prefix)))
-        periods = [col.replace(prefix, "") for col in sorted_cols] + ["JUN-JUL_2025"]
+        periods = [col.replace(prefix, "") for col in sorted_cols] + ["JUL-AUG_2025"]
 
         fig = go.Figure()
         buttons = []
