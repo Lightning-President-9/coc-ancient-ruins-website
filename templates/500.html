@@ -1,37 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <title>Ancient Ruins</title>
-      <style>
-         {% include 'style.css' %}
-      </style>
-      <link rel="icon" href="/static/clan-badge_16.png">
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
-   </head>
-   <body>
-      <div class="container">
+{% include 'head.html' %}
+<body>
+  <div class="container">
+    {% include "navbar.html" %}
 
-         <!-- Include the navbar -->
-         {% include "navbar.html" %}
+    <div class="main-table">
+      <section class="table-header">
+        <h2>500 - Internal Server Error</h2>
+      </section>
 
-         <div class="main-table">
-            <section class="table-header">
-               <h2>500 - Internal Server Error</h2>
-            </section>
-            <div class="isclaimers">
-              <p>
-                <strong>
-                Sorry! It looks like there was an issue on our end while processing your request.<br>
-                This could be due to a temporary glitch, a server error, or a configuration problem.<br>
-               Thank you for visiting Ancient Ruins Clan Website!
-              </strong>
-               </p>
-            </div>
-         </div>
+      <div class="isclaimers">
+        <p>
+          <strong>
+            Sorry! It looks like there was an issue on our end while processing your request.<br>
+            This could be due to a temporary glitch, a server error, or a configuration problem.<br>
+            Thank you for visiting Ancient Ruins Clan Website!
+          </strong>
+        </p>
       </div>
-   </body>
+    </div>
+  </div>
+</body>
 </html>

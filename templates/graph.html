@@ -1,211 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ancient Ruins [{{graph_name}}]</title>
-    <link rel="icon" href="/static/clan-badge_16.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-image: url("/static/bg_img_2.png");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            color: #333;
-            padding-top: 70px; /* Adjust this value based on the height of the navbar */
-        }
-        h1 {
-            text-align: center;
-            font-weight: 700;
-            margin-bottom: 40px;
-            color: #000;
-            width: auto;
-            height: auto;
-            background-color: #fff5;
-            backdrop-filter: blur(7px);
-            box-shadow: 0 .4rem .8rem #0005;
-            border-radius: .8rem;
-            overflow: hidden;
-        }
-        #controls-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        select, button {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            background-color: #fff5;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            width: auto;
-            height: auto;
-            backdrop-filter: blur(7px);
-        }
-        select:hover, button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        button {
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #DBE1E2;
-        }
-        #charts-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            overflow-x: auto;
-            width: 100%;
-        }
-        .chart {
-            width: 95%;
-            max-width: 95vw;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            box-sizing: border-box;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .chart:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        /* Basic Navbar Styles */
-        .navbar {
-            /* width: 100%; */
-            display: flex;
-            /* justify-content: space-around; */
-            /* align-items: center; */
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            /* padding: 10px 20px; */
-            margin-bottom: 10px;
-            /* box-sizing: border-box; */
-            position: fixed; /* Fixed positioning */
-            top: 0; /* Align to the top */
-            left: 0; /* Align to the left */
-            width: 100%; /* Full width */
-            z-index: 1000; /* Ensure it’s above other content */
-            padding: 10px; /* Adjust padding as needed */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ancient Ruins [{{ graph_name }}]</title>
+  <link rel="icon" href="/static/clan-badge_16.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
 
-        .nav-item {
-            display: flex;
-            align-items: center;
-        }
+  <style>
+    {% include "graph.css" %}
+  </style>
 
-        .navbar a {
-            text-decoration: none;
-            padding: 5px 10px;
-        }
-
-        /* Image Icons */
-        .nav-icon {
-            width: 40px;
-            height: 40px;
-        }
-
-        /* Dropdown Styles */
-        .dropdown {
-            position: relative;
-            /* margin: 0 10px; */
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #f9f9f9;
-            min-width: 150px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1000;
-            border-radius: 4px;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            display: block;
-            text-align: left;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        /* Show dropdown on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-    </style>
-    <script src="https://cdn.plot.ly/plotly-3.0.1.min.js" charset="utf-8"></script>
+  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js" charset="utf-8"></script>
 </head>
 <body>
-    <!-- Include the navbar -->
-    {% include "navbar.html" %}
+  {% include "navbar.html" %}
 
-    <h1>Graphs - {{ month_year }}</h1>
-    <div id="controls-container">
-        <form id="fetch-data-form" method="GET">
-            <select id="month-year-select" name="month-year" aria-label="Select month">
-                <option value="JUL_2024">July 2024</option>
-                <option value="AUG_2024">August 2024</option>
-                <option value="SEP_2024">September 2024</option>
-                <option value="OCT_2024">October 2024</option>
-                <option value="NOV_2024">November 2024</option>
-                <option value="DEC_2024">December 2024</option>
-                <option value="JAN_2025">January 2025</option>
-                <option value="FEB_2025">February 2025</option>
-                <option value="MAR_2025">March 2025</option>
-                <option value="APR_2025">April 2025</option>
-                <option value="MAY_2025">May 2025</option>
-                <option value="JUN_2025">June 2025</option>
-                <option value="JUL_2025">July 2025</option>
-            </select>
-            <button type="submit" id="fetch-button">Fetch Data</button>
-        </form>
-    </div>
-    <div id="charts-container"></div>
-    <script>
-        let graphJSON_list = {{ graphJSON_list | tojson | safe }};
-        let container = document.getElementById('charts-container');
+  <h1>Graphs - {{ month_year }}</h1>
 
-        function renderCharts(graphJSON_list) {
-            container.innerHTML = ''; // Clear previous charts
-            graphJSON_list.forEach((graphJSON, index) => {
-                let chartDiv = document.createElement('div');
-                chartDiv.id = 'chart' + (index + 1);
-                chartDiv.classList.add('chart');
-                container.appendChild(chartDiv);
-                let graph = JSON.parse(graphJSON);
-                Plotly.newPlot(chartDiv.id, graph.data, graph.layout, {responsive: true});
-            });
-        }
-        document.getElementById('fetch-data-form').action = window.location.href;
+  <div id="controls-container">
+    <form id="fetch-data-form" method="GET">
+      <select id="month-year-select" name="month-year" aria-label="Select month">
+        <option value="JUL_2024">July 2024</option>
+        <option value="AUG_2024">August 2024</option>
+        <option value="SEP_2024">September 2024</option>
+        <option value="OCT_2024">October 2024</option>
+        <option value="NOV_2024">November 2024</option>
+        <option value="DEC_2024">December 2024</option>
+        <option value="JAN_2025">January 2025</option>
+        <option value="FEB_2025">February 2025</option>
+        <option value="MAR_2025">March 2025</option>
+        <option value="APR_2025">April 2025</option>
+        <option value="MAY_2025">May 2025</option>
+        <option value="JUN_2025">June 2025</option>
+        <option value="JUL_2025">July 2025</option>
+      </select>
+      <button type="submit" id="fetch-button">Fetch Data</button>
+    </form>
+  </div>
 
-        document.getElementById('fetch-button').addEventListener('click', function() {
-<!--            let selectedMonthAndYear = document.getElementById('month-year-select').value;-->
+  <div id="charts-container"></div>
 
-<!--            renderCharts(graphJSON_list); // Re-render the charts with updated data-->
-        });
-        // Initial rendering of charts
-        renderCharts(graphJSON_list);
-    </script>
+  <script>
+    {% include "graph.js" %}
+  </script>
 </body>
 </html>

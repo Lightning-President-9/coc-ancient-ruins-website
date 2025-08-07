@@ -1,7 +1,6 @@
 Flask
 gunicorn
 sqlalchemy
-pymysql
 psycopg2-binary
 pandas
 plotly

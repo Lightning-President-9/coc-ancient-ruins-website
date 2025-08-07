@@ -9,7 +9,7 @@
     justify-content : center;
     align-items : center;
     font-family:"Roboto Condensed";
-     padding-top: 70px; /* Adjust this value based on the height of the navbar */
+     padding-top: 70px;
 }
 .container{
     width:90%;
@@ -38,7 +38,7 @@ table,th,td{
     overflow : hidden;
 
 }
-/*For Search*/
+
 .table-body .hide {
     display: none;
 }
@@ -52,7 +52,6 @@ table,th,td{
 .table-header .input-group {
   width : 35%;
 
-  /*height : 100%;*/
   align-items: stretch;
 
   background-color: #fff4;
@@ -61,14 +60,12 @@ table,th,td{
   display:flex;
   justify-content:centre;
 
-  /*align-items:centre;*/
   transition:.2s;
 }
 
 .table-header .input-group:hover{
   width : 45%;
 
-  /*background-color: #fff4;*/
   background-color:#fff8;
   box-shadow:0 .1rem .4rem #0002;
 }
@@ -209,7 +206,6 @@ p{
         transform: translateX(-50%);
 }
 
-/**/
 thead th span.icon-arrow{
   display:inline-block;
   width:1.3rem;
@@ -253,9 +249,7 @@ thead th.asc span.icon-arrow{
   position: relative;
   display: inline-block;
 }
-/**/
 
-/**/
 .export__file {
     position: relative;
 }
@@ -333,24 +327,18 @@ thead th.asc span.icon-arrow{
     height: auto;
 }
 
-/* Basic Navbar Styles */
 .navbar {
-    /* width: 100%; */
     display: flex;
-    /* justify-content: space-around; */
-    /* align-items: center; */
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* padding: 10px 20px; */
     margin-bottom: 10px;
-    /* box-sizing: border-box; */
-    position: fixed; /* Fixed positioning */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    width: 100%; /* Full width */
-    z-index: 1000; /* Ensure it’s above other content */
-    padding: 10px; /* Adjust padding as needed */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 10px;
 }
 
 .nav-item {
@@ -363,16 +351,13 @@ thead th.asc span.icon-arrow{
     padding: 5px 10px;
 }
 
-/* Image Icons */
 .nav-icon {
     width: 40px;
     height: 40px;
 }
 
-/* Dropdown Styles */
 .dropdown {
     position: relative;
-    /* margin: 0 10px; */
 }
 
 .dropdown-content {
@@ -398,7 +383,6 @@ thead th.asc span.icon-arrow{
     background-color: #ddd;
 }
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
