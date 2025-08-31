@@ -16,7 +16,7 @@ from reportlab.pdfgen.canvas import Canvas
 
 # === CONFIG ===
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-JSON_URL = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_JUL_2025.json"
+JSON_URL = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_AUG_2025.json"
 CLAN_LOGO = os.path.join(BASE_DIR, "static", "clan-badge_16.png")
 WEBSITE_LINK = "https://coc-ancient-ruins-website.onrender.com/"
 
@@ -34,7 +34,7 @@ METRICS = {
 plt.style.use('seaborn-v0_8')
 
 # Fiscal order: JUL → JUN
-fiscal_order = ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN","JUL"]
+fiscal_order = ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN","JUL","AUG"]
 
 def sort_key(period):
     start_month = period.split('-')[0]

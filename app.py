@@ -86,15 +86,15 @@ GRAPH_METHODS = {
 def render_graph(graph_type, obj_type):
     if obj_type == "mem":
         graph_obj = cmg_obj
-        month_year = request.args.get('month-year', 'JUL_2025')
+        month_year = request.args.get('month-year', 'AUG_2025')
         template_name = './graph.html'
     elif obj_type == "fmem":
         graph_obj = fmg_obj
-        month_year = request.args.get('month-year', 'JUL_2025')
+        month_year = request.args.get('month-year', 'AUG_2025')
         template_name = './graph.html'
     elif obj_type == "mag":
         graph_obj = mag_obj
-        month_year = request.args.get('month-year', 'JUN-JUL_2025')
+        month_year = request.args.get('month-year', 'JUL-AUG_2025')
         template_name = './mem_month_graph.html'
     else:
         return render_template("404.html"), 404
