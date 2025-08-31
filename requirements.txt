@@ -9,3 +9,4 @@ scikit-learn
 kaleido
 reportlab
 matplotlib
+seaborn
