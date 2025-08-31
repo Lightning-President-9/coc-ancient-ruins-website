@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Player Reports</title>
+    <link rel="icon" href=".././static/clan-badge_16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        {% include 'style.css' %}
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        {% include "navbar.html" %}
+
+        <main class="main-table">
+            <section class="table-header">
+                <h2>Download Player Performance Reports</h2>
+            </section>
+
+            <section class="table-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Player Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for player in players %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('download_player_report', player_name=player) }}" target="_blank" rel="noopener">
+                                    {{ player }}
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

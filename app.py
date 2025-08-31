@@ -1,4 +1,4 @@
-from flask import Flask , render_template,jsonify,request
+from flask import Flask, render_template, jsonify, request, send_file
 import pickle
 import json
 import plotly
@@ -8,6 +8,7 @@ from graph import FormerMemberGraph as fmg
 from graph import MonthlyAnalysisGraph as mag
 from graph import AllMonthGraph as amg
 from graph import AI_PRED as ai_pred
+from player_report import get_players, generate_player_report
 
 app = Flask(__name__)
 
@@ -121,6 +122,26 @@ def ai_prediction():
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
 
     return render_template("all_month_graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
+
+@app.route("/player-report/")
+def player_reports():
+    players = get_players()
+    return render_template('player_report.html', players=players)
+
+@app.route("/player-report/<player_name>/")
+def download_player_report(player_name):
+    players = get_players()  # Fetch all valid player names
+    if player_name not in players:
+        # Render custom 404 page instead of default error
+        return render_template("404.html"), 404
+
+    pdf_buf = generate_player_report(player_name)
+    return send_file(
+        pdf_buf,
+        as_attachment=True,
+        download_name=f"{player_name}_report.pdf",
+        mimetype='application/pdf'
+    )
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -6,3 +6,5 @@ pandas
 plotly
 requests
 scikit-learn
+kaleido
+reportlab
