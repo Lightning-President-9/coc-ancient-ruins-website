@@ -11,31 +11,39 @@
     {% include "graph.css" %}
   </style>
 
-  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js" charset="utf-8"></script>
 </head>
 <body>
   {% include "navbar.html" %}
 
   <h1>Graphs - {{ month_year }}</h1>
 
+  {% if message %}
+  <div class="alert-message">{{ message }}</div>
+  {% endif %}
+
   <div id="controls-container">
     <form id="fetch-data-form" method="GET">
-      <select id="month-year-select" name="month-year" aria-label="Select month">
-        <option value="JUN-JUL_2024">JUN-JUL 2024</option>
-        <option value="JUL-AUG_2024">JUL-AUG 2024</option>
-        <option value="AUG-SEP_2024">AUG-SEP 2024</option>
-        <option value="SEP-OCT_2024">SEP-OCT 2024</option>
-        <option value="OCT-NOV_2024">OCT-NOV 2024</option>
-        <option value="NOV-DEC_2024">NOV-DEC 2024</option>
-        <option value="DEC-JAN_2025">DEC-JAN 2025</option>
-        <option value="JAN-FEB_2025">JAN-FEB 2025</option>
-        <option value="FEB-MAR_2025">FEB-MAR 2025</option>
-        <option value="MAR-APR_2025">MAR-APR 2025</option>
-        <option value="APR-MAY_2025">APR-MAY 2025</option>
-        <option value="MAY-JUN_2025">MAY-JUN 2025</option>
-        <option value="JUN-JUL_2025">JUN-JUL 2025</option>
-        <option value="JUL-AUG_2025">JUL-AUG 2025</option>
-        <option value="AUG-SEP_2025">AUG-SEP 2025</option>
+      <label for="month-select">Select Month:</label>
+      <select id="month-select" aria-label="Select month period">
+        <option value="JAN-FEB">JAN-FEB</option>
+        <option value="FEB-MAR">FEB-MAR</option>
+        <option value="MAR-APR">MAR-APR</option>
+        <option value="APR-MAY">APR-MAY</option>
+        <option value="MAY-JUN">MAY-JUN</option>
+        <option value="JUN-JUL">JUN-JUL</option>
+        <option value="JUL-AUG">JUL-AUG</option>
+        <option value="AUG-SEP">AUG-SEP</option>
+        <option value="SEP-OCT">SEP-OCT</option>
+        <option value="OCT-NOV">OCT-NOV</option>
+        <option value="NOV-DEC">NOV-DEC</option>
+        <option value="DEC-JAN">DEC-JAN</option>
+      </select>
+
+      <label for="year-select">Select Year:</label>
+      <select id="year-select" aria-label="Select year">
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
       </select>
       <button type="submit" id="fetch-button">Fetch Data</button>
     </form>

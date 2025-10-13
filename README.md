@@ -41,6 +41,7 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **7/7/25:**  Added 404 and reusable navbar templates, included navbar.html to reduce redundancy, updated image URLs in CSS, adjusted min-height styling, and standardized all @app.route paths with trailing slashes.
 - **7/8/25:**  Centralized head elements in `head.html`, added `graph.css` & `graph.js` for graph styles and logic, cleaned up templates, and removed all Replit-specific files.
 - **1/9/25** Added player_report.html and player_report.py to provide a detailed look at a player’s performance across different Clash of Clans activities like War Attacks, Clan Capital, Clan Games, and more. The report includes helpful visuals and tables to track progress and highlight the player’s biggest contributions.
+- **13/10/25:** Streamlined month selection for members, former members, and monthly analysis graphs, reducing redundancy. Handled missing data cases and added a Google Form for feedback.
 ## License
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.
 

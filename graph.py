@@ -12,6 +12,7 @@ class ClanMemberGraph:
     def __init__(self):
         self.data_url = ''
         self.df = None
+        self.message = ""
 
     def update_data_url(self, month_year):
         # Update the data URL dynamically based on month and year
@@ -19,7 +20,11 @@ class ClanMemberGraph:
 
         # Fetch the updated data
         self.response = requests.get(self.data_url)
-        self.json_data = self.response.json()
+        try:
+            self.json_data = self.response.json()
+        except requests.exceptions.RequestException:
+            self.message = f"No data available for {month_year}. Showing SEP_2025 (Latest)"
+            self.update_data_url('SEP_2025')
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
@@ -694,6 +699,7 @@ class FormerMemberGraph:
     def __init__(self):
         self.data_url = ''
         self.df = None
+        self.message = ""
 
     def update_data_url(self, month_year):
         # Update the data URL dynamically based on the selected month and year
@@ -701,7 +707,11 @@ class FormerMemberGraph:
 
         # Fetch JSON data from the updated URL
         self.response = requests.get(self.data_url)
-        self.json_data = self.response.json()
+        try:
+            self.json_data = self.response.json()
+        except requests.exceptions.RequestException:
+            self.message = f"No data available for {month_year}. Showing SEP_2025 (Latest)"
+            self.update_data_url('SEP_2025')
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
@@ -1250,6 +1260,7 @@ class MonthlyAnalysisGraph:
     def __init__(self):
         self.data_url = ''
         self.df = None
+        self.message = ""
 
     def update_data_url(self, month_year):
         # Update the data URL dynamically based on month and year
@@ -1257,7 +1268,11 @@ class MonthlyAnalysisGraph:
 
         # Fetch the updated data
         self.response = requests.get(self.data_url)
-        self.json_data = self.response.json()
+        try:
+            self.json_data = self.response.json()
+        except requests.exceptions.RequestException:
+            self.message = f"No data available for {month_year}. Showing AUG-SEP_2025 (Latest)"
+            self.update_data_url('AUG-SEP_2025')
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)

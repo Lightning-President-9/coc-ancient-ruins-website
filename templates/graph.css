@@ -146,3 +146,109 @@ button:hover {
 .dropdown:hover .dropdown-content {
 	display: block;
 }
+
+.alert-message {
+  background: rgba(255, 255, 255, 0.18);
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  padding: 12px 24px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+#controls-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+#month-select, #year-select, #fetch-button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  color: black;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+#month-select:hover, #year-select:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+#fetch-button {
+  background-image: linear-gradient(135deg, #A5D6A7, #FF9800);
+  color: black;
+  cursor: pointer;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+#fetch-button:hover {
+  background: linear-gradient(135deg, #FFB74D, #C8E6C9);
+  transform: scale(1.05);
+}
+
+#controls-container label {
+  color: black;
+  font-weight: 500;
+  font-size: 1rem;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  margin-right: 6px;
+  backdrop-filter: blur(4px);
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+#controls-container label:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 650px) {
+  #controls-container {
+    flex-direction: column;
+    align-items: stretch;
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  #controls-container label,
+  #controls-container select,
+  #controls-container button {
+    width: 100%;
+    text-align: center;
+  }
+
+  #controls-container label,
+  #controls-container select {
+    margin-bottom: 10px;
+  }
+
+  #fetch-button {
+    margin-top: 8px;
+  }
+
+  .alert-message {
+    width: 90%;
+    font-size: 0.95rem;
+    padding: 10px 16px;
+  }
+}

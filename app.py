@@ -99,6 +99,8 @@ def render_graph(graph_type, obj_type):
     else:
         return render_template("404.html"), 404
 
+    graph_obj.message = ""
+
     graph_obj.update_data_url(month_year)
 
     # Get the corresponding method for the graph type
@@ -108,7 +110,7 @@ def render_graph(graph_type, obj_type):
 
     figures = getattr(graph_obj, method_name)()
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in figures]
-    return render_template(template_name,month_year=month_year, graphJSON_list=graphJSON_list, graph_name=f"{obj_type.upper()} {graph_type.capitalize()} Chart")
+    return render_template(template_name,month_year=month_year, graphJSON_list=graphJSON_list, graph_name=f"{obj_type.upper()} {graph_type.capitalize()} Chart", message=graph_obj.message)
 
 @app.route("/graph/<obj_type>/<graph_type>/", methods=['GET'])
 def graph_handler(obj_type, graph_type):

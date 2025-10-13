@@ -18,24 +18,32 @@
 
   <h1>Graphs - {{ month_year }}</h1>
 
+  {% if message %}
+  <div class="alert-message">{{ message }}</div>
+  {% endif %}
+
   <div id="controls-container">
     <form id="fetch-data-form" method="GET">
-      <select id="month-year-select" name="month-year" aria-label="Select month">
-        <option value="JUL_2024">July 2024</option>
-        <option value="AUG_2024">August 2024</option>
-        <option value="SEP_2024">September 2024</option>
-        <option value="OCT_2024">October 2024</option>
-        <option value="NOV_2024">November 2024</option>
-        <option value="DEC_2024">December 2024</option>
-        <option value="JAN_2025">January 2025</option>
-        <option value="FEB_2025">February 2025</option>
-        <option value="MAR_2025">March 2025</option>
-        <option value="APR_2025">April 2025</option>
-        <option value="MAY_2025">May 2025</option>
-        <option value="JUN_2025">June 2025</option>
-        <option value="JUL_2025">July 2025</option>
-        <option value="AUG_2025">August 2025</option>
-        <option value="SEP_2025">September 2025</option>
+      <label for="month-select">Select Month:</label>
+      <select id="month-select" aria-label="Select month">
+        <option value="JAN">January</option>
+        <option value="FEB">February</option>
+        <option value="MAR">March</option>
+        <option value="APR">April</option>
+        <option value="MAY">May</option>
+        <option value="JUN">June</option>
+        <option value="JUL">July</option>
+        <option value="AUG">August</option>
+        <option value="SEP">September</option>
+        <option value="OCT">October</option>
+        <option value="NOV">November</option>
+        <option value="DEC">December</option>
+      </select>
+
+      <label for="year-select">Select Year:</label>
+      <select id="year-select" aria-label="Select year">
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
       </select>
       <button type="submit" id="fetch-button">Fetch Data</button>
     </form>
