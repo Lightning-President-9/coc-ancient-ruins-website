@@ -23,18 +23,15 @@ class ClanMemberGraph:
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
-            self.message = f"No data available for {month_year}. Showing SEP_2025 (Latest)"
-            self.update_data_url('SEP_2025')
+            self.message = f"No data available for {month_year}. Showing OCT_2025 (Latest)"
+            self.update_data_url('OCT_2025')
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
 
         # Convert string columns to numeric
-        try:
-            for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
-                self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
-        except KeyError:
-            self.update_data_url('SEP_2025')
+        for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
+            self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
 
         # Filter data
         self.df_in = self.df[self.df['war'] == 'IN']
@@ -710,18 +707,15 @@ class FormerMemberGraph:
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
-            self.message = f"No data available for {month_year}. Showing SEP_2025 (Latest)"
-            self.update_data_url('SEP_2025')
+            self.message = f"No data available for {month_year}. Showing OCT_2025 (Latest)"
+            self.update_data_url('OCT_2025')
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
 
         # Convert string columns to numeric where necessary
-        try :
-            for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
-                self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
-        except KeyError:
-            self.update_data_url('SEP_2025')
+        for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
+            self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
 
         # Select numerical columns for later use
         self.numerical_df = self.df.select_dtypes(include=['number'])
@@ -1271,18 +1265,15 @@ class MonthlyAnalysisGraph:
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
-            self.message = f"No data available for {month_year}. Showing AUG-SEP_2025 (Latest)"
-            self.update_data_url('AUG-SEP_2025')
+            self.message = f"No data available for {month_year}. Showing SEP-OCT_2025 (Latest)"
+            self.update_data_url('SEP-OCT_2025')
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
 
         # Convert string columns to numeric
-        try:
-            for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
-                self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
-        except KeyError:
-            self.update_data_url('AUG-SEP_2025')
+        for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
+            self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
 
         self.numerical_df = self.df.select_dtypes(include=['number'])
 
@@ -1824,7 +1815,7 @@ class AllMonthGraph:
             "NOV-DEC_2024", "DEC-JAN_2025", "JAN-FEB_2025",
             "FEB-MAR_2025", "MAR-APR_2025", "APR-MAY_2025",
             "MAY-JUN_2025", "JUN-JUL_2025", "JUL-AUG_2025",
-            "AUG-SEP_2025"
+            "AUG-SEP_2025", "SEP-OCT_2025"
         ]
 
     def fetch_data(self):
@@ -1867,7 +1858,7 @@ class AllMonthGraph:
 
     def generate_heatmap_figures(self):
         # Load JSON data from the URL
-        url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_SEP_2025.json"
+        url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_OCT_2025.json"
         response = requests.get(url)
         response.raise_for_status()  # Raise error if request fails
 
@@ -1932,13 +1923,13 @@ class AllMonthGraph:
 class AI_PRED:
     def __init__(self):
         # URLs are hardcoded inside the class
-        self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_SEP_2025.json"
-        self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/SEP_2025.json"
+        self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_OCT_2025.json"
+        self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/OCT_2025.json"
 
         self.custom_order = [
             'jul-aug', 'aug-sep', 'sep-oct', 'oct-nov', 'nov-dec',
             'dec-jan', 'jan-feb', 'feb-mar', 'mar-apr', 'apr-may',
-            'may-jun', 'jun-jul','jul-aug','aug-sep'
+            'may-jun', 'jun-jul', 'jul-aug', 'aug-sep', 'sep-oct'
         ]
         self.df_filtered = self._load_and_filter_data()
 
@@ -1961,7 +1952,7 @@ class AI_PRED:
         df = self.df_filtered
         metric_cols = [col for col in df.columns if col.startswith(prefix)]
         sorted_cols = sorted(metric_cols, key=lambda col: self.custom_order.index(self._get_period_key(col, prefix)))
-        periods = [col.replace(prefix, "") for col in sorted_cols] + ["SEP-OCT_2025"]
+        periods = [col.replace(prefix, "") for col in sorted_cols] + ["OCT-NOV_2025"]
 
         fig = go.Figure()
         buttons = []
