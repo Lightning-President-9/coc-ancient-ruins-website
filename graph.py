@@ -1839,36 +1839,33 @@ class AllMonthGraph:
             "https://raw.githubusercontent.com/Lightning-President-9/"
             "ClanDataRepo/refs/heads/main/Clan%20Members/Monthly%20Analysis%20JSON/"
         )
+        self.folder_url = (
+            "https://github.com/Lightning-President-9/"
+            "ClanDataRepo/tree/main/Clan%20Members/Monthly%20Analysis%20JSON"
+        )
         self.months = self.get_available_months()   # Dynamic month loading
 
     def get_available_months(self):
-        # GitHub API folder listing
-        api_url = (
-            "https://api.github.com/repos/Lightning-President-9/ClanDataRepo/"
-            "contents/Clan%20Members/Monthly%20Analysis%20JSON"
-        )
-
-        response = requests.get(api_url)
+        """Scrape GitHub HTML page to list JSON files."""
+        response = requests.get(self.folder_url)
         response.raise_for_status()
-        files = response.json()
+        html = response.text
 
-        month_pairs = []
-        pattern = r"data_(.+)\.json"
+        # Extract filenames data_XXX.json
+        files = re.findall(r"data_([A-Z\-0-9_]+)\.json", html)
 
-        for f in files:
-            match = re.match(pattern, f["name"])
-            if match:
-                month_pairs.append(match.group(1))
+        # 🔥 Remove duplicates while preserving order
+        files = list(dict.fromkeys(files))
 
-        # Sort month pairs properly
-        month_pairs = self.sort_month_pairs(month_pairs)
+        # Proper sort
+        files = self.sort_month_pairs(files)
 
+        # Start from JUN-JUL_2024
         START = "JUN-JUL_2024"
-        if START in month_pairs:
-            start_index = month_pairs.index(START)
-            month_pairs = month_pairs[start_index:]
+        if START in files:
+            files = files[files.index(START):]
 
-        return month_pairs
+        return files
 
     def sort_month_pairs(self, pairs):
         MONTH_MAP = {
@@ -1880,36 +1877,30 @@ class AllMonthGraph:
         def pair_to_date(pair):
             # Example: NOV-DEC_2024
             part, year = pair.split("_")
-            start_month = part.split("-")[0]
-            end_month = part.split("-")[1]
+            s, e = part.split("-")
 
-            year_number = int(year)
-            month_number = MONTH_MAP[start_month]
+            year = int(year)
+            if s == "DEC" and e == "JAN":
+                year -= 1  # DEC-JAN belongs to previous year
 
-            # DEC-JAN case → belongs to previous year
-            if start_month == "DEC" and end_month == "JAN":
-                year_number -= 1
-
-            return datetime(year_number, month_number, 1)
+            return datetime(year, MONTH_MAP[s], 1)
 
         return sorted(pairs, key=pair_to_date)
 
     def fetch_data(self):
         all_data = {}
-
         for month in self.months:
             url = f"{self.base_url}data_{month}.json"
             response = requests.get(url)
             response.raise_for_status()
             all_data[month] = response.json()
-
         return all_data
 
     def process_data(self, all_data):
         monthly_totals = []
 
         for month, records in all_data.items():
-            total_values = {
+            totals = {
                 "month": month,
                 "warattack": 0,
                 "clancapital": 0,
@@ -1918,18 +1909,18 @@ class AllMonthGraph:
                 "clanscore": 0,
             }
 
-            for record in records:
-                total_values["warattack"] += int(record.get("warattack", 0))
-                total_values["clancapital"] += int(record.get("clancapital", 0))
-                total_values["clangames"] += int(record.get("clangames", 0))
-                total_values["clangamesmaxed"] += int(record.get("clangamesmaxed", 0))
-                total_values["clanscore"] += int(record.get("clanscore", 0))
+            for r in records:
+                totals["warattack"] += int(r.get("warattack", 0))
+                totals["clancapital"] += int(r.get("clancapital", 0))
+                totals["clangames"] += int(r.get("clangames", 0))
+                totals["clangamesmaxed"] += int(r.get("clangamesmaxed", 0))
+                totals["clanscore"] += int(r.get("clanscore", 0))
 
-            monthly_totals.append(total_values)
+            monthly_totals.append(totals)
 
         df = pd.DataFrame(monthly_totals)
 
-        # Sort by dynamic months (preserve correct order)
+        # Maintain sorted month order
         df["month"] = pd.Categorical(df["month"], categories=self.months, ordered=True)
         df = df.sort_values("month")
 
