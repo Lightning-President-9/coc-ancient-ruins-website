@@ -2,7 +2,9 @@ from flask import Flask, render_template, jsonify, request, send_file
 import pickle
 import json
 import plotly
+
 # from database import load_from_db_mem,load_from_db_fmem
+
 from graph import ClanMemberGraph as cmg
 from graph import FormerMemberGraph as fmg
 from graph import MonthlyAnalysisGraph as mag
@@ -10,10 +12,14 @@ from graph import AllMonthGraph as amg
 from graph import AI_PRED as ai_pred
 from player_report import get_players, generate_player_report
 
+LATEST_MONTH = "OCT_2025"
+LATEST_MONTH_RANGE = "SEP-OCT_2025"
+
 app = Flask(__name__)
 
 # mem_list=load_from_db_mem()
 # fmem_list=load_from_db_fmem()
+
 cmg_obj = cmg()
 fmg_obj = fmg()
 mag_obj = mag()
@@ -28,7 +34,7 @@ with open('data_file.pickle', 'rb') as f:
 
 @app.route("/")
 def coc_ancient_ruins():
-  return render_template('home.html',DM=mem_list,DNM=fmem_list)
+  return render_template('index.html',DM=mem_list,DNM=fmem_list)
 
 @app.route("/api/mem/")
 def data_mem():
@@ -86,15 +92,15 @@ GRAPH_METHODS = {
 def render_graph(graph_type, obj_type):
     if obj_type == "mem":
         graph_obj = cmg_obj
-        month_year = request.args.get('month-year', 'OCT_2025')
+        month_year = request.args.get('month-year', LATEST_MONTH)
         template_name = './graph.html'
     elif obj_type == "fmem":
         graph_obj = fmg_obj
-        month_year = request.args.get('month-year', 'OCT_2025')
+        month_year = request.args.get('month-year', LATEST_MONTH)
         template_name = './graph.html'
     elif obj_type == "mag":
         graph_obj = mag_obj
-        month_year = request.args.get('month-year', 'SEP-OCT_2025')
+        month_year = request.args.get('month-year', LATEST_MONTH_RANGE)
         template_name = './mem_month_graph.html'
     else:
         return render_template("404.html"), 404

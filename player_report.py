@@ -14,9 +14,11 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfgen.canvas import Canvas
 
+CLAN_MONTHLY_PERFORMANCE_RANGE = "JUL_2024_to_OCT_2025"
+
 # === CONFIG ===
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-JSON_URL = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_OCT_2025.json"
+JSON_URL = f"https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_{CLAN_MONTHLY_PERFORMANCE_RANGE}.json"
 CLAN_LOGO = os.path.join(BASE_DIR, "static", "clan-badge_17.png")
 WEBSITE_LINK = "https://coc-ancient-ruins-website.onrender.com/"
 
@@ -33,17 +35,34 @@ METRICS = {
 
 plt.style.use('seaborn-v0_8')
 
-# Fiscal order: JUL → JUN
-fiscal_order = ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN","JUL","AUG","SEP","OCT"]
+# ----------------------------------------
+# 🔥 MONTH MAPPING
+# ----------------------------------------
+MONTH_MAP = {
+    "JAN": 1, "FEB": 2, "MAR": 3, "APR": 4,
+    "MAY": 5, "JUN": 6, "JUL": 7, "AUG": 8,
+    "SEP": 9, "OCT": 10, "NOV": 11, "DEC": 12
+}
 
-def sort_key(period):
-    start_month = period.split('-')[0]
-    return fiscal_order.index(start_month) if start_month in fiscal_order else 99
+def extract_all_periods(df):
+    """Extract all period names from JSON key prefixes dynamically."""
+    periods = set()
+    for col in df.columns:
+        if "_" in col and any(col.startswith(prefix) for prefix in METRICS.values()):
+            period = col.split("_", 1)[1]  # take part after prefix
+            periods.add(period)
+    return list(periods)
 
-def get_players():
-    return df['name'].tolist()
+def period_sort_key(period):
+    """Convert 'JUL-AUG_2024' into sortable tuple (year, start_month_num, end_month_num)."""
+    try:
+        p1, year = period.split("_")
+        start_m, end_m = p1.split("-")
+        return (int(year), MONTH_MAP[start_m], MONTH_MAP[end_m])
+    except:
+        return (9999, 99, 99)
 
-# Footer function
+# Footer
 def add_footer(canvas: Canvas, doc):
     canvas.saveState()
     footer_text = f"Your Stats, Brought To You By: https://coc-ancient-ruins-website.onrender.com/player-report | Generated on {datetime.now().strftime('%d %B %Y')}"
@@ -52,18 +71,30 @@ def add_footer(canvas: Canvas, doc):
     canvas.drawCentredString(A4[0] / 2, 20, footer_text)
     canvas.restoreState()
 
+def get_players():
+    return df['name'].tolist()
+
 def generate_player_report(player_name):
+
     player_data = df[df['name'] == player_name].to_dict(orient='records')[0]
 
-    # Extract periods and sort in fiscal order
-    periods = [k.replace('warattack_', '') for k in player_data.keys() if k.startswith('warattack_')]
-    periods.sort(key=sort_key)
+    # ----------------------------------------
+    # 🔥 DYNAMIC PERIOD EXTRACTION & SORTING
+    # ----------------------------------------
+    periods = extract_all_periods(df)
+    periods.sort(key=period_sort_key)
 
-    # Collect metric values
+    # ----------------------------------------
+    # Metric Data Extraction
+    # ----------------------------------------
     metric_values = {}
     for metric, prefix in METRICS.items():
-        vals = [player_data.get(f"{prefix}{period}", 0) for period in periods]
-        vals = [0 if (v is None or pd.isna(v) or v < 0) else v for v in vals]
+        vals = []
+        for period in periods:
+            val = player_data.get(f"{prefix}{period}", 0)
+            if val is None or pd.isna(val) or val < 0:
+                val = 0
+            vals.append(val)
         metric_values[metric] = vals
 
     # Peak Performance Table
@@ -96,6 +127,7 @@ def generate_player_report(player_name):
         plt.close()
 
     color_palette = ["#1f77b4", "#2ca02c", "#ff7f0e", "#d62728", "#9467bd"]
+
     for (metric, vals), color in zip(metric_values.items(), color_palette):
         create_metric_chart(vals, metric, color)
 
@@ -108,7 +140,7 @@ def generate_player_report(player_name):
     ax.set_ylabel("Value")
     ax.grid(True, linestyle='--', alpha=0.6)
     plt.xticks(rotation=45)
-    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout(rect=[0, 0, 0.8, 1])
     buf = io.BytesIO()
     plt.savefig(buf, format='PNG')
@@ -123,7 +155,7 @@ def generate_player_report(player_name):
         ax.bar(periods, vals, bottom=bottom_vals, label=metric, color=color)
         bottom_vals = [b + v for b, v in zip(bottom_vals, vals)]
     ax.set_title("Monthly Contribution Breakdown", fontsize=14, fontweight='bold')
-    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.xticks(rotation=45)
     plt.tight_layout(rect=[0, 0, 0.8, 1])
     buf = io.BytesIO()
@@ -132,14 +164,16 @@ def generate_player_report(player_name):
     img_buffers.append(buf)
     plt.close()
 
-    # Pie Chart with Zero Data Check
+    # Pie Chart
     totals = [sum(vals) for vals in metric_values.values()]
     fig, ax = plt.subplots(figsize=(6, 6))
     if sum(totals) > 0:
-        ax.pie(totals, labels=list(metric_values.keys()), autopct='%1.1f%%', colors=color_palette, startangle=140)
+        ax.pie(totals, labels=list(metric_values.keys()), autopct='%1.1f%%',
+               colors=color_palette, startangle=140)
         ax.set_title("Overall Contribution Share", fontsize=14, fontweight='bold')
     else:
-        ax.text(0.5, 0.5, "No Data Available", ha='center', va='center', fontsize=14, color='gray')
+        ax.text(0.5, 0.5, "No Data Available", ha='center', va='center',
+                fontsize=14, color='gray')
         ax.set_title("Overall Contribution Share", fontsize=14, fontweight='bold')
         ax.axis('off')
     buf = io.BytesIO()
@@ -173,7 +207,7 @@ def generate_player_report(player_name):
     styles = getSampleStyleSheet()
     elements = []
 
-    # COVER PAGE
+    # Cover Page
     if os.path.exists(CLAN_LOGO):
         elements.append(Image(CLAN_LOGO, width=120, height=120))
     elements.append(Spacer(1, 20))
@@ -186,8 +220,7 @@ def generate_player_report(player_name):
     elements.append(Paragraph(
         "This report provides a detailed analysis of the player's performance across "
         "different Clash of Clans activities, including War Attacks, Clan Capital, "
-        "Clan Games, and more. Visual insights and tables are included to help track "
-        "progress and identify peak contributions.",
+        "Clan Games, and more.",
         styles['Normal']
     ))
     elements.append(Spacer(1, 30))

@@ -3,10 +3,17 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import warnings
+import re
+from datetime import datetime
 
 from sklearn.linear_model import LinearRegression
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
+
+LATEST_MONTH = "OCT_2025"
+LATEST_MONTH_RANGE = "SEP-OCT_2025"
+PREDICTED_MONTH = "OCT-NOV_2025"
+CLAN_MONTHLY_PERFORMANCE_RANGE = "JUL_2024_to_OCT_2025"
 
 class ClanMemberGraph:
     def __init__(self):
@@ -23,8 +30,8 @@ class ClanMemberGraph:
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
-            self.message = f"No data available for {month_year}. Showing OCT_2025 (Latest)"
-            self.update_data_url('OCT_2025')
+            self.message = f"No data available for {month_year}. Showing {LATEST_MONTH} (Latest)"
+            self.update_data_url(LATEST_MONTH)
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
@@ -96,11 +103,19 @@ class ClanMemberGraph:
         fig2.update_layout(title_text='War Participation Status')
 
         # 3. Clan Capital Contribution
-        self.df['clancapital_range'] = pd.cut(self.df['clancapital'], bins=[-1, 50, 100, 200, 300], labels=['0-50', '51-100', '101-200', '201-300'])
+        self.df['clancapital_range'] = pd.cut(
+            self.df['clancapital'],
+            bins=[-1, 50, 100, 200, 300, float('inf')],
+            labels=['0-50', '51-100', '101-200', '201-300', '300+']
+        )
         fig3 = px.pie(self.df, names='clancapital_range', title='Clan Capital Contribution')
 
         # 4. Clan Games Participation
-        self.df['clangames_range'] = pd.cut(self.df['clangames'], bins=[-1, 5, 10, 15, 20], labels=['0-5', '6-10', '11-15', '16-20'])
+        self.df['clangames_range'] = pd.cut(
+            self.df['clangames'],
+            bins=[-1, 5, 10, 15, 20, float('inf')],
+            labels=['0-5', '6-10', '11-15', '16-20', '20+']
+        )
         fig4 = px.pie(self.df, names='clangames_range', title='Clan Games Participation')
 
         # 5. Maxed Clan Games
@@ -109,11 +124,19 @@ class ClanMemberGraph:
         fig5.update_layout(title_text='Maxed Clan Games')
 
         # 6. Clan Score Distribution
-        self.df['clanscore_range'] = pd.cut(self.df['clanscore'], bins=[-1, 100, 300, 500, 700], labels=['0-100', '101-300', '301-500', '501-700'])
+        self.df['clanscore_range'] = pd.cut(
+            self.df['clanscore'],
+            bins=[-1, 100, 300, 500, 700, float('inf')],
+            labels=['0-100', '101-300', '301-500', '501-700', '700+']
+        )
         fig6 = px.pie(self.df, names='clanscore_range', title='Clan Score Distribution')
 
         # 7. War Attacks Distribution
-        self.df['warattack_range'] = pd.cut(self.df['warattack'], bins=[-1, 50, 100, 200, 300], labels=['0-50', '51-100', '101-200', '201-300'])
+        self.df['warattack_range'] = pd.cut(
+            self.df['warattack'],
+            bins=[-1, 50, 100, 200, 300, float('inf')],
+            labels=['0-50', '51-100', '101-200', '201-300', '300+']
+        )
         fig7 = px.pie(self.df, names='warattack_range', title='War Attacks Distribution')
 
         return [fig1, fig2, fig3, fig4, fig5, fig6, fig7]
@@ -707,8 +730,8 @@ class FormerMemberGraph:
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
-            self.message = f"No data available for {month_year}. Showing OCT_2025 (Latest)"
-            self.update_data_url('OCT_2025')
+            self.message = f"No data available for {month_year}. Showing {LATEST_MONTH} (Latest)"
+            self.update_data_url(LATEST_MONTH)
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
@@ -757,7 +780,11 @@ class FormerMemberGraph:
 
     def create_pie_charts(self):
         # 1. Clan Capital Contribution
-        self.df['clancapital_range'] = pd.cut(self.df['clancapital'], bins=[-1, 50, 100, 200, 300], labels=['0-50', '51-100', '101-200', '201-300'])
+        self.df['clancapital_range'] = pd.cut(
+            self.df['clancapital'],
+            bins=[-1, 50, 100, 200, 300, float('inf')],
+            labels=['0-50', '51-100', '101-200', '201-300', '300+']
+        )
         fig1 = px.pie(self.df, names='clancapital_range', title='Clan Capital Contribution')
 
         # 2. Clan Games Participation
@@ -1265,8 +1292,8 @@ class MonthlyAnalysisGraph:
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
-            self.message = f"No data available for {month_year}. Showing SEP-OCT_2025 (Latest)"
-            self.update_data_url('SEP-OCT_2025')
+            self.message = f"No data available for {month_year}. Showing {LATEST_MONTH_RANGE} (Latest)"
+            self.update_data_url(LATEST_MONTH_RANGE)
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
@@ -1808,15 +1835,64 @@ class MonthlyAnalysisGraph:
 
 class AllMonthGraph:
     def __init__(self):
-        self.base_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Monthly%20Analysis%20JSON/"
-        self.months = [
-            "JUN-JUL_2024", "JUL-AUG_2024",
-            "AUG-SEP_2024", "SEP-OCT_2024", "OCT-NOV_2024",
-            "NOV-DEC_2024", "DEC-JAN_2025", "JAN-FEB_2025",
-            "FEB-MAR_2025", "MAR-APR_2025", "APR-MAY_2025",
-            "MAY-JUN_2025", "JUN-JUL_2025", "JUL-AUG_2025",
-            "AUG-SEP_2025", "SEP-OCT_2025"
-        ]
+        self.base_url = (
+            "https://raw.githubusercontent.com/Lightning-President-9/"
+            "ClanDataRepo/refs/heads/main/Clan%20Members/Monthly%20Analysis%20JSON/"
+        )
+        self.months = self.get_available_months()   # Dynamic month loading
+
+    def get_available_months(self):
+        # GitHub API folder listing
+        api_url = (
+            "https://api.github.com/repos/Lightning-President-9/ClanDataRepo/"
+            "contents/Clan%20Members/Monthly%20Analysis%20JSON"
+        )
+
+        response = requests.get(api_url)
+        response.raise_for_status()
+        files = response.json()
+
+        month_pairs = []
+        pattern = r"data_(.+)\.json"
+
+        for f in files:
+            match = re.match(pattern, f["name"])
+            if match:
+                month_pairs.append(match.group(1))
+
+        # Sort month pairs properly
+        month_pairs = self.sort_month_pairs(month_pairs)
+
+        START = "JUN-JUL_2024"
+        if START in month_pairs:
+            start_index = month_pairs.index(START)
+            month_pairs = month_pairs[start_index:]
+
+        return month_pairs
+
+    def sort_month_pairs(self, pairs):
+        MONTH_MAP = {
+            'JAN': 1, 'FEB': 2, 'MAR': 3, 'APR': 4,
+            'MAY': 5, 'JUN': 6, 'JUL': 7, 'AUG': 8,
+            'SEP': 9, 'OCT': 10, 'NOV': 11, 'DEC': 12
+        }
+
+        def pair_to_date(pair):
+            # Example: NOV-DEC_2024
+            part, year = pair.split("_")
+            start_month = part.split("-")[0]
+            end_month = part.split("-")[1]
+
+            year_number = int(year)
+            month_number = MONTH_MAP[start_month]
+
+            # DEC-JAN case → belongs to previous year
+            if start_month == "DEC" and end_month == "JAN":
+                year_number -= 1
+
+            return datetime(year_number, month_number, 1)
+
+        return sorted(pairs, key=pair_to_date)
 
     def fetch_data(self):
         all_data = {}
@@ -1825,8 +1901,7 @@ class AllMonthGraph:
             url = f"{self.base_url}data_{month}.json"
             response = requests.get(url)
             response.raise_for_status()
-            data = response.json()
-            all_data[month] = data
+            all_data[month] = response.json()
 
         return all_data
 
@@ -1853,26 +1928,31 @@ class AllMonthGraph:
             monthly_totals.append(total_values)
 
         df = pd.DataFrame(monthly_totals)
+
+        # Sort by dynamic months (preserve correct order)
         df["month"] = pd.Categorical(df["month"], categories=self.months, ordered=True)
+        df = df.sort_values("month")
+
         return df
 
     def generate_heatmap_figures(self):
-        # Load JSON data from the URL
-        url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_OCT_2025.json"
+        url = (
+            "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/"
+            "refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/"
+            "clan_monthly_performance_"+CLAN_MONTHLY_PERFORMANCE_RANGE+".json"
+        )
         response = requests.get(url)
-        response.raise_for_status()  # Raise error if request fails
+        response.raise_for_status()
 
-        data = response.json()
-        df = pd.DataFrame(data)
+        df = pd.DataFrame(response.json())
 
-        # List of metric prefixes
         metrics = ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']
-
-        # Container for figures
         figures = []
 
         for metric in metrics:
-            heatmap_df = df.set_index("name")[[col for col in df.columns if col.startswith(metric + "_")]]
+            heatmap_df = df.set_index("name")[
+                [col for col in df.columns if col.startswith(metric + "_")]
+            ]
             heatmap_df.replace(-1, None, inplace=True)
 
             fig = px.imshow(
@@ -1880,7 +1960,8 @@ class AllMonthGraph:
                 labels=dict(
                     x="Month",
                     y="Player",
-                    color=metric.replace("clangamesmaxed", "Clan Games Maxed").capitalize().replace("_", " ")
+                    color=metric.replace("clangamesmaxed", "Clan Games Maxed")
+                          .capitalize().replace("_", " ")
                 ),
                 x=[col.replace(f"{metric}_", "") for col in heatmap_df.columns],
                 y=heatmap_df.index,
@@ -1888,49 +1969,47 @@ class AllMonthGraph:
                 aspect="auto",
                 color_continuous_scale='Plasma'
             )
-            fig.update_yaxes(tickfont=dict(size=10))
 
+            fig.update_yaxes(tickfont=dict(size=10))
             figures.append(fig)
 
-        # Assign to named variables for consistency
-        fig1, fig2, fig3, fig4, fig5 = figures
-        return [fig1, fig2, fig3, fig4, fig5]
+        return figures
 
     def plot_graphs(self, df):
-        # Convert DataFrame to long format for plotting
         df_long = df.melt(id_vars=["month"], var_name="Category", value_name="Total")
 
-        # Line Chart
-        fig1 = px.line(df_long, x="month", y="Total", color="Category", markers=True,
-                       title="Monthly Clan Performance",
-                       labels={"Total": "Total Value", "month": "Month"},
-                       line_shape="linear")
+        fig1 = px.line(
+            df_long, x="month", y="Total", color="Category", markers=True,
+            title="Monthly Clan Performance"
+        )
 
-        # Bar Graph
-        fig2 = px.bar(df_long, x="month", y="Total", color="Category", barmode="group",
-                      title="Monthly Clan Performance (Bar Graph)")
+        fig2 = px.bar(
+            df_long, x="month", y="Total", color="Category", barmode="group",
+            title="Monthly Clan Performance (Bar Graph)"
+        )
 
-        # Treemap
-        fig3 = px.treemap(df_long, path=["month", "Category"], values="Total",
-                          title="Hierarchical Clan Performance Breakdown")
+        fig3 = px.treemap(
+            df_long, path=["month", "Category"], values="Total",
+            title="Hierarchical Clan Performance Breakdown"
+        )
 
-        # Area Chart
-        fig4 = px.area(df_long, x="month", y="Total", color="Category",
-                       title="Monthly Clan Performance (Area Chart)")
+        fig4 = px.area(
+            df_long, x="month", y="Total", color="Category",
+            title="Monthly Clan Performance (Area Chart)"
+        )
 
         return [fig1, fig2, fig3, fig4]
 
 class AI_PRED:
     def __init__(self):
-        # URLs are hardcoded inside the class
-        self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_JUL_2024_to_OCT_2025.json"
-        self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/OCT_2025.json"
+        self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_"+CLAN_MONTHLY_PERFORMANCE_RANGE+".json"
+        self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/"+LATEST_MONTH+".json"
 
-        self.custom_order = [
-            'jul-aug', 'aug-sep', 'sep-oct', 'oct-nov', 'nov-dec',
-            'dec-jan', 'jan-feb', 'feb-mar', 'mar-apr', 'apr-may',
-            'may-jun', 'jun-jul', 'jul-aug', 'aug-sep', 'sep-oct'
-        ]
+        self.month_map = {
+            "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+            "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12
+        }
+
         self.df_filtered = self._load_and_filter_data()
 
     def _load_and_filter_data(self):
@@ -1945,43 +2024,90 @@ class AI_PRED:
         df_filtered.reset_index(drop=True, inplace=True)
         return df_filtered
 
-    def _get_period_key(self, col, prefix):
-        return col.replace(prefix, "").split("_")[0].lower()
+    def _period_sort_key(self, col_name, prefix):
+        """
+        Converts 'dec-jan_2025' into a sortable tuple.
+        """
+        period = col_name.replace(prefix, "").lower()   # e.g., "dec-jan_2025"
+        range_part, year_str = period.split("_")        # "dec-jan", "2025"
+        start_m, end_m = range_part.split("-")
+
+        # Year correction:
+        # "dec-jan_2025" means Dec 2024 to Jan 2025
+        y_end = int(year_str)
+        y_start = y_end if self.month_map[start_m] < self.month_map[end_m] else y_end - 1
+
+        return (y_start, self.month_map[start_m], y_end, self.month_map[end_m])
 
     def forecast_plot(self, prefix):
         df = self.df_filtered
         metric_cols = [col for col in df.columns if col.startswith(prefix)]
-        sorted_cols = sorted(metric_cols, key=lambda col: self.custom_order.index(self._get_period_key(col, prefix)))
-        periods = [col.replace(prefix, "") for col in sorted_cols] + ["OCT-NOV_2025"]
+
+        # Sort columns chronologically using the FIXED sort key
+        sorted_cols = sorted(
+            metric_cols,
+            key=lambda col: self._period_sort_key(col, prefix)
+        )
+
+        periods = [col.replace(prefix, "").upper() for col in sorted_cols]
 
         fig = go.Figure()
         buttons = []
 
-        for i, name in enumerate(df['name']):
-            row = df[df['name'] == name]
+        for i, name in enumerate(df["name"]):
+            row = df[df["name"] == name]
             values = row[sorted_cols].values.flatten()
             X = list(range(len(values)))
+
+            # Linear regression model
             model = LinearRegression().fit(pd.DataFrame(X), values)
             forecast = model.predict([[len(X)]])[0]
             pred_line = model.predict(pd.DataFrame(X + [len(X)]))
 
-            trace1 = go.Scatter(x=periods[:-1], y=values, mode='lines+markers', name="Actual")
-            trace2 = go.Scatter(x=periods, y=pred_line, mode='lines', name="Linear Fit")
-            trace3 = go.Scatter(x=[periods[-1]], y=[forecast], mode='markers+text', name="Forecast",
-                                marker=dict(size=10, color="green"),
-                                text=[f"{forecast:.1f}"], textposition="top center")
+            # Plot
+            trace_actual = go.Scatter(
+                x=periods,
+                y=values,
+                mode="lines+markers",
+                name="Actual"
+            )
 
-            fig.add_trace(trace1)
-            fig.add_trace(trace2)
-            fig.add_trace(trace3)
+            trace_fit = go.Scatter(
+                x=periods + [PREDICTED_MONTH],
+                y=list(pred_line),
+                mode="lines",
+                name="Linear Fit"
+            )
 
-            vis = [False] * len(df['name']) * 3
+            trace_forecast = go.Scatter(
+                x=[PREDICTED_MONTH],
+                y=[forecast],
+                mode="markers+text",
+                name="Forecast",
+                marker=dict(size=10, color="green"),
+                text=[f"{forecast:.1f}"],
+                textposition="top center"
+            )
+
+            fig.add_trace(trace_actual)
+            fig.add_trace(trace_fit)
+            fig.add_trace(trace_forecast)
+
+            # Visibility mapping for dropdown
+            vis = [False] * (len(df['name']) * 3)
             vis[i * 3:i * 3 + 3] = [True, True, True]
-            buttons.append(dict(label=name, method="update",
-                                args=[{"visible": vis},
-                                      {"title": f"{prefix[:-1].capitalize()} Forecast for {name}"}]))
 
-        for j in range(len(df['name']) * 3):
+            buttons.append(dict(
+                label=name,
+                method="update",
+                args=[
+                    {"visible": vis},
+                    {"title": f"{prefix[:-1].capitalize()} Forecast for {name}"}
+                ]
+            ))
+
+        # Show only the first member by default
+        for j in range(len(df["name"]) * 3):
             fig.data[j].visible = j < 3
 
         fig.update_layout(
@@ -1989,21 +2115,20 @@ class AI_PRED:
                 buttons=buttons,
                 direction="down",
                 x=1.05,
-                y=1.15,
-                xanchor="left",
-                yanchor="top"
+                y=1.15
             )],
-            title=f"{prefix[:-1].capitalize()} Forecast for {df['name'].iloc[0]}",
+            title=f"{prefix[:-1].capitalize()} Forecast",
             xaxis_title="Period",
             yaxis_title=prefix[:-1].capitalize()
         )
+
         return fig
 
     def forecast_all(self):
-        fig1 = self.forecast_plot("warattack_")
-        fig2 = self.forecast_plot("clancapital_")
-        fig3 = self.forecast_plot("clangames_")
-        fig4 = self.forecast_plot("clangamesmaxed_")
-        fig5 = self.forecast_plot("clanscore_")
-
-        return [fig1, fig2, fig3, fig4, fig5]
+        return [
+            self.forecast_plot("warattack_"),
+            self.forecast_plot("clancapital_"),
+            self.forecast_plot("clangames_"),
+            self.forecast_plot("clangamesmaxed_"),
+            self.forecast_plot("clanscore_")
+        ]
