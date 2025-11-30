@@ -47,7 +47,7 @@
                   </tr>
                   <tr>
                      <td><strong>Clan Capital League:</strong></td>
-                     <th>Silver League III</th>
+                     <th>Silver League I</th>
                   </tr>
                   <tr>
                      <td><strong>Clan Location:</strong></td>
@@ -75,7 +75,7 @@
                   </tr>
                   <tr>
                      <td><strong>Wars Won:</strong></td>
-                     <th>171</th>
+                     <th>174</th>
                   </tr>
                   <tr>
                      <td><strong>Clan Leader:</strong></td>
@@ -249,7 +249,7 @@
                      <th>Name<span class="icon-arrow">&UpArrow;</span></th>
                        <th class="sortable-header">
                            <span class="tooltip">Clan Score
-                               <span class="tooltiptext">Clan Score >75</span>
+                               <span class="tooltiptext">Clan Score >200</span>
                            </span>
                            <span class="icon-arrow">&UpArrow;</span>
                        </th>
@@ -257,7 +257,7 @@
                </thead>
                <tbody>
                   {% for datam in DM %}
-                  {% if datam['clanscore'] > 75 %}
+                  {% if datam['clanscore'] > 200 %}
                   <tr>
                      <td>{{datam['name']}}</td>
                      <td>{{datam['clanscore']}}</td>
@@ -265,7 +265,7 @@
                   {% endif %}
                   {% endfor %}
                   {% for datam in DNM %}
-                  {% if datam['clanscore'] > 75 %}
+                  {% if datam['clanscore'] > 200 %}
                   <tr>
                      <td>{{datam['name']}}</td>
                      <td>{{datam['clanscore']}}</td>
