@@ -12,8 +12,8 @@ from graph import AllMonthGraph as amg
 from graph import AI_PRED as ai_pred
 from player_report import get_players, generate_player_report
 
-LATEST_MONTH = "OCT_2025"
-LATEST_MONTH_RANGE = "SEP-OCT_2025"
+LATEST_MONTH = "NOV_2025"
+LATEST_MONTH_RANGE = "OCT-NOV_2025"
 
 app = Flask(__name__)
 

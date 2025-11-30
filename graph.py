@@ -10,10 +10,10 @@ from sklearn.linear_model import LinearRegression
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-LATEST_MONTH = "OCT_2025"
-LATEST_MONTH_RANGE = "SEP-OCT_2025"
-PREDICTED_MONTH = "OCT-NOV_2025"
-CLAN_MONTHLY_PERFORMANCE_RANGE = "JUL_2024_to_OCT_2025"
+LATEST_MONTH = "NOV_2025"
+LATEST_MONTH_RANGE = "OCT-NOV_2025"
+PREDICTED_MONTH = "NOV-DEC_2025"
+CLAN_MONTHLY_PERFORMANCE_RANGE = "JUL_2024_to_NOV_2025"
 
 class ClanMemberGraph:
     def __init__(self):
