@@ -46,15 +46,15 @@ def data_fmem():
 
 @app.route("/graph/mem/")
 def graph_mem():
-  return render_template('mem_graph.html')
+  return render_template('mem-graph.html')
 
 @app.route("/graph/fmem/")
 def graph_fmem():
-  return render_template('fmem_graph.html')
+  return render_template('fmem-graph.html')
 
 @app.route("/graph/mag/")
 def graph_mag():
-  return render_template('mem_month_analysis.html')
+  return render_template('mem-month-analysis.html')
 
 @app.route("/all-mon-ana-graph/")
 def all_mon_ana_graph():
@@ -67,7 +67,7 @@ def all_mon_ana_graph():
     # Convert Plotly figures to JSON
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in all_graphs]
 
-    return render_template("all_month_graph.html", graphJSON_list=graphJSON_list, graph_name="All Month Analysis")
+    return render_template("all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="All Month Analysis")
 
 # Mapping for graph types and their respective methods
 GRAPH_METHODS = {
@@ -101,7 +101,7 @@ def render_graph(graph_type, obj_type):
     elif obj_type == "mag":
         graph_obj = mag_obj
         month_year = request.args.get('month-year', LATEST_MONTH_RANGE)
-        template_name = './mem_month_graph.html'
+        template_name = './mem-month-graph.html'
     else:
         return render_template("404.html"), 404
 
@@ -129,12 +129,12 @@ def ai_prediction():
     graphs = apg_obj.forecast_all()
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
 
-    return render_template("all_month_graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
+    return render_template("all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
 
 @app.route("/player-report/")
 def player_reports():
     players = get_players()
-    return render_template('player_report.html', players=players)
+    return render_template('player-report.html', players=players)
 
 @app.route("/player-report/<player_name>/")
 def download_player_report(player_name):
