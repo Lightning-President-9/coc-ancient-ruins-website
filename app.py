@@ -5,11 +5,11 @@ import plotly
 
 # from database import load_from_db_mem,load_from_db_fmem
 
-from graph import ClanMemberGraph as cmg
-from graph import FormerMemberGraph as fmg
-from graph import MonthlyAnalysisGraph as mag
-from graph import AllMonthGraph as amg
-from graph import AI_PRED as ai_pred
+from clan_member_graph import ClanMemberGraph as cmg
+from former_member_graph import FormerMemberGraph as fmg
+from monthly_analysis_graph import MonthlyAnalysisGraph as mag
+from all_month_graph import AllMonthGraph as amg
+from ai_prediction_graph import AiPredictionGraph as apg
 from player_report import get_players, generate_player_report
 
 LATEST_MONTH = "NOV_2025"
@@ -24,7 +24,7 @@ cmg_obj = cmg()
 fmg_obj = fmg()
 mag_obj = mag()
 amg_obj = amg()
-ai_pred_obj = ai_pred()
+apg_obj = apg()
 
 # with open('data_file.pickle', 'wb') as f:
 #   pickle.dump([mem_list, fmem_list], f)
@@ -126,7 +126,7 @@ def graph_handler(obj_type, graph_type):
 
 @app.route("/ai/prediction/")
 def ai_prediction():
-    graphs = ai_pred_obj.forecast_all()
+    graphs = apg_obj.forecast_all()
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
 
     return render_template("all_month_graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
