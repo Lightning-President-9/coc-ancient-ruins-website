@@ -3,10 +3,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import warnings
+from .constants import LATEST_MONTH
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
-
-LATEST_MONTH = "NOV_2025"
 
 class FormerMemberGraph:
     def __init__(self):

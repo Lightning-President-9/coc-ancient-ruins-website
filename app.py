@@ -11,9 +11,7 @@ from graphs import MonthlyAnalysisGraph as mag
 from graphs import AllMonthGraph as amg
 from graphs import AIPredictionGraph as apg
 from graphs import get_players, generate_player_report
-
-LATEST_MONTH = "NOV_2025"
-LATEST_MONTH_RANGE = "OCT-NOV_2025"
+from graphs import LATEST_MONTH, LATEST_MONTH_RANGE
 
 app = Flask(__name__)
 

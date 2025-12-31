@@ -3,10 +3,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import warnings
+from .constants import LATEST_MONTH_RANGE
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
-
-LATEST_MONTH_RANGE = "OCT-NOV_2025"
 
 class MonthlyAnalysisGraph:
     def __init__(self):

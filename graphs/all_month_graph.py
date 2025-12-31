@@ -4,10 +4,9 @@ import requests
 import warnings
 import re
 from datetime import datetime
+from .constants import CLAN_MONTHLY_PERFORMANCE_RANGE
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
-
-CLAN_MONTHLY_PERFORMANCE_RANGE = "JUL_2024_to_NOV_2025"
 
 class AllMonthGraph:
     def __init__(self):

@@ -2,14 +2,10 @@ import pandas as pd
 import plotly.graph_objects as go
 import requests
 import warnings
-
 from sklearn.linear_model import LinearRegression
+from .constants import LATEST_MONTH, PREDICTED_MONTH, CLAN_MONTHLY_PERFORMANCE_RANGE
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
-
-LATEST_MONTH = "NOV_2025"
-PREDICTED_MONTH = "NOV-DEC_2025"
-CLAN_MONTHLY_PERFORMANCE_RANGE = "JUL_2024_to_NOV_2025"
 
 class AIPredictionGraph:
     def __init__(self):

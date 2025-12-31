@@ -13,8 +13,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfgen.canvas import Canvas
-
-CLAN_MONTHLY_PERFORMANCE_RANGE = "JUL_2024_to_OCT_2025"
+from .constants import CLAN_MONTHLY_PERFORMANCE_RANGE
 
 # === CONFIG ===
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
