@@ -1,16 +1,16 @@
-from flask import Flask, render_template, jsonify, request, send_file
+from flask import Flask, render_template, jsonify, request, send_file, redirect
 import pickle
 import json
 import plotly
 
 # from database import load_from_db_mem,load_from_db_fmem
 
-from clan_member_graph import ClanMemberGraph as cmg
-from former_member_graph import FormerMemberGraph as fmg
-from monthly_analysis_graph import MonthlyAnalysisGraph as mag
-from all_month_graph import AllMonthGraph as amg
-from ai_prediction_graph import AiPredictionGraph as apg
-from player_report import get_players, generate_player_report
+from graphs import ClanMemberGraph as cmg
+from graphs import FormerMemberGraph as fmg
+from graphs import MonthlyAnalysisGraph as mag
+from graphs import AllMonthGraph as amg
+from graphs import AIPredictionGraph as apg
+from graphs import get_players, generate_player_report
 
 LATEST_MONTH = "NOV_2025"
 LATEST_MONTH_RANGE = "OCT-NOV_2025"
@@ -107,7 +107,7 @@ def render_graph(graph_type, obj_type):
 
     graph_obj.message = ""
 
-    graph_obj.update_data_url(month_year)
+    graph_obj.update_and_load_data(month_year)
 
     # Get the corresponding method for the graph type
     method_name = GRAPH_METHODS.get(graph_type)
@@ -150,6 +150,10 @@ def download_player_report(player_name):
         download_name=f"{player_name}_report.pdf",
         mimetype='application/pdf'
     )
+
+@app.route('/github/')
+def redirect_to_github():
+    return redirect("https://github.com/Lightning-President-9/coc-ancient-ruins-website", code=301)
 
 @app.errorhandler(404)
 def page_not_found(e):

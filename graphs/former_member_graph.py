@@ -6,33 +6,34 @@ import warnings
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-LATEST_MONTH_RANGE = "OCT-NOV_2025"
+LATEST_MONTH = "NOV_2025"
 
-class MonthlyAnalysisGraph:
+class FormerMemberGraph:
     def __init__(self):
         self.data_url = ''
         self.df = None
         self.message = ""
 
-    def update_data_url(self, month_year):
-        # Update the data URL dynamically based on month and year
-        self.data_url = f'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Monthly%20Analysis%20JSON/data_{month_year}.json'
+    def update_and_load_data(self, month_year):
+        # Update the data URL dynamically based on the selected month and year
+        self.data_url = f'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/{month_year}.json'
 
-        # Fetch the updated data
+        # Fetch JSON data from the updated URL
         self.response = requests.get(self.data_url)
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
-            self.message = f"No data available for {month_year}. Showing {LATEST_MONTH_RANGE} (Latest)"
-            self.update_data_url(LATEST_MONTH_RANGE)
+            self.message = f"No data available for {month_year}. Showing {LATEST_MONTH} (Latest)"
+            self.update_and_load_data(LATEST_MONTH)
 
         # Load JSON data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
 
-        # Convert string columns to numeric
+        # Convert string columns to numeric where necessary
         for column in ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']:
             self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
 
+        # Select numerical columns for later use
         self.numerical_df = self.df.select_dtypes(include=['number'])
 
     def create_bar_graphs(self):
@@ -72,7 +73,11 @@ class MonthlyAnalysisGraph:
 
     def create_pie_charts(self):
         # 1. Clan Capital Contribution
-        self.df['clancapital_range'] = pd.cut(self.df['clancapital'], bins=[-1, 50, 100, 200, 300], labels=['0-50', '51-100', '101-200', '201-300'])
+        self.df['clancapital_range'] = pd.cut(
+            self.df['clancapital'],
+            bins=[-1, 50, 100, 200, 300, float('inf')],
+            labels=['0-50', '51-100', '101-200', '201-300', '300+']
+        )
         fig1 = px.pie(self.df, names='clancapital_range', title='Clan Capital Contribution')
 
         # 2. Clan Games Participation
@@ -488,43 +493,44 @@ class MonthlyAnalysisGraph:
 
     def create_funnel_charts(self):
         # 1. Funnel Chart for Clan Capital
-        df1 = self.df.sort_values(by='clancapital', ascending=False)
+        sorted_df1 = self.df.sort_values(by='clancapital', ascending=False)
         fig1 = go.Figure()
-        fig1.add_trace(go.Funnel(y=df1['name'], x=df1['clancapital'], textinfo="value+percent initial"))
+        fig1.add_trace(go.Funnel(y=sorted_df1['name'], x=sorted_df1['clancapital'], textinfo="value+percent initial"))
         fig1.update_layout(title='Funnel Chart for Clan Capital', yaxis_title='Name', xaxis_title='Clan Capital')
 
         # 2. Funnel Chart for Clan Games
-        df2 = self.df.sort_values(by='clangames', ascending=False)
+        sorted_df2 = self.df.sort_values(by='clangames', ascending=False)
         fig2 = go.Figure()
-        fig2.add_trace(go.Funnel(y=df2['name'], x=df2['clangames'], textinfo="value+percent initial"))
+        fig2.add_trace(go.Funnel(y=sorted_df2['name'], x=sorted_df2['clangames'], textinfo="value+percent initial"))
         fig2.update_layout(title='Funnel Chart for Clan Games', yaxis_title='Name', xaxis_title='Clan Games')
 
         # 3. Funnel Chart for Clan Games Maxed
-        df3 = self.df.sort_values(by='clangamesmaxed', ascending=False)
+        sorted_df3 = self.df.sort_values(by='clangamesmaxed', ascending=False)
         fig3 = go.Figure()
-        fig3.add_trace(go.Funnel(y=df3['name'], x=df3['clangamesmaxed'], textinfo="value+percent initial"))
+        fig3.add_trace(
+            go.Funnel(y=sorted_df3['name'], x=sorted_df3['clangamesmaxed'], textinfo="value+percent initial"))
         fig3.update_layout(title='Funnel Chart for Clan Games Maxed', yaxis_title='Name',
                            xaxis_title='Clan Games Maxed')
 
         # 4. Funnel Chart for Clan Score
-        df4 = self.df.sort_values(by='clanscore', ascending=False)
+        sorted_df4 = self.df.sort_values(by='clanscore', ascending=False)
         fig4 = go.Figure()
-        fig4.add_trace(go.Funnel(y=df4['name'], x=df4['clanscore'], textinfo="value+percent initial"))
+        fig4.add_trace(go.Funnel(y=sorted_df4['name'], x=sorted_df4['clanscore'], textinfo="value+percent initial"))
         fig4.update_layout(title='Funnel Chart for Clan Score', yaxis_title='Name', xaxis_title='Clan Score')
 
         # 5. Funnel Chart for War Attack
-        df5 = self.df.sort_values(by='warattack', ascending=False)
+        sorted_df5 = self.df.sort_values(by='warattack', ascending=False)
         fig5 = go.Figure()
-        fig5.add_trace(go.Funnel(y=df5['name'], x=df5['warattack'], textinfo="value+percent initial"))
+        fig5.add_trace(go.Funnel(y=sorted_df5['name'], x=sorted_df5['warattack'], textinfo="value+percent initial"))
         fig5.update_layout(title='Funnel Chart for War Attack', yaxis_title='Name', xaxis_title='War Attack')
 
         # 6. Stacked Funnel Chart of Numerical Values
         fig6 = go.Figure()
         for column in self.numerical_df.columns:
             if column not in ['srno']:  # Exclude 'srno'
-                df_sorted = self.df.sort_values(by=column, ascending=False)
-                fig6.add_trace(
-                    go.Funnel(name=column, y=df_sorted['name'], x=df_sorted[column], textinfo="value+percent initial"))
+                sorted_df_col = self.df.sort_values(by=column, ascending=False)
+                fig6.add_trace(go.Funnel(name=column, y=sorted_df_col['name'], x=sorted_df_col[column],
+                                         textinfo="value+percent initial"))
         fig6.update_layout(title='Stacked Funnel Chart of Numerical Values', yaxis_title='Name', xaxis_title='Values')
 
         return [fig1, fig2, fig3, fig4, fig5, fig6]

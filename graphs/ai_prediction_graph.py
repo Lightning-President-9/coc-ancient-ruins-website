@@ -11,7 +11,7 @@ LATEST_MONTH = "NOV_2025"
 PREDICTED_MONTH = "NOV-DEC_2025"
 CLAN_MONTHLY_PERFORMANCE_RANGE = "JUL_2024_to_NOV_2025"
 
-class AiPredictionGraph:
+class AIPredictionGraph:
     def __init__(self):
         self.main_data_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_"+CLAN_MONTHLY_PERFORMANCE_RANGE+".json"
         self.filter_names_url = "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/JSON/"+LATEST_MONTH+".json"
