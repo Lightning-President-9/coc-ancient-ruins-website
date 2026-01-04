@@ -1,3 +1,23 @@
+# graphs/player_report.py
+
+"""
+Generates detailed, downloadable PDF performance reports for individual
+clan members in the Clash of Clans – Ancient Ruins Clan Website.
+
+This module:
+- Loads long-range monthly performance data from a GitHub-hosted JSON source
+- Dynamically extracts and sorts performance periods
+- Produces multiple visualizations using Matplotlib and Seaborn
+- Builds a professional multi-page PDF report using ReportLab
+
+The report includes:
+- Player summary and peak performance tables
+- Metric-wise trend charts
+- Combined and stacked visual analyses
+- Contribution breakdowns and activity heatmaps
+"""
+
+# Importing Libraries
 import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
@@ -15,7 +35,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfgen.canvas import Canvas
 from constants import CLAN_MONTHLY_PERFORMANCE_RANGE
 
-# === CONFIG ===
+# CONFIG
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 JSON_URL = f"https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_{CLAN_MONTHLY_PERFORMANCE_RANGE}.json"
 CLAN_LOGO = os.path.join(BASE_DIR, "static", "clan-badge_17.png")
@@ -34,9 +54,7 @@ METRICS = {
 
 plt.style.use('seaborn-v0_8')
 
-# ----------------------------------------
-# 🔥 MONTH MAPPING
-# ----------------------------------------
+# MONTH MAPPING
 MONTH_MAP = {
     "JAN": 1, "FEB": 2, "MAR": 3, "APR": 4,
     "MAY": 5, "JUN": 6, "JUL": 7, "AUG": 8,
@@ -44,7 +62,19 @@ MONTH_MAP = {
 }
 
 def extract_all_periods(df):
-    """Extract all period names from JSON key prefixes dynamically."""
+    """
+    Extract all unique period identifiers from the dataset.
+
+    Scans DataFrame columns to dynamically identify all available
+    month-range periods associated with performance metrics.
+
+    Args:
+        df (pandas.DataFrame): Clan performance dataset
+
+    Returns:
+        list[str]: List of unique period identifiers
+    """
+
     periods = set()
     for col in df.columns:
         if "_" in col and any(col.startswith(prefix) for prefix in METRICS.values()):
@@ -54,18 +84,25 @@ def extract_all_periods(df):
 
 def period_sort_key(period):
     """
-    Sort periods like:
-    NOV-DEC_2024 → DEC-JAN_2025 → JAN-FEB_2025
+    Generate a chronological sorting key for period identifiers.
 
-    by anchoring to the START month and correcting DEC-JAN year.
+    Handles cross-year month ranges such as DEC-JAN by adjusting
+    the associated year for accurate ordering.
+
+    Args:
+        period (str): Period identifier (e.g., 'NOV-DEC_2024')
+
+    Returns:
+        datetime.datetime: Sorting key for chronological ordering
     """
+
     try:
         part, year = period.split("_")
         start_m, end_m = part.split("-")
 
         year = int(year)
 
-        # 🔥 Critical fix: DEC-JAN belongs to previous year
+        # Critical fix: DEC-JAN belongs to previous year
         if start_m == "DEC" and end_m == "JAN":
             year -= 1
 
@@ -76,6 +113,18 @@ def period_sort_key(period):
 
 # Footer
 def add_footer(canvas: Canvas, doc):
+    """
+    Add a standardized footer to each page of the PDF.
+
+    The footer includes:
+    - Website attribution
+    - Report generation date
+
+    Args:
+        canvas (reportlab.pdfgen.canvas.Canvas): PDF canvas object
+        doc (SimpleDocTemplate): PDF document reference
+    """
+
     canvas.saveState()
     footer_text = f"Your Stats, Brought To You By: https://coc-ancient-ruins-website.onrender.com/player-report | Generated on {datetime.now().strftime('%d %B %Y')}"
     canvas.setFont('Helvetica', 8)
@@ -84,21 +133,40 @@ def add_footer(canvas: Canvas, doc):
     canvas.restoreState()
 
 def get_players():
+    """
+    Retrieve the list of available player names.
+
+    Returns:
+        list[str]: List of player names present in the dataset
+    """
+
     return df['name'].tolist()
 
 def generate_player_report(player_name):
+    """
+    Generate a complete PDF performance report for a specific player.
+
+    This function:
+    - Extracts player-specific data
+    - Dynamically identifies and sorts all time periods
+    - Computes metric trends, totals, and peak performance
+    - Generates multiple visual charts
+    - Assembles a styled multi-page PDF report
+
+    Args:
+        player_name (str): Name of the player
+
+    Returns:
+        io.BytesIO: In-memory PDF file buffer
+    """
 
     player_data = df[df['name'] == player_name].to_dict(orient='records')[0]
 
-    # ----------------------------------------
-    # 🔥 DYNAMIC PERIOD EXTRACTION & SORTING
-    # ----------------------------------------
+    # DYNAMIC PERIOD EXTRACTION & SORTING
     periods = extract_all_periods(df)
     periods.sort(key=period_sort_key)
 
-    # ----------------------------------------
     # Metric Data Extraction
-    # ----------------------------------------
     metric_values = {}
     for metric, prefix in METRICS.items():
         vals = []
@@ -115,7 +183,7 @@ def generate_player_report(player_name):
         peak_idx = vals.index(max(vals)) if max(vals) > 0 else 0
         peak_data.append([metric, max(vals), periods[peak_idx]])
 
-    # === Generate Charts ===
+    # Generate Charts
     img_buffers = []
 
     def create_metric_chart(values, title, color):
@@ -208,7 +276,7 @@ def generate_player_report(player_name):
     img_buffers.append(buf)
     plt.close()
 
-    # === PDF BUILD ===
+    # PDF BUILD
     pdf_buf = io.BytesIO()
     doc = SimpleDocTemplate(
         pdf_buf,

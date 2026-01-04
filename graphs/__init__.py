@@ -1,4 +1,19 @@
 # graphs/__init__.py
+
+"""
+graphs package initializer for the Clash of Clans – Ancient Ruins Clan Website.
+
+This module:
+- Aggregates and exposes all graph-related classes used by the application
+- Centralizes imports for different graph types (member, former member,
+  monthly analysis, all-month analysis, and AI prediction)
+- Exposes player report utilities
+- Re-exports commonly used constants for graph configuration
+
+By defining `__all__`, this file provides a clean public interface for the
+graphs package and simplifies imports throughout the application.
+"""
+
 from .ai_prediction_graph import AIPredictionGraph
 from .all_month_graph import AllMonthGraph
 from .clan_member_graph import ClanMemberGraph

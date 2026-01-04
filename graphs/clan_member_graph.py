@@ -1,3 +1,20 @@
+# graphs/clan_member_graph.py
+
+"""
+Generates detailed visual analytics for current clan members for a
+selected month in the Clash of Clans – Ancient Ruins Clan Website.
+
+This module:
+- Loads monthly clan member data from a GitHub-hosted JSON source
+- Preprocesses and categorizes member performance metrics
+- Produces a wide variety of Plotly visualizations, including:
+  bar, pie, line, scatter, histogram, box, violin, heatmap, treemap,
+  sunburst, density, 3D scatter, area, polar, funnel, and waterfall charts
+
+It serves as the primary visualization engine for member-level analysis.
+"""
+
+# Importing Libraries
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -8,12 +25,49 @@ from constants import LATEST_MONTH
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 class ClanMemberGraph:
+    """
+    ClanMemberGraph
+
+    Handles data loading, preprocessing, and visualization generation
+    for current clan members.
+
+    The class supports:
+    - Dynamic month-based data loading
+    - Separation of war participation status (IN / OUT)
+    - Generation of multiple chart types from the same dataset
+    - Graceful fallback to latest available data when requested data is missing
+    """
+
     def __init__(self):
+        """
+        Initialize the ClanMemberGraph instance.
+
+        Sets default placeholders for:
+        - Data source URL
+        - Loaded DataFrame
+        - Informational message for missing or fallback data
+        """
+
         self.data_url = ''
         self.df = None
         self.message = ""
 
     def update_and_load_data(self, month_year):
+        """
+        Load and preprocess clan member data for a given month.
+
+        This method:
+        - Dynamically builds the data source URL
+        - Fetches JSON data from GitHub
+        - Falls back to the latest available month if data is missing
+        - Converts performance fields to numeric types
+        - Separates members by war participation status
+        - Extracts numerical columns for analytics
+
+        Args:
+            month_year (str): Month identifier (e.g., 'DEC_2025')
+        """
+
         # Update the data URL dynamically based on month and year
         self.data_url = f'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Clan%20Members/JSON/{month_year}.json'
 
@@ -38,6 +92,18 @@ class ClanMemberGraph:
         self.numerical_df = self.df.select_dtypes(include=['number'])
 
     def create_bar_graphs(self):
+        """
+        Generate bar chart visualizations for clan member performance.
+
+        Includes:
+        - Grouped bar charts for IN vs OUT war participation
+        - Stacked bar charts for aggregated numerical metrics
+        - Distribution counts for war and player status
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Bar chart figures
+        """
+
         # 1. Vertical Bar Chart of War Attack
         fig1 = go.Figure()
         fig1.add_trace(go.Bar(x=self.df_in['name'], y=self.df_in['warattack'], name='War IN'))
@@ -86,6 +152,18 @@ class ClanMemberGraph:
         return [fig1, fig2, fig3, fig4, fig5, fig6, fig7]
 
     def create_pie_charts(self):
+        """
+        Generate pie chart visualizations for categorical distributions.
+
+        Covers:
+        - Player status and war participation
+        - Binned distributions for clan capital, clan games,
+          clan games maxed, clan score, and war attacks
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Pie chart figures
+        """
+
         # 1. Player Status Distribution
         fig1 = px.pie(self.df, names='status', title='Player Status Distribution')
 
@@ -134,6 +212,17 @@ class ClanMemberGraph:
         return [fig1, fig2, fig3, fig4, fig5, fig6, fig7]
 
     def create_line_charts(self):
+        """
+        Generate line chart visualizations for numerical metrics.
+
+        Includes:
+        - Individual metric trends by player
+        - Combined multi-metric line chart
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Line chart figures
+        """
+
         line_charts = []
         numerical_columns = self.numerical_df.columns.drop('srno', errors='ignore')
 
@@ -154,6 +243,19 @@ class ClanMemberGraph:
         return line_charts
 
     def create_scatter_plots(self):
+        """
+        Generate scatter plot visualizations for metric comparisons.
+
+        Includes:
+        - Pairwise numerical comparisons
+        - Color encoding by war participation
+        - Size encoding by clan score
+        - Combined color and size encodings
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Scatter plot figures
+        """
+
         scatter_plots = []
         numerical_columns = self.numerical_df.columns.drop('srno', errors='ignore')
 
@@ -207,6 +309,18 @@ class ClanMemberGraph:
         return scatter_plots
 
     def create_histograms(self):
+        """
+        Generate histogram visualizations for numerical metrics.
+
+        Includes:
+        - Plain distributions
+        - Distributions segmented by war status
+        - Distributions segmented by player status
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Histogram figures
+        """
+
         histograms = []
         numerical_columns = self.numerical_df.columns.drop(['srno'], errors='ignore')
 
@@ -234,6 +348,18 @@ class ClanMemberGraph:
         return histograms
 
     def create_box_plots(self):
+        """
+        Generate box plot visualizations for statistical distribution analysis.
+
+        Includes:
+        - Overall distributions
+        - Distributions segmented by war participation
+        - Distributions segmented by player status
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Box plot figures
+        """
+
         box_plots = []
         numerical_columns = self.numerical_df.columns.drop(['srno'], errors='ignore')
 
@@ -261,6 +387,18 @@ class ClanMemberGraph:
         return box_plots
 
     def create_violin_plots(self):
+        """
+        Generate violin plot visualizations for density and distribution insights.
+
+        Includes:
+        - Overall metric distributions
+        - Distributions segmented by war participation
+        - Distributions segmented by player status
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Violin plot figures
+        """
+
         violin_plots = []
         numerical_columns = self.numerical_df.columns.drop(['srno'], errors='ignore')
 
@@ -288,6 +426,17 @@ class ClanMemberGraph:
         return violin_plots
 
     def create_heatmaps(self):
+        """
+        Generate heatmap visualizations for relationship intensity analysis.
+
+        Includes:
+        - Metric-to-metric density heatmaps
+        - Categorical heatmap of war status vs player status
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Heatmap figures
+        """
+
         heatmaps = []
 
         # 1. Heatmap of warattack vs clancapital
@@ -331,6 +480,17 @@ class ClanMemberGraph:
         return heatmaps
 
     def create_treemaps(self):
+        """
+        Generate treemap visualizations for hierarchical contribution analysis.
+
+        Maps performance metrics by:
+        - Player status
+        - War participation status
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Treemap figures
+        """
+
         treemaps = []
 
         # Ensure there are no NaN or zero values in the values column
@@ -390,6 +550,16 @@ class ClanMemberGraph:
         return treemaps
 
     def create_sunburst_charts(self):
+        """
+        Generate sunburst visualizations for hierarchical metric breakdowns.
+
+        Shows how individual players contribute to totals
+        across status and war participation dimensions.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Sunburst chart figures
+        """
+
         sunbursts = []
 
         # 1. Sunburst chart based on 'status' and 'warattack'
@@ -445,6 +615,15 @@ class ClanMemberGraph:
         return sunbursts
 
     def create_density_plots(self):
+        """
+        Generate density contour plots for bivariate metric distributions.
+
+        Analyzes concentration patterns between key performance metrics.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Density plot figures
+        """
+
         density_plots = []
 
         # 1. Density plot of Clan Capital vs. Clan Games
@@ -510,6 +689,16 @@ class ClanMemberGraph:
         return density_plots
 
     def create_3d_scatter_plots(self):
+        """
+        Generate 3D scatter plots for multi-metric comparison.
+
+        Visualizes combinations of three numerical performance metrics
+        with war participation as a categorical dimension.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: 3D scatter plot figures
+        """
+
         numerical_columns = ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']
         scatter_plots_3d = []
 
@@ -532,6 +721,17 @@ class ClanMemberGraph:
         return scatter_plots_3d
 
     def create_area_graphs(self):
+        """
+        Generate area chart visualizations for cumulative comparisons.
+
+        Includes:
+        - IN vs OUT participation comparisons
+        - Stacked area charts for numerical metrics
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Area chart figures
+        """
+
         # 1. Area Chart of Clan Capital Over Players (IN/OUT)
         fig1 = go.Figure()
         fig1.add_trace(go.Scatter(x=self.df_in['name'], y=self.df_in['clancapital'], fill='tozeroy', name='War IN'))
@@ -572,6 +772,18 @@ class ClanMemberGraph:
         return [fig1, fig2, fig3, fig4, fig5, fig6]
 
     def create_polar_charts(self):
+        """
+        Generate polar chart visualizations for radial comparisons.
+
+        Includes:
+        - Metric comparisons by war participation
+        - Stacked polar charts
+        - Clan score distribution by player status
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Polar chart figures
+        """
+
         # 1. Polar Chart of Clan Capital Over Players (IN/OUT)
         fig1 = go.Figure()
         fig1.add_trace(go.Scatterpolar(r=self.df_in['clancapital'], theta=self.df_in['name'], fill='toself', name='War IN'))
@@ -617,6 +829,17 @@ class ClanMemberGraph:
         return [fig1, fig2, fig3, fig4, fig5, fig6, fig7]
 
     def create_funnel_charts(self):
+        """
+        Generate funnel chart visualizations for ranked performance analysis.
+
+        Includes:
+        - Individual funnels per metric
+        - Stacked funnels across numerical metrics
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Funnel chart figures
+        """
+
         figures = []
 
         # 1. Funnel Chart for Clan Capital
@@ -668,6 +891,18 @@ class ClanMemberGraph:
         return figures
 
     def create_waterfall_charts(self):
+        """
+        Generate waterfall chart visualizations for incremental contribution analysis.
+
+        Includes:
+        - Metric contribution per player
+        - Stacked metric waterfalls
+        - Aggregated changes by player status
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Waterfall chart figures
+        """
+
         # 1. Waterfall Chart for Clan Capital
         fig1 = go.Figure()
         fig1.add_trace(go.Waterfall(x=self.df['name'], y=self.df['clancapital'], textposition="outside"))

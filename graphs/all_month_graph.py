@@ -1,3 +1,20 @@
+# graphs/all_month_graph.py
+
+"""
+Generates long-term, multi-month clan performance visualizations for the
+Clash of Clans – Ancient Ruins Clan Website.
+
+This module:
+- Dynamically discovers available monthly analysis data from GitHub
+- Aggregates clan-wide performance metrics across months
+- Produces multiple Plotly visualizations including line, bar, area,
+  treemap, and heatmap charts
+- Supports historical trend analysis and long-range performance insights
+
+Data is sourced from GitHub-hosted JSON files and processed using pandas.
+"""
+
+# Importing Libraries
 import pandas as pd
 import plotly.express as px
 import requests
@@ -9,7 +26,27 @@ from constants import CLAN_MONTHLY_PERFORMANCE_RANGE
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 class AllMonthGraph:
+    """
+    AllMonthGraph
+
+    Handles end-to-end generation of long-term clan performance graphs.
+
+    Responsibilities:
+    - Discover available month ranges dynamically from a GitHub repository
+    - Fetch and aggregate monthly performance data
+    - Maintain correct chronological ordering of month ranges
+    - Generate multiple visualization types for comparative and trend analysis
+    """
+
     def __init__(self):
+        """
+        Initialize the AllMonthGraph object.
+
+        - Defines base URLs for monthly analysis data
+        - Dynamically loads available month ranges from GitHub
+        - Stores sorted month ranges for consistent ordering across graphs
+        """
+
         self.base_url = (
             "https://raw.githubusercontent.com/Lightning-President-9/"
             "ClanDataRepo/refs/heads/main/Clan%20Members/Monthly%20Analysis%20JSON/"
@@ -21,7 +58,20 @@ class AllMonthGraph:
         self.months = self.get_available_months()   # Dynamic month loading
 
     def get_available_months(self):
-        """Scrape GitHub HTML page to list JSON files."""
+        """
+        Retrieve all available month-range identifiers from the GitHub repository.
+
+        This method:
+        - Scrapes the GitHub folder HTML page
+        - Extracts JSON filenames representing month ranges
+        - Removes duplicates while preserving order
+        - Sorts month ranges chronologically
+        - Trims the list to start from a defined baseline month
+
+        Returns:
+            list[str]: Sorted list of available month-range identifiers
+        """
+
         response = requests.get(self.folder_url)
         response.raise_for_status()
         html = response.text
@@ -29,7 +79,7 @@ class AllMonthGraph:
         # Extract filenames data_XXX.json
         files = re.findall(r"data_([A-Z\-0-9_]+)\.json", html)
 
-        # 🔥 Remove duplicates while preserving order
+        # Remove duplicates while preserving order
         files = list(dict.fromkeys(files))
 
         # Proper sort
@@ -43,6 +93,19 @@ class AllMonthGraph:
         return files
 
     def sort_month_pairs(self, pairs):
+        """
+        Sort month-range identifiers chronologically.
+
+        Handles special cases where month ranges span across years
+        (e.g., DEC-JAN ranges).
+
+        Args:
+            pairs (list[str]): List of month-range identifiers (e.g., 'NOV-DEC_2024')
+
+        Returns:
+            list[str]: Chronologically sorted month-range identifiers
+        """
+
         MONTH_MAP = {
             'JAN': 1, 'FEB': 2, 'MAR': 3, 'APR': 4,
             'MAY': 5, 'JUN': 6, 'JUL': 7, 'AUG': 8,
@@ -63,6 +126,17 @@ class AllMonthGraph:
         return sorted(pairs, key=pair_to_date)
 
     def fetch_data(self):
+        """
+        Fetch monthly analysis data for all available month ranges.
+
+        For each discovered month range, this method:
+        - Constructs the appropriate GitHub raw JSON URL
+        - Downloads and parses the JSON data
+
+        Returns:
+            dict[str, list[dict]]: Mapping of month-range identifiers to raw records
+        """
+
         all_data = {}
         for month in self.months:
             url = f"{self.base_url}data_{month}.json"
@@ -72,6 +146,21 @@ class AllMonthGraph:
         return all_data
 
     def process_data(self, all_data):
+        """
+        Aggregate clan-wide performance metrics by month range.
+
+        For each month range:
+        - Sums performance metrics across all players
+        - Builds a structured DataFrame for visualization
+        - Preserves chronological month ordering
+
+        Args:
+            all_data (dict): Raw monthly analysis data keyed by month range
+
+        Returns:
+            pandas.DataFrame: Aggregated monthly performance totals
+        """
+
         monthly_totals = []
 
         for month, records in all_data.items():
@@ -102,6 +191,18 @@ class AllMonthGraph:
         return df
 
     def generate_heatmap_figures(self):
+        """
+        Generate heatmap visualizations for player-level monthly performance.
+
+        This method:
+        - Fetches long-range clan performance data
+        - Creates one heatmap per performance metric
+        - Displays player vs. month intensity patterns
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Heatmap figures for each metric
+        """
+
         url = (
             "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/"
             "refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/"
@@ -142,6 +243,22 @@ class AllMonthGraph:
         return figures
 
     def plot_graphs(self, df):
+        """
+        Generate summary graphs for aggregated monthly clan performance.
+
+        Produces multiple visualization types including:
+        - Line chart
+        - Bar chart
+        - Treemap
+        - Area chart
+
+        Args:
+            df (pandas.DataFrame): Aggregated monthly performance data
+
+        Returns:
+            list[plotly.graph_objects.Figure]: List of summary graphs
+        """
+
         df_long = df.melt(id_vars=["month"], var_name="Category", value_name="Total")
 
         fig1 = px.line(

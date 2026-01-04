@@ -1,3 +1,19 @@
+# graphs/monthly_analysis_graph.py
+
+"""
+Generates comparative performance visualizations for clan members
+across a selected month range in the Clash of Clans – Ancient Ruins Clan Website.
+
+This module:
+- Loads month-range-based performance data from a GitHub-hosted JSON source
+- Aggregates and prepares player-level performance metrics
+- Produces multiple Plotly visualizations to analyze trends,
+  distributions, and relationships within a specific time window
+
+It serves as the core engine for month-range analysis graphs.
+"""
+
+# Importing Libraries
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -8,12 +24,47 @@ from constants import LATEST_MONTH_RANGE
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 class MonthlyAnalysisGraph:
+    """
+    MonthlyAnalysisGraph
+
+    Handles loading, preprocessing, and visualization of clan performance
+    data across a defined month range.
+
+    The class supports:
+    - Dynamic loading of month-range datasets
+    - Graceful fallback to the latest available month range
+    - Generation of multiple chart types for comparative analysis
+    """
+
     def __init__(self):
+        """
+        Initialize the MonthlyAnalysisGraph instance.
+
+        Sets default placeholders for:
+        - Data source URL
+        - Loaded DataFrame
+        - Informational message used when fallback data is required
+        """
+
         self.data_url = ''
         self.df = None
         self.message = ""
 
     def update_and_load_data(self, month_year):
+        """
+        Load and preprocess clan performance data for a given month range.
+
+        This method:
+        - Dynamically builds the GitHub data URL
+        - Fetches and parses JSON data
+        - Falls back to the latest available month range if data is unavailable
+        - Converts performance fields to numeric values
+        - Extracts numerical columns for analytics
+
+        Args:
+            month_year (str): Month-range identifier (e.g., 'NOV-DEC_2025')
+        """
+
         # Update the data URL dynamically based on month and year
         self.data_url = f'https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Monthly%20Analysis%20JSON/data_{month_year}.json'
 
@@ -35,6 +86,17 @@ class MonthlyAnalysisGraph:
         self.numerical_df = self.df.select_dtypes(include=['number'])
 
     def create_bar_graphs(self):
+        """
+        Generate bar chart visualizations for month-range performance metrics.
+
+        Includes:
+        - Individual bar charts for each performance metric
+        - Stacked bar chart aggregating all numerical metrics
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Bar chart figures
+        """
+
         # 1. Vertical Bar Chart of War Attack
         fig1 = go.Figure()
         fig1.add_trace(go.Bar(x=self.df['name'], y=self.df['warattack'], name='War Attack'))
@@ -70,6 +132,20 @@ class MonthlyAnalysisGraph:
         return [fig1, fig2, fig3, fig4, fig5, fig6]
 
     def create_pie_charts(self):
+        """
+        Generate pie chart visualizations for binned metric distributions.
+
+        Covers:
+        - Clan capital contribution
+        - Clan games participation
+        - Clan games maxed
+        - Clan score distribution
+        - War attack distribution
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Pie chart figures
+        """
+
         # 1. Clan Capital Contribution
         self.df['clancapital_range'] = pd.cut(self.df['clancapital'], bins=[-1, 50, 100, 200, 300], labels=['0-50', '51-100', '101-200', '201-300'])
         fig1 = px.pie(self.df, names='clancapital_range', title='Clan Capital Contribution')
@@ -94,6 +170,17 @@ class MonthlyAnalysisGraph:
         return [fig1, fig2, fig3, fig4, fig5]
 
     def create_line_charts(self):
+        """
+        Generate line chart visualizations for numerical metrics.
+
+        Includes:
+        - Individual metric trends by player
+        - Combined multi-metric comparison chart
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Line chart figures
+        """
+
         line_charts = []
         numerical_columns = self.numerical_df.columns.drop('srno', errors='ignore')
 
@@ -114,6 +201,17 @@ class MonthlyAnalysisGraph:
         return line_charts
 
     def create_scatter_plots(self):
+        """
+        Generate scatter plot visualizations for metric relationship analysis.
+
+        Includes:
+        - Pairwise numerical comparisons
+        - Scatter plots sized by clan score
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Scatter plot figures
+        """
+
         scatter_plots = []
         numerical_columns = self.numerical_df.columns.drop('srno', errors='ignore')
 
@@ -143,6 +241,13 @@ class MonthlyAnalysisGraph:
         return scatter_plots
 
     def create_histograms(self):
+        """
+        Generate histogram visualizations for numerical metric distributions.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Histogram figures
+        """
+
         histograms = []
         numerical_columns = self.numerical_df.columns.drop(['srno'], errors='ignore')
 
@@ -156,6 +261,13 @@ class MonthlyAnalysisGraph:
         return histograms
 
     def create_box_plots(self):
+        """
+        Generate box plot visualizations for statistical distribution analysis.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Box plot figures
+        """
+
         box_plots = []
         numerical_columns = self.numerical_df.columns.drop(['srno'], errors='ignore')
 
@@ -169,6 +281,13 @@ class MonthlyAnalysisGraph:
         return box_plots
 
     def create_violin_plots(self):
+        """
+        Generate violin plot visualizations for density and distribution insights.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Violin plot figures
+        """
+
         violin_plots = []
         numerical_columns = self.numerical_df.columns.drop(['srno'], errors='ignore')
 
@@ -182,6 +301,15 @@ class MonthlyAnalysisGraph:
         return violin_plots
 
     def create_heatmaps(self):
+        """
+        Generate density heatmaps for bivariate performance relationships.
+
+        Analyzes intensity patterns between key performance metrics.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Heatmap figures
+        """
+
         heatmaps = []
 
         # 1. Heatmap of warattack vs clancapital
@@ -211,6 +339,15 @@ class MonthlyAnalysisGraph:
         return heatmaps
 
     def create_treemaps(self):
+        """
+        Generate treemap visualizations for contribution breakdowns by player.
+
+        Each treemap represents a single performance metric.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Treemap figures
+        """
+
         treemaps = []
 
         # Ensure there are no NaN or zero values in the values column
@@ -270,6 +407,15 @@ class MonthlyAnalysisGraph:
         return treemaps
 
     def create_sunburst_charts(self):
+        """
+        Generate sunburst visualizations for hierarchical contribution analysis.
+
+        Displays how individual players contribute to overall metrics.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Sunburst chart figures
+        """
+
         sunbursts = []
 
         # Ensure there are no NaN or zero values in the values column
@@ -329,6 +475,13 @@ class MonthlyAnalysisGraph:
         return sunbursts
 
     def create_density_plots(self):
+        """
+        Generate density contour plots for bivariate performance analysis.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Density plot figures
+        """
+
         density_plots = []
 
         # 1. Density plot of Clan Capital vs. Clan Games
@@ -394,6 +547,15 @@ class MonthlyAnalysisGraph:
         return density_plots
 
     def create_3d_scatter_plots(self):
+        """
+        Generate 3D scatter plots for multi-metric comparisons.
+
+        Each plot visualizes three numerical metrics simultaneously.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: 3D scatter plot figures
+        """
+
         numerical_columns = ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']
         scatter_plots_3d = []
 
@@ -416,6 +578,15 @@ class MonthlyAnalysisGraph:
         return scatter_plots_3d
 
     def create_area_graphs(self):
+        """
+        Generate area chart visualizations for cumulative metric comparisons.
+
+        Includes stacked and individual area charts.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Area chart figures
+        """
+
         # 1. Area Chart of Clan Capital Over Players
         fig1 = go.Figure()
         fig1.add_trace(go.Scatter(x=self.df['name'], y=self.df['clancapital'], fill='tozeroy', name='Clan Capital'))
@@ -451,6 +622,13 @@ class MonthlyAnalysisGraph:
         return [fig1, fig2, fig3, fig4, fig5, fig6]
 
     def create_polar_charts(self):
+        """
+        Generate polar chart visualizations for radial metric comparisons.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Polar chart figures
+        """
+
         # 1. Polar Chart of Clan Capital Over Players
         fig1 = go.Figure()
         fig1.add_trace(go.Scatterpolar(r=self.df['clancapital'], theta=self.df['name'], fill='toself', name='Clan Capital'))
@@ -486,6 +664,17 @@ class MonthlyAnalysisGraph:
         return [fig1, fig2, fig3, fig4, fig5, fig6]
 
     def create_funnel_charts(self):
+        """
+        Generate funnel chart visualizations for ranked performance analysis.
+
+        Includes:
+        - Individual metric funnels
+        - Stacked funnels across numerical metrics
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Funnel chart figures
+        """
+
         # 1. Funnel Chart for Clan Capital
         df1 = self.df.sort_values(by='clancapital', ascending=False)
         fig1 = go.Figure()
@@ -529,6 +718,13 @@ class MonthlyAnalysisGraph:
         return [fig1, fig2, fig3, fig4, fig5, fig6]
 
     def create_waterfall_charts(self):
+        """
+        Generate waterfall chart visualizations for incremental contribution analysis.
+
+        Returns:
+            list[plotly.graph_objects.Figure]: Waterfall chart figures
+        """
+
         # 1. Waterfall Chart for Clan Capital
         fig1 = go.Figure()
         fig1.add_trace(go.Waterfall(x=self.df['name'], y=self.df['clancapital'], textposition="outside"))
