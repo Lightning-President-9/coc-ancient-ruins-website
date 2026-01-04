@@ -4,7 +4,7 @@ import requests
 import warnings
 import re
 from datetime import datetime
-from .constants import CLAN_MONTHLY_PERFORMANCE_RANGE
+from constants import CLAN_MONTHLY_PERFORMANCE_RANGE
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 

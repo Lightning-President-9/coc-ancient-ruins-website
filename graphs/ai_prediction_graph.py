@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 import requests
 import warnings
 from sklearn.linear_model import LinearRegression
-from .constants import LATEST_MONTH, PREDICTED_MONTH, CLAN_MONTHLY_PERFORMANCE_RANGE
+from constants import LATEST_MONTH, PREDICTED_MONTH, CLAN_MONTHLY_PERFORMANCE_RANGE
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 

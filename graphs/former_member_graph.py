@@ -3,7 +3,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import warnings
-from .constants import LATEST_MONTH
+from constants import LATEST_MONTH
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 

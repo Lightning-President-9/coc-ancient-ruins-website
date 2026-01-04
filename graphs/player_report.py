@@ -13,7 +13,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfgen.canvas import Canvas
-from .constants import CLAN_MONTHLY_PERFORMANCE_RANGE
+from constants import CLAN_MONTHLY_PERFORMANCE_RANGE
 
 # === CONFIG ===
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -53,13 +53,26 @@ def extract_all_periods(df):
     return list(periods)
 
 def period_sort_key(period):
-    """Convert 'JUL-AUG_2024' into sortable tuple (year, start_month_num, end_month_num)."""
+    """
+    Sort periods like:
+    NOV-DEC_2024 → DEC-JAN_2025 → JAN-FEB_2025
+
+    by anchoring to the START month and correcting DEC-JAN year.
+    """
     try:
-        p1, year = period.split("_")
-        start_m, end_m = p1.split("-")
-        return (int(year), MONTH_MAP[start_m], MONTH_MAP[end_m])
-    except:
-        return (9999, 99, 99)
+        part, year = period.split("_")
+        start_m, end_m = part.split("-")
+
+        year = int(year)
+
+        # 🔥 Critical fix: DEC-JAN belongs to previous year
+        if start_m == "DEC" and end_m == "JAN":
+            year -= 1
+
+        return datetime(year, MONTH_MAP[start_m], 1)
+
+    except Exception:
+        return datetime(9999, 12, 31)
 
 # Footer
 def add_footer(canvas: Canvas, doc):

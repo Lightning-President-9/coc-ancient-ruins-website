@@ -140,7 +140,7 @@ function exportTableToPDF(tableClass) {
     // Remove specified text content from table headers
     const cleanedTableHeader = tableHeader
         .replace(/↑/g, '') // Remove '↑'
-        .replace(/Clan Score >75/g, '') // Remove "Clan Score >75"
+        .replace(/Clan Score >200/g, '') // Remove "Clan Score >200"
         .replace(/Clan Score = War Attack \+ Clan Capital \+ Clan Games \* \(if Clan Games Maxed = 0 return 1 else return Clan Games Maxed\)/g, '') // Remove explanation
         .replace(/\n/g, ''); // Remove line breaks
 
@@ -194,7 +194,7 @@ function tableToJson(tableId) {
   headers.forEach(function(header, index) {
     let headerText = header.textContent
       .replace('↑', '') // Remove '↑'
-      .replace('Clan Score >75', '') // Remove "Clan Score >75"
+      .replace('Clan Score >200', '') // Remove "Clan Score >200"
       .replace('Clan Score = War Attack + Clan Capital + Clan Games * (if Clan Games Maxed = 0 return 1 else return Clan Games Maxed)', '') // Remove explanation
       .replace(/\n/g, '') // Remove line breaks
       .trim()
@@ -280,7 +280,7 @@ function tableToCsv(tableId) {
     let headers = Array.from(table.querySelectorAll('th')).map(function(header) {
         let cleanedHeader = header.textContent.trim()
             .replace('↑', '') // Remove '↑'
-            .replace('Clan Score >75', '') // Remove "Clan Score >75"
+            .replace('Clan Score >200', '') // Remove "Clan Score >200"
             .replace('Clan Score = War Attack + Clan Capital + Clan Games * (if Clan Games Maxed = 0 return 1 else return Clan Games Maxed)', '') // Remove explanation
             .replace(/\n/g, '') // Remove line breaks
             .toLowerCase()
@@ -350,7 +350,7 @@ function convertTableToExcel(table) {
     headers.forEach(function(header) {
         header.textContent = header.textContent
             .replace('↑', '')
-            .replace('Clan Score >75', '')
+            .replace('Clan Score >200', '')
             .replace('Clan Score = War Attack + Clan Capital + Clan Games * (if Clan Games Maxed = 0 return 1 else return Clan Games Maxed)', '')
             .replace(/\n/g, '');
     });
