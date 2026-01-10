@@ -30,6 +30,7 @@ from graphs import AllMonthGraph as amg
 from graphs import AIPredictionGraph as apg
 from graphs import get_players, generate_player_report
 from constants import LATEST_MONTH, LATEST_MONTH_RANGE
+from chatbot.chat_controller import handle_chat
 
 # Flask app object
 app = Flask(__name__)
@@ -88,7 +89,7 @@ def coc_ancient_ruins():
     return render_template('index.html',DM=mem_list,DNM=fmem_list)
 
 @app.route("/api/mem/")
-def data_mem():
+def api_mem():
     """
     API endpoint to return current clan members data.
 
@@ -99,7 +100,7 @@ def data_mem():
     return jsonify(mem_list)
 
 @app.route("/api/fmem/")
-def data_fmem():
+def api_fmem():
     """
     API endpoint to return former clan members data.
 
@@ -108,6 +109,54 @@ def data_fmem():
     """
 
     return jsonify(fmem_list)
+
+@app.route("/api/chatbot/", methods=["POST"])
+def api_chatbot():
+    """
+        Main chatbot interaction endpoint.
+
+        Accepts:
+            JSON payload:
+                {
+                    "message": "<user query>"
+                }
+
+        Validation:
+            - Message length must not exceed 500 characters
+
+        Returns:
+            flask.Response (JSON):
+                {
+                    "reply": "<chatbot response>",
+                    "source": "<data source or None>",
+                    "suggestions": [<follow-up suggestions>]
+                }
+
+        Error Responses:
+            400 Bad Request:
+                Returned when the message exceeds the allowed length.
+
+        Purpose:
+            - Processes user input
+            - Delegates response generation to the chatbot engine
+            - Returns structured chatbot output for frontend consumption
+
+        HTTP Method:
+            POST
+    """
+
+    payload = request.get_json(silent=True) or {}
+    message = payload.get("message", "")
+
+    if len(message) > 500:
+        return jsonify({
+            "reply": "Message too long. Please keep it under 500 characters.",
+            "source": None,
+            "suggestions": []
+        }), 400
+
+    response = handle_chat(message)
+    return jsonify(response)
 
 @app.route("/graph/mem/")
 def graph_mem():
@@ -118,7 +167,7 @@ def graph_mem():
         HTML template: mem-graph.html
     """
 
-    return render_template('mem-graph.html')
+    return render_template('/graph-pages/mem-graph.html')
 
 @app.route("/graph/fmem/")
 def graph_fmem():
@@ -129,7 +178,7 @@ def graph_fmem():
         HTML template: fmem-graph.html
     """
 
-    return render_template('fmem-graph.html')
+    return render_template('/graph-pages/fmem-graph.html')
 
 @app.route("/graph/mag/")
 def graph_mag():
@@ -140,7 +189,7 @@ def graph_mag():
         HTML template: mem-month-analysis.html
     """
 
-    return render_template('mem-month-analysis.html')
+    return render_template('/graph-pages/mem-month-analysis.html')
 
 @app.route("/all-mon-ana-graph/")
 def all_mon_ana_graph():
@@ -163,7 +212,7 @@ def all_mon_ana_graph():
     # Convert Plotly figures to JSON
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in all_graphs]
 
-    return render_template("all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="All Month Analysis")
+    return render_template("/graph-pages/all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="All Month Analysis")
 
 def render_graph(graph_type, obj_type):
     """
@@ -196,7 +245,7 @@ def render_graph(graph_type, obj_type):
         month_year = request.args.get('month-year', LATEST_MONTH_RANGE)
         template_name = './mem-month-graph.html'
     else:
-        return render_template("404.html"), 404
+        return render_template("/error-pages/404.html"), 404
 
     graph_obj.message = ""
 
@@ -205,7 +254,7 @@ def render_graph(graph_type, obj_type):
     # Get the corresponding method for the graph type
     method_name = GRAPH_METHODS.get(graph_type)
     if not method_name:
-        return render_template("404.html"), 404
+        return render_template("/error-pages/404.html"), 404
 
     figures = getattr(graph_obj, method_name)()
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in figures]
@@ -228,7 +277,7 @@ def graph_handler(obj_type, graph_type):
     """
 
     if obj_type not in ["mem", "fmem", "mag"]:
-        return render_template("404.html"), 404
+        return render_template("/error-pages/404.html"), 404
     return render_graph(graph_type, obj_type)
 
 @app.route("/ai/prediction/")
@@ -246,7 +295,7 @@ def ai_prediction():
     graphs = apg_obj.forecast_all()
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
 
-    return render_template("all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
+    return render_template("/graph-pages/all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
 
 @app.route("/player-report/")
 def player_reports():
@@ -260,7 +309,7 @@ def player_reports():
     """
 
     players = get_players()
-    return render_template('player-report.html', players=players)
+    return render_template('/graph-pages/player-report.html', players=players)
 
 @app.route("/player-report/<player_name>/")
 def download_player_report(player_name):
@@ -280,7 +329,7 @@ def download_player_report(player_name):
     players = get_players()  # Fetch all valid player names
     if player_name not in players:
         # Render custom 404 page instead of default error
-        return render_template("404.html"), 404
+        return render_template("/error-pages/404.html"), 404
 
     pdf_buf = generate_player_report(player_name)
     return send_file(
@@ -289,6 +338,50 @@ def download_player_report(player_name):
         download_name=f"{player_name}_report.pdf",
         mimetype='application/pdf'
     )
+
+@app.route("/chatbot-service-status", methods=["GET"])
+def service_status():
+    """
+        Health-check endpoint for the Clan Chatbot API.
+
+        Returns:
+            flask.Response (JSON):
+                {
+                    "status": "ok",
+                    "service": "Clan Chatbot API"
+                }
+
+        Purpose:
+            - Verifies that the chatbot service is running
+            - Used for monitoring, uptime checks, and deployment validation
+
+        HTTP Method:
+            GET
+    """
+
+    return jsonify({
+        "status": "ok",
+        "service": "Clan Chatbot API"
+    })
+
+@app.route("/ai/chat/", methods=["GET"])
+def ai_chat():
+    """
+        Renders the chatbot web interface.
+
+        Returns:
+            flask.Response (HTML):
+                Renders the 'chatbot-pages/chat.html' template.
+
+        Purpose:
+            - Provides the browser-based UI for interacting with the chatbot
+            - Intended for human users, not programmatic API access
+
+        HTTP Method:
+            GET
+        """
+
+    return render_template("/chatbot-pages/chat.html")
 
 @app.route('/github/')
 def redirect_to_github():
@@ -301,10 +394,24 @@ def redirect_to_github():
 
     return redirect("https://github.com/Lightning-President-9/coc-ancient-ruins-website", code=301)
 
+@app.errorhandler(405)
+def method_not_allowed_error(e):
+    """
+        Custom handler for 405 (Method Not Allowed) error-pages.
+
+        Args:
+            e (Exception): Error instance
+
+        Returns:
+            HTML template: 405.html
+    """
+
+    return render_template("/error-pages/405.html"), 405
+
 @app.errorhandler(404)
 def page_not_found(e):
     """
-    Custom handler for 404 (Not Found) errors.
+    Custom handler for 404 (Not Found) error-pages.
 
     Args:
         e (Exception): Error instance
@@ -313,12 +420,12 @@ def page_not_found(e):
         HTML template: 404.html
     """
 
-    return render_template("404.html"), 404
+    return render_template("/error-pages/404.html"), 404
 
 @app.errorhandler(500)
 def internal_server_error(e):
     """
-    Custom handler for 500 (Internal Server Error) errors.
+    Custom handler for 500 (Internal Server Error) error-pages.
 
     Args:
         e (Exception): Error instance
@@ -327,7 +434,7 @@ def internal_server_error(e):
         HTML template: 500.html
     """
 
-    return render_template("500.html"), 500
+    return render_template("/error-pages/500.html"), 500
 
 # Application starting point/run method
 if __name__ == '__main__':

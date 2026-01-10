@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+<body>
+  <div class="container">
+    {% include "navbar.html" %}
+
+    <div class="main-table">
+      <section class="table-header">
+        <h2>405 - Method Not Allowed</h2>
+      </section>
+
+      <div class="isclaimers">
+        <p>
+          <strong>
+            The request you made is not valid or the HTTP method used is not allowed for this endpoint.<br>
+            This API endpoint only accepts <code>POST</code> requests with a JSON body.<br><br>
+
+            Please use one of the following examples to interact with the API correctly.
+          </strong>
+        </p>
+
+        <br>
+
+        <p><strong>CMD</strong></p>
+          <p>curl -X POST https://coc-ancient-ruins-website.onrender.com/api/chatbot/ -H "Content-Type: application/json" -d "{\"message\":\"top 10 warattack apr 2025\"}"</p>
+        <br>
+
+        <p><strong>PowerShell</strong></p>
+          <p>Invoke-RestMethod -Uri https://coc-ancient-ruins-website.onrender.com/api/chatbot/ -Method POST -ContentType "application/json" -Body '{"message":"top 10 warattack apr 2025"}' | ConvertTo-Json -Depth 5</p>
+        <br>
+        <p>
+          <strong>
+            If you are accessing the site through a browser, please navigate using the menu above.<br>
+            Thank you for using the Ancient Ruins Clan Website.
+          </strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

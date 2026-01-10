@@ -1,0 +1,279 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	background-image: url("/static/bg_img_2.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	margin: 0;
+	padding: 20px;
+	box-sizing: border-box;
+	color: #333;
+	padding-top: 80px;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 100px); /* accounts for navbar */
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+    overflow: hidden;
+}
+
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid #ddd;
+    background: #ffffff;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+#chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+.user-msg {
+    align-self: flex-end;
+    background: black;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 10px;
+    max-width: 70%;
+    white-space: pre-line;
+    animation: fadeInUp 0.25s ease-out;
+}
+
+.bot-msg {
+    align-self: flex-start;
+    background: #f1f3f4;
+    color: #000;
+    padding: 10px 12px;
+    border-radius: 10px;
+    max-width: 75%;
+    white-space: pre-line;
+    animation: fadeInUp 0.35s ease-out;
+}
+
+.bot-msg a,
+.bot-content a {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.bot-msg,
+.user-msg {
+    max-width: 92%;
+}
+
+.navbar {
+	display: flex;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin-bottom: 10px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+	padding: 10px;
+}
+
+.nav-item {
+	display: flex;
+	align-items: center;
+}
+
+.navbar a {
+	text-decoration: none;
+	padding: 5px 10px;
+}
+
+.nav-icon {
+	width: 40px;
+	height: 40px;
+}
+
+.dropdown {
+	position: relative;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: #f9f9f9;
+	min-width: 150px;
+	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	border-radius: 4px;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	display: block;
+	text-align: left;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.copy-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: #555;
+}
+
+.copy-btn:hover {
+    text-decoration: underline;
+}
+
+.bot-content {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.bot-content pre {
+    background: #f6f8fa;
+    padding: 10px;
+    border-radius: 6px;
+    font-family: Consolas, Menlo, Monaco, monospace;
+    font-size: 13px;
+    overflow-x: auto;
+}
+
+.bot-content code {
+    background: #eee;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.bot-content ul {
+    padding-left: 18px;
+    margin: 6px 0;
+}
+
+.metric-row {
+    margin-bottom: 6px;
+    font-family: Consolas, monospace;
+}
+
+.metric-value {
+    font-weight: bold;
+    min-width: 60px;
+    display: inline-block;
+}
+
+.compare-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 4px;
+    font-family: Consolas, monospace;
+}
+
+.compare-key {
+    width: 140px;
+    font-weight: bold;
+}
+
+.input-area {
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #ffffff;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+button {
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+}
+
+button:hover {
+    background: #eaeaea;
+}
+
+a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+@media print {
+    body {
+        background: white;
+    }
+
+    button {
+        display: none !important;
+    }
+
+    .chat-container {
+        border: none;
+        max-width: 100%;
+    }
+}

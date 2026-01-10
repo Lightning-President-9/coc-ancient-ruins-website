@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>KARSB - AR STATS BOT</title>
+    <style>
+        {% include 'chatbot-pages/chat.css' %}
+    </style>
+    <link rel="icon" href="/static/clan-badge_17.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- DOM sanitization -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+
+    <!-- PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+{% include "navbar.html" %}
+
+<div class="chat-container">
+
+    <!-- HEADER -->
+    <div class="chat-header">
+        <h2>KARSB - Ancient Ruins STATS BOT</h2>
+        <button onclick="saveChatAsPDF()">Save Chat as PDF</button>
+    </div>
+
+    <!-- CHAT BODY -->
+    <div id="chat-box"></div>
+
+    <!-- INPUT -->
+    <div class="input-area">
+        <input
+            type="text"
+            id="user-input"
+            placeholder="Ask a clan-related question..."
+            autocomplete="off"
+            onkeydown="if(event.key === 'Enter') sendMessage()"
+        />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+    <!-- Chat logic -->
+    <script>
+         {% include 'chatbot-pages/chat.js' %}
+    </script>
+</body>
+</html>

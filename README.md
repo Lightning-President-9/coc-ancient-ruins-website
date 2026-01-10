@@ -43,6 +43,7 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **1/9/25** Added player_report.html and player_report.py to provide a detailed look at a player’s performance across different Clash of Clans activities like War Attacks, Clan Capital, Clan Games, and more. The report includes helpful visuals and tables to track progress and highlight the player’s biggest contributions.
 - **13/10/25:** Streamlined month selection for members, former members, and monthly analysis graphs, reducing redundancy. Handled missing data cases and added a Google Form for feedback.
 - **1/1/26:** Added Documentation in all the .py files.
+- **10/1/26:** Added KARBS a light weighted rule based chat/conversational bot for deep statistical analysis of Ancient Ruins Clan.
 
 ## License
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.
