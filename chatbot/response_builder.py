@@ -99,9 +99,7 @@ def build_response(result: dict, month_value: str) -> str:
     rtype = result.get("type")
     month_readable = month_value.replace("_", " ")
 
-    # -----------------------------
     # LIST NAMES
-    # -----------------------------
     if rtype == "LIST_NAMES":
         names = _safe_names(result.get("names", []))
         domain = result.get("domain")
@@ -118,7 +116,7 @@ def build_response(result: dict, month_value: str) -> str:
 
         return title + ":\n" + ", ".join(names)
 
-    # ---- TOTAL METRIC ----
+    # TOTAL METRIC
     if rtype == "TOTAL_METRIC":
         metric = result["metric"]
         total = result["total"]
@@ -129,9 +127,7 @@ def build_response(result: dict, month_value: str) -> str:
             f"was {total}, across {count} players."
         )
 
-    # -----------------------------
     # MOST OF METRIC
-    # -----------------------------
     if rtype == "MOST_OF_METRIC":
         metric = result["metric"]
         value = result["value"]
@@ -142,9 +138,7 @@ def build_response(result: dict, month_value: str) -> str:
             f"achieved by: {', '.join(names)}."
         )
 
-    # -----------------------------
     # LEAST OF METRIC
-    # -----------------------------
     if rtype == "LEAST_OF_METRIC":
         metric = result["metric"]
         value = result["value"]
@@ -155,7 +149,7 @@ def build_response(result: dict, month_value: str) -> str:
             f"recorded by: {', '.join(names)}."
         )
 
-    # ---- COMPARE PLAYERS ----
+    # COMPARE PLAYERS
     if rtype == "COMPARE_PLAYERS":
         players = result["players"]
         metrics = result["metrics"]
@@ -181,9 +175,7 @@ def build_response(result: dict, month_value: str) -> str:
 
         return "\n".join(lines)
 
-    # -----------------------------
     # TOP N METRIC
-    # -----------------------------
     if rtype == "TOP_N_METRIC":
         metric = result["metric"]
         limit = result["limit"]
@@ -200,9 +192,7 @@ def build_response(result: dict, month_value: str) -> str:
 
         return "\n".join(lines)
 
-    # -----------------------------
     # GROUP BY VALUE
-    # -----------------------------
     if rtype == "GROUP_BY_VALUE":
         metric = result["metric"]
         groups = result["groups"]
@@ -217,27 +207,21 @@ def build_response(result: dict, month_value: str) -> str:
 
         return "\n".join(lines)
 
-    # -----------------------------
     # PLAYER STATUS
-    # -----------------------------
     if rtype == "PLAYER_STATUS":
         return (
             f"{result['player']}'s status in {month_readable} "
             f"was {result['status']}."
         )
 
-    # -----------------------------
     # PLAYER METRIC
-    # -----------------------------
     if rtype == "PLAYER_METRIC":
         return (
             f"{result['player']}'s {result['metric']} in {month_readable} "
             f"was {result['value']}."
         )
 
-    # -----------------------------
     # PLAYER FULL DATA
-    # -----------------------------
     if rtype == "PLAYER_FULL_DATA":
         data = result["data"]
         lines = []
@@ -247,7 +231,7 @@ def build_response(result: dict, month_value: str) -> str:
 
         return "\n".join(lines)
 
-    # ---- AVERAGE METRIC ----
+    # AVERAGE METRIC
     if rtype == "AVERAGE_METRIC":
         metric = result["metric"]
         avg = result["average"]
@@ -258,7 +242,7 @@ def build_response(result: dict, month_value: str) -> str:
             f"was {avg} based on {count} players."
         )
 
-    # ---- PLAYER MEMBERSHIP CHECK ----
+    # PLAYER MEMBERSHIP CHECK
     if rtype == "PLAYER_MEMBERSHIP_CHECK":
         player = result["player"]
         domain = result["domain"]
@@ -281,9 +265,7 @@ def build_response(result: dict, month_value: str) -> str:
                 f"in {month_readable}."
             )
 
-    # -----------------------------
     # ERRORS
-    # -----------------------------
     if rtype == "ERROR_UNSUPPORTED_METRIC":
         metrics = ", ".join(result["allowed"])
         return (

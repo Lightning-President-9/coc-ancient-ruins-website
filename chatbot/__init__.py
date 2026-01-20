@@ -31,6 +31,7 @@ __all__ = [
     "almost_hint",
     "chat_controller",
     "domain_router",
+    "input_classifier",
     "month_normalizer",
     "operation_resolver",
     "raw_fetcher",
