@@ -5,7 +5,7 @@ Main Flask application for the Clash of Clans – Ancient Ruins Clan Website.
 
 This module initializes the Flask app, loads persisted clan data, integrates
 graph-generation modules, and defines all routes for rendering pages, serving APIs,
-generating graphs, AI predictions, and downloadable player reports.
+generating graphs, AI predictions, Chatbot, and downloadable player reports.
 
 Technologies used:
 - Flask for web framework and routing
@@ -23,11 +23,11 @@ import plotly
 # from database import load_from_db_mem,load_from_db_fmem
 
 # Importing Libraries from graph directory
-from graphs import ClanMemberGraph as cmg
-from graphs import FormerMemberGraph as fmg
-from graphs import MonthlyAnalysisGraph as mag
-from graphs import AllMonthGraph as amg
-from graphs import AIPredictionGraph as apg
+from graphs import ClanMemberGraph
+from graphs import FormerMemberGraph
+from graphs import MonthlyAnalysisGraph
+from graphs import AllMonthGraph
+from graphs import AIPredictionGraph
 from graphs import get_players, generate_player_report
 from constants import LATEST_MONTH, LATEST_MONTH_RANGE
 from chatbot.chat_controller import handle_chat
@@ -39,12 +39,72 @@ app = Flask(__name__)
 # mem_list=load_from_db_mem()
 # fmem_list=load_from_db_fmem()
 
-# Graphs object creation
-cmg_obj = cmg()
-fmg_obj = fmg()
-mag_obj = mag()
-amg_obj = amg()
-apg_obj = apg()
+# Graphs object declaration
+cmg = None
+fmg = None
+mag = None
+amg = None
+apg = None
+
+def get_cmg_instance():
+    """
+    Get the singleton instance of ClanMemberGraph.
+
+    Creates a new instance if it does not already exist,
+    otherwise returns the existing one.
+    """
+    global cmg
+    if cmg is None:
+        cmg = ClanMemberGraph()
+    return cmg
+
+
+def get_fmg_instance():
+    """
+    Get the singleton instance of FormerMemberGraph.
+
+    Lazily initializes the instance on first call.
+    """
+    global fmg
+    if fmg is None:
+        fmg = FormerMemberGraph()
+    return fmg
+
+
+def get_mag_instance():
+    """
+    Get the singleton instance of MonthlyAnalysisGraph.
+
+    Ensures only one MonthlyAnalysisGraph instance exists.
+    """
+    global mag
+    if mag is None:
+        mag = MonthlyAnalysisGraph()
+    return mag
+
+
+def get_amg_instance():
+    """
+    Get the singleton instance of AllMonthGraph.
+
+    Returns the existing instance or creates it if needed.
+    """
+    global amg
+    if amg is None:
+        amg = AllMonthGraph()
+    return amg
+
+
+def get_apg_instance():
+    """
+    Get the singleton instance of AIPredictionGraph.
+
+    Initializes the graph on first access.
+    """
+    global apg
+    if apg is None:
+        apg = AIPredictionGraph()
+    return apg
 
 # Writing binary pickle file for saving new values for mem_list and fmem_list
 # with open('data_file.pickle', 'wb') as f:
@@ -203,10 +263,11 @@ def all_mon_ana_graph():
         HTML template: all-month-graph.html
     """
 
-    clan_data = amg_obj.fetch_data()
-    df = amg_obj.process_data(clan_data)
-    plot_graphs = amg_obj.plot_graphs(df)
-    heatmap_graphs = amg_obj.generate_heatmap_figures()
+    amg = get_amg_instance()
+    clan_data = amg.fetch_data()
+    df = amg.process_data(clan_data)
+    plot_graphs = amg.plot_graphs(df)
+    heatmap_graphs = amg.generate_heatmap_figures()
     all_graphs =plot_graphs + heatmap_graphs
 
     # Convert Plotly figures to JSON
@@ -233,15 +294,18 @@ def render_graph(graph_type, obj_type):
     """
 
     if obj_type == "mem":
-        graph_obj = cmg_obj
+        cmg = get_cmg_instance()
+        graph_obj = cmg
         month_year = request.args.get('month-year', LATEST_MONTH)
         template_name = './graph-pages/graph.html'
     elif obj_type == "fmem":
-        graph_obj = fmg_obj
+        fmg = get_fmg_instance()
+        graph_obj = fmg
         month_year = request.args.get('month-year', LATEST_MONTH)
         template_name = './graph-pages/graph.html'
     elif obj_type == "mag":
-        graph_obj = mag_obj
+        mag = get_mag_instance()
+        graph_obj = mag
         month_year = request.args.get('month-year', LATEST_MONTH_RANGE)
         template_name = './graph-pages/mem-month-graph.html'
     else:
@@ -292,7 +356,8 @@ def ai_prediction():
         HTML template: all-month-graph.html
     """
 
-    graphs = apg_obj.forecast_all()
+    apg = get_apg_instance()
+    graphs = apg.forecast_all()
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
 
     return render_template("/graph-pages/all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
