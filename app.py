@@ -19,15 +19,9 @@ import pickle
 import json
 import plotly
 
-# Fetching data from directly from database
-# from database import load_from_db_mem,load_from_db_fmem
-
 # Importing Libraries from graph directory
-from graphs import ClanMemberGraph
-from graphs import FormerMemberGraph
-from graphs import MonthlyAnalysisGraph
-from graphs import AllMonthGraph
-from graphs import AIPredictionGraph
+# import data_persist
+from graphs import ClanMemberGraph, FormerMemberGraph, MonthlyAnalysisGraph, AllMonthGraph, AIPredictionGraph, MemberClusterGraph
 from graphs import get_players, generate_player_report
 from constants import LATEST_MONTH, LATEST_MONTH_RANGE
 from chatbot.chat_controller import handle_chat
@@ -35,23 +29,19 @@ from chatbot.chat_controller import handle_chat
 # Flask app object
 app = Flask(__name__)
 
-# Database load variables
-# mem_list=load_from_db_mem()
-# fmem_list=load_from_db_fmem()
-
 # Graphs object declaration
 cmg = None
 fmg = None
 mag = None
 amg = None
 apg = None
+mcg = None
 
 def get_cmg_instance():
     """
     Get the singleton instance of ClanMemberGraph.
 
-    Creates a new instance if it does not already exist,
-    otherwise returns the existing one.
+    Returns the existing instance or creates it if needed.
     """
     global cmg
     if cmg is None:
@@ -63,7 +53,7 @@ def get_fmg_instance():
     """
     Get the singleton instance of FormerMemberGraph.
 
-    Lazily initializes the instance on first call.
+    Returns the existing instance or creates it if needed.
     """
     global fmg
     if fmg is None:
@@ -75,7 +65,7 @@ def get_mag_instance():
     """
     Get the singleton instance of MonthlyAnalysisGraph.
 
-    Ensures only one MonthlyAnalysisGraph instance exists.
+    Returns the existing instance or creates it if needed.
     """
     global mag
     if mag is None:
@@ -99,16 +89,26 @@ def get_apg_instance():
     """
     Get the singleton instance of AIPredictionGraph.
 
-    Initializes the graph on first access.
+    Returns the existing instance or creates it if needed.
     """
     global apg
     if apg is None:
         apg = AIPredictionGraph()
     return apg
 
-# Writing binary pickle file for saving new values for mem_list and fmem_list
-# with open('data_file.pickle', 'wb') as f:
-#   pickle.dump([mem_list, fmem_list], f)
+def get_mcg_instance():
+    """
+    Get the singleton instance of MemberClusterGraph.
+
+    Returns the existing instance or creates it if needed.
+    """
+    global mcg
+    if mcg is None:
+        mcg = MemberClusterGraph()
+    return mcg
+
+# Fetch data from database and write it to a pickle file.
+# data_persist.refresh_pickle_data()
 
 # Reading binary pickle file for initialization of mem_list and fmem_list
 with open('data_file.pickle', 'rb') as f:
@@ -361,6 +361,26 @@ def ai_prediction():
     graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
 
     return render_template("/graph-pages/all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
+
+@app.route("/ai/cluster/")
+def ai_cluster():
+    """
+    Render Cluster graphs for clan performance metrics.
+
+    Uses the AI prediction graph module to forecast trends and serialize
+    the resulting Plotly figures.
+
+    Returns:
+        HTML template: mem-month-graph.html
+    """
+
+    mcg = get_mcg_instance()
+    month_year = request.args.get('month-year', LATEST_MONTH_RANGE)
+    mcg.update_and_load_data(month_year)
+    graphs = mcg.create_scatter_plots()
+    graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
+
+    return render_template("./graph-pages/mem-month-graph.html", graphJSON_list=graphJSON_list,month_year=month_year, graph_name="AI Cluster",message=mcg.message)
 
 @app.route("/player-report/")
 def player_reports():

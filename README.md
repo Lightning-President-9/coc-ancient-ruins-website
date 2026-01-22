@@ -44,6 +44,7 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **13/10/25:** Streamlined month selection for members, former members, and monthly analysis graphs, reducing redundancy. Handled missing data cases and added a Google Form for feedback.
 - **1/1/26:** Added Documentation in all the .py files.
 - **10/1/26:** Added KARBS a light weighted rule based chat/conversational bot for deep statistical analysis of Ancient Ruins Clan.
+- **22/1/26:** Added KMeans-based member cluster analysis with discrete scatter plots to visualize performance groupings across key metrics.
 
 ## License
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.
