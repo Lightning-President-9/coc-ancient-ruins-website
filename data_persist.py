@@ -25,3 +25,6 @@ def refresh_pickle_data():
 
     with open(PICKLE_FILE, "wb") as f:
         pickle.dump([mem_list, fmem_list], f)
+
+# Run the method to update pickle file
+# refresh_pickle_data()
