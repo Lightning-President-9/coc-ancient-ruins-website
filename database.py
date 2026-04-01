@@ -26,10 +26,10 @@ FormerMembers_Query:
 
 # Importing Libraries
 from sqlalchemy import create_engine,text
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
 
-# load_dotenv()  # This loads the variables from .env into os.environ
+load_dotenv()  # This loads the variables from .env into os.environ
 
 # Getting the database connection string
 db_connection_string=os.environ.get('DB_CONNECTION_STRING')

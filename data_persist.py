@@ -27,4 +27,4 @@ def refresh_pickle_data():
         pickle.dump([mem_list, fmem_list], f)
 
 # Run the method to update pickle file
-# refresh_pickle_data()
+refresh_pickle_data()
