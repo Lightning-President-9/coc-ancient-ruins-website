@@ -1,526 +1,96 @@
-# app.py
-
 """
-Main Flask application for the Clash of Clans – Ancient Ruins Clan Website.
+app.py
 
-This module initializes the Flask app, loads persisted clan data, integrates
-graph-generation modules, and defines all routes for rendering pages, serving APIs,
-generating graphs, AI predictions, Chatbot, and downloadable player reports.
+Main entry point of the Ancient Ruins Clan Analytics API application.
 
-Technologies used:
-- Flask for web framework and routing
-- Plotly for interactive graph visualizations
-- Pickle for loading cached clan data
+This module is responsible for:
+• Initializing the Flask application
+• Configuring Swagger API documentation
+• Registering all route blueprints
+• Registering centralized error handlers
+• Configuring API rate limiting
+• Starting the Flask server
+
+Architecture Role:
+Acts as the application bootstrap module that wires together
+routes, documentation, error handling, and request protection
+into a single API service.
+
+Core Responsibilities:
+• Application configuration
+• API documentation setup
+• Blueprint registration
+• Error handler integration
+• Global request rate limiting
+• Server startup configuration
+
+Technologies Used:
+• Flask → Web framework
+• Flasgger → Swagger API documentation
+• Flask-Limiter → API rate limiting and abuse protection
+• Blueprint architecture → Modular route design
+
+Security Features:
+• Global request rate limiting to prevent API abuse
+• Protection against excessive request bursts
+• Fair usage enforcement for public endpoints
+
+Design Pattern Used:
+Application Factory style modular structure using route registrars.
 """
 
-# Importing Libraries
-from flask import Flask, render_template, jsonify, request, send_file, redirect
-import pickle
-import json
-import plotly
+from flask import Flask
+from flasgger import Swagger
 
-# Importing Libraries from graph directory
-# import data_persist
-from graphs import ClanMemberGraph, FormerMemberGraph, MonthlyAnalysisGraph, AllMonthGraph, AIPredictionGraph, MemberClusterGraph
-from graphs import get_players, generate_player_report
-from constants import LATEST_MONTH, LATEST_MONTH_RANGE
-from chatbot.chat_controller import handle_chat
+from routes import register_routes
+from routes.error_handlers import register_error_handlers
 
-# Flask app object
+from limiter_config import init_limiter
+
+# Creating the main Flask application instance.
+# This object serves as the central WSGI application.
 app = Flask(__name__)
 
-# Graphs object declaration
-cmg = None
-fmg = None
-mag = None
-amg = None
-apg = None
-mcg = None
-
-def get_cmg_instance():
-    """
-    Get the singleton instance of ClanMemberGraph.
-
-    Returns the existing instance or creates it if needed.
-    """
-    global cmg
-    if cmg is None:
-        cmg = ClanMemberGraph()
-    return cmg
-
-
-def get_fmg_instance():
-    """
-    Get the singleton instance of FormerMemberGraph.
-
-    Returns the existing instance or creates it if needed.
-    """
-    global fmg
-    if fmg is None:
-        fmg = FormerMemberGraph()
-    return fmg
-
-
-def get_mag_instance():
-    """
-    Get the singleton instance of MonthlyAnalysisGraph.
-
-    Returns the existing instance or creates it if needed.
-    """
-    global mag
-    if mag is None:
-        mag = MonthlyAnalysisGraph()
-    return mag
-
-
-def get_amg_instance():
-    """
-    Get the singleton instance of AllMonthGraph.
-
-    Returns the existing instance or creates it if needed.
-    """
-    global amg
-    if amg is None:
-        amg = AllMonthGraph()
-    return amg
-
-
-def get_apg_instance():
-    """
-    Get the singleton instance of AIPredictionGraph.
-
-    Returns the existing instance or creates it if needed.
-    """
-    global apg
-    if apg is None:
-        apg = AIPredictionGraph()
-    return apg
-
-def get_mcg_instance():
-    """
-    Get the singleton instance of MemberClusterGraph.
-
-    Returns the existing instance or creates it if needed.
-    """
-    global mcg
-    if mcg is None:
-        mcg = MemberClusterGraph()
-    return mcg
-
-# Fetch data from database and write it to a pickle file.
-# data_persist.refresh_pickle_data()
-
-# Reading binary pickle file for initialization of mem_list and fmem_list
-with open('data_file.pickle', 'rb') as f:
-  mem_list, fmem_list = pickle.load(f)
-
-# Mapping for graph types and their respective methods
-GRAPH_METHODS = {
-    "bar": "create_bar_graphs",
-    "piechart": "create_pie_charts",
-    "linechart": "create_line_charts",
-    "scatterplot": "create_scatter_plots",
-    "histogram": "create_histograms",
-    "boxplot": "create_box_plots",
-    "violinplot": "create_violin_plots",
-    "heatmap": "create_heatmaps",
-    "treemap": "create_treemaps",
-    "sunburstchart": "create_sunburst_charts",
-    "densityplot": "create_density_plots",
-    "3dscatterplot": "create_3d_scatter_plots",
-    "areagraph": "create_area_graphs",
-    "polarchart": "create_polar_charts",
-    "funnelchart": "create_funnel_charts",
-    "waterfallchart": "create_waterfall_charts",
+# Swagger/OpenAPI documentation configuration.
+# Defines API metadata including title, version,
+# description and project contact information.
+swagger_template = {
+    "info": {
+        "title": "Ancient Ruins Clan Data API",
+        "description": "API documentation for Ancient Ruins Clan",
+        "version": "1.0.0",
+        "contact": {
+            "name": "COC Ancient Ruins Project",
+            "url": "https://github.com/Lightning-President-9",
+        },
+    }
 }
 
-@app.route("/")
-def coc_ancient_ruins():
+# Initialize Swagger documentation for automatic
+# API endpoint documentation and testing interface.
+Swagger(app, template=swagger_template)
+
+# Registers all application routes using Blueprint modular structure.
+# This keeps the application scalable and organized by separating
+# route logic into different modules.
+register_routes(app)
+
+# Registers global error handlers (404, 500, 405 etc.)
+# Provides centralized exception handling across the application.
+register_error_handlers(app)
+
+init_limiter(app)
+
+if __name__ == "__main__":
     """
-    Render the home page of the website.
+    Application execution entry point.
 
-    Displays tables for current clan members and former clan members using
-    data loaded from the pickle file.
+    Purpose:
+    Starts the Flask development server.
 
-    Returns:
-        HTML template: index.html
+    Configuration:
+    host  → Allows external access
+    port  → Application running port
+    debug → Enables hot reload and debugging
     """
-
-    return render_template('index.html',DM=mem_list,DNM=fmem_list)
-
-@app.route("/api/mem/")
-def api_mem():
-    """
-    API endpoint to return current clan members data.
-
-    Returns:
-        JSON response containing the list of current clan members.
-    """
-
-    return jsonify(mem_list)
-
-@app.route("/api/fmem/")
-def api_fmem():
-    """
-    API endpoint to return former clan members data.
-
-    Returns:
-        JSON response containing the list of former clan members.
-    """
-
-    return jsonify(fmem_list)
-
-@app.route("/api/chatbot/", methods=["POST"])
-def api_chatbot():
-    """
-        Main chatbot interaction endpoint.
-
-        Accepts:
-            JSON payload:
-                {
-                    "message": "<user query>"
-                }
-
-        Validation:
-            - Message length must not exceed 500 characters
-
-        Returns:
-            flask.Response (JSON):
-                {
-                    "reply": "<chatbot response>",
-                    "source": "<data source or None>",
-                    "suggestions": [<follow-up suggestions>]
-                }
-
-        Error Responses:
-            400 Bad Request:
-                Returned when the message exceeds the allowed length.
-
-        Purpose:
-            - Processes user input
-            - Delegates response generation to the chatbot engine
-            - Returns structured chatbot output for frontend consumption
-
-        HTTP Method:
-            POST
-    """
-
-    payload = request.get_json(silent=True) or {}
-    message = payload.get("message", "")
-
-    if len(message) > 500:
-        return jsonify({
-            "reply": "Message too long. Please keep it under 500 characters.",
-            "source": None,
-            "suggestions": []
-        }), 400
-
-    response = handle_chat(message)
-    return jsonify(response)
-
-@app.route("/graph/mem/")
-def graph_mem():
-    """
-    Render the member graphs landing page.
-
-    Returns:
-        HTML template: mem-graph.html
-    """
-
-    return render_template('/graph-pages/mem-graph.html')
-
-@app.route("/graph/fmem/")
-def graph_fmem():
-    """
-    Render the former member graphs landing page.
-
-    Returns:
-        HTML template: fmem-graph.html
-    """
-
-    return render_template('/graph-pages/fmem-graph.html')
-
-@app.route("/graph/mag/")
-def graph_mag():
-    """
-    Render the monthly analysis graph selection page for clan members.
-
-    Returns:
-        HTML template: mem-month-analysis.html
-    """
-
-    return render_template('/graph-pages/mem-month-analysis.html')
-
-@app.route("/all-mon-ana-graph/")
-def all_mon_ana_graph():
-    """
-    Render the all-month analysis graphs page.
-
-    Fetches clan data, processes it into a DataFrame, generates multiple Plotly graphs
-    including heatmaps, serializes them to JSON, and sends them to the template.
-
-    Returns:
-        HTML template: all-month-graph.html
-    """
-
-    amg = get_amg_instance()
-    clan_data = amg.fetch_data()
-    df = amg.process_data(clan_data)
-    plot_graphs = amg.plot_graphs(df)
-    heatmap_graphs = amg.generate_heatmap_figures()
-    all_graphs =plot_graphs + heatmap_graphs
-
-    # Convert Plotly figures to JSON
-    graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in all_graphs]
-
-    return render_template("/graph-pages/all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="All Month Analysis")
-
-def render_graph(graph_type, obj_type):
-    """
-    Generic graph rendering handler for members, former members, and monthly analysis.
-
-    Based on the object type (mem, fmem, mag) and graph type, this function:
-    - Selects the appropriate graph object
-    - Loads and updates data for the selected month
-    - Dynamically calls the correct graph creation method
-    - Serializes Plotly figures into JSON
-
-    Args:
-        graph_type (str): Type of graph to generate (bar, piechart, linechart, etc.)
-        obj_type (str): Data scope (mem, fmem, mag)
-
-    Returns:
-        Rendered HTML template with embedded Plotly graphs
-    """
-
-    if obj_type == "mem":
-        cmg = get_cmg_instance()
-        graph_obj = cmg
-        month_year = request.args.get('month-year', LATEST_MONTH)
-        template_name = './graph-pages/graph.html'
-    elif obj_type == "fmem":
-        fmg = get_fmg_instance()
-        graph_obj = fmg
-        month_year = request.args.get('month-year', LATEST_MONTH)
-        template_name = './graph-pages/graph.html'
-    elif obj_type == "mag":
-        mag = get_mag_instance()
-        graph_obj = mag
-        month_year = request.args.get('month-year', LATEST_MONTH_RANGE)
-        template_name = './graph-pages/mem-month-graph.html'
-    else:
-        return render_template("/error-pages/404.html"), 404
-
-    graph_obj.message = ""
-
-    graph_obj.update_and_load_data(month_year)
-
-    # Get the corresponding method for the graph type
-    method_name = GRAPH_METHODS.get(graph_type)
-    if not method_name:
-        return render_template("/error-pages/404.html"), 404
-
-    figures = getattr(graph_obj, method_name)()
-    graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in figures]
-    return render_template(template_name,month_year=month_year, graphJSON_list=graphJSON_list, graph_name=f"{obj_type.upper()} {graph_type.capitalize()} Chart", message=graph_obj.message)
-
-@app.route("/graph/<obj_type>/<graph_type>/", methods=['GET'])
-def graph_handler(obj_type, graph_type):
-    """
-    Route handler that validates graph parameters and delegates rendering.
-
-    Ensures the object type is valid before passing control to the generic
-    graph rendering function.
-
-    Args:
-        obj_type (str): Data scope (mem, fmem, mag)
-        graph_type (str): Requested graph type
-
-    Returns:
-        Rendered graph page or 404 error page
-    """
-
-    if obj_type not in ["mem", "fmem", "mag"]:
-        return render_template("/error-pages/404.html"), 404
-    return render_graph(graph_type, obj_type)
-
-@app.route("/ai/prediction/")
-def ai_prediction():
-    """
-    Render AI-based prediction graphs for clan performance metrics.
-
-    Uses the AI prediction graph module to forecast trends and serialize
-    the resulting Plotly figures.
-
-    Returns:
-        HTML template: all-month-graph.html
-    """
-
-    apg = get_apg_instance()
-    graphs = apg.forecast_all()
-    graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
-
-    return render_template("/graph-pages/all-month-graph.html", graphJSON_list=graphJSON_list, graph_name="AI Prediction")
-
-@app.route("/ai/cluster/")
-def ai_cluster():
-    """
-    Render Cluster graphs for clan performance metrics.
-
-    Uses the AI prediction graph module to forecast trends and serialize
-    the resulting Plotly figures.
-
-    Returns:
-        HTML template: mem-month-graph.html
-    """
-
-    mcg = get_mcg_instance()
-    month_year = request.args.get('month-year', LATEST_MONTH_RANGE)
-    mcg.update_and_load_data(month_year)
-    graphs = mcg.create_scatter_plots()
-    graphJSON_list = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
-
-    return render_template("./graph-pages/mem-month-graph.html", graphJSON_list=graphJSON_list,month_year=month_year, graph_name="AI Cluster",message=mcg.message)
-
-@app.route("/player-report/")
-def player_reports():
-    """
-    Render the player report selection page.
-
-    Fetches all available player names and displays them for report generation.
-
-    Returns:
-        HTML template: player-report.html
-    """
-
-    players = get_players()
-    return render_template('/graph-pages/player-report.html', players=players)
-
-@app.route("/player-report/<player_name>/")
-def download_player_report(player_name):
-    """
-    Generate and download a detailed PDF report for a specific player.
-
-    Validates the player name, generates a PDF report in memory,
-    and sends it as a downloadable file.
-
-    Args:
-        player_name (str): Name of the player
-
-    Returns:
-        PDF file download response or custom 404 page
-    """
-
-    players = get_players()  # Fetch all valid player names
-    if player_name not in players:
-        # Render custom 404 page instead of default error
-        return render_template("/error-pages/404.html"), 404
-
-    pdf_buf = generate_player_report(player_name)
-    return send_file(
-        pdf_buf,
-        as_attachment=True,
-        download_name=f"{player_name}_report.pdf",
-        mimetype='application/pdf'
-    )
-
-@app.route("/chatbot-service-status", methods=["GET"])
-def service_status():
-    """
-        Health-check endpoint for the Clan Chatbot API.
-
-        Returns:
-            flask.Response (JSON):
-                {
-                    "status": "ok",
-                    "service": "Clan Chatbot API"
-                }
-
-        Purpose:
-            - Verifies that the chatbot service is running
-            - Used for monitoring, uptime checks, and deployment validation
-
-        HTTP Method:
-            GET
-    """
-
-    return jsonify({
-        "status": "ok",
-        "service": "Clan Chatbot API"
-    })
-
-@app.route("/ai/chat/", methods=["GET"])
-def ai_chat():
-    """
-        Renders the chatbot web interface.
-
-        Returns:
-            flask.Response (HTML):
-                Renders the 'chatbot-pages/chat.html' template.
-
-        Purpose:
-            - Provides the browser-based UI for interacting with the chatbot
-            - Intended for human users, not programmatic API access
-
-        HTTP Method:
-            GET
-        """
-
-    return render_template("/chatbot-pages/chat.html")
-
-@app.route('/github/')
-def redirect_to_github():
-    """
-    Redirect users to the project's GitHub repository.
-
-    Returns:
-        HTTP 301 redirect response
-    """
-
-    return redirect("https://github.com/Lightning-President-9/coc-ancient-ruins-website", code=301)
-
-@app.errorhandler(405)
-def method_not_allowed_error(e):
-    """
-        Custom handler for 405 (Method Not Allowed) error-pages.
-
-        Args:
-            e (Exception): Error instance
-
-        Returns:
-            HTML template: 405.html
-    """
-
-    return render_template("/error-pages/405.html"), 405
-
-@app.errorhandler(404)
-def page_not_found(e):
-    """
-    Custom handler for 404 (Not Found) error-pages.
-
-    Args:
-        e (Exception): Error instance
-
-    Returns:
-        HTML template: 404.html
-    """
-
-    return render_template("/error-pages/404.html"), 404
-
-@app.errorhandler(500)
-def internal_server_error(e):
-    """
-    Custom handler for 500 (Internal Server Error) error-pages.
-
-    Args:
-        e (Exception): Error instance
-
-    Returns:
-        HTML template: 500.html
-    """
-
-    return render_template("/error-pages/500.html"), 500
-
-# Application starting point/run method
-if __name__ == '__main__':
-  app.run(host='0.0.0.0',port=10000,debug=True)
+    app.run(host="0.0.0.0", port=10000, debug=True)

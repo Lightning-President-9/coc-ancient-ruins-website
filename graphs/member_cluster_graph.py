@@ -5,7 +5,7 @@ Generates KMeans-based cluster scatter plots for clan members
 across a selected month range.
 
 This module:
-- Loads month-range-based member data from GitHub
+- Loads month-range-based member coc-data from GitHub
 - Applies KMeans clustering (k = 2)
 - Generates scatter plots for each pair of numerical features
 - Uses clan score as marker size
@@ -23,12 +23,11 @@ from constants import LATEST_MONTH_RANGE
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
-
 class MemberClusterGraph:
     """
     MemberClusterGraph
 
-    Handles loading, clustering, and visualization of clan member data
+    Handles loading, clustering, and visualization of clan member coc-data
     using KMeans clustering.
     """
 
@@ -46,17 +45,17 @@ class MemberClusterGraph:
             "clancapital",
             "clangames",
             "clangamesmaxed",
-            "clanscore"
+            "clanscore",
         ]
 
     def update_and_load_data(self, month_year):
         """
-        Load and preprocess clan performance data for a given month range.
+        Load and preprocess clan performance coc-data for a given month range.
 
         This method:
-        - Dynamically builds the GitHub data URL
-        - Fetches and parses JSON data
-        - Falls back to the latest available month range if data is unavailable
+        - Dynamically builds the GitHub coc-data URL
+        - Fetches and parses JSON coc-data
+        - Falls back to the latest available month range if coc-data is unavailable
         - Converts performance fields to numeric values
         - Extracts numerical columns for analytics
 
@@ -64,7 +63,7 @@ class MemberClusterGraph:
             month_year (str): Month-range identifier (e.g., 'NOV-DEC_2025')
         """
 
-        # Update the data URL dynamically based on month and year
+        # Update the coc-data URL dynamically based on month and year
         self.data_url = (
             "https://raw.githubusercontent.com/Lightning-President-9/"
             "ClanDataRepo/refs/heads/main/Clan%20Members/"
@@ -72,19 +71,19 @@ class MemberClusterGraph:
             f"data_{month_year}.json"
         )
 
-        # Fetch the updated data
+        # Fetch the updated coc-data
         self.response = requests.get(self.data_url)
 
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
             self.message = (
-                f"No data available for {month_year}. "
+                f"No coc-data available for {month_year}. "
                 f"Showing {LATEST_MONTH_RANGE} (Latest)"
             )
             self.update_and_load_data(LATEST_MONTH_RANGE)
 
-        # Load JSON data into a DataFrame
+        # Load JSON coc-data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
 
         # Convert string columns to numeric
@@ -95,9 +94,25 @@ class MemberClusterGraph:
         self.numerical_df = self.df[self.features]
 
         # Apply KMeans clustering (k = 2)
+        # Apply KMeans clustering (k = 2)
         kmeans = KMeans(n_clusters=2, random_state=42)
         self.df["cluster"] = kmeans.fit_predict(self.numerical_df)
-        self.df["cluster"] = self.df["cluster"].astype(str)
+
+        # Find which cluster is more active
+        cluster_activity = self.df.groupby("cluster")[self.features].mean().sum(axis=1)
+
+        # Cluster with higher total activity → Highly Active (0)
+        high_activity_cluster = cluster_activity.idxmax()
+        low_activity_cluster = cluster_activity.idxmin()
+
+        # Create mapping dictionary
+        cluster_mapping = {
+            high_activity_cluster: "Highly Active",
+            low_activity_cluster: "Less Active",
+        }
+
+        # Apply mapping
+        self.df["cluster"] = self.df["cluster"].map(cluster_mapping)
 
     def create_scatter_plots(self):
         """
@@ -113,7 +128,7 @@ class MemberClusterGraph:
         figures = []
 
         for i, x_col in enumerate(self.features):
-            for y_col in self.features[i + 1:]:
+            for y_col in self.features[i + 1 :]:
                 fig = px.scatter(
                     data_frame=self.df,
                     x=x_col,
@@ -125,8 +140,8 @@ class MemberClusterGraph:
                     labels={
                         x_col: x_col.capitalize(),
                         y_col: y_col.capitalize(),
-                        "cluster": "Cluster"
-                    }
+                        "cluster": "Cluster",
+                    },
                 )
 
                 figures.append(fig)

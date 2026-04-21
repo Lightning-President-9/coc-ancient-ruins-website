@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body>
+    <div class="container">
+      {% include "navbar.html" %}
+      <main class="main-clan-table">
+        <section class="table-header">
+          <h2>Ancient Ruins Clan Search Details</h2>
+        </section>
+        <div class="data-box">
+          <div class="img-box">
+            <div class="img">
+              <img src="{{ url_for('static', filename='clan-badge_18.png') }}" alt="Clan Badge">
+            </div>
+            <div class="p-data">
+              <strong>
+                <p>
+                  <u>FROM WHERE THE DATA IS COMING?</u>
+                </p>
+                <p>COC API</p>
+                <p>CLANS SEARCH</p>
+              </strong>
+            </div>
+          </div>
+          <section class="table-body">
+            <table>
+              <thead>
+                <tr>
+                  <td>
+                    <strong>Clan Tag:</strong>
+                  </td>
+                  <th>{{ clan.tag }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Name:</strong>
+                  </td>
+                  <th>{{ clan.name }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Type:</strong>
+                  </td>
+                  <th>{{ clan.type }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Location:</strong>
+                  </td>
+                  <th>{{ clan.location.name }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Badge:</strong>
+                  </td>
+                  <th>
+                    <img src="{{ clan.badgeUrls.small }}" alt="Clan Badge" width="40">
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Level:</strong>
+                  </td>
+                  <th>{{ clan.clanLevel }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Points:</strong>
+                  </td>
+                  <th>{{ clan.clanPoints }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Builder Base Points:</strong>
+                  </td>
+                  <th>{{ clan.clanBuilderBasePoints }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Capital Points:</strong>
+                  </td>
+                  <th>{{ clan.clanCapitalPoints }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Capital League:</strong>
+                  </td>
+                  <th>{{ clan.capitalLeague.name }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Required Trophies:</strong>
+                  </td>
+                  <th>{{ clan.requiredTrophies }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Frequency:</strong>
+                  </td>
+                  <th>{{ clan.warFrequency }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Win Streak:</strong>
+                  </td>
+                  <th>{{ clan.warWinStreak }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Wins:</strong>
+                  </td>
+                  <th>{{ clan.warWins }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Ties:</strong>
+                  </td>
+                  <th>{{ clan.warTies }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Losses:</strong>
+                  </td>
+                  <th>{{ clan.warLosses }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War League:</strong>
+                  </td>
+                  <th>{{ clan.warLeague.name }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Members:</strong>
+                  </td>
+                  <th>{{ clan.members }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Required Builder Base Trophies:</strong>
+                  </td>
+                  <th>{{ clan.requiredBuilderBaseTrophies }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Required Townhall Level:</strong>
+                  </td>
+                  <th>{{ clan.requiredTownhallLevel }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Chat Language:</strong>
+                  </td>
+                  <th>{{ clan.chatLanguage.name }}</th>
+                </tr>
+              </thead>
+            </table>
+          </section>
+        </div>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Labels</h2>
+          <div class="export__file">
+            <label for="export-file-main-member" class="export__file-btn" title="Export File" style="
+          background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;
+       "></label>
+            <input type="checkbox" id="export-file-main-member">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member" id="toPDFLabelsTable">PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}" alt="PDF">
+              </label>
+              <label for="export-file-main-member" id="toJSONLabelsTable">JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}" alt="JSON">
+              </label>
+              <label for="export-file-main-member" id="toCSVLabelsTable">CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}" alt="CSV">
+              </label>
+              <label for="export-file-main-member" id="toEXCELLabelsTable">EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}" alt="Excel">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}" alt="Search">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Label Badge <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for label in clan.labels %} <tr>
+                <td>{{label['name']}}</td>
+                <td>
+                  <img src="{{ label.iconUrls.small }}" alt="Clan Badge" width="40">
+                </td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script>{% include 'coc-data-pages/table-utils.js' %}</script>
+  </body>
+</html>

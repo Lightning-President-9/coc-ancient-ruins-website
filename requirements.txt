@@ -10,3 +10,5 @@ kaleido
 reportlab
 matplotlib
 seaborn
+flasgger
+flask-limiter

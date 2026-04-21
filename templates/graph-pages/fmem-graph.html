@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-{% include 'head.html' %}
-<body>
-  <div class="container">
-    {% include "navbar.html" %}
-
-    <div class="main-table">
-      <section class="table-header">
-        <h2>Former Clan Members Graphs</h2>
-      </section>
-
-      <div class="graphs-container">
-        {% for graph in [
+  {% include 'head.html' %}
+  <body>
+    <div class="container">
+      {% include "navbar.html" %}
+      <div class="main-table">
+        <section class="table-header">
+          <h2>Former Clan Members Graphs</h2>
+        </section>
+        <div class="graphs-container"> {% for graph in [
           "bar", "piechart", "linechart", "scatterplot", "histogram", "boxplot",
           "violinplot", "heatmap", "treemap", "sunburstchart", "densityplot",
           "3dscatterplot", "areagraph", "polarchart", "funnelchart", "waterfallchart"
-        ] %}
-          <div class="graph-item">
+        ] %} <div class="graph-item">
             <a href="https://coc-ancient-ruins-website.onrender.com/graph/fmem/{{ graph }}" target="_self" rel="self">
               <img src="/static/graph-icons/{{ graph }}.png" alt="{{ graph|capitalize }} Chart" class="graph-icon">
             </a>
             <p class="graph-label">{{ graph|capitalize }}</p>
-          </div>
-        {% endfor %}
+          </div> {% endfor %} </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

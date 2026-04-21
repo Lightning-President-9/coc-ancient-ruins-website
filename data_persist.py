@@ -11,9 +11,7 @@ Responsibilities:
 import pickle
 from database import load_from_db_mem, load_from_db_fmem
 
-
 PICKLE_FILE = "data_file.pickle"
-
 
 def refresh_pickle_data():
     """

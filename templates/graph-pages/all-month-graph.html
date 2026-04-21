@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ancient Ruins [{{ graph_name }}]</title>
-  <link rel="icon" href="/static/clan-badge_17.png">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-
-  <style>
-    {% include "graph-pages/graph.css" %}
-  </style>
-
-  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
-</head>
-<body>
-  {% include "navbar.html" %}
-
-  <h1>{{ graph_name }}</h1>
-  <div id="charts-container"></div>
-
-  <script>
-    let graphJSON_list = {{ graphJSON_list | tojson | safe }};
-    let container = document.getElementById('charts-container');
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ancient Ruins [{{ graph_name }}]</title>
+    <link rel="icon" href="/static/clan-badge_18.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <style>{% include "graph-pages/graph.css" %}</style>
+    <script src="https://cdn.plot.ly/plotly-3.1.0.min.js"></script>
+  </head>
+  <body>
+    {% include "navbar.html" %}
+    <h1>{{ graph_name }}</h1>
+    <div id="charts-container"></div>
+    <script>
+      let graphJSON_list = {{ graphJSON_list | tojson | safe }};
+      let container = document.getElementById('charts-container');
 
       function renderCharts(graphJSON_list) {
         container.innerHTML = ''; // Clear previous charts
@@ -31,11 +25,12 @@
           chartDiv.classList.add('chart');
           container.appendChild(chartDiv);
           let graph = JSON.parse(graphJSON);
-          Plotly.newPlot(chartDiv.id, graph.data, graph.layout, {responsive: true});
+          Plotly.newPlot(chartDiv.id, graph.data, graph.layout, {
+            responsive: true
+          });
         });
       }
-
-    renderCharts(graphJSON_list);
-  </script>
-</body>
+      renderCharts(graphJSON_list);
+    </script>
+  </body>
 </html>

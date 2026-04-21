@@ -21,10 +21,24 @@ from .former_member_graph import FormerMemberGraph
 from .monthly_analysis_graph import MonthlyAnalysisGraph
 from .member_cluster_graph import MemberClusterGraph
 from .player_report import get_players, generate_player_report
-from constants import LATEST_MONTH, PREDICTED_MONTH, LATEST_MONTH_RANGE, CLAN_MONTHLY_PERFORMANCE_RANGE
+from constants import (
+    LATEST_MONTH,
+    PREDICTED_MONTH,
+    LATEST_MONTH_RANGE,
+    CLAN_MONTHLY_PERFORMANCE_RANGE,
+)
 
-__all__ = ["AIPredictionGraph", "AllMonthGraph", "ClanMemberGraph",
-           "FormerMemberGraph", "MonthlyAnalysisGraph", "get_players",
-           "MemberClusterGraph",
-           "generate_player_report", "LATEST_MONTH", "PREDICTED_MONTH",
-           "LATEST_MONTH_RANGE", "CLAN_MONTHLY_PERFORMANCE_RANGE"]
+__all__ = [
+    "AIPredictionGraph",
+    "AllMonthGraph",
+    "ClanMemberGraph",
+    "FormerMemberGraph",
+    "MonthlyAnalysisGraph",
+    "get_players",
+    "MemberClusterGraph",
+    "generate_player_report",
+    "LATEST_MONTH",
+    "PREDICTED_MONTH",
+    "LATEST_MONTH_RANGE",
+    "CLAN_MONTHLY_PERFORMANCE_RANGE",
+]

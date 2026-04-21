@@ -1,7 +1,7 @@
 # chatbot/raw_fetcher.py
 
 """
-This module is responsible for retrieving structured clan data from
+This module is responsible for retrieving structured clan coc-data from
 GitHub-hosted JSON files using raw content URLs.
 
 Its primary role is to abstract away all details related to:
@@ -10,11 +10,11 @@ Its primary role is to abstract away all details related to:
 - Fetching JSON content safely
 - Caching network requests for efficiency
 
-By isolating data access logic in this module, the chatbot ensures that
+By isolating coc-data access logic in this module, the chatbot ensures that
 all network interaction is centralized, predictable, and optimized for
 low-resource environments.
 
-This module does not interpret or modify the data it fetches. It simply
+This module does not interpret or modify the coc-data it fetches. It simply
 retrieves raw structured content for downstream processing.
 """
 
@@ -36,7 +36,6 @@ DOMAIN_PATHS = {
     "FORMER_CLAN_MEMBERS": "Former%20Clan%20Members/JSON",
     "TOP_CLAN_CONTRIBUTORS": "Top%20Clan%20Contributors/JSON",
 }
-
 
 def _build_filename(domain: str, month_value: str) -> str:
     """
@@ -63,7 +62,6 @@ def _build_filename(domain: str, month_value: str) -> str:
     # All others: APR_2025.json
     return f"{month_value}.json"
 
-
 def build_raw_url(domain: str, month_value: str) -> str | None:
     """
     Builds the full GitHub raw URL for a dataset.
@@ -88,7 +86,6 @@ def build_raw_url(domain: str, month_value: str) -> str | None:
 
     filename = _build_filename(domain, month_value)
     return f"{RAW_BASE}/{path}/{filename}"
-
 
 @lru_cache(maxsize=128)
 def raw_file_exists(url: str) -> bool:
@@ -144,12 +141,11 @@ def _fetch_json(url: str) -> list | None:
     except requests.RequestException:
         return None
 
-
 def fetch_json_if_exists(domain: str, month_value: str) -> list | None:
     """
     Safely retrieves a dataset if it exists.
 
-    This function serves as the public interface for data retrieval. It
+    This function serves as the public interface for coc-data retrieval. It
     first constructs the expected dataset URL, verifies its existence,
     and then fetches and returns the parsed JSON content.
 
@@ -165,7 +161,7 @@ def fetch_json_if_exists(domain: str, month_value: str) -> list | None:
             - Parsed JSON dataset if available.
             - None if the dataset does not exist or cannot be retrieved.
 
-    This defensive approach ensures that missing data is handled
+    This defensive approach ensures that missing coc-data is handled
     gracefully by higher-level components of the chatbot.
     """
 

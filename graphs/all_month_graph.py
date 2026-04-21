@@ -5,7 +5,7 @@ Generates long-term, multi-month clan performance visualizations for the
 Clash of Clans – Ancient Ruins Clan Website.
 
 This module:
-- Dynamically discovers available monthly analysis data from GitHub
+- Dynamically discovers available monthly analysis coc-data from GitHub
 - Aggregates clan-wide performance metrics across months
 - Produces multiple Plotly visualizations including line, bar, area,
   treemap, and heatmap charts
@@ -23,7 +23,7 @@ import re
 from datetime import datetime
 from constants import CLAN_MONTHLY_PERFORMANCE_RANGE
 
-warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.simplefilter(action="ignore", category=FutureWarning)
 
 class AllMonthGraph:
     """
@@ -33,7 +33,7 @@ class AllMonthGraph:
 
     Responsibilities:
     - Discover available month ranges dynamically from a GitHub repository
-    - Fetch and aggregate monthly performance data
+    - Fetch and aggregate monthly performance coc-data
     - Maintain correct chronological ordering of month ranges
     - Generate multiple visualization types for comparative and trend analysis
     """
@@ -42,7 +42,7 @@ class AllMonthGraph:
         """
         Initialize the AllMonthGraph object.
 
-        - Defines base URLs for monthly analysis data
+        - Defines base URLs for monthly analysis coc-data
         - Dynamically loads available month ranges from GitHub
         - Stores sorted month ranges for consistent ordering across graphs
         """
@@ -55,7 +55,7 @@ class AllMonthGraph:
             "https://github.com/Lightning-President-9/"
             "ClanDataRepo/tree/main/Clan%20Members/Monthly%20Analysis%20JSON"
         )
-        self.months = self.get_available_months()   # Dynamic month loading
+        self.months = self.get_available_months()  # Dynamic month loading
 
     def get_available_months(self):
         """
@@ -88,7 +88,7 @@ class AllMonthGraph:
         # Start from JUN-JUL_2024
         START = "JUN-JUL_2024"
         if START in files:
-            files = files[files.index(START):]
+            files = files[files.index(START) :]
 
         return files
 
@@ -107,9 +107,18 @@ class AllMonthGraph:
         """
 
         MONTH_MAP = {
-            'JAN': 1, 'FEB': 2, 'MAR': 3, 'APR': 4,
-            'MAY': 5, 'JUN': 6, 'JUL': 7, 'AUG': 8,
-            'SEP': 9, 'OCT': 10, 'NOV': 11, 'DEC': 12
+            "JAN": 1,
+            "FEB": 2,
+            "MAR": 3,
+            "APR": 4,
+            "MAY": 5,
+            "JUN": 6,
+            "JUL": 7,
+            "AUG": 8,
+            "SEP": 9,
+            "OCT": 10,
+            "NOV": 11,
+            "DEC": 12,
         }
 
         def pair_to_date(pair):
@@ -127,11 +136,11 @@ class AllMonthGraph:
 
     def fetch_data(self):
         """
-        Fetch monthly analysis data for all available month ranges.
+        Fetch monthly analysis coc-data for all available month ranges.
 
         For each discovered month range, this method:
         - Constructs the appropriate GitHub raw JSON URL
-        - Downloads and parses the JSON data
+        - Downloads and parses the JSON coc-data
 
         Returns:
             dict[str, list[dict]]: Mapping of month-range identifiers to raw records
@@ -155,7 +164,7 @@ class AllMonthGraph:
         - Preserves chronological month ordering
 
         Args:
-            all_data (dict): Raw monthly analysis data keyed by month range
+            all_data (dict): Raw monthly analysis coc-data keyed by month range
 
         Returns:
             pandas.DataFrame: Aggregated monthly performance totals
@@ -195,7 +204,7 @@ class AllMonthGraph:
         Generate heatmap visualizations for player-level monthly performance.
 
         This method:
-        - Fetches long-range clan performance data
+        - Fetches long-range clan performance coc-data
         - Creates one heatmap per performance metric
         - Displays player vs. month intensity patterns
 
@@ -206,14 +215,20 @@ class AllMonthGraph:
         url = (
             "https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/"
             "refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/"
-            "clan_monthly_performance_"+CLAN_MONTHLY_PERFORMANCE_RANGE+".json"
+            "clan_monthly_performance_" + CLAN_MONTHLY_PERFORMANCE_RANGE + ".json"
         )
         response = requests.get(url)
         response.raise_for_status()
 
         df = pd.DataFrame(response.json())
 
-        metrics = ['warattack', 'clancapital', 'clangames', 'clangamesmaxed', 'clanscore']
+        metrics = [
+            "warattack",
+            "clancapital",
+            "clangames",
+            "clangamesmaxed",
+            "clanscore",
+        ]
         figures = []
 
         for metric in metrics:
@@ -228,13 +243,14 @@ class AllMonthGraph:
                     x="Month",
                     y="Player",
                     color=metric.replace("clangamesmaxed", "Clan Games Maxed")
-                          .capitalize().replace("_", " ")
+                    .capitalize()
+                    .replace("_", " "),
                 ),
                 x=[col.replace(f"{metric}_", "") for col in heatmap_df.columns],
                 y=heatmap_df.index,
                 title=f"Heatmap of {metric.replace('clangamesmaxed', 'Clan Games Maxed').capitalize()} per Month",
                 aspect="auto",
-                color_continuous_scale='Plasma'
+                color_continuous_scale="Plasma",
             )
 
             fig.update_yaxes(tickfont=dict(size=10))
@@ -253,7 +269,7 @@ class AllMonthGraph:
         - Area chart
 
         Args:
-            df (pandas.DataFrame): Aggregated monthly performance data
+            df (pandas.DataFrame): Aggregated monthly performance coc-data
 
         Returns:
             list[plotly.graph_objects.Figure]: List of summary graphs
@@ -262,23 +278,36 @@ class AllMonthGraph:
         df_long = df.melt(id_vars=["month"], var_name="Category", value_name="Total")
 
         fig1 = px.line(
-            df_long, x="month", y="Total", color="Category", markers=True,
-            title="Monthly Clan Performance"
+            df_long,
+            x="month",
+            y="Total",
+            color="Category",
+            markers=True,
+            title="Monthly Clan Performance",
         )
 
         fig2 = px.bar(
-            df_long, x="month", y="Total", color="Category", barmode="group",
-            title="Monthly Clan Performance (Bar Graph)"
+            df_long,
+            x="month",
+            y="Total",
+            color="Category",
+            barmode="group",
+            title="Monthly Clan Performance (Bar Graph)",
         )
 
         fig3 = px.treemap(
-            df_long, path=["month", "Category"], values="Total",
-            title="Hierarchical Clan Performance Breakdown"
+            df_long,
+            path=["month", "Category"],
+            values="Total",
+            title="Hierarchical Clan Performance Breakdown",
         )
 
         fig4 = px.area(
-            df_long, x="month", y="Total", color="Category",
-            title="Monthly Clan Performance (Area Chart)"
+            df_long,
+            x="month",
+            y="Total",
+            color="Category",
+            title="Monthly Clan Performance (Area Chart)",
         )
 
         return [fig1, fig2, fig3, fig4]

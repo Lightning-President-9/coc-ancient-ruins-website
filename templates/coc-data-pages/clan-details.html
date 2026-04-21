@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body>
+    <div class="container">
+      {% include "navbar.html" %}
+      <main class="main-clan-table">
+        <section class="table-header">
+          <h2>Ancient Ruins Clan Details</h2>
+        </section>
+        <div class="data-box">
+          <div class="img-box">
+            <div class="img">
+              <img src="{{ url_for('static', filename='clan-badge_18.png') }}" alt="Clan Badge">
+            </div>
+            <div class="p-data">
+              <strong>
+                <p>
+                  <u>FROM WHERE THE DATA IS COMING?</u>
+                </p>
+                <p>COC API</p>
+                <p>CLAN DETAILS</p>
+              </strong>
+            </div>
+          </div>
+          <section class="table-body">
+            <table>
+              <thead>
+                <tr>
+                  <td>
+                    <strong>Clan Tag:</strong>
+                  </td>
+                  <th>{{ clan.tag }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Name:</strong>
+                  </td>
+                  <th>{{ clan.name }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Type:</strong>
+                  </td>
+                  <th>{{ clan.type }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Description:</strong>
+                  </td>
+                  <th>{{ clan.description }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Location:</strong>
+                  </td>
+                  <th>{{ clan.location.name }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Badge:</strong>
+                  </td>
+                  <th>
+                    <img src="{{ clan.badgeUrls.small }}" alt="Clan Badge" width="40">
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Level:</strong>
+                  </td>
+                  <th>{{ clan.clanLevel }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Points:</strong>
+                  </td>
+                  <th>{{ clan.clanPoints }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Builder Base Points:</strong>
+                  </td>
+                  <th>{{ clan.clanBuilderBasePoints }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Capital Points:</strong>
+                  </td>
+                  <th>{{ clan.clanCapitalPoints }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Capital League:</strong>
+                  </td>
+                  <th>{{ clan.capitalLeague.name }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Required Trophies:</strong>
+                  </td>
+                  <th>{{ clan.requiredTrophies }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Frequency:</strong>
+                  </td>
+                  <th>{{ clan.warFrequency }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Win Streak:</strong>
+                  </td>
+                  <th>{{ clan.warWinStreak }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Wins:</strong>
+                  </td>
+                  <th>{{ clan.warWins }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Ties:</strong>
+                  </td>
+                  <th>{{ clan.warTies }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War Losses:</strong>
+                  </td>
+                  <th>{{ clan.warLosses }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan War League:</strong>
+                  </td>
+                  <th>{{ clan.warLeague.name }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Members:</strong>
+                  </td>
+                  <th>{{ clan.members }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Required Builder Base Trophies:</strong>
+                  </td>
+                  <th>{{ clan.requiredBuilderBaseTrophies }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Required Townhall Level:</strong>
+                  </td>
+                  <th>{{ clan.requiredTownhallLevel }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Capital Hall Level:</strong>
+                  </td>
+                  <th>{{ clan.clanCapital.capitalHallLevel }}</th>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Clan Chat Language:</strong>
+                  </td>
+                  <th>{{ clan.chatLanguage.name }}</th>
+                </tr>
+              </thead>
+            </table>
+          </section>
+        </div>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Clan Capital Districts</h2>
+          <div class="export__file">
+            <label for="export-file-main-member" class="export__file-btn" title="Export File" style="
+          background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;
+       "></label>
+            <input type="checkbox" id="export-file-main-member">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member" id="toPDFDistrictsTable">PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}" alt="PDF">
+              </label>
+              <label for="export-file-main-member" id="toJSONDistrictsTable">JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}" alt="JSON">
+              </label>
+              <label for="export-file-main-member" id="toCSVDistrictsTable">CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}" alt="CSV">
+              </label>
+              <label for="export-file-main-member" id="toEXCELDistrictsTable">EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}" alt="Excel">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}" alt="Search">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>District Hall Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for ccdd in clan.clanCapital.districts %} <tr>
+                <td>{{ccdd['name']}}</td>
+                <td>{{ccdd['districtHallLevel']}}</td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-not-member-table">
+        <section class="table-header">
+          <h2>Clan Member Details</h2>
+          <div class="export__file">
+            <label for="export-file-not-member" class="export__file-btn" title="Export File" style="
+          background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;
+       "></label>
+            <input type="checkbox" id="export-file-not-member">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-not-member" id="toPDFMemberListTable">PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}" alt="PDF">
+              </label>
+              <label for="export-file-not-member" id="toJSONMemberListTable">JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}" alt="JSON">
+              </label>
+              <label for="export-file-not-member" id="toCSVMemberListTable">CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}" alt="CSV">
+              </label>
+              <label for="export-file-not-member" id="toEXCELMemberListTable">EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}" alt="Excel">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}" alt="Search">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Tag <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Role <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Town Hall Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Experience Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>League Tier <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>League Tier Badge <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Trophies <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Builder Base Trophies <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Rank <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Previous Clan Rank <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Donations <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Donations Received <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Builder Base League <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for cmd in clan.memberList %} <tr>
+                <td>
+                  <a href="https://pixelcrux.com/Clash_of_Clans/Profile/App?tag={{ cmd['tag'][1:] }}" target="_blank" rel="noopener noreferrer">{{ cmd['tag'] }}
+                  </a>
+                </td>
+                <td>
+                  <a href="https://link.clashofclans.com/en/?action=OpenPlayerProfile&tag=%23{{ cmd['tag'][1:] }}" target="_blank" rel="noopener noreferrer">{{ cmd['name'] }}
+                  </a>
+                </td>
+                <td>{{cmd['role']}}</td>
+                <td>{{cmd['townHallLevel']}}</td>
+                <td>{{cmd['expLevel']}}</td>
+                <td>{{cmd.leagueTier['name']}}</td>
+                <td>
+                  <img src="{{ cmd.leagueTier.iconUrls.small }}" alt="Clan Badge" width="40">
+                </td>
+                <td>{{cmd['trophies']}}</td>
+                <td>{{cmd['builderBaseTrophies']}}</td>
+                <td>{{cmd['clanRank']}}</td>
+                <td>{{cmd['previousClanRank']}}</td>
+                <td>{{cmd['donations']}}</td>
+                <td>{{cmd['donationsReceived']}}</td>
+                <td>{{cmd.builderBaseLeague['name']}}</td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script>{% include 'coc-data-pages/table-utils.js' %}</script>
+  </body>
+</html>

@@ -3,7 +3,7 @@
 """
 This module is responsible for determining which dataset domain should be
 used to answer a given user query. It acts as a lightweight routing layer
-that maps user intent and temporal context to the appropriate data source.
+that maps user intent and temporal context to the appropriate coc-data source.
 
 The routing decision is based on:
 - Keywords present in the user query (e.g., "former", "top", "most")
@@ -14,7 +14,7 @@ By centralizing domain selection logic in this module, the chatbot ensures:
 - Consistent dataset usage across all queries
 - Predictable and deterministic routing behavior
 
-This module does not inspect or manipulate the data itself; it only selects
+This module does not inspect or manipulate the coc-data itself; it only selects
 the correct dataset domain identifier to be used by downstream components.
 """
 
@@ -23,21 +23,21 @@ def route_domain(text: str, month_info: dict) -> str | None:
     Determines the appropriate dataset domain for a user query.
 
     This function analyzes the normalized user input and the extracted
-    month information to decide which category of clan data should be queried.
+    month information to decide which category of clan coc-data should be queried.
 
     Supported domains:
-    - CLAN_MEMBERS: Monthly data for active clan members
+    - CLAN_MEMBERS: Monthly coc-data for active clan members
     - CLAN_MONTHLY_ANALYSIS: Aggregated analysis across a range of months
-    - FORMER_CLAN_MEMBERS: Monthly data for players who have left the clan
+    - FORMER_CLAN_MEMBERS: Monthly coc-data for players who have left the clan
     - TOP_CLAN_CONTRIBUTORS: Monthly top contributors based on clanscore
 
     Routing rules:
     - Queries containing "former" or "ex member" with a single month
-      are routed to former clan member data.
-    - Queries referencing a month range are routed to monthly analysis data.
+      are routed to former clan member coc-data.
+    - Queries referencing a month range are routed to monthly analysis coc-data.
     - Queries requesting top or most clanscore for a single month are routed
       to the top clan contributors dataset.
-    - All other single-month queries default to active clan member data.
+    - All other single-month queries default to active clan member coc-data.
 
     Parameters:
         text (str): Raw user input text.

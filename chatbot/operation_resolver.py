@@ -4,7 +4,7 @@
 This module functions as the core inference and decision-making engine of
 the chatbot. Its responsibility is to translate a validated user query
 into a precise analytical operation that can be executed on structured
-clan data.
+clan coc-data.
 
 The resolver is fully deterministic and rule-based. It does not perform
 any natural language generation; instead, it interprets user intent using
@@ -13,7 +13,7 @@ explicit rules, keyword detection, and controlled heuristics.
 Key responsibilities of this module include:
 - Identifying which metric a user is referring to
 - Detecting analytical intent (top, lowest, average, total, group, compare)
-- Validating whether a metric is allowed for a given data domain
+- Validating whether a metric is allowed for a given coc-data domain
 - Resolving player-specific, aggregate, and comparative operations
 - Returning a structured result object describing what was computed
 
@@ -31,23 +31,29 @@ import re
 # DOMAIN → ALLOWED METRICS
 DOMAIN_ALLOWED_FIELDS = {
     "CLAN_MEMBERS": {
-        "war", "warattack", "clancapital",
-        "clangames", "clangamesmaxed",
-        "clanscore", "status"
+        "war",
+        "warattack",
+        "clancapital",
+        "clangames",
+        "clangamesmaxed",
+        "clanscore",
+        "status",
     },
     "CLAN_MONTHLY_ANALYSIS": {
-        "warattack", "clancapital",
-        "clangames", "clangamesmaxed",
-        "clanscore"
+        "warattack",
+        "clancapital",
+        "clangames",
+        "clangamesmaxed",
+        "clanscore",
     },
     "FORMER_CLAN_MEMBERS": {
-        "warattack", "clancapital",
-        "clangames", "clangamesmaxed",
-        "clanscore"
+        "warattack",
+        "clancapital",
+        "clangames",
+        "clangamesmaxed",
+        "clanscore",
     },
-    "TOP_CLAN_CONTRIBUTORS": {
-        "clanscore"
-    }
+    "TOP_CLAN_CONTRIBUTORS": {"clanscore"},
 }
 
 # SUPPORTED METRICS
@@ -61,19 +67,19 @@ SUPPORTED_METRICS = {
 
 def detect_metric(text: str) -> str | None:
     """
-        Detects which supported metric is referenced in the user query.
+    Detects which supported metric is referenced in the user query.
 
-        The function performs a simple substring search against the set of
-        supported metrics. Only one metric is returned, and the first match
-        encountered is used.
+    The function performs a simple substring search against the set of
+    supported metrics. Only one metric is returned, and the first match
+    encountered is used.
 
-        Parameters:
-            text (str): Raw user input text.
+    Parameters:
+        text (str): Raw user input text.
 
-        Returns:
-            str | None:
-                - The detected metric name if found.
-                - None if no supported metric is referenced.
+    Returns:
+        str | None:
+            - The detected metric name if found.
+            - None if no supported metric is referenced.
     """
 
     text = text.lower()
@@ -84,21 +90,21 @@ def detect_metric(text: str) -> str | None:
 
 def detect_two_players(text: str, data: list) -> list[str]:
     """
-        Detects exactly two distinct player names from the user query.
+    Detects exactly two distinct player names from the user query.
 
-        This function scans the input text against known player names present
-        in the dataset. It preserves the order of appearance and removes
-        duplicates. A valid result is returned only when exactly two unique
-        players are found.
+    This function scans the input text against known player names present
+    in the dataset. It preserves the order of appearance and removes
+    duplicates. A valid result is returned only when exactly two unique
+    players are found.
 
-        Parameters:
-            text (str): Raw user input text.
-            data (list): Dataset containing player records.
+    Parameters:
+        text (str): Raw user input text.
+        data (list): Dataset containing player records.
 
-        Returns:
-            list[str]:
-                - A list of exactly two player names if detected.
-                - An empty list otherwise.
+    Returns:
+        list[str]:
+            - A list of exactly two player names if detected.
+            - An empty list otherwise.
     """
 
     found = []
@@ -119,28 +125,28 @@ def detect_two_players(text: str, data: list) -> list[str]:
 
 def detect_group_by(text: str) -> bool:
     """
-        Determines whether the user query requests grouping by metric value.
+    Determines whether the user query requests grouping by metric value.
 
-        Parameters:
-            text (str): Raw user input text.
+    Parameters:
+        text (str): Raw user input text.
 
-        Returns:
-            bool:
-                True if the query contains grouping intent, False otherwise.
+    Returns:
+        bool:
+            True if the query contains grouping intent, False otherwise.
     """
 
     return "group" in text.lower()
 
 def detect_average(text: str) -> bool:
     """
-        Determines whether the user query requests an average calculation.
+    Determines whether the user query requests an average calculation.
 
-        Parameters:
-            text (str): Raw user input text.
+    Parameters:
+        text (str): Raw user input text.
 
-        Returns:
-            bool:
-                True if average-related keywords are detected, False otherwise.
+    Returns:
+        bool:
+            True if average-related keywords are detected, False otherwise.
     """
 
     text = text.lower()
@@ -148,14 +154,14 @@ def detect_average(text: str) -> bool:
 
 def detect_total(text: str) -> bool:
     """
-        Determines whether the user query requests a total or sum calculation.
+    Determines whether the user query requests a total or sum calculation.
 
-        Parameters:
-            text (str): Raw user input text.
+    Parameters:
+        text (str): Raw user input text.
 
-        Returns:
-            bool:
-                True if total-related keywords are detected, False otherwise.
+    Returns:
+        bool:
+            True if total-related keywords are detected, False otherwise.
     """
 
     text = text.lower()
@@ -163,18 +169,18 @@ def detect_total(text: str) -> bool:
 
 def detect_top_n(text: str) -> int | None:
     """
-        Detects a request for a top-N ranking.
+    Detects a request for a top-N ranking.
 
-        This function parses expressions such as "top 5" or "top 10" and
-        enforces an upper bound to prevent excessive computation.
+    This function parses expressions such as "top 5" or "top 10" and
+    enforces an upper bound to prevent excessive computation.
 
-        Parameters:
-            text (str): Raw user input text.
+    Parameters:
+        text (str): Raw user input text.
 
-        Returns:
-            int | None:
-                - The requested N value if valid.
-                - None if no top-N pattern is detected.
+    Returns:
+        int | None:
+            - The requested N value if valid.
+            - None if no top-N pattern is detected.
     """
 
     m = re.search(r"\btop\s+(\d{1,2})\b", text.lower())
@@ -185,15 +191,15 @@ def detect_top_n(text: str) -> int | None:
 
 def detect_membership_query(text: str) -> bool:
     """
-        Determines whether the query is asking about player membership or
-        existence within a specific dataset domain.
+    Determines whether the query is asking about player membership or
+    existence within a specific dataset domain.
 
-        Parameters:
-            text (str): Raw user input text.
+    Parameters:
+        text (str): Raw user input text.
 
-        Returns:
-            bool:
-                True if membership-related intent is detected, False otherwise.
+    Returns:
+        bool:
+            True if membership-related intent is detected, False otherwise.
     """
 
     text = text.lower()
@@ -201,14 +207,14 @@ def detect_membership_query(text: str) -> bool:
 
 def detect_non_zero(text: str) -> bool:
     """
-        Determines whether the query specifies exclusion of zero-valued metrics.
+    Determines whether the query specifies exclusion of zero-valued metrics.
 
-        Parameters:
-            text (str): Raw user input text.
+    Parameters:
+        text (str): Raw user input text.
 
-        Returns:
-            bool:
-                True if non-zero filtering is requested, False otherwise.
+    Returns:
+        bool:
+            True if non-zero filtering is requested, False otherwise.
     """
 
     text = text.lower()
@@ -216,19 +222,19 @@ def detect_non_zero(text: str) -> bool:
 
 def detect_player_name(text: str, data: list) -> str | None:
     """
-        Detects a single player name referenced in the user query.
+    Detects a single player name referenced in the user query.
 
-        The function matches player names present in the dataset using a
-        case-insensitive substring search.
+    The function matches player names present in the dataset using a
+    case-insensitive substring search.
 
-        Parameters:
-            text (str): Raw user input text.
-            data (list): Dataset containing player records.
+    Parameters:
+        text (str): Raw user input text.
+        data (list): Dataset containing player records.
 
-        Returns:
-            str | None:
-                - The detected player name if found.
-                - None if no player name is detected.
+    Returns:
+        str | None:
+            - The detected player name if found.
+            - None if no player name is detected.
     """
 
     text_lower = text.lower()
@@ -299,7 +305,7 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
             return {
                 "type": "ERROR_FIELD_NOT_SUPPORTED",
                 "field": metric,
-                "allowed": sorted(allowed)
+                "allowed": sorted(allowed),
             }
 
         # numeric safety check
@@ -312,7 +318,7 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
             except (TypeError, ValueError):
                 return {
                     "type": "ERROR_UNSUPPORTED_METRIC",
-                    "allowed": sorted(SUPPORTED_METRICS)
+                    "allowed": sorted(SUPPORTED_METRICS),
                 }
             break
 
@@ -323,20 +329,20 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
             "type": "PLAYER_METRIC",
             "player": player,
             "metric": metric,
-            "value": int(row.get(metric, 0))
+            "value": int(row.get(metric, 0)),
         }
 
     if "status" in text_lower and domain != "CLAN_MEMBERS":
         return {
             "type": "ERROR_FIELD_NOT_SUPPORTED",
             "field": "status",
-            "allowed": sorted(DOMAIN_ALLOWED_FIELDS.get(domain, []))
+            "allowed": sorted(DOMAIN_ALLOWED_FIELDS.get(domain, [])),
         }
 
     if "most" in text_lower and not metric:
         return {
             "type": "ERROR_UNSUPPORTED_METRIC",
-            "allowed": sorted(SUPPORTED_METRICS)
+            "allowed": sorted(SUPPORTED_METRICS),
         }
 
     if player and metric:
@@ -345,7 +351,7 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
             "type": "PLAYER_METRIC",
             "player": player,
             "metric": metric,
-            "value": int(row.get(metric, 0))
+            "value": int(row.get(metric, 0)),
         }
 
     # LIST NAMES
@@ -353,14 +359,14 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
         return {
             "type": "LIST_NAMES",
             "domain": domain,
-            "names": [row.get("name") for row in data]
+            "names": [row.get("name") for row in data],
         }
 
     # PLAYER INTENT GUARARD
     if metric and " of " in text_lower and not player:
         return {
             "type": "ERROR_PLAYER_NOT_FOUND",
-            "players": [row.get("name") for row in data]
+            "players": [row.get("name") for row in data],
         }
 
     # COMPARE TWO PLAYERS
@@ -370,7 +376,7 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
         if not players:
             return {
                 "type": "ERROR_COMPARE_PLAYERS_NOT_FOUND",
-                "players": [row.get("name") for row in data]
+                "players": [row.get("name") for row in data],
             }
 
         p1, p2 = players
@@ -389,23 +395,13 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
             except (TypeError, ValueError):
                 continue
 
-            comparison[m] = {
-                p1: v1,
-                p2: v2
-            }
+            comparison[m] = {p1: v1, p2: v2}
 
-        result = {
-            "type": "COMPARE_PLAYERS",
-            "players": players,
-            "metrics": comparison
-        }
+        result = {"type": "COMPARE_PLAYERS", "players": players, "metrics": comparison}
 
         # include status only for clan members
         if domain == "CLAN_MEMBERS":
-            result["status"] = {
-                p1: row1.get("status"),
-                p2: row2.get("status")
-            }
+            result["status"] = {p1: row1.get("status"), p2: row2.get("status")}
 
         return result
 
@@ -424,16 +420,13 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
             count += 1
 
         if count == 0:
-            return {
-                "type": "ERROR_NO_DATA_FOR_TOTAL",
-                "metric": metric
-            }
+            return {"type": "ERROR_NO_DATA_FOR_TOTAL", "metric": metric}
 
         return {
             "type": "TOTAL_METRIC",
             "metric": metric,
             "total": total,
-            "count": count
+            "count": count,
         }
 
     # AVERAGE OF METRIC
@@ -447,10 +440,7 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
             values.append(v)
 
         if not values:
-            return {
-                "type": "ERROR_NO_DATA_FOR_AVERAGE",
-                "metric": metric
-            }
+            return {"type": "ERROR_NO_DATA_FOR_AVERAGE", "metric": metric}
 
         avg = sum(values) / len(values)
 
@@ -458,7 +448,7 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
             "type": "AVERAGE_METRIC",
             "metric": metric,
             "average": round(avg, 2),
-            "count": len(values)
+            "count": len(values),
         }
 
     # METRIC-BASED OPERATIONS
@@ -477,16 +467,10 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
 
         if not values:
             if non_zero_only:
-                return {
-                    "type": "ERROR_NO_NON_ZERO_VALUES",
-                    "metric": metric
-                }
+                return {"type": "ERROR_NO_NON_ZERO_VALUES", "metric": metric}
             return None
 
-        unique_values = sorted(
-            set(values),
-            reverse=is_highest
-        )
+        unique_values = sorted(set(values), reverse=is_highest)
 
         # GROUP BY VALUE (STAND-ALONE)
         if detect_group_by(text_lower) and not top_n:
@@ -504,16 +488,13 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
 
             if not groups:
                 if non_zero_only:
-                    return {
-                        "type": "ERROR_NO_NON_ZERO_VALUES",
-                        "metric": metric
-                    }
+                    return {"type": "ERROR_NO_NON_ZERO_VALUES", "metric": metric}
                 return None
 
             return {
                 "type": "GROUP_BY_VALUE",
                 "metric": metric,
-                "groups": dict(sorted(groups.items()))
+                "groups": dict(sorted(groups.items())),
             }
 
         # TOP N (WITH TIES)
@@ -521,11 +502,7 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
             selected = unique_values[:top_n]
 
             groups = {
-                v: [
-                    row.get("name")
-                    for row in data
-                    if int(row.get(metric, 0)) == v
-                ]
+                v: [row.get("name") for row in data if int(row.get(metric, 0)) == v]
                 for v in selected
             }
 
@@ -534,36 +511,29 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
                 "metric": metric,
                 "mode": "lowest" if is_lowest else "highest",
                 "limit": top_n,
-                "groups": groups
+                "groups": groups,
             }
 
         # SINGLE HIGHEST / LOWEST
         extreme = unique_values[0]
-        names = [
-            row.get("name")
-            for row in data
-            if int(row.get(metric, 0)) == extreme
-        ]
+        names = [row.get("name") for row in data if int(row.get(metric, 0)) == extreme]
 
         return {
             "type": "LEAST_OF_METRIC" if is_lowest else "MOST_OF_METRIC",
             "metric": metric,
             "names": names,
-            "value": extreme
+            "value": extreme,
         }
 
     # MEMBERSHIP / EXISTENCE CHECK
     if detect_membership_query(text_lower) and player:
-        exists = any(
-            row.get("name") == player
-            for row in data
-        )
+        exists = any(row.get("name") == player for row in data)
 
         return {
             "type": "PLAYER_MEMBERSHIP_CHECK",
             "player": player,
             "domain": domain,
-            "exists": exists
+            "exists": exists,
         }
 
     # PLAYER-SPECIFIC QUERIES
@@ -574,26 +544,16 @@ def resolve_operation(text: str, domain: str, data: list) -> dict | None:
     ):
         return {
             "type": "ERROR_PLAYER_NOT_FOUND",
-            "players": [row.get("name") for row in data]
+            "players": [row.get("name") for row in data],
         }
 
     if domain == "CLAN_MEMBERS" and "status" in text_lower and player:
         row = next(r for r in data if r.get("name") == player)
-        return {
-            "type": "PLAYER_STATUS",
-            "player": player,
-            "status": row.get("status")
-        }
+        return {"type": "PLAYER_STATUS", "player": player, "status": row.get("status")}
 
     if player and ("display" in text_lower or "show" in text_lower):
         row = next(r for r in data if r.get("name") == player)
-        return {
-            "type": "PLAYER_FULL_DATA",
-            "player": player,
-            "data": row
-        }
+        return {"type": "PLAYER_FULL_DATA", "player": player, "coc-data": row}
 
     # FALLBACK
-    return {
-        "type": "ERROR_UNCLEAR_OPERATION"
-    }
+    return {"type": "ERROR_UNCLEAR_OPERATION"}

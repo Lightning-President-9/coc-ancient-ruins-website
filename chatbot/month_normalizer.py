@@ -13,7 +13,7 @@ The normalization process is fully deterministic and rule-based, relying
 on regular expressions and predefined month mappings. No assumptions are
 made beyond explicit patterns found in the input text.
 
-This module plays a critical role in ensuring consistent data access and
+This module plays a critical role in ensuring consistent coc-data access and
 preventing ambiguity when resolving time-based clan queries.
 """
 
@@ -21,22 +21,33 @@ import re
 
 # Canonical month mapping
 MONTH_MAP = {
-    "jan": "JAN", "january": "JAN",
-    "feb": "FEB", "february": "FEB",
-    "mar": "MAR", "march": "MAR",
-    "apr": "APR", "april": "APR",
+    "jan": "JAN",
+    "january": "JAN",
+    "feb": "FEB",
+    "february": "FEB",
+    "mar": "MAR",
+    "march": "MAR",
+    "apr": "APR",
+    "april": "APR",
     "may": "MAY",
-    "jun": "JUN", "june": "JUN",
-    "jul": "JUL", "july": "JUL",
-    "aug": "AUG", "august": "AUG",
-    "sep": "SEP", "sept": "SEP", "september": "SEP",
-    "oct": "OCT", "october": "OCT",
-    "nov": "NOV", "november": "NOV",
-    "dec": "DEC", "december": "DEC",
+    "jun": "JUN",
+    "june": "JUN",
+    "jul": "JUL",
+    "july": "JUL",
+    "aug": "AUG",
+    "august": "AUG",
+    "sep": "SEP",
+    "sept": "SEP",
+    "september": "SEP",
+    "oct": "OCT",
+    "october": "OCT",
+    "nov": "NOV",
+    "november": "NOV",
+    "dec": "DEC",
+    "december": "DEC",
 }
 
 YEAR_PATTERN = r"(20\d{2})"
-
 
 def extract_single_month(text: str) -> str | None:
     """
@@ -70,7 +81,6 @@ def extract_single_month(text: str) -> str | None:
 
     return None
 
-
 def extract_month_range(text: str) -> str | None:
     """
     Extracts and normalizes a month-range reference from user input.
@@ -103,7 +113,6 @@ def extract_month_range(text: str) -> str | None:
                 return f"{c1}-{c2}_{year}"
 
     return None
-
 
 def normalize_month(text: str) -> dict:
     """

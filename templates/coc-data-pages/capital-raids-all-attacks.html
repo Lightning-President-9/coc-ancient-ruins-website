@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body>
+    <div class="container">
+      {% include "navbar.html" %}
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Total Raids</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-1" class="export__file-btn" title="Export File" style="
+          background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;
+       "></label>
+            <input type="checkbox" id="export-file-main-member-1">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-1" id="toPDFClanCapitalTotalRaids">PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}" alt="PDF">
+              </label>
+              <label for="export-file-main-member-1" id="toJSONClanCapitalTotalRaids">JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}" alt="JSON">
+              </label>
+              <label for="export-file-main-member-1" id="toCSVClanCapitalTotalRaids">CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}" alt="CSV">
+              </label>
+              <label for="export-file-main-member-1" id="toEXCELClanCapitalTotalRaids">EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}" alt="Excel">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}" alt="Search">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>State <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Start Time <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>End Time <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Capital Total Loot <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Raids Completed <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Total Attacks <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Enemy Districts Destroyed <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Offensive Reward <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Defensive Reward <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for crs in capital_raid_seasons %} <tr>
+                <td>{{crs['state']}}</td>
+                <td>{{crs['startTime']}}</td>
+                <td>{{crs['endTime']}}</td>
+                <td>{{crs['capitalTotalLoot']}}</td>
+                <td>{{crs['raidsCompleted']}}</td>
+                <td>{{crs['totalAttacks']}}</td>
+                <td>{{crs['enemyDistrictsDestroyed']}}</td>
+                <td>{{crs['offensiveReward']}}</td>
+                <td>{{crs['defensiveReward']}}</td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Attack Log</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-2" class="export__file-btn" title="Export File" style="
+          background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;
+       "></label>
+            <input type="checkbox" id="export-file-main-member-2">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-2" id="toPDFClanCapitalAttackLog">PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}" alt="PDF">
+              </label>
+              <label for="export-file-main-member-2" id="toJSONClanCapitalAttackLog">JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}" alt="JSON">
+              </label>
+              <label for="export-file-main-member-2" id="toCSVClanCapitalAttackLog">CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}" alt="CSV">
+              </label>
+              <label for="export-file-main-member-2" id="toEXCELClanCapitalAttackLog">EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}" alt="Excel">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}" alt="Search">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Start Time <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>End Time <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Tag <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Badge <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Attack Count <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>District Count <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Districts Destroyed <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for crs in capital_raid_seasons %} {% for log in crs.attackLog %} <tr>
+                <td>{{ crs.startTime }}</td>
+                <td>{{ crs.endTime }}</td>
+                <td>{{ log.defender.tag }}</td>
+                <td>{{ log.defender.name }}</td>
+                <td>{{ log.defender.level }}</td>
+                <td>
+                  <img src="{{ log.defender.badgeUrls.small }}" alt="Clan Badge" width="40">
+                </td>
+                <td>{{ log.attackCount }}</td>
+                <td>{{ log.districtCount }}</td>
+                <td>{{ log.districtsDestroyed }}</td>
+              </tr> {% endfor %} {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Attack Log/Districts</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-3" class="export__file-btn" title="Export File" style="
+          background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;
+       "></label>
+            <input type="checkbox" id="export-file-main-member-3">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-3" id="toPDFClanCapitalAttackLog/Districts">PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}" alt="PDF">
+              </label>
+              <label for="export-file-main-member-3" id="toJSONClanCapitalAttackLog/Districts">JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}" alt="JSON">
+              </label>
+              <label for="export-file-main-member-3" id="toCSVClanCapitalAttackLog/Districts">CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}" alt="CSV">
+              </label>
+              <label for="export-file-main-member-3" id="toEXCELClanCapitalAttackLog/Districts">EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}" alt="Excel">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}" alt="Search">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Start Time <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>End Time <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Badge <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>District Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>District Hall Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Destruction Percent <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Attack Count <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Total Looted <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for crs in capital_raid_seasons %} {% for log in crs.attackLog %} {% for district in log.districts %} <tr>
+                <td>{{ crs.startTime }}</td>
+                <td>{{ crs.endTime }}</td>
+                <td>{{ log.defender.name }}</td>
+                <td>
+                  <img src="{{ log.defender.badgeUrls.small }}" alt="Clan Badge" width="40">
+                </td>
+                <td>{{ district.name }}</td>
+                <td>{{ district.districtHallLevel }}</td>
+                <td>{{ district.destructionPercent }}</td>
+                <td>{{ district.attackCount }}</td>
+                <td>{{ district.totalLooted }}</td>
+              </tr> {% endfor %} {% endfor %} {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script>{% include 'coc-data-pages/table-utils.js' %}</script>
+  </body>
+</html>

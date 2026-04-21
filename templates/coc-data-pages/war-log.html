@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body>
+    <div class="container">
+      {% include "navbar.html" %}
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Clan War Log</h2>
+          <div class="export__file">
+            <label for="export-file-warlog-1" class="export__file-btn" title="Export File" style="background:#fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-warlog-1">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-warlog-1" id="toPDFWarLogTable"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-warlog-1" id="toJSONWarLogTable"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-warlog-1" id="toCSVWarLogTable"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-warlog-1" id="toEXCELWarLogTable"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Result <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>End Time <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Team Size <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Attacks Per Member <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Tag <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Badge <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Stars <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Clan Destruction % <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Opponent Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Opponent Tag <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Opponent Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Opponent Badge <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Opponent Stars <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Opponent Destruction % <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for war in war_logs %} <tr>
+                <td>{{ war.result }}</td>
+                <td>{{ war.endTime }}</td>
+                <td>{{ war.teamSize }}</td>
+                <td>{{ war.attacksPerMember }}</td>
+                <td>{{ war.clan.name }}</td>
+                <td>{{ war.clan.tag }}</td>
+                <td>{{ war.clan.clanLevel }}</td>
+                <td>
+                  <img src="{{ war.clan.badgeUrls.small }}" width="40">
+                </td>
+                <td>{{ war.clan.stars }}</td>
+                <td>{{ war.clan.destructionPercentage }}</td>
+                <td>{{ war.opponent.name }}</td>
+                <td>{{ war.opponent.tag }}</td>
+                <td>{{ war.opponent.clanLevel }}</td>
+                <td>
+                  <img src="{{ war.opponent.badgeUrls.small }}" width="40">
+                </td>
+                <td>{{ war.opponent.stars }}</td>
+                <td>{{ war.opponent.destructionPercentage }}</td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script>{% include 'coc-data-pages/table-utils.js' %}</script>
+  </body>
+</html>

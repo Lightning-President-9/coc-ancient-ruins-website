@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'head.html' %}
+  <style>
+    .main-table {
+      height: 400px !important;
+    }
+  </style>
+  <body>
+    <div class="container">
+      {% include "navbar.html" %}
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Player Overview</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-1" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-1">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-1" id="toPDFPlayerOverview"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-1" id="toJSONPlayerOverview"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-1" id="toCSVPlayerOverview"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-1" id="toEXCELPlayerOverview"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Tag</th>
+                <th>Town Hall</th>
+                <th>Town Hall Weapon</th>
+                <th>Exp Level</th>
+                <th>Trophies</th>
+                <th>Best Trophies</th>
+                <th>War Stars</th>
+                <th>Attack Wins</th>
+                <th>Defense Wins</th>
+                <th>Role</th>
+                <th>War Preference</th>
+                <th>Donations</th>
+                <th>Donations Received</th>
+                <th>Clan Capital Contributions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ player.name }}</td>
+                <td>{{ player.tag }}</td>
+                <td>{{ player.townHallLevel }}</td>
+                <td>{{ player.townHallWeaponLevel }}</td>
+                <td>{{ player.expLevel }}</td>
+                <td>{{ player.trophies }}</td>
+                <td>{{ player.bestTrophies }}</td>
+                <td>{{ player.warStars }}</td>
+                <td>{{ player.attackWins }}</td>
+                <td>{{ player.defenseWins }}</td>
+                <td>{{ player.role }}</td>
+                <td>{{ player.warPreference }}</td>
+                <td>{{ player.donations }}</td>
+                <td>{{ player.donationsReceived }}</td>
+                <td>{{ player.clanCapitalContributions }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Clan Information</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-2" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-2">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-2" id="toPDFClanInformation"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-2" id="toJSONClanInformation"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-2" id="toCSVClanInformation"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-2" id="toEXCELClanInformation"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Clan Tag</th>
+                <th>Clan Name</th>
+                <th>Clan Level</th>
+                <th>Clan Badge</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ player.clan.tag }}</td>
+                <td>{{ player.clan.name }}</td>
+                <td>{{ player.clan.clanLevel }}</td>
+                <td>
+                  <img src="{{ player.clan.badgeUrls.small }}" width="40">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>League Information</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-3" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-3">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-3" id="toPDFLeagueInformation"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-3" id="toJSONLeagueInformation"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-3" id="toCSVLeagueInformation"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-3" id="toEXCELLeagueInformation"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>League Name</th>
+                <th>League Icon</th>
+                <th>Builder Base League</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ player.leagueTier.name }}</td>
+                <td>
+                  <img src="{{ player.leagueTier.iconUrls.small }}" width="40">
+                </td>
+                <td>{{ player.builderBaseLeague.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Player Achievements</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-4" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-4">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-4" id="toPDFPlayerAchievements"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-4" id="toJSONPlayerAchievements"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-4" id="toCSVPlayerAchievements"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-4" id="toEXCELPlayerAchievements"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Stars <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Value <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Target <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Info <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Completion Info <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Village <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for achievement in player.achievements %} <tr>
+                <td>{{ achievement.name }}</td>
+                <td>{{ achievement.stars }}</td>
+                <td>{{ achievement.value }}</td>
+                <td>{{ achievement.target }}</td>
+                <td>{{ achievement.info }}</td>
+                <td> {% if achievement.completionInfo %} {{ achievement.completionInfo }} {% else %} - {% endif %} </td>
+                <td>{{ achievement.village }}</td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Hero Equipment</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-5" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-5">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-5" id="toPDFHeroEquipment"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-5" id="toJSONHeroEquipment"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-5" id="toCSVHeroEquipment"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-5" id="toEXCELHeroEquipment"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Max Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Village <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for equip in player.heroEquipment %} <tr>
+                <td>{{ equip.name }}</td>
+                <td>{{ equip.level }}</td>
+                <td>{{ equip.maxLevel }}</td>
+                <td>{{ equip.village }}</td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Player Spells</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-6" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-6">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-6" id="toPDFPlayerSpells"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-6" id="toJSONPlayerSpells"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-6" id="toCSVPlayerSpells"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-6" id="toEXCELPlayerSpells"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Max Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Village <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for spell in player.spells %} <tr>
+                <td>{{ spell.name }}</td>
+                <td>{{ spell.level }}</td>
+                <td>{{ spell.maxLevel }}</td>
+                <td>{{ spell.village }}</td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Player Troops</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-7" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-7">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-7" id="toPDFPlayerTroops"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-7" id="toJSONPlayerTroops"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-7" id="toCSVPlayerTroops"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-7" id="toEXCELPlayerTroops"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Max Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Village <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for troop in player.troops %} <tr>
+                <td>{{ troop.name }}</td>
+                <td>{{ troop.level }}</td>
+                <td>{{ troop.maxLevel }}</td>
+                <td>{{ troop.village }}</td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Player Heroes</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-8" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-8">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-8" id="toPDFPlayerHeroes"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-8" id="toJSONPlayerHeroes"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-8" id="toCSVPlayerHeroes"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-8" id="toEXCELPlayerHeroes"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Max Level <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Village <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Equipment <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for hero in player.heroes %} <tr>
+                <td>{{ hero.name }}</td>
+                <td>{{ hero.level }}</td>
+                <td>{{ hero.maxLevel }}</td>
+                <td>{{ hero.village }}</td>
+                <td> {% if hero.equipment %} <ul style="margin:0;padding-left:15px"> {% for eq in hero.equipment %} <li>{{ eq.name }} (Lvl {{ eq.level }}/{{ eq.maxLevel }})</li> {% endfor %} </ul> {% else %} - {% endif %} </td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Player Labels</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-9" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-9">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-9" id="toPDFPlayerLabels"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-9" id="toJSONPlayerLabels"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-9" id="toCSVPlayerLabels"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-9" id="toEXCELPlayerLabels"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>ID <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Name <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>Icon <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for label in player.labels %} <tr>
+                <td>{{ label.id }}</td>
+                <td>{{ label.name }}</td>
+                <td>
+                  <img src="{{ label.iconUrls.small }}" alt="Label Icon" width="40">
+                </td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Player House Elements</h2>
+          <div class="export__file">
+            <label for="export-file-main-member-10" class="export__file-btn" title="Export File" style="background: #fff6 url('/static/home-page-icons/export_img_final.png') center / 65% no-repeat;"></label>
+            <input type="checkbox" id="export-file-main-member-10">
+            <div class="export__file-options">
+              <label>Export As &nbsp; &#10140;</label>
+              <label for="export-file-main-member-10" id="toPDFPlayerHouseElements"> PDF <img src="{{ url_for('static', filename='home-page-icons/pdf_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-10" id="toJSONPlayerHouseElements"> JSON <img src="{{ url_for('static', filename='home-page-icons/json_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-10" id="toCSVPlayerHouseElements"> CSV <img src="{{ url_for('static', filename='home-page-icons/csv_icon_img_final.png') }}">
+              </label>
+              <label for="export-file-main-member-10" id="toEXCELPlayerHouseElements"> EXCEL <img src="{{ url_for('static', filename='home-page-icons/xls_icon_img_final.png') }}">
+              </label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="search" placeholder="Search Data...">
+            <img src="{{ url_for('static', filename='home-page-icons/search_img_final.png') }}">
+          </div>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Type <span class="icon-arrow">&UpArrow;</span>
+                </th>
+                <th>ID <span class="icon-arrow">&UpArrow;</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody> {% for element in player.playerHouse.elements %} <tr>
+                <td>{{ element.type }}</td>
+                <td>{{ element.id }}</td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script>{% include 'coc-data-pages/table-utils.js' %}</script>
+  </body>
+</html>

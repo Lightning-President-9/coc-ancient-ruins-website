@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body>
+    <div class="container">
+      {% include "navbar.html" %}
+      <main class="main-table">
+        <section class="table-header">
+          <h2>Clan Players</h2>
+        </section>
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Player Name</th>
+                <th>Profile</th>
+              </tr>
+            </thead>
+            <tbody> {% for player in players %} <tr>
+                <td>{{ player }}</td>
+                <td>
+                  <a href="/coc-data/clan-players/{{ player }}/"> View Profile </a>
+                </td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script>{% include 'coc-data-pages/table-utils.js' %}</script>
+  </body>
+</html>

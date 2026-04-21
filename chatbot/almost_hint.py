@@ -33,7 +33,6 @@ MONTHS = {
     "dec": "DEC",
 }
 
-
 def suggest_month(text: str) -> str | None:
     """
     Attempts to infer a valid month–year combination from informal user input.
@@ -60,8 +59,7 @@ def suggest_month(text: str) -> str | None:
     t = text.lower()
 
     m = re.search(
-        r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s*(\d{2,4})",
-        t
+        r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s*(\d{2,4})", t
     )
     if m:
         month = MONTHS[m.group(1)]
@@ -71,7 +69,6 @@ def suggest_month(text: str) -> str | None:
         return f"{month} {year}"
 
     return None
-
 
 def suggest_player(text: str, players: list[str]) -> str | None:
     """
@@ -97,10 +94,7 @@ def suggest_player(text: str, players: list[str]) -> str | None:
     """
 
     t = text.lower()
-    matches = [
-        p for p in players
-        if p.lower().startswith(t) or t in p.lower()
-    ]
+    matches = [p for p in players if p.lower().startswith(t) or t in p.lower()]
 
     if len(matches) == 1:
         return matches[0]

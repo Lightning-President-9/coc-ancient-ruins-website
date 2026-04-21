@@ -6,7 +6,7 @@ This module is responsible for converting structured operation results
 responses suitable for display in the chat UI or export to PDF.
 
 It acts as the final presentation layer of the chatbot pipeline and
-contains no business logic or data computation. All inputs to this
+contains no business logic or coc-data computation. All inputs to this
 module are assumed to be validated and structured beforehand.
 
 Key responsibilities:
@@ -39,7 +39,6 @@ def _safe_names(names: list) -> list[str]:
 
     return [str(n) for n in names if n is not None and str(n).strip()]
 
-
 def build_response(result: dict, month_value: str) -> str:
     """
     Convert a structured operation result into a readable response string.
@@ -48,13 +47,13 @@ def build_response(result: dict, month_value: str) -> str:
     response accordingly. Each supported operation type has a dedicated
     formatting block to ensure clarity and consistency.
 
-    The function does not modify or compute data; it only formats the
+    The function does not modify or compute coc-data; it only formats the
     result provided by the resolver.
 
     Parameters:
         result (dict):
             Structured output from the operation_resolver module,
-            containing operation type and associated data.
+            containing operation type and associated coc-data.
         month_value (str):
             Normalized month identifier (e.g., "APR_2025", "APR-MAY_2025").
 
@@ -94,7 +93,7 @@ def build_response(result: dict, month_value: str) -> str:
     """
 
     if not result:
-        return "I could not understand the request or the data is unavailable."
+        return "I could not understand the request or the coc-data is unavailable."
 
     rtype = result.get("type")
     month_readable = month_value.replace("_", " ")
@@ -105,7 +104,7 @@ def build_response(result: dict, month_value: str) -> str:
         domain = result.get("domain")
 
         if not names:
-            return f"No data found for {month_readable}."
+            return f"No coc-data found for {month_readable}."
 
         if domain == "FORMER_CLAN_MEMBERS":
             title = f"Former clan members for {month_readable}"
@@ -154,9 +153,7 @@ def build_response(result: dict, month_value: str) -> str:
         players = result["players"]
         metrics = result["metrics"]
 
-        lines = [
-            f"Comparison for {players[0]} vs {players[1]} in {month_readable}:"
-        ]
+        lines = [f"Comparison for {players[0]} vs {players[1]} in {month_readable}:"]
 
         for metric, values in metrics.items():
             lines.append(
@@ -182,9 +179,7 @@ def build_response(result: dict, month_value: str) -> str:
         mode = result["mode"]
         groups = result["groups"]
 
-        lines = [
-            f"Top {limit} {mode} {metric} in {month_readable}:"
-        ]
+        lines = [f"Top {limit} {mode} {metric} in {month_readable}:"]
 
         for value in sorted(groups.keys(), reverse=(mode == "highest")):
             names = _safe_names(groups[value])
@@ -197,9 +192,7 @@ def build_response(result: dict, month_value: str) -> str:
         metric = result["metric"]
         groups = result["groups"]
 
-        lines = [
-            f"{metric.capitalize()} grouped by value in {month_readable}:"
-        ]
+        lines = [f"{metric.capitalize()} grouped by value in {month_readable}:"]
 
         for value, names in groups.items():
             safe = _safe_names(names)
@@ -223,7 +216,7 @@ def build_response(result: dict, month_value: str) -> str:
 
     # PLAYER FULL DATA
     if rtype == "PLAYER_FULL_DATA":
-        data = result["data"]
+        data = result["coc-data"]
         lines = []
 
         for key in sorted(data.keys()):
@@ -251,19 +244,13 @@ def build_response(result: dict, month_value: str) -> str:
         domain_label = {
             "CLAN_MEMBERS": "a clan member",
             "FORMER_CLAN_MEMBERS": "a former member",
-            "TOP_CLAN_CONTRIBUTORS": "in top contributors"
+            "TOP_CLAN_CONTRIBUTORS": "in top contributors",
         }.get(domain, "present")
 
         if exists:
-            return (
-                f"Yes, {player} was {domain_label} "
-                f"in {month_readable}."
-            )
+            return f"Yes, {player} was {domain_label} " f"in {month_readable}."
         else:
-            return (
-                f"No, {player} was not {domain_label} "
-                f"in {month_readable}."
-            )
+            return f"No, {player} was not {domain_label} " f"in {month_readable}."
 
     # ERRORS
     if rtype == "ERROR_UNSUPPORTED_METRIC":
@@ -291,7 +278,7 @@ def build_response(result: dict, month_value: str) -> str:
     if rtype == "ERROR_NO_NON_ZERO_VALUES":
         return (
             f"All values for {result['metric']} are zero in {month_readable}. "
-            "No non-zero data is available."
+            "No non-zero coc-data is available."
         )
 
     if rtype == "ERROR_UNCLEAR_OPERATION":
@@ -313,13 +300,13 @@ def build_response(result: dict, month_value: str) -> str:
 
     if rtype == "ERROR_NO_DATA_FOR_AVERAGE":
         return (
-            f"No valid data available to calculate the average "
+            f"No valid coc-data available to calculate the average "
             f"for {result['metric']} in {month_readable}."
         )
 
     if rtype == "ERROR_NO_DATA_FOR_TOTAL":
         return (
-            f"No valid data available to calculate the total "
+            f"No valid coc-data available to calculate the total "
             f"for {result['metric']} in {month_readable}."
         )
 

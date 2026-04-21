@@ -3,11 +3,11 @@
 """
 This module acts as the central orchestration layer of the chatbot system.
 It is responsible for receiving raw user input, interpreting intent,
-coordinating data access, invoking analytical operations, and returning
+coordinating coc-data access, invoking analytical operations, and returning
 a structured response suitable for UI or API consumption.
 
 The controller does not perform analytics itself. Instead, it coordinates
-specialized modules for classification, normalization, routing, data
+specialized modules for classification, normalization, routing, coc-data
 retrieval, operation resolution, and response formatting. This design
 keeps the chatbot deterministic, modular, and easy to reason about.
 
@@ -36,90 +36,90 @@ METRIC_EXPLANATIONS = {
     "clanscore": "Overall contribution score representing player performance.",
     "clangamesmaxed": "Whether the player fully completed Clan Games.",
     "clangames": "Points contributed by the player in Clan Games.",
-    "clancapital": "Contribution made by the player to Clan Capital raids."
+    "clancapital": "Contribution made by the player to Clan Capital raids.",
 }
 
 def build_suggestions(op_type: str, domain: str, month_value: str) -> list[str]:
     """
-        Builds a contextual list of follow-up query suggestions.
+    Builds a contextual list of follow-up query suggestions.
 
-        This function generates meaningful next-step questions based on the
-        type of operation that was just executed. The goal is to guide users
-        toward valid and relevant queries without overwhelming them.
+    This function generates meaningful next-step questions based on the
+    type of operation that was just executed. The goal is to guide users
+    toward valid and relevant queries without overwhelming them.
 
-        Suggestions are:
-        - Operation-aware (based on op_type)
-        - Month-specific (derived from month_value)
-        - Domain-safe (only valid for the resolved dataset)
+    Suggestions are:
+    - Operation-aware (based on op_type)
+    - Month-specific (derived from month_value)
+    - Domain-safe (only valid for the resolved dataset)
 
-        Parameters:
-            op_type (str): The resolved operation type returned by the
-                           operation resolver.
-            domain (str): The dataset domain used for the current query.
-            month_value (str): Normalized month or month-range value.
+    Parameters:
+        op_type (str): The resolved operation type returned by the
+                       operation resolver.
+        domain (str): The dataset domain used for the current query.
+        month_value (str): Normalized month or month-range value.
 
-        Returns:
-            list[str]:
-                A list of suggested follow-up questions that the user can
-                immediately ask next.
-        """
+    Returns:
+        list[str]:
+            A list of suggested follow-up questions that the user can
+            immediately ask next.
+    """
 
     m = month_value.replace("_", " ")
 
     if op_type == "PLAYER_METRIC":
         return [
-            f"display data of this player in {m}",
+            f"display coc-data of this player in {m}",
             f"compare this player vs another in {m}",
-            f"what is the average clanscore in {m}"
+            f"what is the average clanscore in {m}",
         ]
 
     if op_type in {"MOST_OF_METRIC", "LEAST_OF_METRIC"}:
         return [
             f"top 5 clanscore in {m}",
             f"lowest non-zero warattack in {m}",
-            f"group clanscore in {m}"
+            f"group clanscore in {m}",
         ]
 
     if op_type == "TOP_N_METRIC":
         return [
             f"top 3 lowest clanscore in {m}",
             f"group warattack in {m}",
-            f"what is the average warattack in {m}"
+            f"what is the average warattack in {m}",
         ]
 
     if op_type == "GROUP_BY_VALUE":
         return [
             f"top 5 warattack in {m}",
             f"lowest non-zero warattack in {m}",
-            f"total warattack in {m}"
+            f"total warattack in {m}",
         ]
 
     if op_type == "COMPARE_PLAYERS":
         return [
             f"what is the average clanscore in {m}",
             f"top 5 clanscore in {m}",
-            f"display data of one of these players in {m}"
+            f"display coc-data of one of these players in {m}",
         ]
 
     if op_type in {"AVERAGE_METRIC", "TOTAL_METRIC"}:
         return [
             f"top 5 clanscore in {m}",
             f"group clanscore in {m}",
-            f"compare two players in {m}"
+            f"compare two players in {m}",
         ]
 
     if op_type == "PLAYER_MEMBERSHIP_CHECK":
         return [
-            f"display data of this player in {m}",
+            f"display coc-data of this player in {m}",
             f"is this player active in {m}",
-            f"compare this player vs another in {m}"
+            f"compare this player vs another in {m}",
         ]
 
     # Safe fallback
     return [
         f"list all names in {m}",
         f"top 5 clanscore in {m}",
-        f"what is the average warattack in {m}"
+        f"what is the average warattack in {m}",
     ]
 
 def handle_chat(user_text: str) -> dict:
@@ -133,13 +133,13 @@ def handle_chat(user_text: str) -> dict:
     - Enforce input constraints (length, emptiness)
     - Handle help, greeting, and informational queries
     - Normalize and validate month or month-range expressions
-    - Determine the correct data domain to query
-    - Fetch structured clan data from GitHub-hosted JSON
+    - Determine the correct coc-data domain to query
+    - Fetch structured clan coc-data from GitHub-hosted JSON
     - Resolve the analytical operation requested by the user
     - Convert structured results into a human-readable response
     - Attach source links and contextual follow-up suggestions
 
-    The function is fully deterministic: given the same input and data,
+    The function is fully deterministic: given the same input and coc-data,
     it will always produce the same output.
 
     Processing flow:
@@ -163,7 +163,7 @@ def handle_chat(user_text: str) -> dict:
             - suggestions (list[str]): Contextual follow-up questions
 
     Error handling:
-        - Gracefully handles invalid input, missing data, unsupported
+        - Gracefully handles invalid input, missing coc-data, unsupported
           operations, and ambiguous queries.
         - Provides helpful clarification prompts instead of failing silently.
 
@@ -176,7 +176,7 @@ def handle_chat(user_text: str) -> dict:
         return {
             "reply": "Your message is too long. Please keep it under 500 characters.",
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     text = user_text.strip()
@@ -187,7 +187,7 @@ def handle_chat(user_text: str) -> dict:
         return {
             "reply": "Please ask a clan-related question.",
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # HELP COMMAND (MUST BE FIRST)
@@ -195,48 +195,38 @@ def handle_chat(user_text: str) -> dict:
         return {
             "reply": (
                 "Here’s what I can help you with (Ancient Ruins clan only):\n\n"
-
                 "GENERAL\n"
                 "- who are you\n"
                 "- what can you do\n"
                 "- what metrics can I ask about\n"
                 "- what does <metric> mean\n\n"
-
                 "CLAN MEMBERS (monthly)\n"
                 "- list all names in APR 2025\n"
-                "- display data of KAI HIWATARI in APR 2025\n"
+                "- display coc-data of KAI HIWATARI in APR 2025\n"
                 "- what is the status of Chief in APR 2025\n\n"
-
                 "FORMER CLAN MEMBERS\n"
                 "- list all former members in DEC 2024\n"
-                "- display data of KING SEENU in APR 2025\n\n"
-
+                "- display coc-data of KING SEENU in APR 2025\n\n"
                 "TOP CLAN CONTRIBUTORS\n"
                 "- who had most clanscore in APR 2025\n"
                 "- is Bennie in top contributors for APR 2025\n\n"
-
                 "RANKINGS & STATS\n"
                 "- who had most warattack in APR 2025\n"
                 "- who had lowest non-zero warattack in APR 2025\n"
                 "- top 10 warattack in APR 2025\n"
                 "- top 5 lowest clanscore in APR 2025\n\n"
-
                 "AGGREGATES\n"
                 "- what is the average warattack in APR 2025\n"
                 "- total clanscore in APR 2025\n\n"
-
                 "GROUPING\n"
                 "- group warattack in APR 2025\n"
                 "- group non-zero clanscore in APR 2025\n\n"
-
                 "COMPARISONS\n"
                 "- compare Chief vs KAI HIWATARI in APR 2025\n"
                 "- compare former KING SEENU vs RAVI in DEC 2024\n\n"
-
                 "MEMBERSHIP CHECKS\n"
                 "- is Chief a clan member in APR 2025\n"
                 "- is KING SEENU a former member in DEC 2024\n\n"
-
                 "Notes:\n"
                 "- All queries are month-based\n"
                 "- Rankings handle ties automatically\n"
@@ -244,7 +234,7 @@ def handle_chat(user_text: str) -> dict:
                 "- I only answer questions about the Ancient Ruins clan"
             ),
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # INPUT CLASSIFICATION
@@ -254,14 +244,14 @@ def handle_chat(user_text: str) -> dict:
         return {
             "reply": (
                 "Hello! I am kARsb, Clan Data Assistant for the Ancient Ruins clan.\n\n"
-                "I specialize only in Ancient Ruins clan data and can help you with:\n"
+                "I specialize only in Ancient Ruins clan coc-data and can help you with:\n"
                 "- Monthly clan member statistics\n"
                 "- Performance analysis\n"
                 "- Rankings and comparisons\n\n"
                 "Type `help` to see example questions."
             ),
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     if category == "GIBBERISH":
@@ -272,21 +262,20 @@ def handle_chat(user_text: str) -> dict:
                 "or type `help` to see example questions."
             ),
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # STATIC / INFORMATIONAL QUERIES
-
     # Who are you
     if "who are you" in text_lower:
         return {
             "reply": (
                 "I am KARSB, Clan Data Assistant for the Ancient Ruins clan.\n\n"
-                "I specialize only in Ancient Ruins clan data. "
+                "I specialize only in Ancient Ruins clan coc-data. "
                 "I can help you with monthly stats, performance, and rankings."
             ),
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # What can you do
@@ -295,27 +284,24 @@ def handle_chat(user_text: str) -> dict:
             "reply": (
                 "I can help you with:\n"
                 "- Clan member statistics by month\n"
-                "- Former clan member data\n"
+                "- Former clan member coc-data\n"
                 "- Top clan contributors\n"
                 "- Rankings (top, lowest, averages, totals)\n"
                 "- Player comparisons\n"
                 "- Grouped performance analysis\n\n"
-                "All data is specific to the Ancient Ruins clan."
+                "All coc-data is specific to the Ancient Ruins clan."
             ),
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # What metrics can I ask about
     if "what metrics" in text_lower:
         metrics = ", ".join(sorted(METRIC_EXPLANATIONS.keys()))
         return {
-            "reply": (
-                "You can ask about the following metrics:\n"
-                f"{metrics}"
-            ),
+            "reply": ("You can ask about the following metrics:\n" f"{metrics}"),
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # What does <metric> mean
@@ -325,7 +311,7 @@ def handle_chat(user_text: str) -> dict:
                 return {
                     "reply": f"**{metric}** means:\n{explanation}",
                     "source": None,
-                    "suggestions": []
+                    "suggestions": [],
                 }
 
     # Thanks / Thank you
@@ -333,11 +319,10 @@ def handle_chat(user_text: str) -> dict:
         return {
             "reply": "You're welcome! If you need more clan insights, just ask.",
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # CLAN LOGIC
-
     # STEP A: Normalize month / range
     month_info = normalize_month(text)
     month_value = month_info.get("value")
@@ -352,7 +337,7 @@ def handle_chat(user_text: str) -> dict:
                     f"Did you mean **{hint}**?"
                 ),
                 "source": None,
-                "suggestions": []
+                "suggestions": [],
             }
 
         return {
@@ -361,25 +346,25 @@ def handle_chat(user_text: str) -> dict:
                 "e.g. 'APR 2025' or 'APR-MAY 2025'."
             ),
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # STEP B: Route domain
     domain = route_domain(text, month_info)
     if not domain:
         return {
-            "reply": "I could not determine which clan data to use.",
+            "reply": "I could not determine which clan coc-data to use.",
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
-    # STEP C: Fetch data
+    # STEP C: Fetch coc-data
     data = fetch_json_if_exists(domain, month_value)
     if data is None:
         return {
-            "reply": f"No data available for {month_value.replace('_', ' ')}.",
+            "reply": f"No coc-data available for {month_value.replace('_', ' ')}.",
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # STEP D: Resolve operation
@@ -388,7 +373,7 @@ def handle_chat(user_text: str) -> dict:
         return {
             "reply": "I could not understand the requested operation.",
             "source": None,
-            "suggestions": []
+            "suggestions": [],
         }
 
     # STEP E: Build response
@@ -396,14 +381,6 @@ def handle_chat(user_text: str) -> dict:
 
     source_url = build_raw_url(domain, month_value)
 
-    suggestions = build_suggestions(
-        operation_result.get("type"),
-        domain,
-        month_value
-    )
+    suggestions = build_suggestions(operation_result.get("type"), domain, month_value)
 
-    return {
-        "reply": reply_text,
-        "source": source_url,
-        "suggestions": suggestions
-    }
+    return {"reply": reply_text, "source": source_url, "suggestions": suggestions}
