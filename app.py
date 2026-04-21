@@ -93,4 +93,4 @@ if __name__ == "__main__":
     port  → Application running port
     debug → Enables hot reload and debugging
     """
-    app.run(host="0.0.0.0", port=10000, debug=True)
+    app.run(host="0.0.0.0", port=10000)
