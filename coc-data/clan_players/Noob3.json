@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 2,
-            "value": 342,
+            "value": 343,
             "target": 500,
             "info": "Successfully defend against 500 attacks",
-            "completionInfo": "Total defenses won: 342",
+            "completionInfo": "Total defenses won: 343",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 2,
-            "value": 18370,
+            "value": 18450,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 18370",
+            "completionInfo": "Total Season Challenges points: 18450",
             "village": "home"
         },
         {
@@ -552,7 +552,7 @@
         {
             "name": "Barbarian",
             "level": 9,
-            "maxLevel": 12,
+            "maxLevel": 13,
             "village": "home"
         },
         {
@@ -564,7 +564,7 @@
         {
             "name": "Goblin",
             "level": 8,
-            "maxLevel": 9,
+            "maxLevel": 10,
             "village": "home"
         },
         {
@@ -582,7 +582,7 @@
         {
             "name": "Balloon",
             "level": 8,
-            "maxLevel": 12,
+            "maxLevel": 13,
             "village": "home"
         },
         {
@@ -600,7 +600,7 @@
         {
             "name": "Dragon",
             "level": 7,
-            "maxLevel": 12,
+            "maxLevel": 13,
             "village": "home"
         },
         {
@@ -624,13 +624,13 @@
         {
             "name": "Valkyrie",
             "level": 2,
-            "maxLevel": 11,
+            "maxLevel": 12,
             "village": "home"
         },
         {
             "name": "Golem",
             "level": 4,
-            "maxLevel": 14,
+            "maxLevel": 15,
             "village": "home"
         },
         {
@@ -666,7 +666,7 @@
         {
             "name": "Super Barbarian",
             "level": 1,
-            "maxLevel": 8,
+            "maxLevel": 9,
             "village": "home"
         },
         {
@@ -732,13 +732,13 @@
         {
             "name": "Yeti",
             "level": 2,
-            "maxLevel": 7,
+            "maxLevel": 8,
             "village": "home"
         },
         {
             "name": "Sneaky Goblin",
             "level": 1,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
@@ -750,7 +750,7 @@
         {
             "name": "Rocket Balloon",
             "level": 1,
-            "maxLevel": 8,
+            "maxLevel": 9,
             "village": "home"
         },
         {
@@ -774,7 +774,7 @@
         {
             "name": "Super Valkyrie",
             "level": 1,
-            "maxLevel": 11,
+            "maxLevel": 12,
             "village": "home"
         },
         {
@@ -798,13 +798,13 @@
         {
             "name": "Super Dragon",
             "level": 1,
-            "maxLevel": 10,
+            "maxLevel": 11,
             "village": "home"
         },
         {
             "name": "Headhunter",
             "level": 2,
-            "maxLevel": 3,
+            "maxLevel": 4,
             "village": "home"
         },
         {
@@ -828,7 +828,7 @@
         {
             "name": "Super Yeti",
             "level": 1,
-            "maxLevel": 7,
+            "maxLevel": 8,
             "village": "home"
         }
     ],
@@ -1028,7 +1028,7 @@
         {
             "name": "Rage Spell",
             "level": 6,
-            "maxLevel": 6,
+            "maxLevel": 7,
             "village": "home"
         },
         {
@@ -1040,7 +1040,7 @@
         {
             "name": "Freeze Spell",
             "level": 7,
-            "maxLevel": 7,
+            "maxLevel": 8,
             "village": "home"
         },
         {
@@ -1064,7 +1064,7 @@
         {
             "name": "Clone Spell",
             "level": 1,
-            "maxLevel": 8,
+            "maxLevel": 9,
             "village": "home"
         },
         {
@@ -1088,7 +1088,7 @@
         {
             "name": "Overgrowth Spell",
             "level": 1,
-            "maxLevel": 4,
+            "maxLevel": 5,
             "village": "home"
         }
     ]

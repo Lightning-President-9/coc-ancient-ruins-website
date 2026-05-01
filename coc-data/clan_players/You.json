@@ -73,10 +73,10 @@
         {
             "name": "Nice and Tidy",
             "stars": 3,
-            "value": 4985,
+            "value": 4986,
             "target": 500,
             "info": "Remove 500 obstacles (trees, rocks, bushes)",
-            "completionInfo": "Total obstacles removed: 4985",
+            "completionInfo": "Total obstacles removed: 4986",
             "village": "home"
         },
         {
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 3,
-            "value": 852,
+            "value": 854,
             "target": 500,
             "info": "Successfully defend against 500 attacks",
-            "completionInfo": "Total defenses won: 852",
+            "completionInfo": "Total defenses won: 854",
             "village": "home"
         },
         {
@@ -580,7 +580,7 @@
         {
             "name": "Barbarian",
             "level": 9,
-            "maxLevel": 12,
+            "maxLevel": 13,
             "village": "home"
         },
         {
@@ -592,7 +592,7 @@
         {
             "name": "Goblin",
             "level": 6,
-            "maxLevel": 9,
+            "maxLevel": 10,
             "village": "home"
         },
         {
@@ -610,7 +610,7 @@
         {
             "name": "Balloon",
             "level": 10,
-            "maxLevel": 12,
+            "maxLevel": 13,
             "village": "home"
         },
         {
@@ -628,7 +628,7 @@
         {
             "name": "Dragon",
             "level": 8,
-            "maxLevel": 12,
+            "maxLevel": 13,
             "village": "home"
         },
         {
@@ -652,13 +652,13 @@
         {
             "name": "Valkyrie",
             "level": 8,
-            "maxLevel": 11,
+            "maxLevel": 12,
             "village": "home"
         },
         {
             "name": "Golem",
             "level": 10,
-            "maxLevel": 14,
+            "maxLevel": 15,
             "village": "home"
         },
         {
@@ -694,7 +694,7 @@
         {
             "name": "Super Barbarian",
             "level": 1,
-            "maxLevel": 8,
+            "maxLevel": 9,
             "village": "home"
         },
         {
@@ -784,19 +784,19 @@
         {
             "name": "Battle Blimp",
             "level": 2,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
             "name": "Yeti",
             "level": 3,
-            "maxLevel": 7,
+            "maxLevel": 8,
             "village": "home"
         },
         {
             "name": "Sneaky Goblin",
             "level": 1,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
@@ -808,7 +808,7 @@
         {
             "name": "Rocket Balloon",
             "level": 1,
-            "maxLevel": 8,
+            "maxLevel": 9,
             "village": "home"
         },
         {
@@ -838,7 +838,7 @@
         {
             "name": "Super Valkyrie",
             "level": 1,
-            "maxLevel": 11,
+            "maxLevel": 12,
             "village": "home"
         },
         {
@@ -856,7 +856,7 @@
         {
             "name": "Siege Barracks",
             "level": 1,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
@@ -874,13 +874,13 @@
         {
             "name": "Super Dragon",
             "level": 1,
-            "maxLevel": 10,
+            "maxLevel": 11,
             "village": "home"
         },
         {
             "name": "Headhunter",
             "level": 2,
-            "maxLevel": 3,
+            "maxLevel": 4,
             "village": "home"
         },
         {
@@ -898,7 +898,7 @@
         {
             "name": "Log Launcher",
             "level": 4,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
@@ -916,13 +916,13 @@
         {
             "name": "Druid",
             "level": 1,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
             "name": "Super Yeti",
             "level": 1,
-            "maxLevel": 7,
+            "maxLevel": 8,
             "village": "home"
         },
         {
@@ -978,7 +978,7 @@
             "equipment": [
                 {
                     "name": "Healer Puppet",
-                    "level": 17,
+                    "level": 18,
                     "maxLevel": 18,
                     "village": "home"
                 },
@@ -1169,7 +1169,7 @@
         },
         {
             "name": "Healer Puppet",
-            "level": 17,
+            "level": 18,
             "maxLevel": 18,
             "village": "home"
         },
@@ -1238,7 +1238,7 @@
         {
             "name": "Rage Spell",
             "level": 6,
-            "maxLevel": 6,
+            "maxLevel": 7,
             "village": "home"
         },
         {
@@ -1250,7 +1250,7 @@
         {
             "name": "Freeze Spell",
             "level": 7,
-            "maxLevel": 7,
+            "maxLevel": 8,
             "village": "home"
         },
         {
@@ -1274,7 +1274,7 @@
         {
             "name": "Clone Spell",
             "level": 5,
-            "maxLevel": 8,
+            "maxLevel": 9,
             "village": "home"
         },
         {
@@ -1298,13 +1298,13 @@
         {
             "name": "Recall Spell",
             "level": 2,
-            "maxLevel": 6,
+            "maxLevel": 7,
             "village": "home"
         },
         {
             "name": "Overgrowth Spell",
             "level": 2,
-            "maxLevel": 4,
+            "maxLevel": 5,
             "village": "home"
         }
     ]

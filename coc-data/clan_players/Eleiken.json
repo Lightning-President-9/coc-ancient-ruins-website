@@ -3,9 +3,9 @@
     "name": "Eleiken",
     "townHallLevel": 18,
     "expLevel": 202,
-    "trophies": 26,
+    "trophies": 0,
     "bestTrophies": 3939,
-    "warStars": 806,
+    "warStars": 810,
     "attackWins": 0,
     "defenseWins": 0,
     "builderHallLevel": 10,
@@ -13,7 +13,7 @@
     "bestBuilderBaseTrophies": 3947,
     "role": "coLeader",
     "warPreference": "in",
-    "donations": 0,
+    "donations": 46,
     "donationsReceived": 0,
     "clanCapitalContributions": 1836055,
     "clan": {
@@ -27,21 +27,20 @@
         }
     },
     "leagueTier": {
-        "id": 105000026,
-        "name": "Titan League 26",
+        "id": 105000025,
+        "name": "Titan League 25",
         "iconUrls": {
-            "small": "https://api-assets.clashofclans.com/leaguetiers/125/yIfqSgrhiYRcuMbAPCoeCj1FTmfylCLxnrAljEZc8K0.png",
-            "large": "https://api-assets.clashofclans.com/leaguetiers/326/yIfqSgrhiYRcuMbAPCoeCj1FTmfylCLxnrAljEZc8K0.png"
+            "small": "https://api-assets.clashofclans.com/leaguetiers/125/JLqVXdNkAGjD_yqMRDgu9KK-hDrulNPjsKU4EugHqX8.png",
+            "large": "https://api-assets.clashofclans.com/leaguetiers/326/JLqVXdNkAGjD_yqMRDgu9KK-hDrulNPjsKU4EugHqX8.png"
         }
     },
     "builderBaseLeague": {
         "id": 44000028,
         "name": "Steel League I"
     },
-    "currentLeagueGroupTag": "#2RCYUJV",
-    "currentLeagueSeasonId": 1776661200,
-    "previousLeagueGroupTag": "#2R2Q8YR",
-    "previousLeagueSeasonId": 1776056400,
+    "currentLeagueSeasonId": 0,
+    "previousLeagueGroupTag": "#2RCYUJV",
+    "previousLeagueSeasonId": 1776661200,
     "achievements": [
         {
             "name": "Bigger Coffers",
@@ -91,19 +90,19 @@
         {
             "name": "Gold Grab",
             "stars": 3,
-            "value": 1985628410,
+            "value": 1985908010,
             "target": 100000000,
             "info": "Steal 100000000 Gold",
-            "completionInfo": "Total Gold looted: 1985628410",
+            "completionInfo": "Total Gold looted: 1985908010",
             "village": "home"
         },
         {
             "name": "Elixir Escapade",
             "stars": 3,
-            "value": 1787831901,
+            "value": 1788081526,
             "target": 100000000,
             "info": "Steal 100000000 elixir",
-            "completionInfo": "Total Elixir looted: 1787831901",
+            "completionInfo": "Total Elixir looted: 1788081526",
             "village": "home"
         },
         {
@@ -163,19 +162,19 @@
         {
             "name": "Unbreakable",
             "stars": 2,
-            "value": 442,
+            "value": 451,
             "target": 500,
             "info": "Successfully defend against 500 attacks",
-            "completionInfo": "Total defenses won: 442",
+            "completionInfo": "Total defenses won: 451",
             "village": "home"
         },
         {
             "name": "Friend in Need",
             "stars": 1,
-            "value": 2916,
+            "value": 2962,
             "target": 5000,
             "info": "Donate 5000 capacity worth of reinforcements to Clanmates",
-            "completionInfo": "Total capacity donated: 2916",
+            "completionInfo": "Total capacity donated: 2962",
             "village": "home"
         },
         {
@@ -190,10 +189,10 @@
         {
             "name": "Heroic Heist",
             "stars": 3,
-            "value": 15136824,
+            "value": 15138444,
             "target": 1000000,
             "info": "Steal 1000000 Dark Elixir",
-            "completionInfo": "Total Dark Elixir looted: 15136824",
+            "completionInfo": "Total Dark Elixir looted: 15138444",
             "village": "home"
         },
         {
@@ -226,10 +225,10 @@
         {
             "name": "War Hero",
             "stars": 2,
-            "value": 806,
+            "value": 810,
             "target": 1000,
             "info": "Score 1000 Stars for your clan in Clan War battles",
-            "completionInfo": "Total Stars scored for clan in Clan War battles: 806",
+            "completionInfo": "Total Stars scored for clan in Clan War battles: 810",
             "village": "home"
         },
         {
@@ -361,10 +360,10 @@
         {
             "name": "Well Seasoned",
             "stars": 3,
-            "value": 258015,
+            "value": 258225,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 258015",
+            "completionInfo": "Total Season Challenges points: 258225",
             "village": "home"
         },
         {
@@ -580,7 +579,7 @@
         {
             "name": "Barbarian",
             "level": 10,
-            "maxLevel": 12,
+            "maxLevel": 13,
             "village": "home"
         },
         {
@@ -592,7 +591,7 @@
         {
             "name": "Goblin",
             "level": 9,
-            "maxLevel": 9,
+            "maxLevel": 10,
             "village": "home"
         },
         {
@@ -610,7 +609,7 @@
         {
             "name": "Balloon",
             "level": 12,
-            "maxLevel": 12,
+            "maxLevel": 13,
             "village": "home"
         },
         {
@@ -628,7 +627,7 @@
         {
             "name": "Dragon",
             "level": 11,
-            "maxLevel": 12,
+            "maxLevel": 13,
             "village": "home"
         },
         {
@@ -652,13 +651,13 @@
         {
             "name": "Valkyrie",
             "level": 10,
-            "maxLevel": 11,
+            "maxLevel": 12,
             "village": "home"
         },
         {
             "name": "Golem",
             "level": 13,
-            "maxLevel": 14,
+            "maxLevel": 15,
             "village": "home"
         },
         {
@@ -681,7 +680,7 @@
         },
         {
             "name": "Baby Dragon",
-            "level": 9,
+            "level": 10,
             "maxLevel": 12,
             "village": "home"
         },
@@ -694,7 +693,7 @@
         {
             "name": "Super Barbarian",
             "level": 1,
-            "maxLevel": 8,
+            "maxLevel": 9,
             "village": "home"
         },
         {
@@ -784,19 +783,19 @@
         {
             "name": "Battle Blimp",
             "level": 5,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
             "name": "Yeti",
             "level": 3,
-            "maxLevel": 7,
+            "maxLevel": 8,
             "village": "home"
         },
         {
             "name": "Sneaky Goblin",
             "level": 1,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
@@ -808,7 +807,7 @@
         {
             "name": "Rocket Balloon",
             "level": 1,
-            "maxLevel": 8,
+            "maxLevel": 9,
             "village": "home"
         },
         {
@@ -838,7 +837,7 @@
         {
             "name": "Super Valkyrie",
             "level": 1,
-            "maxLevel": 11,
+            "maxLevel": 12,
             "village": "home"
         },
         {
@@ -862,7 +861,7 @@
         {
             "name": "Siege Barracks",
             "level": 1,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
@@ -880,13 +879,13 @@
         {
             "name": "Super Dragon",
             "level": 1,
-            "maxLevel": 10,
+            "maxLevel": 11,
             "village": "home"
         },
         {
             "name": "Headhunter",
             "level": 3,
-            "maxLevel": 3,
+            "maxLevel": 4,
             "village": "home"
         },
         {
@@ -904,7 +903,7 @@
         {
             "name": "Log Launcher",
             "level": 5,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
@@ -916,7 +915,7 @@
         {
             "name": "Battle Drill",
             "level": 2,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
@@ -946,13 +945,13 @@
         {
             "name": "Root Rider",
             "level": 1,
-            "maxLevel": 3,
+            "maxLevel": 4,
             "village": "home"
         },
         {
             "name": "Druid",
             "level": 1,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         },
         {
@@ -970,7 +969,7 @@
         {
             "name": "Super Yeti",
             "level": 1,
-            "maxLevel": 7,
+            "maxLevel": 8,
             "village": "home"
         },
         {
@@ -999,7 +998,7 @@
         },
         {
             "name": "Unicorn",
-            "level": 13,
+            "level": 15,
             "maxLevel": 15,
             "village": "home"
         },
@@ -1372,7 +1371,7 @@
         {
             "name": "Rage Spell",
             "level": 6,
-            "maxLevel": 6,
+            "maxLevel": 7,
             "village": "home"
         },
         {
@@ -1384,7 +1383,7 @@
         {
             "name": "Freeze Spell",
             "level": 7,
-            "maxLevel": 7,
+            "maxLevel": 8,
             "village": "home"
         },
         {
@@ -1408,7 +1407,7 @@
         {
             "name": "Clone Spell",
             "level": 7,
-            "maxLevel": 8,
+            "maxLevel": 9,
             "village": "home"
         },
         {
@@ -1432,13 +1431,13 @@
         {
             "name": "Recall Spell",
             "level": 1,
-            "maxLevel": 6,
+            "maxLevel": 7,
             "village": "home"
         },
         {
             "name": "Overgrowth Spell",
             "level": 2,
-            "maxLevel": 4,
+            "maxLevel": 5,
             "village": "home"
         },
         {
@@ -1450,7 +1449,7 @@
         {
             "name": "Ice Block Spell",
             "level": 1,
-            "maxLevel": 5,
+            "maxLevel": 6,
             "village": "home"
         }
     ]
