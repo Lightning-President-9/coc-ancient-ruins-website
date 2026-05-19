@@ -12,3 +12,4 @@ matplotlib
 seaborn
 flasgger
 flask-limiter
+redis
