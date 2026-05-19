@@ -46,6 +46,8 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **10/1/26:** Added KARBS a light weighted rule based chat/conversational bot for deep statistical analysis of Ancient Ruins Clan.
 - **22/1/26:** Added KMeans-based member cluster analysis with discrete scatter plots to visualize performance groupings across key metrics.
 - **21/4/26:** Integrated Clash of Clans data from the API, implemented Swagger for comprehensive API documentation, added rate limiting to enhance API security and performance, and improved overall code structure and formatting for better maintainability.
+- **5/5/26:** Added UptimeRobot services for uptime monitoring and to keep the application running continuously.
+- **19/5/26:** Added Redis URL support for rate limiting.
 
 ## License
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.
@@ -57,3 +59,5 @@ This project is licensed under the [MIT License](https://github.com/Lightning-Pr
 - [Plotly Express](https://plotly.com/python/plotly-express/)
 - [Flasgger](https://github.com/flasgger/flasgger)
 - [Clash of Clans API](https://developer.clashofclans.com)
+- [Upstash](https://upstash.com/)
+- [UptimeRobot](https://uptimerobot.com/)
