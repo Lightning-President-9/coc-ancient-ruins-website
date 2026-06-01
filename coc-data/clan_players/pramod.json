@@ -91,19 +91,19 @@
         {
             "name": "Gold Grab",
             "stars": 3,
-            "value": 879486739,
+            "value": 879975872,
             "target": 100000000,
             "info": "Steal 100000000 Gold",
-            "completionInfo": "Total Gold looted: 879486739",
+            "completionInfo": "Total Gold looted: 879975872",
             "village": "home"
         },
         {
             "name": "Elixir Escapade",
             "stars": 3,
-            "value": 906178634,
+            "value": 906893778,
             "target": 100000000,
             "info": "Steal 100000000 elixir",
-            "completionInfo": "Total Elixir looted: 906178634",
+            "completionInfo": "Total Elixir looted: 906893778",
             "village": "home"
         },
         {
@@ -127,46 +127,46 @@
         {
             "name": "Wall Buster",
             "stars": 3,
-            "value": 18710,
+            "value": 18744,
             "target": 2000,
             "info": "Destroy 2000 Walls in Multiplayer battles",
-            "completionInfo": "Total Walls destroyed: 18710",
+            "completionInfo": "Total Walls destroyed: 18744",
             "village": "home"
         },
         {
             "name": "Humiliator",
             "stars": 2,
-            "value": 1041,
+            "value": 1042,
             "target": 2000,
             "info": "Destroy 2000 Town Halls in Multiplayer battles",
-            "completionInfo": "Total Town Halls destroyed: 1041",
+            "completionInfo": "Total Town Halls destroyed: 1042",
             "village": "home"
         },
         {
             "name": "Union Buster",
             "stars": 3,
-            "value": 6278,
+            "value": 6279,
             "target": 2500,
             "info": "Destroy 2500 Builder's Huts in Multiplayer battles",
-            "completionInfo": "Total Builder's Huts destroyed: 6278",
+            "completionInfo": "Total Builder's Huts destroyed: 6279",
             "village": "home"
         },
         {
             "name": "Conqueror",
             "stars": 2,
-            "value": 1890,
+            "value": 1891,
             "target": 5000,
             "info": "Win 5000 Multiplayer battles",
-            "completionInfo": "Total multiplayer battles won: 1890",
+            "completionInfo": "Total multiplayer battles won: 1891",
             "village": "home"
         },
         {
             "name": "Unbreakable",
             "stars": 3,
-            "value": 834,
+            "value": 838,
             "target": 500,
             "info": "Successfully defend against 500 attacks",
-            "completionInfo": "Total defenses won: 834",
+            "completionInfo": "Total defenses won: 838",
             "village": "home"
         },
         {
@@ -181,19 +181,19 @@
         {
             "name": "Mortar Mauler",
             "stars": 3,
-            "value": 6205,
+            "value": 6207,
             "target": 5000,
             "info": "Destroy 5000 Mortars in Multiplayer battles",
-            "completionInfo": "Total Mortars destroyed: 6205",
+            "completionInfo": "Total Mortars destroyed: 6207",
             "village": "home"
         },
         {
             "name": "Heroic Heist",
             "stars": 3,
-            "value": 4428927,
+            "value": 4437432,
             "target": 1000000,
             "info": "Steal 1000000 Dark Elixir",
-            "completionInfo": "Total Dark Elixir looted: 4428927",
+            "completionInfo": "Total Dark Elixir looted: 4437432",
             "village": "home"
         },
         {
@@ -208,10 +208,10 @@
         {
             "name": "X-Bow Exterminator",
             "stars": 3,
-            "value": 3107,
+            "value": 3108,
             "target": 2500,
             "info": "Destroy 2500 X-Bows in Multiplayer battles",
-            "completionInfo": "Total X-Bows destroyed: 3107",
+            "completionInfo": "Total X-Bows destroyed: 3108",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 2,
-            "value": 43090,
+            "value": 43390,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 43090",
+            "completionInfo": "Total Season Challenges points: 43390",
             "village": "home"
         },
         {
@@ -379,10 +379,10 @@
         {
             "name": "Not So Easy This Time",
             "stars": 2,
-            "value": 151,
+            "value": 152,
             "target": 2000,
             "info": "Destroy 2000 weaponized Town Halls in Multiplayer battles",
-            "completionInfo": "Weaponized Town Halls destroyed: 151",
+            "completionInfo": "Weaponized Town Halls destroyed: 152",
             "village": "home"
         },
         {
@@ -556,6 +556,280 @@
             }
         }
     ],
+    "heroes": [
+        {
+            "name": "Barbarian King",
+            "level": 38,
+            "maxLevel": 105,
+            "equipment": [
+                {
+                    "name": "Earthquake Boots",
+                    "level": 1,
+                    "maxLevel": 18,
+                    "village": "home"
+                },
+                {
+                    "name": "Barbarian Puppet",
+                    "level": 5,
+                    "maxLevel": 18,
+                    "village": "home"
+                }
+            ],
+            "village": "home"
+        },
+        {
+            "name": "Archer Queen",
+            "level": 48,
+            "maxLevel": 105,
+            "equipment": [
+                {
+                    "name": "Invisibility Vial",
+                    "level": 6,
+                    "maxLevel": 18,
+                    "village": "home"
+                },
+                {
+                    "name": "Archer Puppet",
+                    "level": 6,
+                    "maxLevel": 18,
+                    "village": "home"
+                }
+            ],
+            "village": "home"
+        },
+        {
+            "name": "Grand Warden",
+            "level": 18,
+            "maxLevel": 80,
+            "equipment": [
+                {
+                    "name": "Life Gem",
+                    "level": 7,
+                    "maxLevel": 18,
+                    "village": "home"
+                },
+                {
+                    "name": "Eternal Tome",
+                    "level": 7,
+                    "maxLevel": 18,
+                    "village": "home"
+                }
+            ],
+            "village": "home"
+        },
+        {
+            "name": "Battle Machine",
+            "level": 9,
+            "maxLevel": 35,
+            "village": "builderBase"
+        },
+        {
+            "name": "Royal Champion",
+            "level": 10,
+            "maxLevel": 55,
+            "equipment": [
+                {
+                    "name": "Royal Gem",
+                    "level": 4,
+                    "maxLevel": 18,
+                    "village": "home"
+                },
+                {
+                    "name": "Seeking Shield",
+                    "level": 4,
+                    "maxLevel": 18,
+                    "village": "home"
+                }
+            ],
+            "village": "home"
+        },
+        {
+            "name": "Minion Prince",
+            "level": 41,
+            "maxLevel": 95,
+            "equipment": [
+                {
+                    "name": "Dark Orb",
+                    "level": 1,
+                    "maxLevel": 18,
+                    "village": "home"
+                },
+                {
+                    "name": "Henchmen Puppet",
+                    "level": 1,
+                    "maxLevel": 18,
+                    "village": "home"
+                }
+            ],
+            "village": "home"
+        }
+    ],
+    "heroEquipment": [
+        {
+            "name": "Barbarian Puppet",
+            "level": 5,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Rage Vial",
+            "level": 5,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Archer Puppet",
+            "level": 6,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Invisibility Vial",
+            "level": 6,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Eternal Tome",
+            "level": 7,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Life Gem",
+            "level": 7,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Seeking Shield",
+            "level": 4,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Royal Gem",
+            "level": 4,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Earthquake Boots",
+            "level": 1,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Vampstache",
+            "level": 1,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Giant Arrow",
+            "level": 1,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Henchmen Puppet",
+            "level": 1,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Dark Orb",
+            "level": 1,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Metal Pants",
+            "level": 1,
+            "maxLevel": 18,
+            "village": "home"
+        }
+    ],
+    "spells": [
+        {
+            "name": "Lightning Spell",
+            "level": 6,
+            "maxLevel": 13,
+            "village": "home"
+        },
+        {
+            "name": "Healing Spell",
+            "level": 6,
+            "maxLevel": 12,
+            "village": "home"
+        },
+        {
+            "name": "Rage Spell",
+            "level": 6,
+            "maxLevel": 7,
+            "village": "home"
+        },
+        {
+            "name": "Jump Spell",
+            "level": 2,
+            "maxLevel": 5,
+            "village": "home"
+        },
+        {
+            "name": "Freeze Spell",
+            "level": 6,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Poison Spell",
+            "level": 2,
+            "maxLevel": 12,
+            "village": "home"
+        },
+        {
+            "name": "Earthquake Spell",
+            "level": 4,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Haste Spell",
+            "level": 5,
+            "maxLevel": 7,
+            "village": "home"
+        },
+        {
+            "name": "Clone Spell",
+            "level": 2,
+            "maxLevel": 9,
+            "village": "home"
+        },
+        {
+            "name": "Skeleton Spell",
+            "level": 3,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Bat Spell",
+            "level": 2,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Invisibility Spell",
+            "level": 1,
+            "maxLevel": 4,
+            "village": "home"
+        },
+        {
+            "name": "Overgrowth Spell",
+            "level": 2,
+            "maxLevel": 5,
+            "village": "home"
+        }
+    ],
     "troops": [
         {
             "name": "Barbarian",
@@ -601,7 +875,7 @@
         },
         {
             "name": "Healer",
-            "level": 5,
+            "level": 6,
             "maxLevel": 11,
             "village": "home"
         },
@@ -915,280 +1189,6 @@
             "name": "Electro Owl",
             "level": 5,
             "maxLevel": 15,
-            "village": "home"
-        }
-    ],
-    "heroes": [
-        {
-            "name": "Barbarian King",
-            "level": 38,
-            "maxLevel": 105,
-            "equipment": [
-                {
-                    "name": "Earthquake Boots",
-                    "level": 1,
-                    "maxLevel": 18,
-                    "village": "home"
-                },
-                {
-                    "name": "Barbarian Puppet",
-                    "level": 5,
-                    "maxLevel": 18,
-                    "village": "home"
-                }
-            ],
-            "village": "home"
-        },
-        {
-            "name": "Archer Queen",
-            "level": 48,
-            "maxLevel": 105,
-            "equipment": [
-                {
-                    "name": "Invisibility Vial",
-                    "level": 6,
-                    "maxLevel": 18,
-                    "village": "home"
-                },
-                {
-                    "name": "Archer Puppet",
-                    "level": 6,
-                    "maxLevel": 18,
-                    "village": "home"
-                }
-            ],
-            "village": "home"
-        },
-        {
-            "name": "Grand Warden",
-            "level": 18,
-            "maxLevel": 80,
-            "equipment": [
-                {
-                    "name": "Life Gem",
-                    "level": 7,
-                    "maxLevel": 18,
-                    "village": "home"
-                },
-                {
-                    "name": "Eternal Tome",
-                    "level": 7,
-                    "maxLevel": 18,
-                    "village": "home"
-                }
-            ],
-            "village": "home"
-        },
-        {
-            "name": "Battle Machine",
-            "level": 9,
-            "maxLevel": 35,
-            "village": "builderBase"
-        },
-        {
-            "name": "Royal Champion",
-            "level": 10,
-            "maxLevel": 55,
-            "equipment": [
-                {
-                    "name": "Royal Gem",
-                    "level": 4,
-                    "maxLevel": 18,
-                    "village": "home"
-                },
-                {
-                    "name": "Seeking Shield",
-                    "level": 4,
-                    "maxLevel": 18,
-                    "village": "home"
-                }
-            ],
-            "village": "home"
-        },
-        {
-            "name": "Minion Prince",
-            "level": 41,
-            "maxLevel": 95,
-            "equipment": [
-                {
-                    "name": "Dark Orb",
-                    "level": 1,
-                    "maxLevel": 18,
-                    "village": "home"
-                },
-                {
-                    "name": "Henchmen Puppet",
-                    "level": 1,
-                    "maxLevel": 18,
-                    "village": "home"
-                }
-            ],
-            "village": "home"
-        }
-    ],
-    "heroEquipment": [
-        {
-            "name": "Barbarian Puppet",
-            "level": 5,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Rage Vial",
-            "level": 5,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Archer Puppet",
-            "level": 6,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Invisibility Vial",
-            "level": 6,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Eternal Tome",
-            "level": 7,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Life Gem",
-            "level": 7,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Seeking Shield",
-            "level": 4,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Royal Gem",
-            "level": 4,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Earthquake Boots",
-            "level": 1,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Vampstache",
-            "level": 1,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Giant Arrow",
-            "level": 1,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Henchmen Puppet",
-            "level": 1,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Dark Orb",
-            "level": 1,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Metal Pants",
-            "level": 1,
-            "maxLevel": 18,
-            "village": "home"
-        }
-    ],
-    "spells": [
-        {
-            "name": "Lightning Spell",
-            "level": 6,
-            "maxLevel": 13,
-            "village": "home"
-        },
-        {
-            "name": "Healing Spell",
-            "level": 6,
-            "maxLevel": 12,
-            "village": "home"
-        },
-        {
-            "name": "Rage Spell",
-            "level": 6,
-            "maxLevel": 7,
-            "village": "home"
-        },
-        {
-            "name": "Jump Spell",
-            "level": 2,
-            "maxLevel": 5,
-            "village": "home"
-        },
-        {
-            "name": "Freeze Spell",
-            "level": 6,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Poison Spell",
-            "level": 2,
-            "maxLevel": 12,
-            "village": "home"
-        },
-        {
-            "name": "Earthquake Spell",
-            "level": 4,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Haste Spell",
-            "level": 5,
-            "maxLevel": 7,
-            "village": "home"
-        },
-        {
-            "name": "Clone Spell",
-            "level": 2,
-            "maxLevel": 9,
-            "village": "home"
-        },
-        {
-            "name": "Skeleton Spell",
-            "level": 3,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Bat Spell",
-            "level": 2,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Invisibility Spell",
-            "level": 1,
-            "maxLevel": 4,
-            "village": "home"
-        },
-        {
-            "name": "Overgrowth Spell",
-            "level": 2,
-            "maxLevel": 5,
             "village": "home"
         }
     ]

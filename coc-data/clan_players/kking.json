@@ -28,11 +28,11 @@
         }
     },
     "leagueTier": {
-        "id": 105000008,
-        "name": "Archer League 8",
+        "id": 105000000,
+        "name": "Unranked",
         "iconUrls": {
-            "small": "https://api-assets.clashofclans.com/leaguetiers/125/lzneKpnJ_ADL1Xb1rceH7-svqRN1UaLnI7ldd8BbyxI.png",
-            "large": "https://api-assets.clashofclans.com/leaguetiers/326/lzneKpnJ_ADL1Xb1rceH7-svqRN1UaLnI7ldd8BbyxI.png"
+            "small": "https://api-assets.clashofclans.com/leaguetiers/125/yyYo5DUFeFBZvmMEQh0ZxvG-1sUOZ_S3kDMB7RllXX0.png",
+            "large": "https://api-assets.clashofclans.com/leaguetiers/326/yyYo5DUFeFBZvmMEQh0ZxvG-1sUOZ_S3kDMB7RllXX0.png"
         }
     },
     "builderBaseLeague": {
@@ -41,7 +41,7 @@
     },
     "currentLeagueSeasonId": 0,
     "previousLeagueGroupTag": "#0",
-    "previousLeagueSeasonId": 1762886590,
+    "previousLeagueSeasonId": 1776661200,
     "achievements": [
         {
             "name": "Bigger Coffers",
@@ -73,10 +73,10 @@
         {
             "name": "Nice and Tidy",
             "stars": 3,
-            "value": 4599,
+            "value": 4600,
             "target": 500,
             "info": "Remove 500 obstacles (trees, rocks, bushes)",
-            "completionInfo": "Total obstacles removed: 4599",
+            "completionInfo": "Total obstacles removed: 4600",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 2,
-            "value": 36640,
+            "value": 36740,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 36640",
+            "completionInfo": "Total Season Challenges points: 36740",
             "village": "home"
         },
         {
@@ -551,6 +551,86 @@
         ]
     },
     "labels": [],
+    "spells": [
+        {
+            "name": "Lightning Spell",
+            "level": 9,
+            "maxLevel": 13,
+            "village": "home"
+        },
+        {
+            "name": "Healing Spell",
+            "level": 7,
+            "maxLevel": 12,
+            "village": "home"
+        },
+        {
+            "name": "Rage Spell",
+            "level": 6,
+            "maxLevel": 7,
+            "village": "home"
+        },
+        {
+            "name": "Jump Spell",
+            "level": 3,
+            "maxLevel": 5,
+            "village": "home"
+        },
+        {
+            "name": "Freeze Spell",
+            "level": 7,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Poison Spell",
+            "level": 6,
+            "maxLevel": 12,
+            "village": "home"
+        },
+        {
+            "name": "Earthquake Spell",
+            "level": 5,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Haste Spell",
+            "level": 5,
+            "maxLevel": 7,
+            "village": "home"
+        },
+        {
+            "name": "Clone Spell",
+            "level": 5,
+            "maxLevel": 9,
+            "village": "home"
+        },
+        {
+            "name": "Skeleton Spell",
+            "level": 6,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Bat Spell",
+            "level": 5,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Invisibility Spell",
+            "level": 3,
+            "maxLevel": 4,
+            "village": "home"
+        },
+        {
+            "name": "Overgrowth Spell",
+            "level": 2,
+            "maxLevel": 5,
+            "village": "home"
+        }
+    ],
     "troops": [
         {
             "name": "Barbarian",
@@ -638,7 +718,7 @@
         },
         {
             "name": "Witch",
-            "level": 4,
+            "level": 5,
             "maxLevel": 8,
             "village": "home"
         },
@@ -650,7 +730,7 @@
         },
         {
             "name": "Bowler",
-            "level": 3,
+            "level": 4,
             "maxLevel": 10,
             "village": "home"
         },
@@ -662,7 +742,7 @@
         },
         {
             "name": "Miner",
-            "level": 5,
+            "level": 6,
             "maxLevel": 12,
             "village": "home"
         },
@@ -868,7 +948,7 @@
     "heroes": [
         {
             "name": "Barbarian King",
-            "level": 57,
+            "level": 58,
             "maxLevel": 105,
             "equipment": [
                 {
@@ -888,7 +968,7 @@
         },
         {
             "name": "Archer Queen",
-            "level": 58,
+            "level": 59,
             "maxLevel": 105,
             "equipment": [
                 {
@@ -908,7 +988,7 @@
         },
         {
             "name": "Grand Warden",
-            "level": 28,
+            "level": 29,
             "maxLevel": 80,
             "equipment": [
                 {
@@ -934,7 +1014,7 @@
         },
         {
             "name": "Minion Prince",
-            "level": 37,
+            "level": 40,
             "maxLevel": 95,
             "equipment": [
                 {
@@ -1060,86 +1140,6 @@
             "name": "Noble Iron",
             "level": 1,
             "maxLevel": 18,
-            "village": "home"
-        }
-    ],
-    "spells": [
-        {
-            "name": "Lightning Spell",
-            "level": 9,
-            "maxLevel": 13,
-            "village": "home"
-        },
-        {
-            "name": "Healing Spell",
-            "level": 7,
-            "maxLevel": 12,
-            "village": "home"
-        },
-        {
-            "name": "Rage Spell",
-            "level": 6,
-            "maxLevel": 7,
-            "village": "home"
-        },
-        {
-            "name": "Jump Spell",
-            "level": 3,
-            "maxLevel": 5,
-            "village": "home"
-        },
-        {
-            "name": "Freeze Spell",
-            "level": 7,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Poison Spell",
-            "level": 6,
-            "maxLevel": 12,
-            "village": "home"
-        },
-        {
-            "name": "Earthquake Spell",
-            "level": 5,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Haste Spell",
-            "level": 5,
-            "maxLevel": 7,
-            "village": "home"
-        },
-        {
-            "name": "Clone Spell",
-            "level": 5,
-            "maxLevel": 9,
-            "village": "home"
-        },
-        {
-            "name": "Skeleton Spell",
-            "level": 6,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Bat Spell",
-            "level": 5,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Invisibility Spell",
-            "level": 3,
-            "maxLevel": 4,
-            "village": "home"
-        },
-        {
-            "name": "Overgrowth Spell",
-            "level": 2,
-            "maxLevel": 5,
             "village": "home"
         }
     ]

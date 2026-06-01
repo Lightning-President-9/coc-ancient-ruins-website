@@ -16,7 +16,7 @@
     "warPreference": "in",
     "donations": 0,
     "donationsReceived": 0,
-    "clanCapitalContributions": 1100599,
+    "clanCapitalContributions": 1101049,
     "clan": {
         "tag": "#2PP0P22CQ",
         "name": "Ancient Ruins",
@@ -28,11 +28,11 @@
         }
     },
     "leagueTier": {
-        "id": 105000008,
-        "name": "Archer League 8",
+        "id": 105000009,
+        "name": "Archer League 9",
         "iconUrls": {
-            "small": "https://api-assets.clashofclans.com/leaguetiers/125/lzneKpnJ_ADL1Xb1rceH7-svqRN1UaLnI7ldd8BbyxI.png",
-            "large": "https://api-assets.clashofclans.com/leaguetiers/326/lzneKpnJ_ADL1Xb1rceH7-svqRN1UaLnI7ldd8BbyxI.png"
+            "small": "https://api-assets.clashofclans.com/leaguetiers/125/ieEdz9Mqbo7g9iJfXwTnIh7Iwz-37aPEmWma1ENEwXE.png",
+            "large": "https://api-assets.clashofclans.com/leaguetiers/326/ieEdz9Mqbo7g9iJfXwTnIh7Iwz-37aPEmWma1ENEwXE.png"
         }
     },
     "builderBaseLeague": {
@@ -40,8 +40,8 @@
         "name": "Iron League III"
     },
     "currentLeagueSeasonId": 0,
-    "previousLeagueGroupTag": "#0",
-    "previousLeagueSeasonId": 1774242000,
+    "previousLeagueGroupTag": "#2JJV8JP",
+    "previousLeagueSeasonId": 1777870800,
     "achievements": [
         {
             "name": "Bigger Coffers",
@@ -73,10 +73,10 @@
         {
             "name": "Nice and Tidy",
             "stars": 3,
-            "value": 6543,
+            "value": 6623,
             "target": 500,
             "info": "Remove 500 obstacles (trees, rocks, bushes)",
-            "completionInfo": "Total obstacles removed: 6543",
+            "completionInfo": "Total obstacles removed: 6623",
             "village": "home"
         },
         {
@@ -91,19 +91,19 @@
         {
             "name": "Gold Grab",
             "stars": 3,
-            "value": 402928259,
+            "value": 403048257,
             "target": 100000000,
             "info": "Steal 100000000 Gold",
-            "completionInfo": "Total Gold looted: 402928259",
+            "completionInfo": "Total Gold looted: 403048257",
             "village": "home"
         },
         {
             "name": "Elixir Escapade",
             "stars": 3,
-            "value": 448782433,
+            "value": 449091230,
             "target": 100000000,
             "info": "Steal 100000000 elixir",
-            "completionInfo": "Total Elixir looted: 448782433",
+            "completionInfo": "Total Elixir looted: 449091230",
             "village": "home"
         },
         {
@@ -127,10 +127,10 @@
         {
             "name": "Wall Buster",
             "stars": 3,
-            "value": 25120,
+            "value": 25156,
             "target": 2000,
             "info": "Destroy 2000 Walls in Multiplayer battles",
-            "completionInfo": "Total Walls destroyed: 25120",
+            "completionInfo": "Total Walls destroyed: 25156",
             "village": "home"
         },
         {
@@ -145,28 +145,28 @@
         {
             "name": "Union Buster",
             "stars": 3,
-            "value": 4388,
+            "value": 4392,
             "target": 2500,
             "info": "Destroy 2500 Builder's Huts in Multiplayer battles",
-            "completionInfo": "Total Builder's Huts destroyed: 4388",
+            "completionInfo": "Total Builder's Huts destroyed: 4392",
             "village": "home"
         },
         {
             "name": "Conqueror",
             "stars": 2,
-            "value": 1158,
+            "value": 1159,
             "target": 5000,
             "info": "Win 5000 Multiplayer battles",
-            "completionInfo": "Total multiplayer battles won: 1158",
+            "completionInfo": "Total multiplayer battles won: 1159",
             "village": "home"
         },
         {
             "name": "Unbreakable",
             "stars": 1,
-            "value": 186,
+            "value": 193,
             "target": 250,
             "info": "Successfully defend against 250 attacks",
-            "completionInfo": "Total defenses won: 186",
+            "completionInfo": "Total defenses won: 193",
             "village": "home"
         },
         {
@@ -181,19 +181,19 @@
         {
             "name": "Mortar Mauler",
             "stars": 2,
-            "value": 4057,
+            "value": 4060,
             "target": 5000,
             "info": "Destroy 5000 Mortars in Multiplayer battles",
-            "completionInfo": "Total Mortars destroyed: 4057",
+            "completionInfo": "Total Mortars destroyed: 4060",
             "village": "home"
         },
         {
             "name": "Heroic Heist",
             "stars": 3,
-            "value": 3877062,
+            "value": 3886739,
             "target": 1000000,
             "info": "Steal 1000000 Dark Elixir",
-            "completionInfo": "Total Dark Elixir looted: 3877062",
+            "completionInfo": "Total Dark Elixir looted: 3886739",
             "village": "home"
         },
         {
@@ -208,19 +208,19 @@
         {
             "name": "X-Bow Exterminator",
             "stars": 2,
-            "value": 2267,
+            "value": 2269,
             "target": 2500,
             "info": "Destroy 2500 X-Bows in Multiplayer battles",
-            "completionInfo": "Total X-Bows destroyed: 2267",
+            "completionInfo": "Total X-Bows destroyed: 2269",
             "village": "home"
         },
         {
             "name": "Firefighter",
             "stars": 2,
-            "value": 1122,
+            "value": 1124,
             "target": 5000,
             "info": "Destroy 5000 Inferno Towers in Multiplayer battles",
-            "completionInfo": "Total Inferno Towers destroyed: 1122",
+            "completionInfo": "Total Inferno Towers destroyed: 1124",
             "village": "home"
         },
         {
@@ -244,10 +244,10 @@
         {
             "name": "Anti-Artillery",
             "stars": 2,
-            "value": 309,
+            "value": 310,
             "target": 2000,
             "info": "Destroy 2000 Eagle or Inferno Artilleries in Multiplayer battles",
-            "completionInfo": "Total Eagle or Inferno Artilleries destroyed: 309",
+            "completionInfo": "Total Eagle or Inferno Artilleries destroyed: 310",
             "village": "home"
         },
         {
@@ -361,19 +361,19 @@
         {
             "name": "Well Seasoned",
             "stars": 3,
-            "value": 97640,
+            "value": 97670,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 97640",
+            "completionInfo": "Total Season Challenges points: 97670",
             "village": "home"
         },
         {
             "name": "Shattered and Scattered",
             "stars": 0,
-            "value": 6,
+            "value": 7,
             "target": 40,
             "info": "Destroy 40 Scattershots in Multiplayer battles",
-            "completionInfo": "Total Scattershots destroyed: 6",
+            "completionInfo": "Total Scattershots destroyed: 7",
             "village": "home"
         },
         {
@@ -424,10 +424,10 @@
         {
             "name": "Most Valuable Clanmate",
             "stars": 2,
-            "value": 1100599,
+            "value": 1101049,
             "target": 2000000,
             "info": "Contribute 2000000 Capital Gold to upgrades in the Clan Capital",
-            "completionInfo": "Total Capital Gold contributed: 1100599",
+            "completionInfo": "Total Capital Gold contributed: 1101049",
             "village": "clanCapital"
         },
         {
@@ -899,7 +899,7 @@
     "heroes": [
         {
             "name": "Barbarian King",
-            "level": 60,
+            "level": 61,
             "maxLevel": 105,
             "equipment": [
                 {
@@ -919,7 +919,7 @@
         },
         {
             "name": "Archer Queen",
-            "level": 60,
+            "level": 61,
             "maxLevel": 105,
             "equipment": [
                 {

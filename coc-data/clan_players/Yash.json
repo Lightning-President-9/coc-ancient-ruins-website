@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 1,
-            "value": 150,
+            "value": 152,
             "target": 250,
             "info": "Successfully defend against 250 attacks",
-            "completionInfo": "Total defenses won: 150",
+            "completionInfo": "Total defenses won: 152",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 2,
-            "value": 26230,
+            "value": 26530,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 26230",
+            "completionInfo": "Total Season Challenges points: 26530",
             "village": "home"
         },
         {
@@ -415,10 +415,10 @@
         {
             "name": "Aggressive Capitalism",
             "stars": 3,
-            "value": 1385670,
+            "value": 1390880,
             "target": 1000000,
             "info": "Loot 1000000 Capital Gold during Raid attacks",
-            "completionInfo": "Total Capital Gold looted: 1385670",
+            "completionInfo": "Total Capital Gold looted: 1390880",
             "village": "clanCapital"
         },
         {
@@ -651,7 +651,7 @@
         },
         {
             "name": "Valkyrie",
-            "level": 5,
+            "level": 6,
             "maxLevel": 12,
             "village": "home"
         },
@@ -663,7 +663,7 @@
         },
         {
             "name": "Witch",
-            "level": 1,
+            "level": 2,
             "maxLevel": 8,
             "village": "home"
         },
@@ -788,6 +788,12 @@
             "village": "home"
         },
         {
+            "name": "Stone Slammer",
+            "level": 2,
+            "maxLevel": 6,
+            "village": "home"
+        },
+        {
             "name": "Inferno Dragon",
             "level": 1,
             "maxLevel": 12,
@@ -851,7 +857,7 @@
     "heroes": [
         {
             "name": "Barbarian King",
-            "level": 21,
+            "level": 23,
             "maxLevel": 105,
             "equipment": [
                 {
@@ -871,7 +877,7 @@
         },
         {
             "name": "Archer Queen",
-            "level": 22,
+            "level": 24,
             "maxLevel": 105,
             "equipment": [
                 {
@@ -891,7 +897,7 @@
         },
         {
             "name": "Grand Warden",
-            "level": 15,
+            "level": 16,
             "maxLevel": 80,
             "equipment": [
                 {
@@ -917,7 +923,7 @@
         },
         {
             "name": "Minion Prince",
-            "level": 26,
+            "level": 28,
             "maxLevel": 95,
             "equipment": [
                 {
@@ -1025,7 +1031,7 @@
         },
         {
             "name": "Healing Spell",
-            "level": 2,
+            "level": 3,
             "maxLevel": 12,
             "village": "home"
         },
@@ -1061,7 +1067,7 @@
         },
         {
             "name": "Haste Spell",
-            "level": 1,
+            "level": 2,
             "maxLevel": 7,
             "village": "home"
         },
@@ -1073,7 +1079,7 @@
         },
         {
             "name": "Skeleton Spell",
-            "level": 1,
+            "level": 2,
             "maxLevel": 8,
             "village": "home"
         }

@@ -73,10 +73,10 @@
         {
             "name": "Nice and Tidy",
             "stars": 3,
-            "value": 7258,
+            "value": 7259,
             "target": 500,
             "info": "Remove 500 obstacles (trees, rocks, bushes)",
-            "completionInfo": "Total obstacles removed: 7258",
+            "completionInfo": "Total obstacles removed: 7259",
             "village": "home"
         },
         {
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 2,
-            "value": 343,
+            "value": 347,
             "target": 500,
             "info": "Successfully defend against 500 attacks",
-            "completionInfo": "Total defenses won: 343",
+            "completionInfo": "Total defenses won: 347",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 2,
-            "value": 18450,
+            "value": 18460,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 18450",
+            "completionInfo": "Total Season Challenges points: 18460",
             "village": "home"
         },
         {
@@ -623,7 +623,7 @@
         },
         {
             "name": "Valkyrie",
-            "level": 2,
+            "level": 3,
             "maxLevel": 12,
             "village": "home"
         },
@@ -855,7 +855,7 @@
         },
         {
             "name": "Archer Queen",
-            "level": 51,
+            "level": 52,
             "maxLevel": 105,
             "equipment": [
                 {

@@ -3,7 +3,7 @@
     "name": "mare",
     "townHallLevel": 13,
     "townHallWeaponLevel": 1,
-    "expLevel": 131,
+    "expLevel": 132,
     "trophies": 0,
     "bestTrophies": 2712,
     "warStars": 253,
@@ -15,7 +15,7 @@
     "role": "admin",
     "warPreference": "in",
     "donations": 0,
-    "donationsReceived": 45,
+    "donationsReceived": 0,
     "clanCapitalContributions": 595617,
     "clan": {
         "tag": "#2PP0P22CQ",
@@ -73,10 +73,10 @@
         {
             "name": "Nice and Tidy",
             "stars": 3,
-            "value": 2378,
+            "value": 2392,
             "target": 500,
             "info": "Remove 500 obstacles (trees, rocks, bushes)",
-            "completionInfo": "Total obstacles removed: 2378",
+            "completionInfo": "Total obstacles removed: 2392",
             "village": "home"
         },
         {
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 1,
-            "value": 90,
+            "value": 91,
             "target": 250,
             "info": "Successfully defend against 250 attacks",
-            "completionInfo": "Total defenses won: 90",
+            "completionInfo": "Total defenses won: 91",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 3,
-            "value": 51350,
+            "value": 51520,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 51350",
+            "completionInfo": "Total Season Challenges points: 51520",
             "village": "home"
         },
         {
@@ -578,7 +578,7 @@
         },
         {
             "name": "Wall Breaker",
-            "level": 8,
+            "level": 9,
             "maxLevel": 14,
             "village": "home"
         },
@@ -596,7 +596,7 @@
         },
         {
             "name": "Healer",
-            "level": 5,
+            "level": 6,
             "maxLevel": 11,
             "village": "home"
         },
@@ -692,7 +692,7 @@
         },
         {
             "name": "Raged Barbarian",
-            "level": 13,
+            "level": 14,
             "maxLevel": 20,
             "village": "builderBase"
         },
