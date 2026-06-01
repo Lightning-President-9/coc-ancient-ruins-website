@@ -91,6 +91,5 @@ if __name__ == "__main__":
     Configuration:
     host  → Allows external access
     port  → Application running port
-    debug → Enables hot reload and debugging
     """
     app.run(host="0.0.0.0", port=10000)
