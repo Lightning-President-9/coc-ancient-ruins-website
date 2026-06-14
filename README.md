@@ -48,6 +48,7 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **21/4/26:** Integrated Clash of Clans data from the API, implemented Swagger for comprehensive API documentation, added rate limiting to enhance API security and performance, and improved overall code structure and formatting for better maintainability.
 - **5/5/26:** Added UptimeRobot services for uptime monitoring and to keep the application running continuously.
 - **19/5/26:** Added Redis URL support for rate limiting.
+- **14/6/26:** Removed UptimeRobot services.
 
 ## License
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.

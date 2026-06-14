@@ -237,32 +237,3 @@ def api_fmem():
     """
 
     return jsonify(fmem_list)
-
-@api_bp.route("/chatbot-service-status")
-@limiter.limit("10 per minute")
-def status():
-
-    """
-    Chatbot Service Status
-    ---
-    tags:
-      - Chatbot Service Status
-
-    responses:
-      200:
-        description: Service status
-        schema:
-          type: object
-          properties:
-            status:
-              type: string
-              example: ok
-
-            service:
-              type: string
-              example: Clan Chatbot API
-      429:
-        description: Too many requests (rate limit exceeded)
-    """
-
-    return jsonify({"status": "ok", "service": "Clan Chatbot API"})
