@@ -4,13 +4,21 @@
 Welcome to the [Clash of Clans (Ancient Ruins Clan) Website](https://coc-ancient-ruins-website.onrender.com/) repository! This project aims to improve the clan experience through a complete platform for member data collection, planning, and engagement. Developed with HTML, CSS, Python, JavaScript, Flask, and PostgreSQL, this site provides a host of features that will assist our clan members in connecting and succeeding.
 
 ## Features
-- **Member Data Collection:** Complete data on clan members and past members.
-- **Clan Score Columns:** Shows performance measurements and scores.
-- **Top Clan Contributors Table:** Indicates the most contributing or active members.
-- **Search & Sort:** Simple search and ordering of data within tables.
-- **Export Options:** HTML tables exportable to PDF, JSON, CSV, and Excel.
-- **API Integration:** Programmatically access member data through API.
-- **Graphs & Visualizations:** Offers graphical view of clan member and former member information.
+
+- **Member & Former Member Data**: Complete records of clan members with historical tracking
+- **Performance Metrics**: Clan score columns and contribution-based rankings
+- **Top Contributors**: Table highlighting most active and valuable players
+- **Search & Sort**: Easy filtering and ordering across all tables
+- **Export Options**: Download data as PDF, JSON, CSV, or Excel
+- **API Access**: Endpoints for members and former members with Swagger docs and rate limiting
+- **Graphs & Analytics**: Visual dashboards for trends, monthly analysis, and comparisons
+- **Advanced Insights**: Heatmaps, AI-based predictions, and KMeans clustering
+- **Player Reports**: Detailed individual performance reports across all game areas
+- **Month-wise Filtering**: Dynamic selection for time-based analysis
+- **UI Improvements**: Centralized navbar, reusable templates, and improved structure
+- **System Enhancements**: Faster data loading via GitHub JSON, Redis support, and cleaner backend design
+- **KARBS Chatbot**: Rule-based assistant for clan performance analysis
+
 
 ## Website Link
 Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
@@ -49,6 +57,7 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **5/5/26:** Added UptimeRobot services for uptime monitoring and to keep the application running continuously.
 - **19/5/26:** Added Redis URL support for rate limiting.
 - **14/6/26:** Removed UptimeRobot services.
+- **23/6/26:** Revised and improved the formula used to compute clan scores for more accurate and balanced player performance evaluation.
 
 ## License
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.
@@ -57,6 +66,7 @@ This project is licensed under the [MIT License](https://github.com/Lightning-Pr
 - [Flask](https://flask.palletsprojects.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/)
+- [Neon](https://neon.com/)
 - [Plotly Express](https://plotly.com/python/plotly-express/)
 - [Flasgger](https://github.com/flasgger/flasgger)
 - [Clash of Clans API](https://developer.clashofclans.com)

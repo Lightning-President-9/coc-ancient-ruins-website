@@ -138,7 +138,7 @@ function exportTableToPDF(tableClass) {
 	const cleanedTableHeader = tableHeader
 		.replace(/↑/g, '') // Remove '↑'
 		.replace(/Clan Score >200/g, '') // Remove "Clan Score >200"
-		.replace(/Clan Score = War Attack \+ Clan Capital \+ Clan Games \* \(if Clan Games Maxed = 0 return 1 else return Clan Games Maxed\)/g, '') // Remove explanation
+		.replace(/Clan Score = War Attack \+ Clan Capital \+ Clan Games \+ Clan Games Maxed/g, '') // Remove explanation
 		.replace(/\n/g, ''); // Remove line breaks
 
 	// Write cleaned table header and styles to PDF content
@@ -192,7 +192,7 @@ function tableToJson(tableId) {
 		let headerText = header.textContent
 			.replace('↑', '') // Remove '↑'
 			.replace('Clan Score >200', '') // Remove "Clan Score >200"
-			.replace('Clan Score = War Attack + Clan Capital + Clan Games * (if Clan Games Maxed = 0 return 1 else return Clan Games Maxed)', '') // Remove explanation
+			.replace('Clan Score = War Attack + Clan Capital + Clan Games + Clan Games Maxed', '') // Remove explanation
 			.replace(/\n/g, '') // Remove line breaks
 			.trim()
 			.toLowerCase()
@@ -280,7 +280,7 @@ function tableToCsv(tableId) {
 		let cleanedHeader = header.textContent.trim()
 			.replace('↑', '') // Remove '↑'
 			.replace('Clan Score >200', '') // Remove "Clan Score >200"
-			.replace('Clan Score = War Attack + Clan Capital + Clan Games * (if Clan Games Maxed = 0 return 1 else return Clan Games Maxed)', '') // Remove explanation
+			.replace('Clan Score = War Attack + Clan Capital + Clan Games + Clan Games Maxed', '') // Remove explanation
 			.replace(/\n/g, '') // Remove line breaks
 			.toLowerCase()
 			.replace(/\s+/g, ''); // Remove spaces and convert to lowercase
@@ -352,7 +352,7 @@ function convertTableToExcel(table) {
 		header.textContent = header.textContent
 			.replace('↑', '')
 			.replace('Clan Score >200', '')
-			.replace('Clan Score = War Attack + Clan Capital + Clan Games * (if Clan Games Maxed = 0 return 1 else return Clan Games Maxed)', '')
+			.replace('Clan Score = War Attack + Clan Capital + Clan Games + Clan Games Maxed', '')
 			.replace(/\n/g, '');
 	});
 
