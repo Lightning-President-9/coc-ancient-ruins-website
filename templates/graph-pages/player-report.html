@@ -26,7 +26,7 @@
             </thead>
             <tbody> {% for player in players %} <tr>
                 <td>
-                  <a href="{{ url_for('download_player_report', player_name=player) }}" target="_blank" rel="noopener">
+                  <a href="{{ url_for('report.download', player=player) }}">
                     {{ player }}
                   </a>
                 </td>

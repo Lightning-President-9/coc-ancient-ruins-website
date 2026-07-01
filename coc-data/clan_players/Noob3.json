@@ -73,10 +73,10 @@
         {
             "name": "Nice and Tidy",
             "stars": 3,
-            "value": 7259,
+            "value": 7278,
             "target": 500,
             "info": "Remove 500 obstacles (trees, rocks, bushes)",
-            "completionInfo": "Total obstacles removed: 7259",
+            "completionInfo": "Total obstacles removed: 7278",
             "village": "home"
         },
         {
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 2,
-            "value": 347,
+            "value": 351,
             "target": 500,
             "info": "Successfully defend against 500 attacks",
-            "completionInfo": "Total defenses won: 347",
+            "completionInfo": "Total defenses won: 351",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 2,
-            "value": 18460,
+            "value": 19060,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 18460",
+            "completionInfo": "Total Season Challenges points: 19060",
             "village": "home"
         },
         {
@@ -836,11 +836,11 @@
         {
             "name": "Barbarian King",
             "level": 52,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Vampstache",
-                    "level": 2,
+                    "level": 5,
                     "maxLevel": 18,
                     "village": "home"
                 },
@@ -855,8 +855,8 @@
         },
         {
             "name": "Archer Queen",
-            "level": 52,
-            "maxLevel": 105,
+            "level": 54,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Invisibility Vial",
@@ -875,18 +875,18 @@
         },
         {
             "name": "Grand Warden",
-            "level": 23,
-            "maxLevel": 80,
+            "level": 24,
+            "maxLevel": 85,
             "equipment": [
                 {
                     "name": "Life Gem",
-                    "level": 2,
+                    "level": 5,
                     "maxLevel": 18,
                     "village": "home"
                 },
                 {
                     "name": "Eternal Tome",
-                    "level": 2,
+                    "level": 5,
                     "maxLevel": 18,
                     "village": "home"
                 }
@@ -922,6 +922,30 @@
     ],
     "heroEquipment": [
         {
+            "name": "Giant Gauntlet",
+            "level": 12,
+            "maxLevel": 27,
+            "village": "home"
+        },
+        {
+            "name": "Frozen Arrow",
+            "level": 12,
+            "maxLevel": 27,
+            "village": "home"
+        },
+        {
+            "name": "Fireball",
+            "level": 12,
+            "maxLevel": 27,
+            "village": "home"
+        },
+        {
+            "name": "Dark Crown",
+            "level": 12,
+            "maxLevel": 27,
+            "village": "home"
+        },
+        {
             "name": "Barbarian Puppet",
             "level": 5,
             "maxLevel": 18,
@@ -947,19 +971,19 @@
         },
         {
             "name": "Eternal Tome",
-            "level": 2,
+            "level": 5,
             "maxLevel": 18,
             "village": "home"
         },
         {
             "name": "Life Gem",
-            "level": 2,
+            "level": 5,
             "maxLevel": 18,
             "village": "home"
         },
         {
             "name": "Vampstache",
-            "level": 2,
+            "level": 5,
             "maxLevel": 18,
             "village": "home"
         },

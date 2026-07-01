@@ -858,7 +858,7 @@
         {
             "name": "Barbarian King",
             "level": 23,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Earthquake Boots",
@@ -878,7 +878,7 @@
         {
             "name": "Archer Queen",
             "level": 24,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Giant Arrow",
@@ -898,7 +898,7 @@
         {
             "name": "Grand Warden",
             "level": 16,
-            "maxLevel": 80,
+            "maxLevel": 85,
             "equipment": [
                 {
                     "name": "Rage Gem",

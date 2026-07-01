@@ -551,86 +551,6 @@
         ]
     },
     "labels": [],
-    "spells": [
-        {
-            "name": "Lightning Spell",
-            "level": 9,
-            "maxLevel": 13,
-            "village": "home"
-        },
-        {
-            "name": "Healing Spell",
-            "level": 7,
-            "maxLevel": 12,
-            "village": "home"
-        },
-        {
-            "name": "Rage Spell",
-            "level": 6,
-            "maxLevel": 7,
-            "village": "home"
-        },
-        {
-            "name": "Jump Spell",
-            "level": 3,
-            "maxLevel": 5,
-            "village": "home"
-        },
-        {
-            "name": "Freeze Spell",
-            "level": 7,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Poison Spell",
-            "level": 6,
-            "maxLevel": 12,
-            "village": "home"
-        },
-        {
-            "name": "Earthquake Spell",
-            "level": 5,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Haste Spell",
-            "level": 5,
-            "maxLevel": 7,
-            "village": "home"
-        },
-        {
-            "name": "Clone Spell",
-            "level": 5,
-            "maxLevel": 9,
-            "village": "home"
-        },
-        {
-            "name": "Skeleton Spell",
-            "level": 6,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Bat Spell",
-            "level": 5,
-            "maxLevel": 8,
-            "village": "home"
-        },
-        {
-            "name": "Invisibility Spell",
-            "level": 3,
-            "maxLevel": 4,
-            "village": "home"
-        },
-        {
-            "name": "Overgrowth Spell",
-            "level": 2,
-            "maxLevel": 5,
-            "village": "home"
-        }
-    ],
     "troops": [
         {
             "name": "Barbarian",
@@ -949,7 +869,7 @@
         {
             "name": "Barbarian King",
             "level": 58,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Earthquake Boots",
@@ -969,7 +889,7 @@
         {
             "name": "Archer Queen",
             "level": 59,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Frozen Arrow",
@@ -989,7 +909,7 @@
         {
             "name": "Grand Warden",
             "level": 29,
-            "maxLevel": 80,
+            "maxLevel": 85,
             "equipment": [
                 {
                     "name": "Life Gem",
@@ -1140,6 +1060,86 @@
             "name": "Noble Iron",
             "level": 1,
             "maxLevel": 18,
+            "village": "home"
+        }
+    ],
+    "spells": [
+        {
+            "name": "Lightning Spell",
+            "level": 9,
+            "maxLevel": 13,
+            "village": "home"
+        },
+        {
+            "name": "Healing Spell",
+            "level": 7,
+            "maxLevel": 12,
+            "village": "home"
+        },
+        {
+            "name": "Rage Spell",
+            "level": 6,
+            "maxLevel": 7,
+            "village": "home"
+        },
+        {
+            "name": "Jump Spell",
+            "level": 3,
+            "maxLevel": 5,
+            "village": "home"
+        },
+        {
+            "name": "Freeze Spell",
+            "level": 7,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Poison Spell",
+            "level": 6,
+            "maxLevel": 12,
+            "village": "home"
+        },
+        {
+            "name": "Earthquake Spell",
+            "level": 5,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Haste Spell",
+            "level": 5,
+            "maxLevel": 7,
+            "village": "home"
+        },
+        {
+            "name": "Clone Spell",
+            "level": 5,
+            "maxLevel": 9,
+            "village": "home"
+        },
+        {
+            "name": "Skeleton Spell",
+            "level": 6,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Bat Spell",
+            "level": 5,
+            "maxLevel": 8,
+            "village": "home"
+        },
+        {
+            "name": "Invisibility Spell",
+            "level": 3,
+            "maxLevel": 4,
+            "village": "home"
+        },
+        {
+            "name": "Overgrowth Spell",
+            "level": 2,
+            "maxLevel": 5,
             "village": "home"
         }
     ]

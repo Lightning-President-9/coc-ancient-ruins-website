@@ -900,7 +900,7 @@
         {
             "name": "Barbarian King",
             "level": 61,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Earthquake Boots",
@@ -920,7 +920,7 @@
         {
             "name": "Archer Queen",
             "level": 61,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Invisibility Vial",
@@ -940,7 +940,7 @@
         {
             "name": "Grand Warden",
             "level": 40,
-            "maxLevel": 80,
+            "maxLevel": 85,
             "equipment": [
                 {
                     "name": "Fireball",

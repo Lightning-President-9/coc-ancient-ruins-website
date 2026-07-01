@@ -893,7 +893,7 @@
         {
             "name": "Barbarian King",
             "level": 68,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Vampstache",
@@ -913,7 +913,7 @@
         {
             "name": "Archer Queen",
             "level": 69,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Invisibility Vial",
@@ -933,7 +933,7 @@
         {
             "name": "Grand Warden",
             "level": 31,
-            "maxLevel": 80,
+            "maxLevel": 85,
             "equipment": [
                 {
                     "name": "Rage Gem",

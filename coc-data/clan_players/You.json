@@ -28,11 +28,11 @@
         }
     },
     "leagueTier": {
-        "id": 105000018,
-        "name": "Witch League 18",
+        "id": 105000017,
+        "name": "Witch League 17",
         "iconUrls": {
-            "small": "https://api-assets.clashofclans.com/leaguetiers/125/GeLamlTvRYNnZp5lEW64pyaORN30rCdrxTjU7oJoTN8.png",
-            "large": "https://api-assets.clashofclans.com/leaguetiers/326/GeLamlTvRYNnZp5lEW64pyaORN30rCdrxTjU7oJoTN8.png"
+            "small": "https://api-assets.clashofclans.com/leaguetiers/125/3mEMvpajLceJ3EKu7u_JIh_cOEsT7wyh701zum9hqCY.png",
+            "large": "https://api-assets.clashofclans.com/leaguetiers/326/3mEMvpajLceJ3EKu7u_JIh_cOEsT7wyh701zum9hqCY.png"
         }
     },
     "builderBaseLeague": {
@@ -40,8 +40,8 @@
         "name": "Iron League III"
     },
     "currentLeagueSeasonId": 0,
-    "previousLeagueGroupTag": "#2GURUQ9",
-    "previousLeagueSeasonId": 1776056400,
+    "previousLeagueGroupTag": "#0",
+    "previousLeagueSeasonId": 1781499600,
     "achievements": [
         {
             "name": "Bigger Coffers",
@@ -73,10 +73,10 @@
         {
             "name": "Nice and Tidy",
             "stars": 3,
-            "value": 4988,
+            "value": 4989,
             "target": 500,
             "info": "Remove 500 obstacles (trees, rocks, bushes)",
-            "completionInfo": "Total obstacles removed: 4988",
+            "completionInfo": "Total obstacles removed: 4989",
             "village": "home"
         },
         {
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 3,
-            "value": 862,
+            "value": 880,
             "target": 500,
             "info": "Successfully defend against 500 attacks",
-            "completionInfo": "Total defenses won: 862",
+            "completionInfo": "Total defenses won: 880",
             "village": "home"
         },
         {
@@ -953,8 +953,8 @@
     "heroes": [
         {
             "name": "Barbarian King",
-            "level": 64,
-            "maxLevel": 105,
+            "level": 65,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Spiky Ball",
@@ -974,7 +974,7 @@
         {
             "name": "Archer Queen",
             "level": 73,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Healer Puppet",
@@ -994,7 +994,7 @@
         {
             "name": "Grand Warden",
             "level": 48,
-            "maxLevel": 80,
+            "maxLevel": 85,
             "equipment": [
                 {
                     "name": "Rage Gem",

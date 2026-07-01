@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 3,
-            "value": 675,
+            "value": 676,
             "target": 500,
             "info": "Successfully defend against 500 attacks",
-            "completionInfo": "Total defenses won: 675",
+            "completionInfo": "Total defenses won: 676",
             "village": "home"
         },
         {
@@ -964,7 +964,7 @@
         {
             "name": "Barbarian King",
             "level": 74,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Vampstache",
@@ -984,7 +984,7 @@
         {
             "name": "Archer Queen",
             "level": 78,
-            "maxLevel": 105,
+            "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Healer Puppet",
@@ -1004,7 +1004,7 @@
         {
             "name": "Grand Warden",
             "level": 53,
-            "maxLevel": 80,
+            "maxLevel": 85,
             "equipment": [
                 {
                     "name": "Life Gem",
