@@ -1,0 +1,67 @@
+<section class="summary-section">
+  <!-- War Attacks -->
+  <div class="summary-card">
+    <div class="card-title"> War Attack </div>
+    <div class="card-value">
+      {{ dashboard.summary.totals["War Attack"] }}
+    </div>
+    <div class="card-info">
+      <span> Rank #{{ dashboard.rankings.ranks["War Attack"].rank }} / {{ dashboard.rankings.ranks["War Attack"].total_players }}
+      </span>
+      <span> Avg/Mon {{ dashboard.summary.averages["War Attack"] }}
+      </span>
+    </div>
+  </div>
+  <!-- Clan Capital -->
+  <div class="summary-card">
+    <div class="card-title"> Clan Capital </div>
+    <div class="card-value">
+      {{ dashboard.summary.totals["Clan Capital"] }}
+    </div>
+    <div class="card-info">
+      <span> Rank #{{ dashboard.rankings.ranks["Clan Capital"].rank }} / {{ dashboard.rankings.ranks["Clan Capital"].total_players }}
+      </span>
+      <span> Avg/Mon {{ dashboard.summary.averages["Clan Capital"] }}
+      </span>
+    </div>
+  </div>
+  <!-- Clan Games -->
+  <div class="summary-card">
+    <div class="card-title"> Clan Games </div>
+    <div class="card-value">
+      {{ dashboard.summary.totals["Clan Games"] }}
+    </div>
+    <div class="card-info">
+      <span> Rank #{{ dashboard.rankings.ranks["Clan Games"].rank }} / {{ dashboard.rankings.ranks["Clan Games"].total_players }}
+      </span>
+      <span> No. of Mon {{ dashboard.summary.total_seasons }}
+      </span>
+    </div>
+  </div>
+  <!-- Clan Games Maxed -->
+  <div class="summary-card">
+    <div class="card-title"> Clan Games Maxed </div>
+    <div class="card-value">
+      {{ dashboard.summary.totals["Clan Games Maxed"] }}
+    </div>
+    <div class="card-info">
+      <span> Rank #{{ dashboard.rankings.ranks["Clan Games Maxed"].rank }} / {{ dashboard.rankings.ranks["Clan Games Maxed"].total_players }}
+      </span>
+      <span> No. of Mon {{ dashboard.summary.total_seasons }}
+      </span>
+    </div>
+  </div>
+  <!-- Clan Score -->
+  <div class="summary-card">
+    <div class="card-title"> Clan Score </div>
+    <div class="card-value">
+      {{ dashboard.summary.totals["Clan Score"] }}
+    </div>
+    <div class="card-info">
+      <span> Rank #{{ dashboard.rankings.ranks["Clan Score"].rank }} / {{ dashboard.rankings.ranks["Clan Score"].total_players }}
+      </span>
+      <span> Avg/Mon {{ dashboard.summary.averages["Clan Score"] }}
+      </span>
+    </div>
+  </div>
+</section>

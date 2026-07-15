@@ -58,6 +58,7 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **19/5/26:** Added Redis URL support for rate limiting.
 - **14/6/26:** Removed UptimeRobot services.
 - **23/6/26:** Revised and improved the formula used to compute clan scores for more accurate and balanced player performance evaluation.
+- **15/7/26:** Updated AI prediction graphs to start from the player's join month, fixed the `playerHouse` error, added functionality to capture whole screen image and added an interactive Player Dashboard with player statistics, rankings, graphs, heatmaps, clan comparison, and monthly history.
 
 ## License
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.

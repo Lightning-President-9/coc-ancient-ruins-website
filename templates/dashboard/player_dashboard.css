@@ -1,0 +1,226 @@
+/* Dashboard */
+
+.dashboard-container {
+  width: 95%;
+  max-width: 1700px;
+
+  margin: auto;
+
+  display: grid;
+
+  gap: 20px;
+
+  padding-top: 15px;
+}
+
+/* Player Header */
+
+.player-header {
+  background: #f2f3f5;
+
+  border-radius: 16px;
+
+  padding: 25px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  border: 1px solid #e8e8e8;
+}
+
+.player-banner{
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.avatar{
+    width: 100px;
+    height: 100px;
+
+    border-radius: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(255,255,255,.08);
+
+    overflow: hidden;
+
+    border: 3px solid rgba(255,255,255,.15);
+}
+
+.player-avatar{
+    width: 85%;
+
+    height: 85%;
+
+    object-fit: contain;
+}
+
+.player-details h1 {
+  margin: 0;
+
+  font-size: 34px;
+}
+
+.player-meta {
+  margin-top: 10px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  align-items: center;
+}
+
+.rating {
+  background: #ffd700;
+
+  color: black;
+
+  font-weight: bold;
+
+  padding: 6px 14px;
+
+  border-radius: 30px;
+}
+
+.divider {
+  opacity: 0.5;
+}
+
+/* Summary Cards */
+
+.summary-section {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 20px;
+}
+
+.summary-card {
+  background: #f2f3f5;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  border: 1px solid #ececec;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+
+  transition: 0.25s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.card-icon {
+  font-size: 32px;
+}
+
+.card-title {
+  margin-top: 10px;
+
+  font-size: 18px;
+
+  font-weight: 600;
+
+  color: #555;
+}
+
+.card-value {
+  margin-top: 12px;
+
+  font-size: 40px;
+
+  font-weight: 700;
+
+  color: #222;
+}
+
+.card-info {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 18px;
+
+  font-size: 13px;
+
+  color: #777;
+}
+
+/* Chart Card */
+
+.chart-card {
+  background: rgba(255, 255, 255, 0.35);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 16px;
+
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.25);
+
+  overflow: hidden;
+
+  transition: 0.25s ease;
+}
+
+.chart-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.35);
+}
+
+.plotly-chart {
+  width: 100%;
+
+  min-height: 500px;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .insight-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.main-table {
+  margin-top: 20px;
+}
+
+.main-table .table-body {
+  max-height: 500px;
+}
+
+.main-table table {
+  width: 100%;
+}
+
+.main-table th,
+.main-table td {
+  text-align: center;
+}
+
+.export__file .export__file-btn {
+  display: block;
+  width: 3.3rem;
+  height: 3.3rem;
+  background: #fff6 url(../.././static/home-page-icons/export_img_final.png)
+    center / 80% no-repeat;
+  border-radius: 0.6rem;
+  transition: 0.2s ease-in-out;
+}

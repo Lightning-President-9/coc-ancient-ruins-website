@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> {% include "head.html" %} <title>{{ player }} | Player Dashboard</title>
+    <style>{% include "dashboard/player_dashboard.css" %}</style>
+  </head>
+  <body> {% include "navbar.html" %}
+    <main class="dashboard-container">
+        {% include "dashboard/components/player_header.html" %}
+        {% include "dashboard/components/summary_cards.html" %}
+        {% set title = "Performance Timeline" %}
+        {% set chart_id = "timeline-chart" %}
+        {% include "dashboard/components/chart.html" %}
+        {% set title = "Contribution Breakdown" %}
+        {% set chart_id = "donut-chart" %}
+        {% include "dashboard/components/chart.html" %}
+        {% set title = "Clan Comparison" %}
+        {% set chart_id = "comparison-chart" %}
+        {% include "dashboard/components/chart.html" %}
+        {% set title = "Activity Heatmap" %}
+        {% set chart_id = "heatmap-chart" %}
+        {% include "dashboard/components/chart.html" %}
+        {% include "dashboard/components/monthly_table.html" %}
+    </main>
+    <script src="https://cdn.plot.ly/plotly-3.1.0.min.js"></script>
+    <script>
+      const dashboard = {{ dashboard | tojson }};
+      {% include "dashboard/player_dashboard.js" %}
+    </script>
+    <script>
+      {% include "dashboard/player_history_table.js" %}
+    </script>
+  </body>
+</html>

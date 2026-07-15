@@ -1,0 +1,42 @@
+<main class="main-table">
+  <section class="table-header">
+    <h2> {{ player }}'s Monthly Performance History</h2>
+    <div class="export__file">
+      <label for="export-history" class="export__file-btn" title="Export File"></label>
+      <input type="checkbox" id="export-history">
+      <div class="export__file-options">
+        <label>Export As &nbsp; &#10140;</label>
+        <label for="export-history" id="PerformanceTabletoPDFHistory"> PDF <img src="/static/home-page-icons/pdf_icon_img_final.png">
+        </label>
+        <label for="export-history" id="PerformanceTabletoJSONHistory"> JSON <img src="/static/home-page-icons/json_icon_img_final.png">
+        </label>
+        <label for="export-history" id="PerformanceTabletoCSVHistory"> CSV <img src="/static/home-page-icons/csv_icon_img_final.png">
+        </label>
+        <label for="export-history" id="PerformanceTabletoEXCELHistory"> EXCEL <img src="/static/home-page-icons/xls_icon_img_final.png">
+        </label>
+      </div>
+    </div>
+  </section>
+  <section class="table-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>War Attack</th>
+          <th>Clan Capital</th>
+          <th>Clan Games</th>
+          <th>Clan Games Maxed</th>
+          <th>Clan Score</th>
+        </tr>
+      </thead>
+      <tbody> {% for i in range(dashboard.periods|length) %} <tr>
+          <td>{{ dashboard.periods[i] }}</td>
+          <td>{{ dashboard.metrics["War Attack"][i] }}</td>
+          <td>{{ dashboard.metrics["Clan Capital"][i] }}</td>
+          <td>{{ dashboard.metrics["Clan Games"][i] }}</td>
+          <td>{{ dashboard.metrics["Clan Games Maxed"][i] }}</td>
+          <td>{{ dashboard.metrics["Clan Score"][i] }}</td>
+        </tr> {% endfor %} </tbody>
+    </table>
+  </section>
+</main>

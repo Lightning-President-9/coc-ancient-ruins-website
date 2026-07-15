@@ -1,6 +1,6 @@
 body {
   min-height: 70vh;
-  background-image: url("/static/bg_img_2.png");
+  background-image: url("/static/bg_img.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -456,7 +456,7 @@ thead th.asc span.icon-arrow {
     justify-items: center;
   }
   body {
-    padding-top: 130px;
+    padding-top: 190px;
   }
 }
 

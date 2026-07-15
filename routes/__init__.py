@@ -33,6 +33,7 @@ Modular Blueprint architecture for maintainability and scalability.
 # Importing Blueprint objects from route modules.
 # Each Blueprint represents a functional module of the application.
 from .api_routes import api_bp
+from .dashboard_routes import dashboard_bp
 from .github_api_routes import github_api_bp
 from .graph_routes import graph_bp
 from .ai_routes import ai_bp
@@ -77,6 +78,9 @@ def register_routes(app):
 
     # Chatbot service routes
     app.register_blueprint(chatbot_bp)
+
+    # Interactive player dashboard
+    app.register_blueprint(dashboard_bp)
 
     # Player report generation routes
     app.register_blueprint(report_bp)

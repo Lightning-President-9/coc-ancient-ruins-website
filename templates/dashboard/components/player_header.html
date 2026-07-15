@@ -1,0 +1,19 @@
+<section class="player-header">
+  <div class="player-banner">
+    <div class="player-details">
+      <h1>
+        {{ player }}
+      </h1>
+      <div class="player-meta">
+        <span class="rating">
+          {{ dashboard.rankings.rating }}
+        </span>
+        <span> Rank #{{ dashboard.rankings.ranks["Clan Score"].rank }} of {{ dashboard.rankings.ranks["Clan Score"].total_players }}
+        </span>
+      </div>
+    </div>
+      <div class="avatar">
+        <img src="{{ url_for('static', filename='clan-badge_18.png') }}" alt="Clan Badge" class="player-avatar">
+      </div>
+  </div>
+</section>

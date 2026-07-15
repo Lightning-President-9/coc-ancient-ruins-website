@@ -90,7 +90,7 @@ class AIPredictionGraph:
 
         main_data = requests.get(self.main_data_url).json()
         df = pd.DataFrame(main_data)
-        df.replace(-1, 0, inplace=True)
+        # df.replace(-1, 0, inplace=True)
 
         may_data = requests.get(self.filter_names_url).json()
         valid_names_upper = {entry["name"].strip().upper() for entry in may_data}
@@ -132,90 +132,158 @@ class AIPredictionGraph:
     def forecast_plot(self, prefix):
         """
         Generate a forecast graph for a specific performance metric.
-
-        For each clan member:
-        - Extracts historical values for the selected metric
-        - Fits a linear regression model
-        - Forecasts the next period's value
-        - Builds an interactive Plotly figure with a dropdown selector
-
-        Args:
-            prefix (str): Metric prefix (e.g., 'warattack_', 'clancapital_')
-
-        Returns:
-            plotly.graph_objects.Figure: Interactive forecast visualization
         """
 
         df = self.df_filtered
+
         metric_cols = [col for col in df.columns if col.startswith(prefix)]
 
-        # Sort columns chronologically using the FIXED sort key
         sorted_cols = sorted(
-            metric_cols, key=lambda col: self._period_sort_key(col, prefix)
+            metric_cols,
+            key=lambda col: self._period_sort_key(col, prefix)
         )
 
         periods = [col.replace(prefix, "").upper() for col in sorted_cols]
 
         fig = go.Figure()
-        buttons = []
 
-        for i, name in enumerate(df["name"]):
+        # Store player trace locations
+        player_trace_indices = []
+
+        # -----------------------
+        # Add all player traces
+        # -----------------------
+        for name in df["name"]:
+
             row = df[df["name"] == name]
-            values = row[sorted_cols].values.flatten()
+
+            values = row[sorted_cols].values.flatten().astype(float)
+
+            # Remove months before joining
+            valid_mask = values != -1
+
+            values = values[valid_mask]
+
+            if len(values) == 0:
+                continue
+
+            periods_player = [
+                p for p, keep in zip(periods, valid_mask)
+                if keep
+            ]
+
             X = list(range(len(values)))
 
-            # Linear regression model
-            model = LinearRegression().fit(pd.DataFrame(X), values)
-            forecast = model.predict([[len(X)]])[0]
-            pred_line = model.predict(pd.DataFrame(X + [len(X)]))
+            if len(values) == 1:
 
-            # Plot
-            trace_actual = go.Scatter(
-                x=periods, y=values, mode="lines+markers", name="Actual"
+                forecast = values[0]
+                pred_line = [values[0], values[0]]
+
+            else:
+
+                model = LinearRegression()
+
+                model.fit(pd.DataFrame(X), values)
+
+                forecast = model.predict([[len(X)]])[0]
+
+                pred_line = model.predict(
+                    pd.DataFrame(X + [len(X)])
+                )
+
+            start = len(fig.data)
+
+            # Actual
+            fig.add_trace(
+                go.Scatter(
+                    x=periods_player,
+                    y=values,
+                    mode="lines+markers",
+                    name="Actual"
+                )
             )
 
-            trace_fit = go.Scatter(
-                x=periods + [PREDICTED_MONTH],
-                y=list(pred_line),
-                mode="lines",
-                name="Linear Fit",
+            # Linear Fit
+            fig.add_trace(
+                go.Scatter(
+                    x=periods_player + [PREDICTED_MONTH],
+                    y=list(pred_line),
+                    mode="lines",
+                    name="Linear Fit"
+                )
             )
 
-            trace_forecast = go.Scatter(
-                x=[PREDICTED_MONTH],
-                y=[forecast],
-                mode="markers+text",
-                name="Forecast",
-                marker=dict(size=10, color="green"),
-                text=[f"{forecast:.1f}"],
-                textposition="top center",
+            # Forecast
+            fig.add_trace(
+                go.Scatter(
+                    x=[PREDICTED_MONTH],
+                    y=[forecast],
+                    mode="markers+text",
+                    name="Forecast",
+                    marker=dict(
+                        size=10,
+                        color="green"
+                    ),
+                    text=[f"{forecast:.1f}"],
+                    textposition="top center"
+                )
             )
 
-            fig.add_trace(trace_actual)
-            fig.add_trace(trace_fit)
-            fig.add_trace(trace_forecast)
+            end = len(fig.data)
 
-            # Visibility mapping for dropdown
-            vis = [False] * (len(df["name"]) * 3)
-            vis[i * 3 : i * 3 + 3] = [True, True, True]
+            player_trace_indices.append(
+                (name, start, end)
+            )
+
+        # -----------------------
+        # Build dropdown
+        # -----------------------
+        buttons = []
+
+        total_traces = len(fig.data)
+
+        for name, start, end in player_trace_indices:
+
+            visible = [False] * total_traces
+
+            for i in range(start, end):
+                visible[i] = True
 
             buttons.append(
                 dict(
                     label=name,
                     method="update",
                     args=[
-                        {"visible": vis},
-                        {"title": f"{prefix[:-1].capitalize()} Forecast for {name}"},
+                        {"visible": visible},
+                        {
+                            "title": f"{prefix[:-1].capitalize()} Forecast for {name}"
+                        },
                     ],
                 )
             )
 
-        # Show only the first member by default
-        for j in range(len(df["name"]) * 3):
-            fig.data[j].visible = j < 3
+        # -----------------------
+        # Show first player
+        # -----------------------
+        for trace in fig.data:
+            trace.visible = False
+
+        if player_trace_indices:
+
+            _, start, end = player_trace_indices[0]
+
+            for i in range(start, end):
+                fig.data[i].visible = True
 
         fig.update_layout(
-            updatemenus=[dict(buttons=buttons, direction="down", x=1.05, y=1.15)],
+            updatemenus=[
+                dict(
+                    buttons=buttons,
+                    direction="down",
+                    x=1.05,
+                    y=1.15,
+                )
+            ],
             title=f"{prefix[:-1].capitalize()} Forecast",
             xaxis_title="Period",
             yaxis_title=prefix[:-1].capitalize(),

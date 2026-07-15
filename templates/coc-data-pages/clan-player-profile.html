@@ -485,10 +485,20 @@
                 </th>
               </tr>
             </thead>
-            <tbody> {% for element in player.playerHouse.elements %} <tr>
-                <td>{{ element.type }}</td>
-                <td>{{ element.id }}</td>
-              </tr> {% endfor %} </tbody>
+            <tbody>
+              {% if player.get('playerHouse') and player.playerHouse.get('elements') %}
+                  {% for element in player.playerHouse.elements %}
+                  <tr>
+                      <td>{{ element.type }}</td>
+                      <td>{{ element.id }}</td>
+                  </tr>
+                  {% endfor %}
+              {% else %}
+                  <tr>
+                      <td colspan="2">No Player House data available.</td>
+                  </tr>
+              {% endif %}
+            </tbody>
           </table>
         </section>
       </main>
