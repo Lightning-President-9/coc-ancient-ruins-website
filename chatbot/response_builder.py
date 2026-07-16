@@ -294,7 +294,8 @@ def build_response(result: dict, month_value: str) -> str:
     if rtype == "ERROR_COMPARE_PLAYERS_NOT_FOUND":
         players = ", ".join(result["players"])
         return (
-            "I could not find exactly two players to compare for this month.\n"
+            "I could not find exactly two players to compare for this month.\nPlease write your message like below:\n"
+            "Compare {player_name} {player_name} in MAY 2026\n"
             f"Available players are: {players}."
         )
 

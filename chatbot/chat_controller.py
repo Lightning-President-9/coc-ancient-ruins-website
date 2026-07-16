@@ -29,98 +29,146 @@ from chatbot.operation_resolver import resolve_operation
 from chatbot.response_builder import build_response
 from chatbot.input_classifier import classify_input
 from chatbot.almost_hint import suggest_month
+import random
 
 # STATIC METRIC EXPLANATIONS
 METRIC_EXPLANATIONS = {
-    "warattack": "Total war attacks performed by a player in the given month.",
-    "clanscore": "Overall contribution score representing player performance.",
-    "clangamesmaxed": "Whether the player fully completed Clan Games.",
-    "clangames": "Points contributed by the player in Clan Games.",
-    "clancapital": "Contribution made by the player to Clan Capital raids.",
+    "warattack": "Number of times attacked in war.",
+    "clancapital": "Number of times attacked in clan capital",
+    "clangames": "	Number of times participated in clan games.",
+    "clangamesmaxed": "Number of times maxed clan points in clan games",
+    "clanscore": "Total sum of warattack, clancapital, clangames and clangamesmaxed",
 }
 
-def build_suggestions(op_type: str, domain: str, month_value: str) -> list[str]:
+def build_suggestions(result: dict, domain: str, month_value: str) -> list[str]:
     """
-    Builds a contextual list of follow-up query suggestions.
-
-    This function generates meaningful next-step questions based on the
-    type of operation that was just executed. The goal is to guide users
-    toward valid and relevant queries without overwhelming them.
-
-    Suggestions are:
-    - Operation-aware (based on op_type)
-    - Month-specific (derived from month_value)
-    - Domain-safe (only valid for the resolved dataset)
-
-    Parameters:
-        op_type (str): The resolved operation type returned by the
-                       operation resolver.
-        domain (str): The dataset domain used for the current query.
-        month_value (str): Normalized month or month-range value.
-
-    Returns:
-        list[str]:
-            A list of suggested follow-up questions that the user can
-            immediately ask next.
+    Build contextual follow-up suggestions.
     """
 
     m = month_value.replace("_", " ")
 
+    op_type = result.get("type")
+    metric = result.get("metric", "warattack")
+    player = result.get("player")
+
+    def pick(pool):
+        """Return up to 3 random unique suggestions."""
+        pool = list(dict.fromkeys(pool))
+        return random.sample(pool, min(3, len(pool)))
+
+    # PLAYER METRIC
     if op_type == "PLAYER_METRIC":
-        return [
-            f"display coc-data of this player in {m}",
-            f"compare this player vs another in {m}",
-            f"what is the average clanscore in {m}",
+        pool = [
+            f"display coc-data of {player} in {m}",
+            f"compare {player} vs another player in {m}",
+            f"what is the average {metric} in {m}",
+            f"who had the highest {metric} in {m}",
+            f"top 10 {metric} in {m}",
+            f"group {metric} in {m}",
+            f"total {metric} in {m}",
         ]
+        return pick(pool)
 
-    if op_type in {"MOST_OF_METRIC", "LEAST_OF_METRIC"}:
-        return [
-            f"top 5 clanscore in {m}",
-            f"lowest non-zero warattack in {m}",
-            f"group clanscore in {m}",
+    # PLAYER DATA
+    if op_type == "PLAYER_FULL_DATA":
+        pool = [
+            f"what is {player}'s warattack in {m}",
+            f"what is {player}'s clanscore in {m}",
+            f"compare {player} vs another player in {m}",
+            f"who had the highest clanscore in {m}",
+            f"top 10 warattack in {m}",
         ]
+        return pick(pool)
 
+    # HIGHEST / LOWEST
+    if op_type in ("MOST_OF_METRIC", "LEAST_OF_METRIC"):
+        pool = [
+            f"top 10 {metric} in {m}",
+            f"average {metric} in {m}",
+            f"total {metric} in {m}",
+            f"group {metric} in {m}",
+            f"who had the highest {metric} in {m}",
+            f"who had the lowest {metric} in {m}",
+        ]
+        return pick(pool)
+
+    # TOP N
     if op_type == "TOP_N_METRIC":
-        return [
-            f"top 3 lowest clanscore in {m}",
-            f"group warattack in {m}",
-            f"what is the average warattack in {m}",
+        pool = [
+            f"average {metric} in {m}",
+            f"total {metric} in {m}",
+            f"group {metric} in {m}",
+            f"who had the highest {metric} in {m}",
+            f"who had the lowest {metric} in {m}",
         ]
+        return pick(pool)
 
+    # GROUP
     if op_type == "GROUP_BY_VALUE":
-        return [
-            f"top 5 warattack in {m}",
-            f"lowest non-zero warattack in {m}",
-            f"total warattack in {m}",
+        pool = [
+            f"top 10 {metric} in {m}",
+            f"average {metric} in {m}",
+            f"total {metric} in {m}",
+            f"who had the highest {metric} in {m}",
         ]
+        return pick(pool)
 
-    if op_type == "COMPARE_PLAYERS":
-        return [
-            f"what is the average clanscore in {m}",
-            f"top 5 clanscore in {m}",
-            f"display coc-data of one of these players in {m}",
-        ]
-
-    if op_type in {"AVERAGE_METRIC", "TOTAL_METRIC"}:
-        return [
-            f"top 5 clanscore in {m}",
-            f"group clanscore in {m}",
+    # TOTAL / AVERAGE
+    if op_type in ("TOTAL_METRIC", "AVERAGE_METRIC"):
+        pool = [
+            f"top 10 {metric} in {m}",
+            f"group {metric} in {m}",
+            f"who had the highest {metric} in {m}",
+            f"who had the lowest {metric} in {m}",
             f"compare two players in {m}",
         ]
+        return pick(pool)
 
-    if op_type == "PLAYER_MEMBERSHIP_CHECK":
-        return [
-            f"display coc-data of this player in {m}",
-            f"is this player active in {m}",
-            f"compare this player vs another in {m}",
+    # COMPARE
+    if op_type == "COMPARE_PLAYERS":
+        players = result.get("players", [])
+
+        pool = [
+            f"display coc-data of {players[0]} in {m}" if len(players) > 0 else "",
+            f"display coc-data of {players[1]} in {m}" if len(players) > 1 else "",
+            f"who had the highest warattack in {m}",
+            f"average warattack in {m}",
+            f"top 10 clanscore in {m}",
         ]
 
-    # Safe fallback
-    return [
-        f"list all names in {m}",
-        f"top 5 clanscore in {m}",
-        f"what is the average warattack in {m}",
+        return pick([x for x in pool if x])
+
+    # MEMBERSHIP
+    if op_type == "PLAYER_MEMBERSHIP_CHECK":
+        pool = [
+            f"display coc-data of {player} in {m}",
+            f"compare {player} vs another player in {m}",
+            f"what is {player}'s warattack in {m}",
+            f"top 10 clanscore in {m}",
+        ]
+        return pick(pool)
+
+    # ERRORS
+    if op_type.startswith("ERROR"):
+        pool = [
+            f"list all clan members in {m}",
+            f"top 10 warattack in {m}",
+            f"average clanscore in {m}",
+            f"group warattack in {m}",
+            f"compare two players in {m}",
+        ]
+        return pick(pool)
+
+    # FALLBACK
+    pool = [
+        f"list all clan members in {m}",
+        f"top 10 warattack in {m}",
+        f"average clanscore in {m}",
+        f"compare two players in {m}",
+        f"group warattack in {m}",
     ]
+
+    return pick(pool)
 
 def handle_chat(user_text: str) -> dict:
     """
@@ -195,43 +243,78 @@ def handle_chat(user_text: str) -> dict:
         return {
             "reply": (
                 "Here’s what I can help you with (Ancient Ruins clan only):\n\n"
+
                 "GENERAL\n"
                 "- who are you\n"
                 "- what can you do\n"
                 "- what metrics can I ask about\n"
-                "- what does <metric> mean\n\n"
-                "CLAN MEMBERS (monthly)\n"
-                "- list all names in APR 2025\n"
+                "- what does warattack mean\n"
+                "- what does clanscore mean\n\n"
+
+                "PLAYER INFORMATION\n"
+                "- display coc-data of Chief in APR 2025\n"
                 "- display coc-data of KAI HIWATARI in APR 2025\n"
+                "- what is Chief's warattack in APR 2025\n"
+                "- what is Chief's clancapital in APR 2025\n"
                 "- what is the status of Chief in APR 2025\n\n"
+
+                "CLAN MEMBERS\n"
+                "- list all clan members in APR 2025\n"
+                "- is Chief a clan member in APR 2025\n\n"
+
                 "FORMER CLAN MEMBERS\n"
                 "- list all former members in DEC 2024\n"
-                "- display coc-data of KING SEENU in APR 2025\n\n"
+                "- display coc-data of KING SEENU in DEC 2024\n"
+                "- is KING SEENU a former member in DEC 2024\n\n"
+
                 "TOP CLAN CONTRIBUTORS\n"
-                "- who had most clanscore in APR 2025\n"
+                "- who had the highest clanscore in APR 2025\n"
+                "- top 10 clanscore in APR 2025\n"
                 "- is Bennie in top contributors for APR 2025\n\n"
-                "RANKINGS & STATS\n"
-                "- who had most warattack in APR 2025\n"
-                "- who had lowest non-zero warattack in APR 2025\n"
+
+                "RANKINGS\n"
+                "- who had the highest warattack in APR 2025\n"
+                "- who had the lowest warattack in APR 2025\n"
+                "- who had the lowest non-zero warattack in APR 2025\n"
                 "- top 10 warattack in APR 2025\n"
-                "- top 5 lowest clanscore in APR 2025\n\n"
-                "AGGREGATES\n"
-                "- what is the average warattack in APR 2025\n"
-                "- total clanscore in APR 2025\n\n"
+                "- top 5 lowest clanscore in APR 2025\n"
+                "- who had the highest clancapital in APR 2025\n\n"
+
+                "STATISTICS\n"
+                "- average warattack in APR 2025\n"
+                "- average clanscore in APR 2025\n"
+                "- total warattack in APR 2025\n"
+                "- total clanscore in APR 2025\n"
+                "- total clancapital in APR 2025\n\n"
+
                 "GROUPING\n"
                 "- group warattack in APR 2025\n"
-                "- group non-zero clanscore in APR 2025\n\n"
-                "COMPARISONS\n"
+                "- group clanscore in APR 2025\n"
+                "- group non-zero warattack in APR 2025\n\n"
+
+                "PLAYER COMPARISON\n"
                 "- compare Chief vs KAI HIWATARI in APR 2025\n"
-                "- compare former KING SEENU vs RAVI in DEC 2024\n\n"
-                "MEMBERSHIP CHECKS\n"
-                "- is Chief a clan member in APR 2025\n"
-                "- is KING SEENU a former member in DEC 2024\n\n"
-                "Notes:\n"
-                "- All queries are month-based\n"
-                "- Rankings handle ties automatically\n"
-                "- Top N refers to top N values, not players\n"
-                "- I only answer questions about the Ancient Ruins clan"
+                "- compare Bennie vs Grandpa1 in APR 2025\n\n"
+
+                "SUPPORTED METRICS\n"
+                "- warattack\n"
+                "- clancapital\n"
+                "- clangames\n"
+                "- clangamesmaxed\n"
+                "- clanscore\n"
+                "- status (Clan Members only)\n\n"
+
+                "SUPPORTED DATE FORMAT\n"
+                "- APR 2025\n"
+                "- DEC 2024\n"
+                "- APR-MAY 2025 (Monthly Analysis)\n\n"
+
+                "NOTES\n"
+                "- Every clan query must include a month.\n"
+                "- Rankings automatically handle ties.\n"
+                "- 'Top N' refers to the top N unique values, not the number of players.\n"
+                "- Month ranges are supported only for Monthly Analysis.\n"
+                "- I only answer questions about the Ancient Ruins clan."
             ),
             "source": None,
             "suggestions": [],
@@ -381,6 +464,10 @@ def handle_chat(user_text: str) -> dict:
 
     source_url = build_raw_url(domain, month_value)
 
-    suggestions = build_suggestions(operation_result.get("type"), domain, month_value)
+    suggestions = build_suggestions(
+        operation_result,
+        domain,
+        month_value
+    )
 
     return {"reply": reply_text, "source": source_url, "suggestions": suggestions}

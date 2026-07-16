@@ -203,7 +203,7 @@ def detect_membership_query(text: str) -> bool:
     """
 
     text = text.lower()
-    return any(k in text for k in ("is", "a member", "a former", "in top"))
+    return any(k in text for k in ("a member", "a former", "in top"))
 
 def detect_non_zero(text: str) -> bool:
     """

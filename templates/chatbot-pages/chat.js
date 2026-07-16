@@ -160,10 +160,10 @@ function appendSourceAndSuggestions(wrapper, source, suggestions) {
 		html += `<div><strong>Source:</strong> <a href="${source}" target="_blank">${source}</a></div>`;
 	}
 
-	if (Array.isArray(suggestions) && suggestions.length) {
-		html += `<div><strong>Suggestions:</strong></div>`;
-		suggestions.forEach(s => html += `<div>• ${escapeHtml(s)}</div>`);
-	}
+    if (Array.isArray(suggestions) && suggestions.length) {
+        html += `<div style="margin-top:12px;"><strong>Suggestions:</strong></div>`;
+        suggestions.forEach(s => html += `<div>• ${escapeHtml(s)}</div>`);
+    }
 
 	wrapper.insertAdjacentHTML("beforeend", html);
 }
