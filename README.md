@@ -60,6 +60,188 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **23/6/26:** Revised and improved the formula used to compute clan scores for more accurate and balanced player performance evaluation.
 - **15/7/26:** Updated AI prediction graphs to start from the player's join month, fixed the `playerHouse` error, added functionality to capture whole screen image and added an interactive Player Dashboard with player statistics, rankings, graphs, heatmaps, clan comparison, and monthly history.
 
+## Tree Structure
+```
+coc-ancient-ruins-website/
+├── .gitignore
+├── app.py
+├── chatbot/
+│   ├── __init__.py
+│   ├── almost_hint.py
+│   ├── chat_controller.py
+│   ├── domain_router.py
+│   ├── input_classifier.py
+│   ├── month_normalizer.py
+│   ├── operation_resolver.py
+│   ├── raw_fetcher.py
+│   └── response_builder.py
+├── coc_data_persist.py
+├── coc-data/
+│   ├── capital_raid_seasons.json
+│   ├── clan_details.json
+│   ├── clan_members.json
+│   ├── clan_players/
+│   │   ├── arggggggah.json
+│   │   ├── Chief.json
+│   │   ├── COPY_KAKASHI.json
+│   │   ├── Dewan.json
+│   │   ├── Eleiken.json
+│   │   ├── emnil007.json
+│   │   ├── flameboy5050.json
+│   │   ├── gautam.json
+│   │   ├── Grandpa1.json
+│   │   ├── JIREN.json
+│   │   ├── Joyotri.json
+│   │   ├── KAI_HIWATARI.json
+│   │   ├── kindstonge17.json
+│   │   ├── kking.json
+│   │   ├── mare.json
+│   │   ├── Noob3.json
+│   │   ├── Prachit123.json
+│   │   ├── pramod.json
+│   │   ├── raful.json
+│   │   ├── Rider_22.json
+│   │   ├── sonu.json
+│   │   ├── tejas.json
+│   │   ├── TREX.json
+│   │   ├── Yash.json
+│   │   └── You.json
+│   ├── clans_search.json
+│   └── warlog.json
+├── constants.py
+├── dashboard/
+│   ├── __init__.py
+│   ├── player_dashboard.py
+│   ├── player_data.py
+│   ├── player_graphs.py
+│   ├── player_rankings.py
+│   ├── player_statistics.py
+│   └── player_utils.py
+├── data_file.pickle
+├── data_persist.py
+├── database.py
+├── graphs/
+│   ├── __init__.py
+│   ├── ai_prediction_graph.py
+│   ├── all_month_graph.py
+│   ├── clan_member_graph.py
+│   ├── former_member_graph.py
+│   ├── member_cluster_graph.py
+│   ├── monthly_analysis_graph.py
+│   └── player_report.py
+├── LICENSE
+├── limiter_config.py
+├── README.md
+├── requirements.txt
+├── routes/
+│   ├── __init__.py
+│   ├── ai_routes.py
+│   ├── api_routes.py
+│   ├── chatbot_routes.py
+│   ├── coc_routes.py
+│   ├── dashboard_routes.py
+│   ├── error_handlers.py
+│   ├── github_api_routes.py
+│   ├── graph_routes.py
+│   ├── report_routes.py
+│   └── ui_routes.py
+├── services/
+│   ├── __init__.py
+│   ├── ai_service.py
+│   ├── dashboard_service.py
+│   ├── github_service.py
+│   ├── graph_service.py
+│   └── report_service.py
+├── static/
+│   ├── bg_img.jpg
+│   ├── clan-badge_18.png
+│   ├── graph-icons/
+│   │   ├── 3dscatterplot.png
+│   │   ├── areagraph.png
+│   │   ├── bar.png
+│   │   ├── boxplot.png
+│   │   ├── densityplot.png
+│   │   ├── funnelchart.png
+│   │   ├── heatmap.png
+│   │   ├── histogram.png
+│   │   ├── linechart.png
+│   │   ├── piechart.png
+│   │   ├── polarchart.png
+│   │   ├── scatterplot.png
+│   │   ├── sunburstchart.png
+│   │   ├── treemap.png
+│   │   ├── violinplot.png
+│   │   └── waterfallchart.png
+│   ├── home-page-icons/
+│   │   ├── csv_icon_img_final.png
+│   │   ├── export_img_final.png
+│   │   ├── json_icon_img_final.png
+│   │   ├── pdf_icon_img_final.png
+│   │   ├── search_img_final.png
+│   │   └── xls_icon_img_final.png
+│   └── nav-bar-icons/
+│       ├── ai_img.png
+│       ├── api_img.png
+│       ├── coc-data_img.png
+│       ├── discord_img.png
+│       ├── github_img.png
+│       ├── graph_img.png
+│       ├── home_img.png
+│       ├── invite_img.png
+│       ├── player-analytics_img.png
+│       └── screenshot_img.png
+└── templates/
+    ├── chatbot-pages/
+    │   ├── chat.css
+    │   ├── chat.html
+    │   └── chat.js
+    ├── coc-data-index.html
+    ├── coc-data-pages/
+    │   ├── capital-raids-all-attacks.html
+    │   ├── capital-raids-all-defences.html
+    │   ├── capital-raids-latest-attacks.html
+    │   ├── capital-raids-latest-defences.html
+    │   ├── capital-raids.html
+    │   ├── clan-details.html
+    │   ├── clan-player-profile.html
+    │   ├── clan-players.html
+    │   ├── clan-search.html
+    │   ├── table-utils.js
+    │   └── war-log.html
+    ├── dashboard/
+    │   ├── components/
+    │   │   ├── chart.html
+    │   │   ├── monthly_table.html
+    │   │   ├── player_header.html
+    │   │   └── summary_cards.html
+    │   ├── dashboard.html
+    │   ├── player_dashboard.css
+    │   ├── player_dashboard.html
+    │   ├── player_dashboard.js
+    │   └── player_history_table.js
+    ├── error-pages/
+    │   ├── 404.html
+    │   ├── 405.html
+    │   ├── 429.html
+    │   └── 500.html
+    ├── graph-pages/
+    │   ├── all-month-graph.html
+    │   ├── fmem-graph.html
+    │   ├── graph.css
+    │   ├── graph.html
+    │   ├── graph.js
+    │   ├── mem-graph.html
+    │   ├── mem-month-analysis.html
+    │   ├── mem-month-graph.html
+    │   └── player-report.html
+    ├── head.html
+    ├── index.html
+    ├── navbar.html
+    ├── screenshot.js
+    ├── script.js
+    └── style.css
+```
+
 ## License
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.
 
