@@ -15,7 +15,7 @@
     "role": "admin",
     "warPreference": "in",
     "donations": 0,
-    "donationsReceived": 0,
+    "donationsReceived": 45,
     "clanCapitalContributions": 595617,
     "clan": {
         "tag": "#2PP0P22CQ",
@@ -28,11 +28,11 @@
         }
     },
     "leagueTier": {
-        "id": 105000012,
-        "name": "Wizard League 12",
+        "id": 105000011,
+        "name": "Wizard League 11",
         "iconUrls": {
-            "small": "https://api-assets.clashofclans.com/leaguetiers/125/A_ZoGbh1g8wYRWygsQ_wMgbVz8GXvvfavKwlSx8C8PQ.png",
-            "large": "https://api-assets.clashofclans.com/leaguetiers/326/A_ZoGbh1g8wYRWygsQ_wMgbVz8GXvvfavKwlSx8C8PQ.png"
+            "small": "https://api-assets.clashofclans.com/leaguetiers/125/XazuJHG2wjBq39KEA4g4hh1nKJQwVO0fRoVDPHvWwAY.png",
+            "large": "https://api-assets.clashofclans.com/leaguetiers/326/XazuJHG2wjBq39KEA4g4hh1nKJQwVO0fRoVDPHvWwAY.png"
         }
     },
     "builderBaseLeague": {
@@ -41,7 +41,7 @@
     },
     "currentLeagueSeasonId": 0,
     "previousLeagueGroupTag": "#0",
-    "previousLeagueSeasonId": 1775451600,
+    "previousLeagueSeasonId": 1784523600,
     "achievements": [
         {
             "name": "Bigger Coffers",
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 1,
-            "value": 91,
+            "value": 92,
             "target": 250,
             "info": "Successfully defend against 250 attacks",
-            "completionInfo": "Total defenses won: 91",
+            "completionInfo": "Total defenses won: 92",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 3,
-            "value": 51520,
+            "value": 51820,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 51520",
+            "completionInfo": "Total Season Challenges points: 51820",
             "village": "home"
         },
         {
@@ -572,7 +572,7 @@
         },
         {
             "name": "Giant",
-            "level": 9,
+            "level": 10,
             "maxLevel": 14,
             "village": "home"
         },
@@ -632,7 +632,7 @@
         },
         {
             "name": "Golem",
-            "level": 8,
+            "level": 9,
             "maxLevel": 15,
             "village": "home"
         },
@@ -892,7 +892,7 @@
     "heroes": [
         {
             "name": "Barbarian King",
-            "level": 68,
+            "level": 70,
             "maxLevel": 110,
             "equipment": [
                 {
@@ -912,7 +912,7 @@
         },
         {
             "name": "Archer Queen",
-            "level": 69,
+            "level": 70,
             "maxLevel": 110,
             "equipment": [
                 {
@@ -932,7 +932,7 @@
         },
         {
             "name": "Grand Warden",
-            "level": 31,
+            "level": 33,
             "maxLevel": 85,
             "equipment": [
                 {
@@ -958,18 +958,18 @@
         },
         {
             "name": "Royal Champion",
-            "level": 20,
+            "level": 22,
             "maxLevel": 55,
             "equipment": [
                 {
                     "name": "Frost Flake",
-                    "level": 14,
+                    "level": 16,
                     "maxLevel": 27,
                     "village": "home"
                 },
                 {
                     "name": "Electro Boots",
-                    "level": 14,
+                    "level": 17,
                     "maxLevel": 27,
                     "village": "home"
                 }
@@ -978,7 +978,7 @@
         },
         {
             "name": "Minion Prince",
-            "level": 36,
+            "level": 40,
             "maxLevel": 95,
             "equipment": [
                 {
@@ -1005,6 +1005,18 @@
             "village": "home"
         },
         {
+            "name": "Spiky Ball",
+            "level": 12,
+            "maxLevel": 27,
+            "village": "home"
+        },
+        {
+            "name": "Frozen Arrow",
+            "level": 12,
+            "maxLevel": 27,
+            "village": "home"
+        },
+        {
             "name": "Magic Mirror",
             "level": 18,
             "maxLevel": 27,
@@ -1012,13 +1024,13 @@
         },
         {
             "name": "Electro Boots",
-            "level": 14,
+            "level": 17,
             "maxLevel": 27,
             "village": "home"
         },
         {
             "name": "Frost Flake",
-            "level": 14,
+            "level": 16,
             "maxLevel": 27,
             "village": "home"
         },
@@ -1212,7 +1224,7 @@
         },
         {
             "name": "Overgrowth Spell",
-            "level": 1,
+            "level": 2,
             "maxLevel": 5,
             "village": "home"
         }

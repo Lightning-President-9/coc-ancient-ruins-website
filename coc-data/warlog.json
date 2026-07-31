@@ -2,6 +2,235 @@
     "items": [
         {
             "result": "win",
+            "endTime": "Jul 31, 2026",
+            "teamSize": 10,
+            "attacksPerMember": 2,
+            "battleModifier": "none",
+            "clan": {
+                "tag": "#2PP0P22CQ",
+                "name": "Ancient Ruins",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png"
+                },
+                "clanLevel": 18,
+                "attacks": 10,
+                "stars": 26,
+                "destructionPercentage": 88.5,
+                "expEarned": 210
+            },
+            "opponent": {
+                "tag": "#2G0G9QCQU",
+                "name": "spidy",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/cWALcvn8_OemsVg6REqa-DbsyMXrJdbS8GUBrKRIdD8.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/cWALcvn8_OemsVg6REqa-DbsyMXrJdbS8GUBrKRIdD8.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/cWALcvn8_OemsVg6REqa-DbsyMXrJdbS8GUBrKRIdD8.png"
+                },
+                "clanLevel": 15,
+                "stars": 8,
+                "destructionPercentage": 29.0
+            }
+        },
+        {
+            "result": "lose",
+            "endTime": "Jul 28, 2026",
+            "teamSize": 10,
+            "attacksPerMember": 2,
+            "battleModifier": "none",
+            "clan": {
+                "tag": "#2PP0P22CQ",
+                "name": "Ancient Ruins",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png"
+                },
+                "clanLevel": 18,
+                "attacks": 13,
+                "stars": 25,
+                "destructionPercentage": 89.4,
+                "expEarned": 160
+            },
+            "opponent": {
+                "tag": "#2YY2928PQ",
+                "name": "LOS CHIMUELOS",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/Si54izsut9_JhuL9UPeru-8mwxZvosFRr0aFu9nwCFw.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/Si54izsut9_JhuL9UPeru-8mwxZvosFRr0aFu9nwCFw.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/Si54izsut9_JhuL9UPeru-8mwxZvosFRr0aFu9nwCFw.png"
+                },
+                "clanLevel": 16,
+                "stars": 27,
+                "destructionPercentage": 95.4
+            }
+        },
+        {
+            "result": "win",
+            "endTime": "Jul 25, 2026",
+            "teamSize": 10,
+            "attacksPerMember": 2,
+            "battleModifier": "none",
+            "clan": {
+                "tag": "#2PP0P22CQ",
+                "name": "Ancient Ruins",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png"
+                },
+                "clanLevel": 18,
+                "attacks": 16,
+                "stars": 29,
+                "destructionPercentage": 97.5,
+                "expEarned": 209
+            },
+            "opponent": {
+                "tag": "#2RJQQ8RYJ",
+                "name": "Catalina SG",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/4BLbE7UUzYNJs3CEWzdOPkO3hUXuRRlHritMDbQglmM.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/4BLbE7UUzYNJs3CEWzdOPkO3hUXuRRlHritMDbQglmM.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/4BLbE7UUzYNJs3CEWzdOPkO3hUXuRRlHritMDbQglmM.png"
+                },
+                "clanLevel": 11,
+                "stars": 13,
+                "destructionPercentage": 50.6
+            }
+        },
+        {
+            "result": "lose",
+            "endTime": "Jul 22, 2026",
+            "teamSize": 10,
+            "attacksPerMember": 2,
+            "battleModifier": "none",
+            "clan": {
+                "tag": "#2PP0P22CQ",
+                "name": "Ancient Ruins",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png"
+                },
+                "clanLevel": 18,
+                "attacks": 16,
+                "stars": 28,
+                "destructionPercentage": 95.8,
+                "expEarned": 155
+            },
+            "opponent": {
+                "tag": "#2YLLC29LJ",
+                "name": "SAMARQAND",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/-N8bg_OC9QZ9UzmjwrSqn4s7yhX7AxRCTEo3xEElAJ0.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/-N8bg_OC9QZ9UzmjwrSqn4s7yhX7AxRCTEo3xEElAJ0.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/-N8bg_OC9QZ9UzmjwrSqn4s7yhX7AxRCTEo3xEElAJ0.png"
+                },
+                "clanLevel": 17,
+                "stars": 29,
+                "destructionPercentage": 98.3
+            }
+        },
+        {
+            "result": "win",
+            "endTime": "Jul 18, 2026",
+            "teamSize": 10,
+            "attacksPerMember": 2,
+            "battleModifier": "none",
+            "clan": {
+                "tag": "#2PP0P22CQ",
+                "name": "Ancient Ruins",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png"
+                },
+                "clanLevel": 18,
+                "attacks": 15,
+                "stars": 28,
+                "destructionPercentage": 97.1,
+                "expEarned": 211
+            },
+            "opponent": {
+                "tag": "#2YLP9VG9Y",
+                "name": "Whitebishop",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/K1iZjqeORuZ4qbySnw_VHWTDlzIrAeN2JYjtMyIJhtA.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/K1iZjqeORuZ4qbySnw_VHWTDlzIrAeN2JYjtMyIJhtA.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/K1iZjqeORuZ4qbySnw_VHWTDlzIrAeN2JYjtMyIJhtA.png"
+                },
+                "clanLevel": 15,
+                "stars": 26,
+                "destructionPercentage": 91.9
+            }
+        },
+        {
+            "result": "lose",
+            "endTime": "Jul 15, 2026",
+            "teamSize": 10,
+            "attacksPerMember": 2,
+            "battleModifier": "none",
+            "clan": {
+                "tag": "#2PP0P22CQ",
+                "name": "Ancient Ruins",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png"
+                },
+                "clanLevel": 18,
+                "attacks": 10,
+                "stars": 20,
+                "destructionPercentage": 83.5,
+                "expEarned": 145
+            },
+            "opponent": {
+                "tag": "#2C9RGJ2J9",
+                "name": "Archway",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/Jo3SLa406-2fk9pjZkyAzY40w00AB2u4vVqIuHh7gSA.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/Jo3SLa406-2fk9pjZkyAzY40w00AB2u4vVqIuHh7gSA.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/Jo3SLa406-2fk9pjZkyAzY40w00AB2u4vVqIuHh7gSA.png"
+                },
+                "clanLevel": 9,
+                "stars": 30,
+                "destructionPercentage": 100.0
+            }
+        },
+        {
+            "result": "win",
+            "endTime": "Jul 10, 2026",
+            "teamSize": 15,
+            "attacksPerMember": 1,
+            "battleModifier": "none",
+            "clan": {
+                "tag": "#2PP0P22CQ",
+                "name": "Ancient Ruins",
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png"
+                },
+                "clanLevel": 18,
+                "attacks": 74,
+                "stars": 242,
+                "destructionPercentage": 463.8,
+                "expEarned": 0
+            },
+            "opponent": {
+                "badgeUrls": {
+                    "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+                    "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+                    "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+                },
+                "clanLevel": 0,
+                "stars": 130,
+                "destructionPercentage": 0.0
+            }
+        },
+        {
+            "result": "win",
             "endTime": "Jun 29, 2026",
             "teamSize": 10,
             "attacksPerMember": 2,
@@ -1729,235 +1958,6 @@
                 "clanLevel": 18,
                 "stars": 16,
                 "destructionPercentage": 55.9
-            }
-        },
-        {
-            "result": "win",
-            "endTime": "Oct 24, 2025",
-            "teamSize": 10,
-            "attacksPerMember": 2,
-            "battleModifier": "none",
-            "clan": {
-                "tag": "#2PP0P22CQ",
-                "name": "Ancient Ruins",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png"
-                },
-                "clanLevel": 17,
-                "attacks": 10,
-                "stars": 20,
-                "destructionPercentage": 87.4,
-                "expEarned": 195
-            },
-            "opponent": {
-                "tag": "#2Q2LU8CGL",
-                "name": "Nuarie dogs",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/HNuplYLrOssOUUPHAtzdQVtw87qfbljiT3SFpp8gOTM.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/HNuplYLrOssOUUPHAtzdQVtw87qfbljiT3SFpp8gOTM.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/HNuplYLrOssOUUPHAtzdQVtw87qfbljiT3SFpp8gOTM.png"
-                },
-                "clanLevel": 15,
-                "stars": 15,
-                "destructionPercentage": 56.2
-            }
-        },
-        {
-            "result": "lose",
-            "endTime": "Oct 20, 2025",
-            "teamSize": 10,
-            "attacksPerMember": 2,
-            "battleModifier": "none",
-            "clan": {
-                "tag": "#2PP0P22CQ",
-                "name": "Ancient Ruins",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png"
-                },
-                "clanLevel": 17,
-                "attacks": 11,
-                "stars": 25,
-                "destructionPercentage": 92.1,
-                "expEarned": 144
-            },
-            "opponent": {
-                "tag": "#2GCY9L2CR",
-                "name": "INTERGALACTIC..",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/28jg7qhF5bAp1x05WXLmt1NqvWGBbV9X2l3LKQ0Krl0.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/28jg7qhF5bAp1x05WXLmt1NqvWGBbV9X2l3LKQ0Krl0.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/28jg7qhF5bAp1x05WXLmt1NqvWGBbV9X2l3LKQ0Krl0.png"
-                },
-                "clanLevel": 15,
-                "stars": 29,
-                "destructionPercentage": 97.5
-            }
-        },
-        {
-            "result": "win",
-            "endTime": "Oct 16, 2025",
-            "teamSize": 10,
-            "attacksPerMember": 2,
-            "battleModifier": "none",
-            "clan": {
-                "tag": "#2PP0P22CQ",
-                "name": "Ancient Ruins",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png"
-                },
-                "clanLevel": 17,
-                "attacks": 15,
-                "stars": 26,
-                "destructionPercentage": 94.5,
-                "expEarned": 190
-            },
-            "opponent": {
-                "tag": "#P9CYCUYC",
-                "name": "Barbaros",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/RZXs8ysaYJ_tfW9vGcjGDVertDMMqYYrKOQuGB9l4UI.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/RZXs8ysaYJ_tfW9vGcjGDVertDMMqYYrKOQuGB9l4UI.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/RZXs8ysaYJ_tfW9vGcjGDVertDMMqYYrKOQuGB9l4UI.png"
-                },
-                "clanLevel": 17,
-                "stars": 10,
-                "destructionPercentage": 38.6
-            }
-        },
-        {
-            "result": null,
-            "endTime": "Oct 10, 2025",
-            "teamSize": 15,
-            "attacksPerMember": 1,
-            "battleModifier": "none",
-            "clan": {
-                "tag": "#2PP0P22CQ",
-                "name": "Ancient Ruins",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png"
-                },
-                "clanLevel": 17,
-                "attacks": 47,
-                "stars": 125,
-                "destructionPercentage": 255.4,
-                "expEarned": 0
-            },
-            "opponent": {
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
-                },
-                "clanLevel": 0,
-                "stars": 141,
-                "destructionPercentage": 0.0
-            }
-        },
-        {
-            "result": "win",
-            "endTime": "Sep 30, 2025",
-            "teamSize": 10,
-            "attacksPerMember": 2,
-            "battleModifier": "none",
-            "clan": {
-                "tag": "#2PP0P22CQ",
-                "name": "Ancient Ruins",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png"
-                },
-                "clanLevel": 17,
-                "attacks": 13,
-                "stars": 24,
-                "destructionPercentage": 91.7,
-                "expEarned": 182
-            },
-            "opponent": {
-                "tag": "#2JPUPVV8R",
-                "name": "UnwantedClasher",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/ks-Nd02q_KY40G4f_nOrkCAUf6TbMK3O440Ugq8ttAA.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/ks-Nd02q_KY40G4f_nOrkCAUf6TbMK3O440Ugq8ttAA.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/ks-Nd02q_KY40G4f_nOrkCAUf6TbMK3O440Ugq8ttAA.png"
-                },
-                "clanLevel": 5,
-                "stars": 17,
-                "destructionPercentage": 62.9
-            }
-        },
-        {
-            "result": "lose",
-            "endTime": "Sep 26, 2025",
-            "teamSize": 10,
-            "attacksPerMember": 2,
-            "battleModifier": "none",
-            "clan": {
-                "tag": "#2PP0P22CQ",
-                "name": "Ancient Ruins",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png"
-                },
-                "clanLevel": 17,
-                "attacks": 10,
-                "stars": 20,
-                "destructionPercentage": 81.2,
-                "expEarned": 131
-            },
-            "opponent": {
-                "tag": "#2LPUYUQJP",
-                "name": "Fénix LR",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/3u0NHVXaoV9olIWnJTv6yyeXjBrJgOi7BbROXpbVe30.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/3u0NHVXaoV9olIWnJTv6yyeXjBrJgOi7BbROXpbVe30.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/3u0NHVXaoV9olIWnJTv6yyeXjBrJgOi7BbROXpbVe30.png"
-                },
-                "clanLevel": 13,
-                "stars": 27,
-                "destructionPercentage": 95.2
-            }
-        },
-        {
-            "result": "lose",
-            "endTime": "Sep 22, 2025",
-            "teamSize": 10,
-            "attacksPerMember": 2,
-            "battleModifier": "none",
-            "clan": {
-                "tag": "#2PP0P22CQ",
-                "name": "Ancient Ruins",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/BKmNdrKpqTztIKAQo77S-MhZGyMTUvXUtjpYP_4pXWU.png"
-                },
-                "clanLevel": 17,
-                "attacks": 17,
-                "stars": 24,
-                "destructionPercentage": 87.7,
-                "expEarned": 133
-            },
-            "opponent": {
-                "tag": "#2JJCQ2GCY",
-                "name": "JohnGo",
-                "badgeUrls": {
-                    "small": "https://api-assets.clashofclans.com/badges/70/zUptj2uFzbTeJWUfd-ycyzmUlZPdU3HL6p8mHIOxX2Q.png",
-                    "large": "https://api-assets.clashofclans.com/badges/512/zUptj2uFzbTeJWUfd-ycyzmUlZPdU3HL6p8mHIOxX2Q.png",
-                    "medium": "https://api-assets.clashofclans.com/badges/200/zUptj2uFzbTeJWUfd-ycyzmUlZPdU3HL6p8mHIOxX2Q.png"
-                },
-                "clanLevel": 3,
-                "stars": 25,
-                "destructionPercentage": 90.5
             }
         },
         {

@@ -16,7 +16,7 @@
     "warPreference": "in",
     "donations": 0,
     "donationsReceived": 0,
-    "clanCapitalContributions": 1480033,
+    "clanCapitalContributions": 1512621,
     "clan": {
         "tag": "#2PP0P22CQ",
         "name": "Ancient Ruins",
@@ -55,10 +55,10 @@
         {
             "name": "Get even more Goblins!",
             "stars": 2,
-            "value": 144,
+            "value": 145,
             "target": 270,
             "info": "Win 270 Stars on the Campaign Map",
-            "completionInfo": "Stars in Campaign Map: 144",
+            "completionInfo": "Stars in Campaign Map: 145",
             "village": "home"
         },
         {
@@ -91,19 +91,19 @@
         {
             "name": "Gold Grab",
             "stars": 2,
-            "value": 59076172,
+            "value": 59244922,
             "target": 100000000,
             "info": "Steal 100000000 Gold",
-            "completionInfo": "Total Gold looted: 59076172",
+            "completionInfo": "Total Gold looted: 59244922",
             "village": "home"
         },
         {
             "name": "Elixir Escapade",
             "stars": 2,
-            "value": 57462910,
+            "value": 57737500,
             "target": 100000000,
             "info": "Steal 100000000 elixir",
-            "completionInfo": "Total Elixir looted: 57462910",
+            "completionInfo": "Total Elixir looted: 57737500",
             "village": "home"
         },
         {
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 1,
-            "value": 152,
+            "value": 153,
             "target": 250,
             "info": "Successfully defend against 250 attacks",
-            "completionInfo": "Total defenses won: 152",
+            "completionInfo": "Total defenses won: 153",
             "village": "home"
         },
         {
@@ -190,10 +190,10 @@
         {
             "name": "Heroic Heist",
             "stars": 2,
-            "value": 329100,
+            "value": 333055,
             "target": 1000000,
             "info": "Steal 1000000 Dark Elixir",
-            "completionInfo": "Total Dark Elixir looted: 329100",
+            "completionInfo": "Total Dark Elixir looted: 333055",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 2,
-            "value": 26530,
+            "value": 26580,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 26530",
+            "completionInfo": "Total Season Challenges points: 26580",
             "village": "home"
         },
         {
@@ -415,19 +415,19 @@
         {
             "name": "Aggressive Capitalism",
             "stars": 3,
-            "value": 1390880,
+            "value": 1410090,
             "target": 1000000,
             "info": "Loot 1000000 Capital Gold during Raid attacks",
-            "completionInfo": "Total Capital Gold looted: 1390880",
+            "completionInfo": "Total Capital Gold looted: 1410090",
             "village": "clanCapital"
         },
         {
             "name": "Most Valuable Clanmate",
             "stars": 2,
-            "value": 1480033,
+            "value": 1512621,
             "target": 2000000,
             "info": "Contribute 2000000 Capital Gold to upgrades in the Clan Capital",
-            "completionInfo": "Total Capital Gold contributed: 1480033",
+            "completionInfo": "Total Capital Gold contributed: 1512621",
             "village": "clanCapital"
         },
         {
@@ -857,7 +857,7 @@
     "heroes": [
         {
             "name": "Barbarian King",
-            "level": 23,
+            "level": 24,
             "maxLevel": 110,
             "equipment": [
                 {
@@ -867,9 +867,9 @@
                     "village": "home"
                 },
                 {
-                    "name": "Barbarian Puppet",
-                    "level": 3,
-                    "maxLevel": 18,
+                    "name": "Giant Gauntlet",
+                    "level": 13,
+                    "maxLevel": 27,
                     "village": "home"
                 }
             ],
@@ -877,12 +877,12 @@
         },
         {
             "name": "Archer Queen",
-            "level": 24,
+            "level": 25,
             "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Giant Arrow",
-                    "level": 3,
+                    "level": 6,
                     "maxLevel": 18,
                     "village": "home"
                 },
@@ -902,13 +902,13 @@
             "equipment": [
                 {
                     "name": "Rage Gem",
-                    "level": 3,
+                    "level": 4,
                     "maxLevel": 18,
                     "village": "home"
                 },
                 {
                     "name": "Eternal Tome",
-                    "level": 4,
+                    "level": 8,
                     "maxLevel": 18,
                     "village": "home"
                 }
@@ -923,18 +923,18 @@
         },
         {
             "name": "Minion Prince",
-            "level": 28,
+            "level": 29,
             "maxLevel": 95,
             "equipment": [
                 {
                     "name": "Dark Orb",
-                    "level": 2,
+                    "level": 4,
                     "maxLevel": 18,
                     "village": "home"
                 },
                 {
                     "name": "Henchmen Puppet",
-                    "level": 1,
+                    "level": 3,
                     "maxLevel": 18,
                     "village": "home"
                 }
@@ -943,6 +943,18 @@
         }
     ],
     "heroEquipment": [
+        {
+            "name": "Giant Gauntlet",
+            "level": 13,
+            "maxLevel": 27,
+            "village": "home"
+        },
+        {
+            "name": "Frozen Arrow",
+            "level": 12,
+            "maxLevel": 27,
+            "village": "home"
+        },
         {
             "name": "Barbarian Puppet",
             "level": 3,
@@ -963,7 +975,7 @@
         },
         {
             "name": "Eternal Tome",
-            "level": 4,
+            "level": 8,
             "maxLevel": 18,
             "village": "home"
         },
@@ -987,30 +999,30 @@
         },
         {
             "name": "Giant Arrow",
-            "level": 3,
+            "level": 6,
             "maxLevel": 18,
             "village": "home"
         },
         {
             "name": "Rage Gem",
+            "level": 4,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Henchmen Puppet",
             "level": 3,
             "maxLevel": 18,
             "village": "home"
         },
         {
             "name": "Dark Orb",
-            "level": 2,
+            "level": 4,
             "maxLevel": 18,
             "village": "home"
         },
         {
             "name": "Rage Vial",
-            "level": 1,
-            "maxLevel": 18,
-            "village": "home"
-        },
-        {
-            "name": "Henchmen Puppet",
             "level": 1,
             "maxLevel": 18,
             "village": "home"
