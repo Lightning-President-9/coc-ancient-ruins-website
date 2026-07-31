@@ -63,6 +63,8 @@ class MemberClusterGraph:
             month_year (str): Month-range identifier (e.g., 'NOV-DEC_2025')
         """
 
+        self.message = None
+
         # Update the coc-data URL dynamically based on month and year
         self.data_url = (
             "https://raw.githubusercontent.com/Lightning-President-9/"
@@ -77,11 +79,14 @@ class MemberClusterGraph:
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
-            self.message = (
-                f"No coc-data available for {month_year}. "
+            fallback_message = (
+                f"No data available for {month_year}. "
                 f"Showing {LATEST_MONTH_RANGE} (Latest)"
             )
+
             self.update_and_load_data(LATEST_MONTH_RANGE)
+
+            self.message = fallback_message
 
         # Load JSON coc-data into a DataFrame
         self.df = pd.DataFrame(self.json_data)

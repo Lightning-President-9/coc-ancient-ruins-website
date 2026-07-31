@@ -238,6 +238,9 @@ def graph_handler(obj, gtype):
     # Resolve graph generation method dynamically
     method = GRAPH_METHODS.get(gtype)
 
+    if not method or not hasattr(graph, method):
+        return render_template("/error-pages/404.html"), 404
+
     # Execute graph creation method
     figures = getattr(graph, method)()
 

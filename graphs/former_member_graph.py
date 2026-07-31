@@ -64,6 +64,8 @@ class FormerMemberGraph:
             month_year (str): Month identifier (e.g., 'DEC_2025')
         """
 
+        self.message = None
+
         # Update the coc-data URL dynamically based on the selected month and year
         self.data_url = f"https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/main/Former%20Clan%20Members/JSON/{month_year}.json"
 
@@ -72,8 +74,14 @@ class FormerMemberGraph:
         try:
             self.json_data = self.response.json()
         except requests.exceptions.RequestException:
-            self.message = f"No coc-data available for {month_year}. Showing {LATEST_MONTH} (Latest)"
+            fallback_message = (
+                f"No data available for {month_year}. "
+                f"Showing {LATEST_MONTH} (Latest)"
+            )
+
             self.update_and_load_data(LATEST_MONTH)
+
+            self.message = fallback_message
 
         # Load JSON coc-data into a DataFrame
         self.df = pd.DataFrame(self.json_data)
