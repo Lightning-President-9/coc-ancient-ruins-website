@@ -246,10 +246,12 @@ coc-ancient-ruins-website/
 This project is licensed under the [MIT License](https://github.com/Lightning-President-9/coc-ancient-ruins-website/blob/main/LICENSE). See the LICENSE file for details.
 
 ## Acknowledgements
+- [Python](https://www.python.org/)
 - [Flask](https://flask.palletsprojects.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/)
 - [Neon](https://neon.com/)
+- [Render](https://render.com/)
 - [Plotly Express](https://plotly.com/python/plotly-express/)
 - [Flasgger](https://github.com/flasgger/flasgger)
 - [Clash of Clans API](https://developer.clashofclans.com)
