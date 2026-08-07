@@ -18,6 +18,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import requests
+from itertools import combinations
 import warnings
 from constants import LATEST_MONTH_RANGE
 
@@ -306,52 +307,43 @@ class MonthlyAnalysisGraph:
 
     def create_scatter_plots(self):
         """
-        Generate scatter plot visualizations for metric relationship analysis.
+        Generate concise scatter plot visualizations for metric relationship analysis.
 
         Includes:
         - Pairwise numerical comparisons
-        - Scatter plots sized by clan score
+        - Marker size encoded by clan score (if available)
 
         Returns:
-            list[plotly.graph_objects.Figure]: Scatter plot figures
+            list[plotly.graph_objects.Figure]
         """
 
         scatter_plots = []
+
         numerical_columns = self.numerical_df.columns.drop("srno", errors="ignore")
 
-        # 1. Pairwise Scatter Plots with Hover Data
-        for i, col1 in enumerate(numerical_columns):
-            for col2 in numerical_columns[i + 1 :]:
-                fig = px.scatter(
-                    self.df,
-                    x=col1,
-                    y=col2,
-                    hover_name="name",
-                    title=f"Scatter Plot of {col1} vs {col2}",
-                    labels={col1: col1.capitalize(), col2: col2.capitalize()},
-                )
-                scatter_plots.append(fig)
+        has_clanscore = "clanscore" in self.df.columns
 
-        # 2. Scatter Plot with Size by 'clanscore' and Hover Data
-        if "clanscore" in numerical_columns:
-            for col1 in numerical_columns:
-                for col2 in numerical_columns:
-                    if col1 != col2:
-                        fig = px.scatter(
-                            self.df,
-                            x=col1,
-                            y=col2,
-                            size="clanscore",
-                            hover_name="name",
-                            title=f"Scatter Plot of {col1} vs {col2} (Size by Clan Score)",
-                            labels={
-                                col1: col1.capitalize(),
-                                col2: col2.capitalize(),
-                                "clanscore": "Clan Score",
-                            },
-                            color_continuous_scale=px.colors.sequential.Plasma,
-                        )
-                        scatter_plots.append(fig)
+        for col1, col2 in combinations(numerical_columns, 2):
+
+            scatter_kwargs = {
+                "data_frame": self.df,
+                "x": col1,
+                "y": col2,
+                "hover_name": "name",
+                "title": f"Scatter Plot of {col1.capitalize()} vs {col2.capitalize()}",
+                "labels": {
+                    col1: col1.capitalize(),
+                    col2: col2.capitalize(),
+                },
+            }
+
+            if has_clanscore:
+                scatter_kwargs["size"] = "clanscore"
+                scatter_kwargs["size_max"] = 15
+                scatter_kwargs["labels"]["clanscore"] = "Clan Score"
+
+            fig = px.scatter(**scatter_kwargs)
+            scatter_plots.append(fig)
 
         return scatter_plots
 

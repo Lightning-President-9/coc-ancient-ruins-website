@@ -19,6 +19,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import requests
+from itertools import combinations
 import warnings
 from constants import LATEST_MONTH
 
@@ -357,92 +358,39 @@ class ClanMemberGraph:
 
         Includes:
         - Pairwise numerical comparisons
-        - Color encoding by war participation
-        - Size encoding by clan score
-        - Combined color and size encodings
+        - Marker size encoded by clan score
 
         Returns:
-            list[plotly.graph_objects.Figure]: Scatter plot figures
+            list[plotly.graph_objects.Figure]
         """
 
         scatter_plots = []
+
         numerical_columns = self.numerical_df.columns.drop("srno", errors="ignore")
 
-        # 1. Pairwise Scatter Plots with Hover Data
-        for i, col1 in enumerate(numerical_columns):
-            for col2 in numerical_columns[i + 1 :]:
-                fig = px.scatter(
-                    self.df,
-                    x=col1,
-                    y=col2,
-                    hover_name="name",
-                    title=f"Scatter Plot of {col1} vs {col2}",
-                    labels={col1: col1.capitalize(), col2: col2.capitalize()},
-                )
-                scatter_plots.append(fig)
+        has_clanscore = "clanscore" in self.df.columns
 
-        # 2. Scatter Plot with Color by 'war' and Hover Data
-        for col1 in numerical_columns:
-            for col2 in numerical_columns:
-                if col1 != col2:
-                    fig = px.scatter(
-                        self.df,
-                        x=col1,
-                        y=col2,
-                        color="war",
-                        hover_name="name",
-                        title=f"Scatter Plot of {col1} vs {col2} by War Status",
-                        labels={
-                            col1: col1.capitalize(),
-                            col2: col2.capitalize(),
-                            "war": "War Status",
-                        },
-                        color_continuous_scale=px.colors.qualitative.Safe,
-                    )
-                    scatter_plots.append(fig)
+        for col1, col2 in combinations(numerical_columns, 2):
 
-        # 3. Scatter Plot with Size by 'clanscore' and Hover Data
-        for col1 in numerical_columns:
-            for col2 in numerical_columns:
-                if col1 != col2:
-                    fig = px.scatter(
-                        self.df,
-                        x=col1,
-                        y=col2,
-                        size="clanscore",
-                        hover_name="name",
-                        title=f"Scatter Plot of {col1} vs {col2} (Size by Clan Score)",
-                        labels={
-                            col1: col1.capitalize(),
-                            col2: col2.capitalize(),
-                            "clanscore": "Clan Score",
-                        },
-                        color_continuous_scale=px.colors.sequential.Plasma,
-                    )
-                    scatter_plots.append(fig)
+            kwargs = {
+                "data_frame": self.df,
+                "x": col1,
+                "y": col2,
+                "hover_name": "name",
+                "title": f"{col1.capitalize()} vs {col2.capitalize()}",
+                "labels": {
+                    col1: col1.capitalize(),
+                    col2: col2.capitalize(),
+                },
+            }
 
-        # 4. Combined Scatter Plot with Color and Size Distinctions
-        for col1 in numerical_columns:
-            for col2 in numerical_columns:
-                if col1 != col2:
-                    fig = px.scatter(
-                        self.df,
-                        x=col1,
-                        y=col2,
-                        color="war",
-                        size="clanscore",
-                        hover_name="name",
-                        title=f"Scatter Plot of {col1} vs {col2} by War Status and Clan Score",
-                        labels={
-                            col1: col1.capitalize(),
-                            col2: col2.capitalize(),
-                            "war": "War Status",
-                            "clanscore": "Clan Score",
-                        },
-                        color_continuous_scale=px.colors.qualitative.Safe,
-                        size_max=15,
-                    )
-                    scatter_plots.append(fig)
+            if has_clanscore:
+                kwargs["size"] = "clanscore"
+                kwargs["size_max"] = 20  # adjust as needed
+                kwargs["labels"]["clanscore"] = "Clan Score"
+
+            fig = px.scatter(**kwargs)
+            scatter_plots.append(fig)
 
         return scatter_plots
 
