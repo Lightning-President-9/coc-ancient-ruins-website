@@ -23,7 +23,7 @@ Features:
 • Clan details dashboard
 • Clan search visualization
 • Capital raid season analysis
-• Attack and defence statistics
+• Attack and defense statistics
 • War history logs
 • Player profile explorer
 

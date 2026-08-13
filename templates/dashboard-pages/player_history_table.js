@@ -2,7 +2,6 @@
 const HISTORY_TABLE = ".main-table";
 
 /* SORTING */
-
 function initializeHistorySorting() {
 
 	const table = document.querySelector(
@@ -91,7 +90,6 @@ function initializeHistorySorting() {
 }
 
 /* COMMON HELPERS */
-
 function getHistoryTable() {
 
 	return document.querySelector(
@@ -134,7 +132,6 @@ function downloadFile(
 }
 
 /* TABLE → JSON */
-
 function tableToJSON() {
 
 	const table =
@@ -142,7 +139,10 @@ function tableToJSON() {
 
 	const headers = [...table.querySelectorAll("thead th")]
 		.map(th =>
-			th.textContent.trim()
+			th.textContent
+				.trim()
+				.toLowerCase()
+				.replace(/\s+/g, "")
 		);
 
 	const rows = [];
@@ -154,13 +154,13 @@ function tableToJSON() {
 			const obj = {};
 
 			[...row.cells]
-			.forEach((cell, i) => {
+				.forEach((cell, i) => {
 
-				obj[
-					headers[i]
-				] = cell.textContent.trim();
+					obj[
+						headers[i]
+					] = cell.textContent.trim();
 
-			});
+				});
 
 			rows.push(obj);
 
@@ -175,7 +175,6 @@ function tableToJSON() {
 }
 
 /* TABLE → CSV */
-
 function tableToCSV() {
 
 	const table =
@@ -187,11 +186,14 @@ function tableToCSV() {
 
 		[...table.querySelectorAll("thead th")]
 
-		.map(th =>
-			`"${th.textContent.trim()}"`
-		)
+			.map(th =>
+				`"${th.textContent
+					.trim()
+					.toLowerCase()
+					.replace(/\s+/g, "")}"`
+			)
 
-		.join(",")
+			.join(",")
 
 	);
 
@@ -204,11 +206,11 @@ function tableToCSV() {
 
 				[...row.cells]
 
-				.map(cell =>
-					`"${cell.textContent.trim()}"`
-				)
+					.map(cell =>
+						`"${cell.textContent.trim()}"`
+					)
 
-				.join(",")
+					.join(",")
 
 			);
 
@@ -219,7 +221,6 @@ function tableToCSV() {
 }
 
 /* EXPORT TO PDF */
-
 function exportHistoryToPDF() {
 
 	const table = getHistoryTable();
@@ -333,7 +334,6 @@ function exportHistoryToPDF() {
 }
 
 /* JSON EXPORT */
-
 function exportHistoryJSON() {
 
 	const json = tableToJSON();
@@ -351,7 +351,6 @@ function exportHistoryJSON() {
 }
 
 /* CSV EXPORT */
-
 function exportHistoryCSV() {
 
 	const csv = tableToCSV();
@@ -369,7 +368,6 @@ function exportHistoryCSV() {
 }
 
 /* EVENT LISTENERS */
-
 const pdfButton =
 	document.getElementById(
 		"PerformanceTabletoPDFHistory"
@@ -422,7 +420,6 @@ if (csvButton) {
 }
 
 /* EXCEL EXPORT (SheetJS) */
-
 function loadSheetJS(callback) {
 
 	if (window.XLSX) {
@@ -441,34 +438,52 @@ function loadSheetJS(callback) {
 
 }
 
+/* EXCEL EXPORT (SheetJS) */
 function exportHistoryExcel() {
 
 	loadSheetJS(function() {
 
 		const table = getHistoryTable();
 
+		const headers = [...table.querySelectorAll("thead th")]
+			.map(th =>
+				th.textContent
+					.trim()
+					.toLowerCase()
+					.replace(/\s+/g, "")
+			);
+
+		const data = [];
+
+		data.push(headers);
+
+		table
+			.querySelectorAll("tbody tr")
+			.forEach(row => {
+
+				data.push(
+					[...row.cells].map(cell =>
+						cell.textContent.trim()
+					)
+				);
+
+			});
+
 		const workbook =
 			XLSX.utils.book_new();
 
 		const worksheet =
-			XLSX.utils.table_to_sheet(table);
+			XLSX.utils.aoa_to_sheet(data);
 
 		XLSX.utils.book_append_sheet(
-
 			workbook,
-
 			worksheet,
-
 			"Monthly History"
-
 		);
 
 		XLSX.writeFile(
-
 			workbook,
-
 			"{{ player }}_monthly_history.xlsx"
-
 		);
 
 	});
@@ -476,7 +491,6 @@ function exportHistoryExcel() {
 }
 
 /* EXCEL BUTTON */
-
 const excelButton =
 	document.getElementById(
 		"PerformanceTabletoEXCELHistory"
@@ -495,7 +509,6 @@ if (excelButton) {
 }
 
 /* INITIALIZATION */
-
 document.addEventListener("DOMContentLoaded", function() {
 
 	initializeHistorySorting();

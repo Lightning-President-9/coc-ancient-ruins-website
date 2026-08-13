@@ -1,5 +1,4 @@
 /* Dashboard */
-
 .dashboard-container {
   width: 95%;
   max-width: 1700px;
@@ -14,7 +13,6 @@
 }
 
 /* Player Header */
-
 .player-header {
   background: #f2f3f5;
 
@@ -95,7 +93,6 @@
 }
 
 /* Summary Cards */
-
 .summary-section {
   display: grid;
 
@@ -161,7 +158,6 @@
 }
 
 /* Chart Card */
-
 .chart-card {
   background: rgba(255, 255, 255, 0.35);
 

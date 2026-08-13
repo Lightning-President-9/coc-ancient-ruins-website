@@ -5,8 +5,8 @@ Service layer for the Interactive Player Dashboard.
 
 Responsibilities:
 • Retrieve available players
-• Retrieve dashboard data
-• Keep routes independent from graph/data modules
+• Retrieve dashboard-pages data
+• Keep routes independent of graph/data modules
 
 Architecture:
 Route

@@ -27,7 +27,7 @@ def dashboard_home():
 
     players = get_dashboard_players()
 
-    return render_template("dashboard/dashboard.html", players=players)
+    return render_template("dashboard-pages/dashboard.html", players=players)
 
 
 @dashboard_bp.route("/dashboard/<player>/")
@@ -44,7 +44,7 @@ def player_dashboard(player):
     dashboard = get_dashboard_data(player)
 
     return render_template(
-        "/dashboard/player_dashboard.html",
+        "/dashboard-pages/player_dashboard.html",
         player=player,
         dashboard=dashboard,
     )
