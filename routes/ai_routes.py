@@ -76,7 +76,7 @@ def prediction():
     graphJSON = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in graphs]
 
     return render_template(
-        "/graph-pages/all-month-graph.html",
+        "/graph-pages/ai-prediction-graph.html",
         graphJSON_list=graphJSON,
         graph_name="AI Prediction",
     )

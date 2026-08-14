@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <title>Ancient Ruins - AI Prediction</title>
+
+    <link rel="icon" href="/static/clan-badge_18.png">
+
+    <style>
+        {% include "graph-pages/graph.css" %}
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Roboto, Arial, sans-serif;
+        }
+
+        .prediction-container {
+            width: 95%;
+            max-width: 95vw;
+            margin: 0 auto;
+        }
+
+        .prediction-container > h1 {
+            margin-bottom: 20px;
+        }
+
+        .prediction-graph {
+            position: relative;
+            width: 100%;
+            margin-bottom: 25px;
+            padding: 20px;
+
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .prediction-chart-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .prediction-chart {
+            width: 100%;
+            min-height: 500px;
+        }
+
+        .player-selector-wrapper {
+            position: absolute;
+            top: 45px;
+            right: 28px;
+            z-index: 1;
+            width: 160px;
+            height: 34px;
+        }
+
+        .player-selector {
+            position: relative;
+            width: 160px;
+            height: 34px;
+        }
+
+        .player-selector-button {
+            width: 160px;
+            height: 34px;
+            padding: 5px 28px 5px 10px;
+            background: #fff;
+            border: 1px solid #c7cdd6;
+            border-radius: 4px;
+            color: #344563;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 12px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .player-selector-button::after {
+            content: "▾";
+            position: absolute;
+            right: 10px;
+            top: 7px;
+            font-size: 13px;
+            pointer-events: none;
+        }
+
+        .player-selector-options {
+            display: none;
+            position: absolute;
+            top: 36px;
+            left: 0;
+            width: 160px;
+            max-height: 220px;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid #c7cdd6;
+            border-radius: 4px;
+            box-shadow: 0 3px 8px rgba(0,0,0,.15);
+            z-index: 2;
+        }
+
+        .player-selector.open .player-selector-options {
+            display: block;
+        }
+
+        .player-selector-option {
+            height: 32px;
+            padding: 7px 10px;
+            color: #344563;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .player-selector-option:hover {
+            background: #f0f3f7;
+        }
+
+        .player-selector-option.selected {
+            background: #e8edf5;
+        }
+
+        @media (max-width: 650px) {
+            .prediction-container {
+                width: 96%;
+            }
+
+            .prediction-graph {
+                padding: 10px;
+            }
+
+            .prediction-chart {
+                min-height: 400px;
+            }
+
+            .player-selector-wrapper {
+                top: 55px;
+                right: 18px;
+                width: 135px;
+                height: 32px;
+            }
+
+            .player-selector {
+                width: 135px;
+                height: 32px;
+            }
+
+            .player-selector-button {
+                width: 135px;
+                height: 32px;
+                font-size: 11px;
+            }
+
+            .player-selector-options {
+                width: 135px;
+                max-height: 180px;
+            }
+
+            .player-selector-option {
+                height: 30px;
+                font-size: 11px;
+            }
+        }
+    </style>
+
+    <script
+        src="https://cdn.plot.ly/plotly-3.1.0.min.js"
+        charset="utf-8">
+    </script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+    </script>
+</head>
+
+<body>
+
+    {% include "navbar.html" %}
+
+    <main class="prediction-container">
+
+        <h1>AI Prediction</h1>
+
+        <div id="predictionGraphs">
+
+        </div>
+
+    </main>
+
+    <script>
+        const graphJSONList = {{ graphJSON_list | tojson }};
+
+        function getPlayerNames(figure) {
+            const buttons =
+                figure.layout &&
+                figure.layout.updatemenus &&
+                figure.layout.updatemenus.length
+                    ? figure.layout.updatemenus[0].buttons
+                    : [];
+
+            return buttons.map(button => button.label);
+        }
+
+        function removePlotlyDropdown(figure) {
+            if (figure.layout) {
+                delete figure.layout.updatemenus;
+            }
+        }
+
+        function getMetricName(figure) {
+            const title =
+                figure.layout &&
+                figure.layout.title;
+
+            let titleText = "";
+
+            if (typeof title === "string") {
+                titleText = title;
+            } else if (title && typeof title.text === "string") {
+                titleText = title.text;
+            }
+
+            if (titleText) {
+                return titleText
+                    .replace(/\s+Forecast.*$/i, "")
+                    .trim();
+            }
+
+            return "Forecast";
+        }
+
+        function setPlayerVisibility(chart, figure, playerIndex) {
+            const totalTraces = figure.data.length;
+            const visible = new Array(totalTraces).fill(false);
+
+            const start = playerIndex * 3;
+            const end = Math.min(start + 3, totalTraces);
+
+            for (let i = start; i < end; i++) {
+                visible[i] = true;
+            }
+
+            Plotly.restyle(chart, {
+                visible: visible
+            });
+        }
+
+        function createPredictionGraph(json, index) {
+            const figure = JSON.parse(json);
+
+            const players = getPlayerNames(figure);
+
+            removePlotlyDropdown(figure);
+
+            const metricName = getMetricName(figure);
+
+            const card = document.createElement("section");
+            card.className = "prediction-graph";
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "prediction-chart-wrapper";
+
+            const selectorWrapper = document.createElement("div");
+            selectorWrapper.className = "player-selector-wrapper";
+
+            const select = document.createElement("div");
+            select.className = "player-selector";
+            select.setAttribute("role", "combobox");
+            select.setAttribute("aria-label", "Select player");
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "player-selector-button";
+            button.textContent = players[0] || "Select player";
+
+            const optionsBox = document.createElement("div");
+            optionsBox.className = "player-selector-options";
+
+            players.forEach((player, playerIndex) => {
+                const option = document.createElement("div");
+                option.className = "player-selector-option";
+                option.textContent = player;
+                option.dataset.index = String(playerIndex);
+
+                if (playerIndex === 0) {
+                    option.classList.add("selected");
+                }
+
+                option.addEventListener("click", function (event) {
+                    event.stopPropagation();
+
+                    const selectedIndex = Number(this.dataset.index);
+
+                    button.textContent = players[selectedIndex];
+
+                    optionsBox
+                        .querySelectorAll(".player-selector-option")
+                        .forEach(item => item.classList.remove("selected"));
+
+                    this.classList.add("selected");
+                    select.classList.remove("open");
+
+                    setPlayerVisibility(chart, figure, selectedIndex);
+
+                    Plotly.relayout(chart, {
+                        "title.text":
+                            metricName +
+                            " Forecast for " +
+                            players[selectedIndex]
+                    });
+                });
+
+                optionsBox.appendChild(option);
+            });
+
+            button.addEventListener("click", function (event) {
+                event.stopPropagation();
+                select.classList.toggle("open");
+            });
+
+            select.appendChild(button);
+            select.appendChild(optionsBox);
+
+            const chart = document.createElement("div");
+            chart.className = "prediction-chart";
+            chart.id = "prediction-chart-" + index;
+
+            selectorWrapper.appendChild(select);
+            wrapper.appendChild(selectorWrapper);
+            wrapper.appendChild(chart);
+            card.appendChild(wrapper);
+
+            document.getElementById("predictionGraphs").appendChild(card);
+
+            Plotly.newPlot(
+                chart,
+                figure.data,
+                figure.layout,
+                {
+                    responsive: true,
+                    displayModeBar: true,
+                }
+            ).then(() => {
+                if (players.length > 0) {
+                    setPlayerVisibility(chart, figure, 0);
+
+                    Plotly.relayout(chart, {
+                        "title.text":
+                            metricName +
+                            " Forecast - " +
+                            players[0]
+                    });
+                }
+            });
+
+
+        }
+
+        document.addEventListener("click", function () {
+            document
+                .querySelectorAll(".player-selector.open")
+                .forEach(dropdown => dropdown.classList.remove("open"));
+        });
+
+        function loadPredictionGraphs() {
+            const container = document.getElementById("predictionGraphs");
+
+            if (container.dataset.loaded === "true") {
+                return;
+            }
+
+            container.dataset.loaded = "true";
+            container.innerHTML = "";
+
+            if (!graphJSONList || graphJSONList.length === 0) {
+                container.innerHTML =
+                    '<div class="error">No AI prediction data available.</div>';
+                return;
+            }
+
+            try {
+                graphJSONList.forEach(createPredictionGraph);
+            } catch (error) {
+                console.error("AI Prediction error:", error);
+
+                container.innerHTML =
+                    '<div class="error">Unable to load AI prediction graphs.</div>';
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadPredictionGraphs);
+    </script>
+
+</body>
+</html>

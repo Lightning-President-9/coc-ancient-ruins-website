@@ -92,4 +92,4 @@ if __name__ == "__main__":
     host  → Allows external access
     port  → Application running port
     """
-    app.run(host="0.0.0.0", port=10000)
+    app.run(host="0.0.0.0", port=10000,debug=True)
