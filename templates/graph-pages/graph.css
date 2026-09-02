@@ -235,7 +235,7 @@ button:hover {
     flex-direction: column;
     align-items: stretch;
     width: 90%;
-    margin: 20px auto;
+    margin: 30px auto;
   }
 
   #controls-container label,
@@ -247,7 +247,7 @@ button:hover {
 
   #controls-container label,
   #controls-container select {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   #fetch-button {
@@ -259,13 +259,41 @@ button:hover {
     font-size: 0.95rem;
     padding: 10px 16px;
   }
+
+  /* MOBILE NAVBAR */
   .navbar {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-    justify-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    padding: 5px 2px;
+    width: 100%;
+    box-sizing: border-box;
   }
+
+  .navbar a {
+    padding: 2px 3px;
+    flex-shrink: 1;
+  }
+
+  .nav-item {
+    flex-shrink: 1;
+  }
+
+  .nav-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  /* Keep dropdowns working */
+  .dropdown-content {
+    min-width: 130px;
+  }
+
+  /* Navbar is only one row now */
   body {
-    padding-top: 190px;
+    padding-top: 50px;
   }
 }

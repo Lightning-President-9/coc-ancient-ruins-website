@@ -86,7 +86,7 @@ body {
   flex-wrap: wrap; /* allows second row */
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
+  /*border-radius: 8px;*/
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
   position: fixed;
@@ -265,20 +265,60 @@ a:hover {
 
 @media (max-width: 650px) {
   body {
-  padding-top: 130px;
+    padding-top: 70px;
   }
- }
+
+  /* MOBILE NAVBAR */
+  .navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    padding: 5px 2px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .navbar a {
+    padding: 2px 3px;
+    flex-shrink: 1;
+  }
+
+  .nav-item {
+    flex-shrink: 1;
+  }
+
+  .nav-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .dropdown-content {
+    min-width: 130px;
+  }
+}
 
 @media print {
   body {
     background: white;
-    padding-top: 130px;
+    padding-top: 50px;
   }
+
+  /* Keep navbar in one row when printing */
   .navbar {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-    justify-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    padding: 5px;
+  }
+
+  .nav-icon {
+    width: 28px;
+    height: 28px;
   }
 
   button {

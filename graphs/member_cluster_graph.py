@@ -141,10 +141,10 @@ class MemberClusterGraph:
                     color="cluster",
                     size="clanscore",
                     hover_name="name",
-                    title=f"Member Cluster Scatter: {x_col} vs {y_col}",
+                    title=f"Cluster Scatter Plot of {x_col} vs {y_col}",
                     labels={
-                        x_col: x_col.capitalize(),
-                        y_col: y_col.capitalize(),
+                        x_col: x_col,
+                        y_col: y_col,
                         "cluster": "Cluster",
                     },
                 )

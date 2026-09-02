@@ -182,21 +182,68 @@ def generate_player_report(player_name):
     periods.sort(key=period_sort_key)
 
     # Metric Data Extraction
-    metric_values = {}
+    raw_metric_values = {}
+
     for metric, prefix in METRICS.items():
         vals = []
+
         for period in periods:
-            val = player_data.get(f"{prefix}{period}", 0)
+            val = player_data.get(f"{prefix}{period}", None)
+
             if val is None or pd.isna(val) or val < 0:
-                val = 0
+                val = float("nan")
+
             vals.append(val)
-        metric_values[metric] = vals
+
+        raw_metric_values[metric] = vals
+
+    active_mask = []
+
+    for i in range(len(periods)):
+        # Player is considered active if at least
+        # one metric contains valid data for period.
+        active = any(
+            pd.notna(raw_metric_values[metric][i])
+            for metric in raw_metric_values
+        )
+
+        active_mask.append(active)
+
+    # Remove inactive periods completely
+    periods = [
+        period
+        for period, keep in zip(periods, active_mask)
+        if keep
+    ]
+
+    # Apply same filtering to every metric
+    metric_values = {}
+
+    for metric, vals in raw_metric_values.items():
+        metric_values[metric] = [
+            val
+            for val, keep in zip(vals, active_mask)
+            if keep
+        ]
 
     # Peak Performance Table
     peak_data = [["Metric", "Peak Value", "Peak Period"]]
     for metric, vals in metric_values.items():
-        peak_idx = vals.index(max(vals)) if max(vals) > 0 else 0
-        peak_data.append([metric, max(vals), periods[peak_idx]])
+        series = pd.Series(vals)
+
+        if series.notna().any():
+            peak_idx = series.idxmax()
+            peak_value = series.loc[peak_idx]
+            peak_period = periods[peak_idx]
+        else:
+            peak_value = 0
+            peak_period = "N/A"
+
+        peak_data.append([
+            metric,
+            int(peak_value) if pd.notna(peak_value) else 0,
+            peak_period,
+        ])
 
     # Generate Charts
     img_buffers = []
@@ -204,7 +251,8 @@ def generate_player_report(player_name):
     def create_metric_chart(values, title, color):
         fig, ax = plt.subplots(figsize=(8, 4))
         ax.plot(periods, values, marker="o", color=color, linewidth=2)
-        avg = sum(values) / len(values) if values else 0
+        avg = pd.Series(values).mean()
+        avg = 0 if pd.isna(avg) else avg
         ax.axhline(
             avg, linestyle="--", color="gray", alpha=0.7, label=f"Avg: {avg:.1f}"
         )
@@ -213,8 +261,17 @@ def generate_player_report(player_name):
         ax.set_ylabel(title)
         ax.grid(True, linestyle="--", alpha=0.6)
         plt.xticks(rotation=45)
+        max_value = pd.Series(values).max()
+
         for i, val in enumerate(values):
-            ax.text(i, val + (max(values) * 0.05), str(val), ha="center", fontsize=8)
+            if pd.notna(val):
+                ax.text(
+                    i,
+                    val + (max_value * 0.05),
+                    str(int(val)),
+                    ha="center",
+                    fontsize=8,
+                )
         ax.legend()
         plt.tight_layout()
         buf = io.BytesIO()
@@ -245,16 +302,51 @@ def generate_player_report(player_name):
     img_buffers.append(buf)
     plt.close()
 
-    # Stacked Bar Chart
+    # Monthly Contribution Breakdown
     fig, ax = plt.subplots(figsize=(8, 4))
+
     bottom_vals = [0] * len(periods)
+
     for (metric, vals), color in zip(metric_values.items(), color_palette):
-        ax.bar(periods, vals, bottom=bottom_vals, label=metric, color=color)
-        bottom_vals = [b + v for b, v in zip(bottom_vals, vals)]
-    ax.set_title("Monthly Contribution Breakdown", fontsize=14, fontweight="bold")
-    ax.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
-    plt.xticks(rotation=45)
+        plot_vals = [
+            0 if pd.isna(v) else v
+            for v in vals
+        ]
+
+        ax.bar(
+            periods,
+            plot_vals,
+            bottom=bottom_vals,
+            label=metric,
+            color=color,
+        )
+
+        bottom_vals = [
+            b + v
+            for b, v in zip(bottom_vals, plot_vals)
+        ]
+
+    ax.set_title(
+        "Monthly Contribution Breakdown",
+        fontsize=14,
+        fontweight="bold"
+    )
+
+    ax.set_xlabel("Period")
+
+    ax.legend(
+        bbox_to_anchor=(1.05, 1),
+        loc="upper left"
+    )
+
+    plt.xticks(
+        rotation=45,
+        ha="right",
+        fontsize=8
+    )
+
     plt.tight_layout(rect=[0, 0, 0.8, 1])
+
     buf = io.BytesIO()
     plt.savefig(buf, format="PNG")
     buf.seek(0)
@@ -262,7 +354,10 @@ def generate_player_report(player_name):
     plt.close()
 
     # Pie Chart
-    totals = [sum(vals) for vals in metric_values.values()]
+    totals = [
+        pd.Series(vals).sum()
+        for vals in metric_values.values()
+    ]
     fig, ax = plt.subplots(figsize=(6, 6))
     if sum(totals) > 0:
         ax.pie(
@@ -291,14 +386,42 @@ def generate_player_report(player_name):
     img_buffers.append(buf)
     plt.close()
 
-    # Heatmap
-    heatmap_data = pd.DataFrame(metric_values, index=periods).T
+    # Activity Intensity Heatmap
+    heatmap_data = pd.DataFrame(
+        metric_values,
+        index=periods
+    ).T
+
     fig, ax = plt.subplots(figsize=(8, 4))
-    sns.heatmap(heatmap_data, annot=True, fmt="g", cmap="YlGnBu", ax=ax)
-    ax.set_title("Activity Intensity Heatmap", fontsize=14, fontweight="bold")
-    plt.xticks(rotation=45)
+
+    sns.heatmap(
+        heatmap_data,
+        annot=True,
+        fmt=".0f",
+        cmap="YlGnBu",
+        ax=ax,
+        cbar=True,
+    )
+
+    ax.set_title(
+        "Activity Intensity Heatmap",
+        fontsize=14,
+        fontweight="bold"
+    )
+
+    ax.set_xlabel("Period")
+    ax.set_ylabel("")
+
+    plt.xticks(
+        rotation=45,
+        ha="right",
+        fontsize=8
+    )
+
     plt.yticks(rotation=0)
+
     plt.tight_layout()
+
     buf = io.BytesIO()
     plt.savefig(buf, format="PNG")
     buf.seek(0)
@@ -356,7 +479,7 @@ def generate_player_report(player_name):
 
     # Summary Table
     summary_data = [["Metric", "Total"]] + [
-        [m, sum(v)] for m, v in metric_values.items()
+        [m, int(pd.Series(v).sum())] for m, v in metric_values.items()
     ]
     summary_table = Table(summary_data, colWidths=[200, 100])
     summary_table.setStyle(

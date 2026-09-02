@@ -256,7 +256,7 @@ class AIPredictionGraph:
                     args=[
                         {"visible": visible},
                         {
-                            "title": f"{prefix[:-1].capitalize()} Forecast for {name}"
+                            "title": f"{prefix[:-1]} Forecast for {name}"
                         },
                     ],
                 )
@@ -284,9 +284,9 @@ class AIPredictionGraph:
                     y=1.15,
                 )
             ],
-            title=f"{prefix[:-1].capitalize()} Forecast",
+            title=f"{prefix[:-1]} Forecast",
             xaxis_title="Period",
-            yaxis_title=prefix[:-1].capitalize(),
+            yaxis_title=prefix[:-1],
         )
 
         return fig

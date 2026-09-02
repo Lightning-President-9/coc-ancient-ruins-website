@@ -243,12 +243,11 @@ class AllMonthGraph:
                     x="Month",
                     y="Player",
                     color=metric.replace("clangamesmaxed", "Clan Games Maxed")
-                    .capitalize()
                     .replace("_", " "),
                 ),
                 x=[col.replace(f"{metric}_", "") for col in heatmap_df.columns],
                 y=heatmap_df.index,
-                title=f"Heatmap of {metric.replace('clangamesmaxed', 'Clan Games Maxed').capitalize()} per Month",
+                title=f"Heatmap of {metric} per month",
                 aspect="auto",
                 color_continuous_scale="Plasma",
             )

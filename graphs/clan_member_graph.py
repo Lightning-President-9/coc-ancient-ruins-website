@@ -129,7 +129,7 @@ class ClanMemberGraph:
         )
         fig1.update_layout(
             barmode="group",
-            title="Vertical Bar Chart of Clan War Attack",
+            title="Vertical Bar Chart of War Attack",
             xaxis_title="Name",
             yaxis_title="War Attack",
         )
@@ -235,8 +235,8 @@ class ClanMemberGraph:
 
         Covers:
         - Player status and war participation
-        - Binned distributions for clan capital, clan games,
-          clan games maxed, clan score, and war attacks
+        - Binned distributions for war attacks, clan capital, clan games,
+          clan games maxed and clan score
 
         Returns:
             list[plotly.graph_objects.Figure]: Pie chart figures
@@ -245,57 +245,57 @@ class ClanMemberGraph:
         # 1. Player Status Distribution
         fig1 = px.pie(self.df, names="status", title="Player Status Distribution")
 
-        # 2. War Participation Status
+        # 2. War Participation Distribution
         war_status = self.df["war"].value_counts()
         fig2 = go.Figure(
             data=[go.Pie(labels=war_status.index, values=war_status.values)]
         )
-        fig2.update_layout(title_text="War Participation Status")
+        fig2.update_layout(title_text="War Participation Distribution")
 
-        # 3. Clan Capital Contribution
-        self.df["clancapital_range"] = pd.cut(
-            self.df["clancapital"],
-            bins=[-1, 50, 100, 200, 300, float("inf")],
-            labels=["0-50", "51-100", "101-200", "201-300", "300+"],
-        )
-        fig3 = px.pie(
-            self.df, names="clancapital_range", title="Clan Capital Contribution"
-        )
-
-        # 4. Clan Games Participation
-        self.df["clangames_range"] = pd.cut(
-            self.df["clangames"],
-            bins=[-1, 5, 10, 15, 20, float("inf")],
-            labels=["0-5", "6-10", "11-15", "16-20", "20+"],
-        )
-        fig4 = px.pie(
-            self.df, names="clangames_range", title="Clan Games Participation"
-        )
-
-        # 5. Maxed Clan Games
-        maxed_games = self.df["clangamesmaxed"].value_counts()
-        fig5 = go.Figure(
-            data=[go.Pie(labels=maxed_games.index, values=maxed_games.values)]
-        )
-        fig5.update_layout(title_text="Maxed Clan Games")
-
-        # 6. Clan Score Distribution
-        self.df["clanscore_range"] = pd.cut(
-            self.df["clanscore"],
-            bins=[-1, 100, 300, 500, 700, float("inf")],
-            labels=["0-100", "101-300", "301-500", "501-700", "700+"],
-        )
-        fig6 = px.pie(self.df, names="clanscore_range", title="Clan Score Distribution")
-
-        # 7. War Attacks Distribution
+        # 3. War Attacks Distribution
         self.df["warattack_range"] = pd.cut(
             self.df["warattack"],
             bins=[-1, 50, 100, 200, 300, float("inf")],
             labels=["0-50", "51-100", "101-200", "201-300", "300+"],
         )
-        fig7 = px.pie(
+        fig3 = px.pie(
             self.df, names="warattack_range", title="War Attacks Distribution"
         )
+
+        # 4. Clan Capital Distribution
+        self.df["clancapital_range"] = pd.cut(
+            self.df["clancapital"],
+            bins=[-1, 50, 100, 200, 300, float("inf")],
+            labels=["0-50", "51-100", "101-200", "201-300", "300+"],
+        )
+        fig4 = px.pie(
+            self.df, names="clancapital_range", title="Clan Capital Distribution"
+        )
+
+        # 5. Clan Games Distribution
+        self.df["clangames_range"] = pd.cut(
+            self.df["clangames"],
+            bins=[-1, 5, 10, 15, 20, float("inf")],
+            labels=["0-5", "6-10", "11-15", "16-20", "20+"],
+        )
+        fig5 = px.pie(
+            self.df, names="clangames_range", title="Clan Games Distribution"
+        )
+
+        # 6. Clan Games Maxed Distribution
+        maxed_games = self.df["clangamesmaxed"].value_counts()
+        fig6 = go.Figure(
+            data=[go.Pie(labels=maxed_games.index, values=maxed_games.values)]
+        )
+        fig6.update_layout(title_text="Clan Games Maxed Distribution")
+
+        # 7. Clan Score Distribution
+        self.df["clanscore_range"] = pd.cut(
+            self.df["clanscore"],
+            bins=[-1, 100, 300, 500, 700, float("inf")],
+            labels=["0-100", "101-300", "301-500", "501-700", "700+"],
+        )
+        fig7 = px.pie(self.df, names="clanscore_range", title="Clan Score Distribution")
 
         return [fig1, fig2, fig3, fig4, fig5, fig6, fig7]
 
@@ -377,10 +377,10 @@ class ClanMemberGraph:
                 "x": col1,
                 "y": col2,
                 "hover_name": "name",
-                "title": f"{col1.capitalize()} vs {col2.capitalize()}",
+                "title": f"Scatter Plot of {col1} vs {col2}",
                 "labels": {
-                    col1: col1.capitalize(),
-                    col2: col2.capitalize(),
+                    col1: col1,
+                    col2: col2,
                 },
             }
 
@@ -567,7 +567,7 @@ class ClanMemberGraph:
         Generate heatmap visualizations for relationship intensity analysis.
 
         Includes:
-        - Metric-to-metric density heatmaps
+        - Pairwise numerical density heatmaps
         - Categorical heatmap of war status vs player status
 
         Returns:
@@ -576,71 +576,55 @@ class ClanMemberGraph:
 
         heatmaps = []
 
-        # 1. Heatmap of warattack vs clancapital
-        heatmap1 = px.density_heatmap(
-            self.df,
-            x="warattack",
-            y="clancapital",
-            nbinsx=20,
-            nbinsy=20,
-            title="Heatmap of War Attack vs Clan Capital",
-            labels={"warattack": "War Attack", "clancapital": "Clan Capital"},
-        )
-        heatmaps.append(heatmap1)
+        # Get all numerical columns except srno
+        numerical_columns = self.numerical_df.columns.drop("srno", errors="ignore")
 
-        # 2. Heatmap of clangames vs clangamesmaxed
-        heatmap2 = px.density_heatmap(
-            self.df,
-            x="clangames",
-            y="clangamesmaxed",
-            nbinsx=20,
-            nbinsy=20,
-            title="Heatmap of Clan Games vs Clan Games Maxed",
-            labels={"clangames": "Clan Games", "clangamesmaxed": "Clan Games Maxed"},
-        )
-        heatmaps.append(heatmap2)
+        # Only include columns that exist in self.df
+        numerical_columns = numerical_columns.intersection(self.df.columns)
 
-        # 3. Heatmap of warattack vs clanscore
-        heatmap3 = px.density_heatmap(
-            self.df,
-            x="warattack",
-            y="clanscore",
-            nbinsx=20,
-            nbinsy=20,
-            title="Heatmap of War Attack vs Clan Score",
-            labels={"warattack": "War Attack", "clanscore": "Clan Score"},
-        )
-        heatmaps.append(heatmap3)
-
-        # 4. Heatmap of clancapital vs clanscore
-        heatmap4 = px.density_heatmap(
-            self.df,
-            x="clancapital",
-            y="clanscore",
-            nbinsx=20,
-            nbinsy=20,
-            title="Heatmap of Clan Capital vs Clan Score",
-            labels={"clancapital": "Clan Capital", "clanscore": "Clan Score"},
-        )
-        heatmaps.append(heatmap4)
-
-        # 5. Heatmap with categorical variables, using war and status as categories
-        # Categorical heatmap example (using counts)
-        war_status_counts = pd.crosstab(self.df["war"], self.df["status"])
-        heatmap5 = go.Figure(
-            data=go.Heatmap(
-                z=war_status_counts.values,
-                x=war_status_counts.columns,
-                y=war_status_counts.index,
-                colorscale="Viridis",
+        # 1. Pairwise numerical heatmaps
+        for col1, col2 in combinations(numerical_columns, 2):
+            fig = px.density_heatmap(
+                self.df,
+                x=col1,
+                y=col2,
+                nbinsx=20,
+                nbinsy=20,
+                title=f"Heatmap of {col1} vs {col2}",
+                labels={
+                    col1: col1,
+                    col2: col2,
+                },
             )
-        )
-        heatmap5.update_layout(
-            title="Heatmap of War Status vs Player Status",
-            xaxis_title="Player Status",
-            yaxis_title="War Status",
-        )
-        heatmaps.append(heatmap5)
+
+            heatmaps.append(fig)
+
+        # 2. Categorical heatmap: War vs Player Status
+        if "war" in self.df.columns and "status" in self.df.columns:
+            war_status_counts = pd.crosstab(
+                self.df["war"],
+                self.df["status"]
+            )
+
+            heatmap = go.Figure(
+                data=go.Heatmap(
+                    z=war_status_counts.values,
+                    x=war_status_counts.columns,
+                    y=war_status_counts.index,
+                    colorscale="Viridis",
+                    text=war_status_counts.values,
+                    texttemplate="%{text}",
+                    textfont={"size": 12},
+                )
+            )
+
+            heatmap.update_layout(
+                title="Heatmap of War Status vs Player Status",
+                xaxis_title="Player Status",
+                yaxis_title="War Status",
+            )
+
+            heatmaps.append(heatmap)
 
         return heatmaps
 
@@ -662,14 +646,14 @@ class ClanMemberGraph:
         def filter_non_zero(df, column):
             return df[df[column].fillna(0) != 0]
 
-        # 1. Treemap based on 'status' and 'warattack'
+        # 1. Treemap based on 'war' and 'warattack'
         df_filtered = filter_non_zero(self.df, "warattack")
         if not df_filtered.empty:
             treemap1 = px.treemap(
                 df_filtered,
-                path=["status", "name"],
+                path=["war", "name"],
                 values="warattack",
-                title="Treemap of War Attack by Player Status",
+                title="Treemap of War Attack by War Status",
                 labels={"warattack": "War Attack", "name": "Player Name"},
                 color="warattack",
                 hover_data=["warattack"],
@@ -677,14 +661,14 @@ class ClanMemberGraph:
             )
             treemaps.append(treemap1)
 
-        # 2. Treemap based on 'war' and 'clancapital'
+        # 2. Treemap based on 'status' and 'clancapital'
         df_filtered = filter_non_zero(self.df, "clancapital")
         if not df_filtered.empty:
             treemap2 = px.treemap(
                 df_filtered,
-                path=["war", "name"],
+                path=["status", "name"],
                 values="clancapital",
-                title="Treemap of Clan Capital by War Status",
+                title="Treemap of Clan Capital by Player Status",
                 labels={"clancapital": "Clan Capital", "name": "Player Name"},
                 color="clancapital",
                 hover_data=["clancapital"],
@@ -692,50 +676,50 @@ class ClanMemberGraph:
             )
             treemaps.append(treemap2)
 
-        # 3. Treemap based on 'status' and 'clanscore'
-        df_filtered = filter_non_zero(self.df, "clanscore")
+        # 3. Treemap based on 'status' and 'clangames'
+        df_filtered = filter_non_zero(self.df, "clangames")
         if not df_filtered.empty:
             treemap3 = px.treemap(
                 df_filtered,
                 path=["status", "name"],
-                values="clanscore",
-                title="Treemap of Clan Score by Player Status",
-                labels={"clanscore": "Clan Score", "name": "Player Name"},
-                color="clanscore",
-                hover_data=["clanscore"],
-                color_continuous_scale="Viridis",
-            )
-            treemaps.append(treemap3)
-
-        # 4. Treemap based on 'war' and 'clangames'
-        df_filtered = filter_non_zero(self.df, "clangames")
-        if not df_filtered.empty:
-            treemap4 = px.treemap(
-                df_filtered,
-                path=["war", "name"],
                 values="clangames",
-                title="Treemap of Clan Games by War Status",
+                title="Treemap of Clan Games by Player Status",
                 labels={"clangames": "Clan Games", "name": "Player Name"},
                 color="clangames",
                 hover_data=["clangames"],
                 color_continuous_scale="Viridis",
             )
-            treemaps.append(treemap4)
+            treemaps.append(treemap3)
 
-        # 5. Treemap based on 'war' and 'clangamesmaxed'
+        # 4. Treemap based on 'status' and 'clangamesmaxed'
         df_filtered = filter_non_zero(self.df, "clangamesmaxed")
         if not df_filtered.empty:
-            treemap5 = px.treemap(
+            treemap4 = px.treemap(
                 df_filtered,
-                path=["war", "name"],
+                path=["status", "name"],
                 values="clangamesmaxed",
-                title="Treemap of Clan Games Maxed by War Status",
+                title="Treemap of Clan Games Maxed by Player Status",
                 labels={"clangamesmaxed": "Clan Games Maxed", "name": "Player Name"},
                 color="clangamesmaxed",
                 hover_data=["clangamesmaxed"],
                 color_continuous_scale="Viridis",
             )
-            treemaps.append(treemap5)
+            treemaps.append(treemap4)
+
+            # 5. Treemap based on 'status' and 'clanscore'
+            df_filtered = filter_non_zero(self.df, "clanscore")
+            if not df_filtered.empty:
+                treemap5 = px.treemap(
+                    df_filtered,
+                    path=["status", "name"],
+                    values="clanscore",
+                    title="Treemap of Clan Score by Player Status",
+                    labels={"clanscore": "Clan Score", "name": "Player Name"},
+                    color="clanscore",
+                    hover_data=["clanscore"],
+                    color_continuous_scale="Viridis",
+                )
+                treemaps.append(treemap5)
 
         return treemaps
 
@@ -752,16 +736,16 @@ class ClanMemberGraph:
 
         sunbursts = []
 
-        # 1. Sunburst chart based on 'status' and 'warattack'
+        # 1. Sunburst chart based on 'war' and 'warattack'
         df_filtered = self.df[
             self.df["warattack"].notna() & (self.df["warattack"] != 0)
         ]
         if not df_filtered.empty:
             sunburst1 = px.sunburst(
                 df_filtered,
-                path=["status", "name"],
+                path=["war", "name"],
                 values="warattack",
-                title="Sunburst of War Attack by Player Status",
+                title="Sunburst Chart of War Attack by War Status",
                 labels={"warattack": "War Attack", "name": "Player Name"},
                 color="warattack",
                 hover_data=["warattack"],
@@ -769,16 +753,16 @@ class ClanMemberGraph:
             )
             sunbursts.append(sunburst1)
 
-        # 2. Sunburst chart based on 'war' and 'clancapital'
+        # 2. Sunburst chart based on 'status' and 'clancapital'
         df_filtered = self.df[
             self.df["clancapital"].notna() & (self.df["clancapital"] != 0)
         ]
         if not df_filtered.empty:
             sunburst2 = px.sunburst(
                 df_filtered,
-                path=["war", "name"],
+                path=["status", "name"],
                 values="clancapital",
-                title="Sunburst of Clan Capital by War Status",
+                title="Sunburst Chart of Clan Capital by Player Status",
                 labels={"clancapital": "Clan Capital", "name": "Player Name"},
                 color="clancapital",
                 hover_data=["clancapital"],
@@ -786,64 +770,65 @@ class ClanMemberGraph:
             )
             sunbursts.append(sunburst2)
 
-        # 3. Sunburst chart based on 'status' and 'clanscore'
+        # 3. Sunburst chart based on 'status' and 'clangames'
         df_filtered = self.df[
-            self.df["clanscore"].notna() & (self.df["clanscore"] != 0)
+            self.df["clangames"].notna() & (self.df["clangames"] != 0)
         ]
         if not df_filtered.empty:
             sunburst3 = px.sunburst(
                 df_filtered,
                 path=["status", "name"],
-                values="clanscore",
-                title="Sunburst of Clan Score by Player Status",
-                labels={"clanscore": "Clan Score", "name": "Player Name"},
-                color="clanscore",
-                hover_data=["clanscore"],
-                color_continuous_scale="Viridis",
-            )
-            sunbursts.append(sunburst3)
-
-        # 4. Sunburst chart based on 'war' and 'clangames'
-        df_filtered = self.df[
-            self.df["clangames"].notna() & (self.df["clangames"] != 0)
-        ]
-        if not df_filtered.empty:
-            sunburst4 = px.sunburst(
-                df_filtered,
-                path=["war", "name"],
                 values="clangames",
-                title="Sunburst of Clan Games by War Status",
+                title="Sunburst Chart of Clan Games by Player Status",
                 labels={"clangames": "Clan Games", "name": "Player Name"},
                 color="clangames",
                 hover_data=["clangames"],
                 color_continuous_scale="Viridis",
             )
-            sunbursts.append(sunburst4)
+            sunbursts.append(sunburst3)
 
-        # 5. Sunburst chart based on 'war' and 'clangamesmaxed'
+        # 4. Sunburst chart based on 'status' and 'clangamesmaxed'
         df_filtered = self.df[
             self.df["clangamesmaxed"].notna() & (self.df["clangamesmaxed"] != 0)
         ]
         if not df_filtered.empty:
-            sunburst5 = px.sunburst(
+            sunburst4 = px.sunburst(
                 df_filtered,
-                path=["war", "name"],
+                path=["status", "name"],
                 values="clangamesmaxed",
-                title="Sunburst of Clan Games Maxed by War Status",
+                title="Sunburst Chart of Clan Games Maxed by Player Status",
                 labels={"clangamesmaxed": "Clan Games Maxed", "name": "Player Name"},
                 color="clangamesmaxed",
                 hover_data=["clangamesmaxed"],
                 color_continuous_scale="Viridis",
             )
-            sunbursts.append(sunburst5)
+            sunbursts.append(sunburst4)
+
+            # 5. Sunburst chart based on 'status' and 'clanscore'
+            df_filtered = self.df[
+                self.df["clanscore"].notna() & (self.df["clanscore"] != 0)
+                ]
+            if not df_filtered.empty:
+                sunburst5 = px.sunburst(
+                    df_filtered,
+                    path=["status", "name"],
+                    values="clanscore",
+                    title="Sunburst Chart of Clan Score by Player Status",
+                    labels={"clanscore": "Clan Score", "name": "Player Name"},
+                    color="clanscore",
+                    hover_data=["clanscore"],
+                    color_continuous_scale="Viridis",
+                )
+                sunbursts.append(sunburst5)
 
         return sunbursts
 
     def create_density_plots(self):
         """
-        Generate density contour plots for bivariate metric distributions.
+        Generate density contour plots for pairwise numerical comparisons.
 
-        Analyzes concentration patterns between key performance metrics.
+        Includes:
+        - Pairwise numerical density contour plots
 
         Returns:
             list[plotly.graph_objects.Figure]: Density plot figures
@@ -851,73 +836,38 @@ class ClanMemberGraph:
 
         density_plots = []
 
-        # 1. Density plot of Clan Capital vs. Clan Games
-        density1 = go.Figure()
-        density1.add_trace(
-            go.Histogram2dContour(
-                x=self.df["clancapital"],
-                y=self.df["clangames"],
-                colorscale="Viridis",
-                contours=dict(showlabels=True),
-            )
+        # Get numerical columns, excluding srno
+        numerical_columns = self.numerical_df.columns.drop(
+            "srno",
+            errors="ignore"
         )
-        density1.update_layout(
-            title="Density Plot of Clan Capital vs. Clan Games",
-            xaxis_title="Clan Capital",
-            yaxis_title="Clan Games",
-        )
-        density_plots.append(density1)
 
-        # 2. Density plot of Clan Score vs. War Attack
-        density2 = go.Figure()
-        density2.add_trace(
-            go.Histogram2dContour(
-                x=self.df["clanscore"],
-                y=self.df["warattack"],
-                colorscale="Viridis",
-                contours=dict(showlabels=True),
-            )
-        )
-        density2.update_layout(
-            title="Density Plot of Clan Score vs. War Attack",
-            xaxis_title="Clan Score",
-            yaxis_title="War Attack",
-        )
-        density_plots.append(density2)
+        # Only use columns that exist in self.df
+        numerical_columns = [
+            col for col in numerical_columns
+            if col in self.df.columns
+        ]
 
-        # 3. Density plot of Clan Games vs. War Attack
-        density3 = go.Figure()
-        density3.add_trace(
-            go.Histogram2dContour(
-                x=self.df["clangames"],
-                y=self.df["warattack"],
-                colorscale="Viridis",
-                contours=dict(showlabels=True),
-            )
-        )
-        density3.update_layout(
-            title="Density Plot of Clan Games vs. War Attack",
-            xaxis_title="Clan Games",
-            yaxis_title="War Attack",
-        )
-        density_plots.append(density3)
+        # Generate density plot for every numerical pair
+        for col1, col2 in combinations(numerical_columns, 2):
+            fig = go.Figure()
 
-        # 4. Density plot of Clan Capital vs. Clan Score
-        density4 = go.Figure()
-        density4.add_trace(
-            go.Histogram2dContour(
-                x=self.df["clancapital"],
-                y=self.df["clanscore"],
-                colorscale="Viridis",
-                contours=dict(showlabels=True),
+            fig.add_trace(
+                go.Histogram2dContour(
+                    x=self.df[col1],
+                    y=self.df[col2],
+                    colorscale="Viridis",
+                    contours=dict(showlabels=True),
+                )
             )
-        )
-        density4.update_layout(
-            title="Density Plot of Clan Capital vs. Clan Score",
-            xaxis_title="Clan Capital",
-            yaxis_title="Clan Score",
-        )
-        density_plots.append(density4)
+
+            fig.update_layout(
+                title=f"Density Plot of {col1} vs {col2}",
+                xaxis_title=col1,
+                yaxis_title=col2,
+            )
+
+            density_plots.append(fig)
 
         return density_plots
 
@@ -953,7 +903,7 @@ class ClanMemberGraph:
                             z=z_col,
                             color="war",  # Color by a categorical variable
                             hover_name="name",  # Display 'name' on hover
-                            title=f"3D Scatter Plot: {x_col}, {y_col}, {z_col}",
+                            title=f"3D Scatter Plot of {x_col} vs {y_col} vs {z_col}",
                         )
                         scatter_plots_3d.append(fig)
 
@@ -971,105 +921,9 @@ class ClanMemberGraph:
             list[plotly.graph_objects.Figure]: Area chart figures
         """
 
-        # 1. Area Chart of Clan Capital Over Players (IN/OUT)
+        # 1. Area Chart of War Attack Over Players (War IN/OUT)
         fig1 = go.Figure()
         fig1.add_trace(
-            go.Scatter(
-                x=self.df_in["name"],
-                y=self.df_in["clancapital"],
-                fill="tozeroy",
-                name="War IN",
-            )
-        )
-        fig1.add_trace(
-            go.Scatter(
-                x=self.df_out["name"],
-                y=self.df_out["clancapital"],
-                fill="tozeroy",
-                name="War OUT",
-            )
-        )
-        fig1.update_layout(
-            title="Area Chart of Clan Capital Over Players (IN/OUT)",
-            xaxis_title="Name",
-            yaxis_title="Clan Capital",
-        )
-
-        # 2. Area Chart of Clan Games Over Players (IN/OUT)
-        fig2 = go.Figure()
-        fig2.add_trace(
-            go.Scatter(
-                x=self.df_in["name"],
-                y=self.df_in["clangames"],
-                fill="tozeroy",
-                name="War IN",
-            )
-        )
-        fig2.add_trace(
-            go.Scatter(
-                x=self.df_out["name"],
-                y=self.df_out["clangames"],
-                fill="tozeroy",
-                name="War OUT",
-            )
-        )
-        fig2.update_layout(
-            title="Area Chart of Clan Games Over Players (IN/OUT)",
-            xaxis_title="Name",
-            yaxis_title="Clan Games",
-        )
-
-        # 3. Area Chart of Clan Games Maxed Over Players (IN/OUT)
-        fig3 = go.Figure()
-        fig3.add_trace(
-            go.Scatter(
-                x=self.df_in["name"],
-                y=self.df_in["clangamesmaxed"],
-                fill="tozeroy",
-                name="War IN",
-            )
-        )
-        fig3.add_trace(
-            go.Scatter(
-                x=self.df_out["name"],
-                y=self.df_out["clangamesmaxed"],
-                fill="tozeroy",
-                name="War OUT",
-            )
-        )
-        fig3.update_layout(
-            title="Area Chart of Clan Games Maxed Over Players (IN/OUT)",
-            xaxis_title="Name",
-            yaxis_title="Clan Games Maxed",
-        )
-
-        # 4. Area Chart of Clan Score Over Players (IN/OUT)
-        fig4 = go.Figure()
-        fig4.add_trace(
-            go.Scatter(
-                x=self.df_in["name"],
-                y=self.df_in["clanscore"],
-                fill="tozeroy",
-                name="War IN",
-            )
-        )
-        fig4.add_trace(
-            go.Scatter(
-                x=self.df_out["name"],
-                y=self.df_out["clanscore"],
-                fill="tozeroy",
-                name="War OUT",
-            )
-        )
-        fig4.update_layout(
-            title="Area Chart of Clan Score Over Players (IN/OUT)",
-            xaxis_title="Name",
-            yaxis_title="Clan Score",
-        )
-
-        # 5. Area Chart of War Attack Over Players (IN/OUT)
-        fig5 = go.Figure()
-        fig5.add_trace(
             go.Scatter(
                 x=self.df_in["name"],
                 y=self.df_in["warattack"],
@@ -1077,7 +931,7 @@ class ClanMemberGraph:
                 name="War IN",
             )
         )
-        fig5.add_trace(
+        fig1.add_trace(
             go.Scatter(
                 x=self.df_out["name"],
                 y=self.df_out["warattack"],
@@ -1085,10 +939,106 @@ class ClanMemberGraph:
                 name="War OUT",
             )
         )
-        fig5.update_layout(
-            title="Area Chart of War Attack Over Players (IN/OUT)",
+        fig1.update_layout(
+            title="Area Chart of War Attack Over Players (War IN/OUT)",
             xaxis_title="Name",
             yaxis_title="War Attack",
+        )
+
+        # 2. Area Chart of Clan Capital Over Players (War IN/OUT)
+        fig2 = go.Figure()
+        fig2.add_trace(
+            go.Scatter(
+                x=self.df_in["name"],
+                y=self.df_in["clancapital"],
+                fill="tozeroy",
+                name="War IN",
+            )
+        )
+        fig2.add_trace(
+            go.Scatter(
+                x=self.df_out["name"],
+                y=self.df_out["clancapital"],
+                fill="tozeroy",
+                name="War OUT",
+            )
+        )
+        fig2.update_layout(
+            title="Area Chart of Clan Capital Over Players (War IN/OUT)",
+            xaxis_title="Name",
+            yaxis_title="Clan Capital",
+        )
+
+        # 3. Area Chart of Clan Games Over Players (War IN/OUT)
+        fig3 = go.Figure()
+        fig3.add_trace(
+            go.Scatter(
+                x=self.df_in["name"],
+                y=self.df_in["clangames"],
+                fill="tozeroy",
+                name="War IN",
+            )
+        )
+        fig3.add_trace(
+            go.Scatter(
+                x=self.df_out["name"],
+                y=self.df_out["clangames"],
+                fill="tozeroy",
+                name="War OUT",
+            )
+        )
+        fig3.update_layout(
+            title="Area Chart of Clan Games Over Players (War IN/OUT)",
+            xaxis_title="Name",
+            yaxis_title="Clan Games",
+        )
+
+        # 4. Area Chart of Clan Games Maxed Over Players (War IN/OUT)
+        fig4 = go.Figure()
+        fig4.add_trace(
+            go.Scatter(
+                x=self.df_in["name"],
+                y=self.df_in["clangamesmaxed"],
+                fill="tozeroy",
+                name="War IN",
+            )
+        )
+        fig4.add_trace(
+            go.Scatter(
+                x=self.df_out["name"],
+                y=self.df_out["clangamesmaxed"],
+                fill="tozeroy",
+                name="War OUT",
+            )
+        )
+        fig4.update_layout(
+            title="Area Chart of Clan Games Maxed Over Players (War IN/OUT)",
+            xaxis_title="Name",
+            yaxis_title="Clan Games Maxed",
+        )
+
+        # 5. Area Chart of Clan Score Over Players (War IN/OUT)
+        fig5 = go.Figure()
+        fig5.add_trace(
+            go.Scatter(
+                x=self.df_in["name"],
+                y=self.df_in["clanscore"],
+                fill="tozeroy",
+                name="War IN",
+            )
+        )
+        fig5.add_trace(
+            go.Scatter(
+                x=self.df_out["name"],
+                y=self.df_out["clanscore"],
+                fill="tozeroy",
+                name="War OUT",
+            )
+        )
+        fig5.update_layout(
+            title="Area Chart of Clan Score Over Players (War IN/OUT)",
+            xaxis_title="Name",
+            yaxis_title="Clan Score",
         )
 
         # 6. Stacked Area Chart of Numerical Values
@@ -1124,101 +1074,9 @@ class ClanMemberGraph:
             list[plotly.graph_objects.Figure]: Polar chart figures
         """
 
-        # 1. Polar Chart of Clan Capital Over Players (IN/OUT)
+        # 1. Polar Chart of War Attack Over Players (War IN/OUT)
         fig1 = go.Figure()
         fig1.add_trace(
-            go.Scatterpolar(
-                r=self.df_in["clancapital"],
-                theta=self.df_in["name"],
-                fill="toself",
-                name="War IN",
-            )
-        )
-        fig1.add_trace(
-            go.Scatterpolar(
-                r=self.df_out["clancapital"],
-                theta=self.df_out["name"],
-                fill="toself",
-                name="War OUT",
-            )
-        )
-        fig1.update_layout(
-            title="Polar Chart of Clan Capital Over Players (IN/OUT)",
-            polar=dict(radialaxis=dict(visible=True)),
-        )
-
-        # 2. Polar Chart of Clan Games Over Players (IN/OUT)
-        fig2 = go.Figure()
-        fig2.add_trace(
-            go.Scatterpolar(
-                r=self.df_in["clangames"],
-                theta=self.df_in["name"],
-                fill="toself",
-                name="War IN",
-            )
-        )
-        fig2.add_trace(
-            go.Scatterpolar(
-                r=self.df_out["clangames"],
-                theta=self.df_out["name"],
-                fill="toself",
-                name="War OUT",
-            )
-        )
-        fig2.update_layout(
-            title="Polar Chart of Clan Games Over Players (IN/OUT)",
-            polar=dict(radialaxis=dict(visible=True)),
-        )
-
-        # 3. Polar Chart of Clan Games Maxed Over Players (IN/OUT)
-        fig3 = go.Figure()
-        fig3.add_trace(
-            go.Scatterpolar(
-                r=self.df_in["clangamesmaxed"],
-                theta=self.df_in["name"],
-                fill="toself",
-                name="War IN",
-            )
-        )
-        fig3.add_trace(
-            go.Scatterpolar(
-                r=self.df_out["clangamesmaxed"],
-                theta=self.df_out["name"],
-                fill="toself",
-                name="War OUT",
-            )
-        )
-        fig3.update_layout(
-            title="Polar Chart of Clan Games Maxed Over Players (IN/OUT)",
-            polar=dict(radialaxis=dict(visible=True)),
-        )
-
-        # 4. Polar Chart of Clan Score Over Players (IN/OUT)
-        fig4 = go.Figure()
-        fig4.add_trace(
-            go.Scatterpolar(
-                r=self.df_in["clanscore"],
-                theta=self.df_in["name"],
-                fill="toself",
-                name="War IN",
-            )
-        )
-        fig4.add_trace(
-            go.Scatterpolar(
-                r=self.df_out["clanscore"],
-                theta=self.df_out["name"],
-                fill="toself",
-                name="War OUT",
-            )
-        )
-        fig4.update_layout(
-            title="Polar Chart of Clan Score Over Players (IN/OUT)",
-            polar=dict(radialaxis=dict(visible=True)),
-        )
-
-        # 5. Polar Chart of War Attack Over Players (IN/OUT)
-        fig5 = go.Figure()
-        fig5.add_trace(
             go.Scatterpolar(
                 r=self.df_in["warattack"],
                 theta=self.df_in["name"],
@@ -1226,7 +1084,7 @@ class ClanMemberGraph:
                 name="War IN",
             )
         )
-        fig5.add_trace(
+        fig1.add_trace(
             go.Scatterpolar(
                 r=self.df_out["warattack"],
                 theta=self.df_out["name"],
@@ -1234,8 +1092,100 @@ class ClanMemberGraph:
                 name="War OUT",
             )
         )
+        fig1.update_layout(
+            title="Polar Chart of War Attack Over Players (War IN/OUT)",
+            polar=dict(radialaxis=dict(visible=True)),
+        )
+
+        # 2. Polar Chart of Clan Capital Over Players (War IN/OUT)
+        fig2 = go.Figure()
+        fig2.add_trace(
+            go.Scatterpolar(
+                r=self.df_in["clancapital"],
+                theta=self.df_in["name"],
+                fill="toself",
+                name="War IN",
+            )
+        )
+        fig2.add_trace(
+            go.Scatterpolar(
+                r=self.df_out["clancapital"],
+                theta=self.df_out["name"],
+                fill="toself",
+                name="War OUT",
+            )
+        )
+        fig2.update_layout(
+            title="Polar Chart of Clan Capital Over Players (War IN/OUT)",
+            polar=dict(radialaxis=dict(visible=True)),
+        )
+
+        # 3. Polar Chart of Clan Games Over Players (War IN/OUT)
+        fig3 = go.Figure()
+        fig3.add_trace(
+            go.Scatterpolar(
+                r=self.df_in["clangames"],
+                theta=self.df_in["name"],
+                fill="toself",
+                name="War IN",
+            )
+        )
+        fig3.add_trace(
+            go.Scatterpolar(
+                r=self.df_out["clangames"],
+                theta=self.df_out["name"],
+                fill="toself",
+                name="War OUT",
+            )
+        )
+        fig3.update_layout(
+            title="Polar Chart of Clan Games Over Players (War IN/OUT)",
+            polar=dict(radialaxis=dict(visible=True)),
+        )
+
+        # 4. Polar Chart of Clan Games Maxed Over Players (War IN/OUT)
+        fig4 = go.Figure()
+        fig4.add_trace(
+            go.Scatterpolar(
+                r=self.df_in["clangamesmaxed"],
+                theta=self.df_in["name"],
+                fill="toself",
+                name="War IN",
+            )
+        )
+        fig4.add_trace(
+            go.Scatterpolar(
+                r=self.df_out["clangamesmaxed"],
+                theta=self.df_out["name"],
+                fill="toself",
+                name="War OUT",
+            )
+        )
+        fig4.update_layout(
+            title="Polar Chart of Clan Games Maxed Over Players (War IN/OUT)",
+            polar=dict(radialaxis=dict(visible=True)),
+        )
+
+        # 5. Polar Chart of Clan Score Over Players (War IN/OUT)
+        fig5 = go.Figure()
+        fig5.add_trace(
+            go.Scatterpolar(
+                r=self.df_in["clanscore"],
+                theta=self.df_in["name"],
+                fill="toself",
+                name="War IN",
+            )
+        )
+        fig5.add_trace(
+            go.Scatterpolar(
+                r=self.df_out["clanscore"],
+                theta=self.df_out["name"],
+                fill="toself",
+                name="War OUT",
+            )
+        )
         fig5.update_layout(
-            title="Polar Chart of War Attack Over Players (IN/OUT)",
+            title="Polar Chart of Clan Score Over Players (War IN/OUT)",
             polar=dict(radialaxis=dict(visible=True)),
         )
 
@@ -1256,29 +1206,14 @@ class ClanMemberGraph:
             polar=dict(radialaxis=dict(visible=True)),
         )
 
-        # Clan Score by Status in a Polar Chart
-        fig7 = go.Figure()
-        fig7.add_trace(
-            go.Scatterpolar(
-                r=self.df["clanscore"],
-                theta=self.df["status"],
-                fill="toself",
-                name="Clan Score by Status",
-            )
-        )
-        fig7.update_layout(
-            title="Clan Score by Status", polar=dict(radialaxis=dict(visible=True))
-        )
-
-        return [fig1, fig2, fig3, fig4, fig5, fig6, fig7]
+        return [fig1, fig2, fig3, fig4, fig5, fig6]
 
     def create_funnel_charts(self):
         """
         Generate funnel chart visualizations for ranked performance analysis.
 
-        Includes:
+        Include:
         - Individual funnels per metric
-        - Stacked funnels across numerical metrics
 
         Returns:
             list[plotly.graph_objects.Figure]: Funnel chart figures
@@ -1286,110 +1221,90 @@ class ClanMemberGraph:
 
         figures = []
 
-        # 1. Funnel Chart for Clan Capital
-        df_sorted = self.df.sort_values(by="clancapital", ascending=False)
+        # 1. Funnel Chart for War Attack
+        df_sorted = self.df.sort_values(by="warattack", ascending=False)
         fig1 = go.Figure()
         fig1.add_trace(
-            go.Funnel(
-                y=df_sorted["name"],
-                x=df_sorted["clancapital"],
-                textinfo="value+percent initial",
-            )
-        )
-        fig1.update_layout(
-            title="Funnel Chart for Clan Capital",
-            yaxis_title="Name",
-            xaxis_title="Clan Capital",
-        )
-        figures.append(fig1)
-
-        # 2. Funnel Chart for Clan Games
-        df_sorted = self.df.sort_values(by="clangames", ascending=False)
-        fig2 = go.Figure()
-        fig2.add_trace(
-            go.Funnel(
-                y=df_sorted["name"],
-                x=df_sorted["clangames"],
-                textinfo="value+percent initial",
-            )
-        )
-        fig2.update_layout(
-            title="Funnel Chart for Clan Games",
-            yaxis_title="Name",
-            xaxis_title="Clan Games",
-        )
-        figures.append(fig2)
-
-        # 3. Funnel Chart for Clan Games Maxed
-        df_sorted = self.df.sort_values(by="clangamesmaxed", ascending=False)
-        fig3 = go.Figure()
-        fig3.add_trace(
-            go.Funnel(
-                y=df_sorted["name"],
-                x=df_sorted["clangamesmaxed"],
-                textinfo="value+percent initial",
-            )
-        )
-        fig3.update_layout(
-            title="Funnel Chart for Clan Games Maxed",
-            yaxis_title="Name",
-            xaxis_title="Clan Games Maxed",
-        )
-        figures.append(fig3)
-
-        # 4. Funnel Chart for Clan Score
-        df_sorted = self.df.sort_values(by="clanscore", ascending=False)
-        fig4 = go.Figure()
-        fig4.add_trace(
-            go.Funnel(
-                y=df_sorted["name"],
-                x=df_sorted["clanscore"],
-                textinfo="value+percent initial",
-            )
-        )
-        fig4.update_layout(
-            title="Funnel Chart for Clan Score",
-            yaxis_title="Name",
-            xaxis_title="Clan Score",
-        )
-        figures.append(fig4)
-
-        # 5. Funnel Chart for War Attack
-        df_sorted = self.df.sort_values(by="warattack", ascending=False)
-        fig5 = go.Figure()
-        fig5.add_trace(
             go.Funnel(
                 y=df_sorted["name"],
                 x=df_sorted["warattack"],
                 textinfo="value+percent initial",
             )
         )
-        fig5.update_layout(
+        fig1.update_layout(
             title="Funnel Chart for War Attack",
             yaxis_title="Name",
             xaxis_title="War Attack",
         )
-        figures.append(fig5)
+        figures.append(fig1)
 
-        # 6. Stacked Funnel Chart of Numerical Values
-        fig6 = go.Figure()
-        for column in self.numerical_df.columns:
-            if column != "srno":
-                df_sorted = self.df.sort_values(by=column, ascending=False)
-                fig6.add_trace(
-                    go.Funnel(
-                        name=column,
-                        y=df_sorted["name"],
-                        x=df_sorted[column],
-                        textinfo="value+percent initial",
-                    )
-                )
-        fig6.update_layout(
-            title="Stacked Funnel Chart of Numerical Values",
-            yaxis_title="Name",
-            xaxis_title="Values",
+        # 2. Funnel Chart for Clan Capital
+        df_sorted = self.df.sort_values(by="clancapital", ascending=False)
+        fig2 = go.Figure()
+        fig2.add_trace(
+            go.Funnel(
+                y=df_sorted["name"],
+                x=df_sorted["clancapital"],
+                textinfo="value+percent initial",
+            )
         )
-        figures.append(fig6)
+        fig2.update_layout(
+            title="Funnel Chart for Clan Capital",
+            yaxis_title="Name",
+            xaxis_title="Clan Capital",
+        )
+        figures.append(fig2)
+
+        # 3. Funnel Chart for Clan Games
+        df_sorted = self.df.sort_values(by="clangames", ascending=False)
+        fig3 = go.Figure()
+        fig3.add_trace(
+            go.Funnel(
+                y=df_sorted["name"],
+                x=df_sorted["clangames"],
+                textinfo="value+percent initial",
+            )
+        )
+        fig3.update_layout(
+            title="Funnel Chart for Clan Games",
+            yaxis_title="Name",
+            xaxis_title="Clan Games",
+        )
+        figures.append(fig3)
+
+        # 4. Funnel Chart for Clan Games Maxed
+        df_sorted = self.df.sort_values(by="clangamesmaxed", ascending=False)
+        fig4 = go.Figure()
+        fig4.add_trace(
+            go.Funnel(
+                y=df_sorted["name"],
+                x=df_sorted["clangamesmaxed"],
+                textinfo="value+percent initial",
+            )
+        )
+        fig4.update_layout(
+            title="Funnel Chart for Clan Games Maxed",
+            yaxis_title="Name",
+            xaxis_title="Clan Games Maxed",
+        )
+        figures.append(fig4)
+
+        # 5. Funnel Chart for Clan Score
+        df_sorted = self.df.sort_values(by="clanscore", ascending=False)
+        fig5 = go.Figure()
+        fig5.add_trace(
+            go.Funnel(
+                y=df_sorted["name"],
+                x=df_sorted["clanscore"],
+                textinfo="value+percent initial",
+            )
+        )
+        fig5.update_layout(
+            title="Funnel Chart for Clan Score",
+            yaxis_title="Name",
+            xaxis_title="Clan Score",
+        )
+        figures.append(fig5)
 
         return figures
 
@@ -1400,75 +1315,74 @@ class ClanMemberGraph:
         Includes:
         - Metric contribution per player
         - Stacked metric waterfalls
-        - Aggregated changes by player status
 
         Returns:
             list[plotly.graph_objects.Figure]: Waterfall chart figures
         """
 
-        # 1. Waterfall Chart for Clan Capital
+        # 1. Waterfall Chart for War Attack
         fig1 = go.Figure()
         fig1.add_trace(
+            go.Waterfall(
+                x=self.df["name"], y=self.df["warattack"], textposition="outside"
+            )
+        )
+        fig1.update_layout(
+            title="Waterfall Chart for War Attack",
+            xaxis_title="Name",
+            yaxis_title="War Attack",
+        )
+
+        # 2. Waterfall Chart for Clan Capital
+        fig2 = go.Figure()
+        fig2.add_trace(
             go.Waterfall(
                 x=self.df["name"], y=self.df["clancapital"], textposition="outside"
             )
         )
-        fig1.update_layout(
+        fig2.update_layout(
             title="Waterfall Chart for Clan Capital",
             xaxis_title="Name",
             yaxis_title="Clan Capital",
         )
 
-        # 2. Waterfall Chart for Clan Games
-        fig2 = go.Figure()
-        fig2.add_trace(
+        # 3. Waterfall Chart for Clan Games
+        fig3 = go.Figure()
+        fig3.add_trace(
             go.Waterfall(
                 x=self.df["name"], y=self.df["clangames"], textposition="outside"
             )
         )
-        fig2.update_layout(
+        fig3.update_layout(
             title="Waterfall Chart for Clan Games",
             xaxis_title="Name",
             yaxis_title="Clan Games",
         )
 
-        # 3. Waterfall Chart for Clan Games Maxed
-        fig3 = go.Figure()
-        fig3.add_trace(
+        # 4. Waterfall Chart for Clan Games Maxed
+        fig4 = go.Figure()
+        fig4.add_trace(
             go.Waterfall(
                 x=self.df["name"], y=self.df["clangamesmaxed"], textposition="outside"
             )
         )
-        fig3.update_layout(
+        fig4.update_layout(
             title="Waterfall Chart for Clan Games Maxed",
             xaxis_title="Name",
             yaxis_title="Clan Games Maxed",
         )
 
-        # 4. Waterfall Chart for Clan Score
-        fig4 = go.Figure()
-        fig4.add_trace(
+        # 5. Waterfall Chart for Clan Score
+        fig5 = go.Figure()
+        fig5.add_trace(
             go.Waterfall(
                 x=self.df["name"], y=self.df["clanscore"], textposition="outside"
             )
         )
-        fig4.update_layout(
+        fig5.update_layout(
             title="Waterfall Chart for Clan Score",
             xaxis_title="Name",
             yaxis_title="Clan Score",
-        )
-
-        # 5. Waterfall Chart for War Attack
-        fig5 = go.Figure()
-        fig5.add_trace(
-            go.Waterfall(
-                x=self.df["name"], y=self.df["warattack"], textposition="outside"
-            )
-        )
-        fig5.update_layout(
-            title="Waterfall Chart for War Attack",
-            xaxis_title="Name",
-            yaxis_title="War Attack",
         )
 
         # 6. Stacked Waterfall Chart of Numerical Values
@@ -1489,19 +1403,4 @@ class ClanMemberGraph:
             yaxis_title="Values",
         )
 
-        # Incremental Changes in War Attack by Status
-        fig7 = go.Figure()
-        fig7.add_trace(
-            go.Waterfall(
-                x=self.df["status"],
-                y=self.df.groupby("status")["warattack"].sum(),
-                textposition="outside",
-            )
-        )
-        fig7.update_layout(
-            title="Incremental Changes in War Attack by Status",
-            xaxis_title="Status",
-            yaxis_title="Total War Attack",
-        )
-
-        return [fig1, fig2, fig3, fig4, fig5, fig6, fig7]
+        return [fig1, fig2, fig3, fig4, fig5, fig6]
