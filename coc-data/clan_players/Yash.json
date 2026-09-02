@@ -3,20 +3,20 @@
     "name": "Yash",
     "townHallLevel": 12,
     "townHallWeaponLevel": 1,
-    "expLevel": 78,
+    "expLevel": 79,
     "trophies": 0,
     "bestTrophies": 1378,
     "warStars": 15,
     "attackWins": 0,
     "defenseWins": 0,
     "builderHallLevel": 6,
-    "builderBaseTrophies": 1914,
-    "bestBuilderBaseTrophies": 1929,
+    "builderBaseTrophies": 1927,
+    "bestBuilderBaseTrophies": 1939,
     "role": "admin",
     "warPreference": "in",
     "donations": 0,
     "donationsReceived": 0,
-    "clanCapitalContributions": 1512621,
+    "clanCapitalContributions": 1569143,
     "clan": {
         "tag": "#2PP0P22CQ",
         "name": "Ancient Ruins",
@@ -53,12 +53,12 @@
             "village": "home"
         },
         {
-            "name": "Get even more Goblins!",
-            "stars": 2,
-            "value": 145,
-            "target": 270,
-            "info": "Win 270 Stars on the Campaign Map",
-            "completionInfo": "Stars in Campaign Map: 145",
+            "name": "Get those Goblins!",
+            "stars": 3,
+            "value": 150,
+            "target": 150,
+            "info": "Win 150 Stars on the Campaign Map",
+            "completionInfo": "Stars in Campaign Map: 150",
             "village": "home"
         },
         {
@@ -91,19 +91,19 @@
         {
             "name": "Gold Grab",
             "stars": 2,
-            "value": 59244922,
+            "value": 60285198,
             "target": 100000000,
             "info": "Steal 100000000 Gold",
-            "completionInfo": "Total Gold looted: 59244922",
+            "completionInfo": "Total Gold looted: 60285198",
             "village": "home"
         },
         {
             "name": "Elixir Escapade",
             "stars": 2,
-            "value": 57737500,
+            "value": 58849875,
             "target": 100000000,
             "info": "Steal 100000000 elixir",
-            "completionInfo": "Total Elixir looted: 57737500",
+            "completionInfo": "Total Elixir looted: 58849875",
             "village": "home"
         },
         {
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 1,
-            "value": 153,
+            "value": 159,
             "target": 250,
             "info": "Successfully defend against 250 attacks",
-            "completionInfo": "Total defenses won: 153",
+            "completionInfo": "Total defenses won: 159",
             "village": "home"
         },
         {
@@ -190,10 +190,10 @@
         {
             "name": "Heroic Heist",
             "stars": 2,
-            "value": 333055,
+            "value": 342569,
             "target": 1000000,
             "info": "Steal 1000000 Dark Elixir",
-            "completionInfo": "Total Dark Elixir looted: 333055",
+            "completionInfo": "Total Dark Elixir looted: 342569",
             "village": "home"
         },
         {
@@ -289,19 +289,19 @@
         {
             "name": "Un-Build It",
             "stars": 2,
-            "value": 122,
+            "value": 123,
             "target": 2000,
             "info": "Destroy 2000 Builder Halls in Builder Battles",
-            "completionInfo": "Total Builder Halls destroyed: 122",
+            "completionInfo": "Total Builder Halls destroyed: 123",
             "village": "builderBase"
         },
         {
             "name": "Champion Builder",
             "stars": 2,
-            "value": 1929,
+            "value": 1939,
             "target": 3000,
             "info": "Achieve a total of 3000 trophies in Builder Battles",
-            "completionInfo": "Builder Trophy record: 1929",
+            "completionInfo": "Builder Trophy record: 1939",
             "village": "builderBase"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 2,
-            "value": 26580,
+            "value": 27370,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 26580",
+            "completionInfo": "Total Season Challenges points: 27370",
             "village": "home"
         },
         {
@@ -415,19 +415,19 @@
         {
             "name": "Aggressive Capitalism",
             "stars": 3,
-            "value": 1410090,
+            "value": 1459640,
             "target": 1000000,
             "info": "Loot 1000000 Capital Gold during Raid attacks",
-            "completionInfo": "Total Capital Gold looted: 1410090",
+            "completionInfo": "Total Capital Gold looted: 1459640",
             "village": "clanCapital"
         },
         {
             "name": "Most Valuable Clanmate",
             "stars": 2,
-            "value": 1512621,
+            "value": 1569143,
             "target": 2000000,
             "info": "Contribute 2000000 Capital Gold to upgrades in the Clan Capital",
-            "completionInfo": "Total Capital Gold contributed: 1512621",
+            "completionInfo": "Total Capital Gold contributed: 1569143",
             "village": "clanCapital"
         },
         {
@@ -675,7 +675,7 @@
         },
         {
             "name": "Bowler",
-            "level": 2,
+            "level": 3,
             "maxLevel": 10,
             "village": "home"
         },
@@ -735,7 +735,7 @@
         },
         {
             "name": "Bomber",
-            "level": 6,
+            "level": 7,
             "maxLevel": 20,
             "village": "builderBase"
         },
@@ -877,7 +877,7 @@
         },
         {
             "name": "Archer Queen",
-            "level": 25,
+            "level": 26,
             "maxLevel": 110,
             "equipment": [
                 {
@@ -1028,7 +1028,19 @@
             "village": "home"
         },
         {
+            "name": "Healer Puppet",
+            "level": 1,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
             "name": "Metal Pants",
+            "level": 1,
+            "maxLevel": 18,
+            "village": "home"
+        },
+        {
+            "name": "Noble Iron",
             "level": 1,
             "maxLevel": 18,
             "village": "home"

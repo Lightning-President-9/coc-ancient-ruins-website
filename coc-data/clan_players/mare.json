@@ -15,7 +15,7 @@
     "role": "admin",
     "warPreference": "in",
     "donations": 0,
-    "donationsReceived": 45,
+    "donationsReceived": 0,
     "clanCapitalContributions": 595617,
     "clan": {
         "tag": "#2PP0P22CQ",
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 1,
-            "value": 92,
+            "value": 97,
             "target": 250,
             "info": "Successfully defend against 250 attacks",
-            "completionInfo": "Total defenses won: 92",
+            "completionInfo": "Total defenses won: 97",
             "village": "home"
         },
         {
@@ -1218,7 +1218,7 @@
         },
         {
             "name": "Recall Spell",
-            "level": 1,
+            "level": 2,
             "maxLevel": 7,
             "village": "home"
         },
