@@ -17,7 +17,7 @@ Welcome to the [Clash of Clans (Ancient Ruins Clan) Website](https://coc-ancient
 - **Month-wise Filtering**: Dynamic selection for time-based analysis
 - **UI Improvements**: Centralized navbar, reusable templates, and improved structure
 - **System Enhancements**: Faster data loading via GitHub JSON, Redis support, and cleaner backend design
-- **KARBS Chatbot**: Rule-based assistant for clan performance analysis
+- **KARSB Chatbot**: Rule-based assistant for clan performance analysis
 
 
 ## Website Link
@@ -51,7 +51,7 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 - **1/9/25** Added player_report.html and player_report.py to provide a detailed look at a player’s performance across different Clash of Clans activities like War Attacks, Clan Capital, Clan Games, and more. The report includes helpful visuals and tables to track progress and highlight the player’s biggest contributions.
 - **13/10/25:** Streamlined month selection for members, former members, and monthly analysis graphs, reducing redundancy. Handled missing data cases and added a Google Form for feedback.
 - **1/1/26:** Added Documentation in all the .py files.
-- **10/1/26:** Added KARBS a light weighted rule based chat/conversational bot for deep statistical analysis of Ancient Ruins Clan.
+- **10/1/26:** Added KARSB a light weighted rule based chat/conversational bot for deep statistical analysis of Ancient Ruins Clan.
 - **22/1/26:** Added KMeans-based member cluster analysis with discrete scatter plots to visualize performance groupings across key metrics.
 - **21/4/26:** Integrated Clash of Clans data from the API, implemented Swagger for comprehensive API documentation, added rate limiting to enhance API security and performance, and improved overall code structure and formatting for better maintainability.
 - **5/5/26:** Added UptimeRobot services for uptime monitoring and to keep the application running continuously.
@@ -63,7 +63,6 @@ Visit the [Clan Website](https://coc-ancient-ruins-website.onrender.com/)
 ## Tree Structure
 ```
 coc-ancient-ruins-website/
-├── .gitignore
 ├── app.py
 ├── chatbot/
 │   ├── __init__.py
@@ -81,12 +80,10 @@ coc-ancient-ruins-website/
 │   ├── clan_details.json
 │   ├── clan_members.json
 │   ├── clan_players/
-│   │   ├── arggggggah.json
 │   │   ├── Chief.json
 │   │   ├── COPY_KAKASHI.json
 │   │   ├── Dewan.json
 │   │   ├── Eleiken.json
-│   │   ├── emnil007.json
 │   │   ├── flameboy5050.json
 │   │   ├── gautam.json
 │   │   ├── Grandpa1.json
@@ -94,15 +91,10 @@ coc-ancient-ruins-website/
 │   │   ├── Joyotri.json
 │   │   ├── KAI_HIWATARI.json
 │   │   ├── kindstonge17.json
-│   │   ├── kking.json
-│   │   ├── mare.json
 │   │   ├── Noob3.json
 │   │   ├── Prachit123.json
-│   │   ├── pramod.json
 │   │   ├── raful.json
 │   │   ├── Rider_22.json
-│   │   ├── sonu.json
-│   │   ├── tejas.json
 │   │   ├── TREX.json
 │   │   ├── Yash.json
 │   │   └── You.json
@@ -129,10 +121,7 @@ coc-ancient-ruins-website/
 │   ├── member_cluster_graph.py
 │   ├── monthly_analysis_graph.py
 │   └── player_report.py
-├── LICENSE
 ├── limiter_config.py
-├── README.md
-├── requirements.txt
 ├── routes/
 │   ├── __init__.py
 │   ├── ai_routes.py
@@ -208,7 +197,7 @@ coc-ancient-ruins-website/
     │   ├── clan-search.html
     │   ├── table-utils.js
     │   └── war-log.html
-    ├── dashboard/
+    ├── dashboard-pages/
     │   ├── components/
     │   │   ├── chart.html
     │   │   ├── monthly_table.html
@@ -225,6 +214,7 @@ coc-ancient-ruins-website/
     │   ├── 429.html
     │   └── 500.html
     ├── graph-pages/
+    │   ├── ai-prediction-graph.html
     │   ├── all-month-graph.html
     │   ├── fmem-graph.html
     │   ├── graph.css
