@@ -15,7 +15,7 @@
     "role": "admin",
     "warPreference": "in",
     "donations": 0,
-    "donationsReceived": 0,
+    "donationsReceived": 77,
     "clanCapitalContributions": 1252143,
     "clan": {
         "tag": "#2PP0P22CQ",
@@ -28,11 +28,11 @@
         }
     },
     "leagueTier": {
-        "id": 105000014,
-        "name": "Valkyrie League 14",
+        "id": 105000013,
+        "name": "Valkyrie League 13",
         "iconUrls": {
-            "small": "https://api-assets.clashofclans.com/leaguetiers/125/7AbbZbiV6whmfa6CZtqt6Ml4NgFH1B-UqCxc59ziqfk.png",
-            "large": "https://api-assets.clashofclans.com/leaguetiers/326/7AbbZbiV6whmfa6CZtqt6Ml4NgFH1B-UqCxc59ziqfk.png"
+            "small": "https://api-assets.clashofclans.com/leaguetiers/125/6BwmbzkNm6p2unZonTauFQ_683uNl4NYtoOXJmEs78c.png",
+            "large": "https://api-assets.clashofclans.com/leaguetiers/326/6BwmbzkNm6p2unZonTauFQ_683uNl4NYtoOXJmEs78c.png"
         }
     },
     "builderBaseLeague": {
@@ -40,8 +40,8 @@
         "name": "Iron League III"
     },
     "currentLeagueSeasonId": 0,
-    "previousLeagueGroupTag": "#8LVLGPV",
-    "previousLeagueSeasonId": 1786338000,
+    "previousLeagueGroupTag": "#0",
+    "previousLeagueSeasonId": 1789362000,
     "achievements": [
         {
             "name": "Bigger Coffers",
@@ -73,10 +73,10 @@
         {
             "name": "Nice and Tidy",
             "stars": 3,
-            "value": 3769,
+            "value": 3811,
             "target": 500,
             "info": "Remove 500 obstacles (trees, rocks, bushes)",
-            "completionInfo": "Total obstacles removed: 3769",
+            "completionInfo": "Total obstacles removed: 3811",
             "village": "home"
         },
         {
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 1,
-            "value": 124,
+            "value": 127,
             "target": 250,
             "info": "Successfully defend against 250 attacks",
-            "completionInfo": "Total defenses won: 124",
+            "completionInfo": "Total defenses won: 127",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 3,
-            "value": 69320,
+            "value": 69620,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 69320",
+            "completionInfo": "Total Season Challenges points: 69620",
             "village": "home"
         },
         {
@@ -505,10 +505,10 @@
         {
             "name": "Crafting Connoisseur",
             "stars": 0,
-            "value": 0,
+            "value": 2,
             "target": 5,
             "info": "Upgrade Crafted Defenses 5 times",
-            "completionInfo": "Total Crafted Defense upgrades: 0",
+            "completionInfo": "Total Crafted Defense upgrades: 2",
             "village": "home"
         },
         {

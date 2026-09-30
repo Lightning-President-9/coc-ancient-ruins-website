@@ -16,7 +16,7 @@
     "warPreference": "in",
     "donations": 0,
     "donationsReceived": 0,
-    "clanCapitalContributions": 1569143,
+    "clanCapitalContributions": 1602507,
     "clan": {
         "tag": "#2PP0P22CQ",
         "name": "Ancient Ruins",
@@ -163,10 +163,10 @@
         {
             "name": "Unbreakable",
             "stars": 1,
-            "value": 159,
+            "value": 161,
             "target": 250,
             "info": "Successfully defend against 250 attacks",
-            "completionInfo": "Total defenses won: 159",
+            "completionInfo": "Total defenses won: 161",
             "village": "home"
         },
         {
@@ -361,10 +361,10 @@
         {
             "name": "Well Seasoned",
             "stars": 2,
-            "value": 27370,
+            "value": 27380,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 27370",
+            "completionInfo": "Total Season Challenges points: 27380",
             "village": "home"
         },
         {
@@ -415,19 +415,19 @@
         {
             "name": "Aggressive Capitalism",
             "stars": 3,
-            "value": 1459640,
+            "value": 1518415,
             "target": 1000000,
             "info": "Loot 1000000 Capital Gold during Raid attacks",
-            "completionInfo": "Total Capital Gold looted: 1459640",
+            "completionInfo": "Total Capital Gold looted: 1518415",
             "village": "clanCapital"
         },
         {
             "name": "Most Valuable Clanmate",
             "stars": 2,
-            "value": 1569143,
+            "value": 1602507,
             "target": 2000000,
             "info": "Contribute 2000000 Capital Gold to upgrades in the Clan Capital",
-            "completionInfo": "Total Capital Gold contributed: 1569143",
+            "completionInfo": "Total Capital Gold contributed: 1602507",
             "village": "clanCapital"
         },
         {
@@ -917,7 +917,7 @@
         },
         {
             "name": "Battle Machine",
-            "level": 7,
+            "level": 8,
             "maxLevel": 35,
             "village": "builderBase"
         },
