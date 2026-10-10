@@ -260,7 +260,7 @@ def handle_chat(user_text: str) -> dict:
 
                 "CLAN MEMBERS\n"
                 "- list all clan members in APR 2025\n"
-                "- is Chief a clan member in APR 2025\n\n"
+                "- was Chief a member in APR 2025\n\n"
 
                 "FORMER CLAN MEMBERS\n"
                 "- list all former members in DEC 2024\n"

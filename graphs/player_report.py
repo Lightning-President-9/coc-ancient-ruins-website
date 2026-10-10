@@ -44,7 +44,7 @@ matplotlib.use("Agg")
 # CONFIG
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 JSON_URL = f"https://raw.githubusercontent.com/Lightning-President-9/ClanDataRepo/refs/heads/main/Clan%20Members/Clan%20Monthly%20Performance%20JSON/clan_monthly_performance_{CLAN_MONTHLY_PERFORMANCE_RANGE}.json"
-CLAN_LOGO = os.path.join(BASE_DIR, "static", "clan-badge_18.png")
+CLAN_LOGO = os.path.join(BASE_DIR, "static", "clan-badge_19.png")
 WEBSITE_LINK = "https://coc-ancient-ruins-website.onrender.com/"
 
 # Load coc-data
