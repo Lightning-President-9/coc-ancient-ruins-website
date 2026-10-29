@@ -221,6 +221,55 @@ body {
   font-weight: bold;
 }
 
+
+/* Source links and clickable follow-up suggestions */
+.message-source {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.message-suggestions {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #d9dce0;
+  font-size: 13px;
+}
+
+.suggestion-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+button.suggestion-btn {
+  max-width: 100%;
+  padding: 8px 12px;
+  color: #174ea6;
+  background: #fff;
+  border: 1px solid #b8c8e5;
+  border-radius: 18px;
+  text-align: left;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+button.suggestion-btn:hover {
+  background: #eaf1ff;
+  border-color: #6d91d5;
+}
+
+button.suggestion-btn:active {
+  transform: scale(0.98);
+}
+
+button.suggestion-btn:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
 .input-area {
   display: flex;
   gap: 8px;
@@ -297,6 +346,11 @@ a:hover {
 
   .dropdown-content {
     min-width: 130px;
+  }
+
+  button.suggestion-btn {
+    padding: 7px 10px;
+    font-size: 12px;
   }
 }
 

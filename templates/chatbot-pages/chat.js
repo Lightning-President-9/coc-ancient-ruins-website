@@ -26,13 +26,12 @@ function smartScroll(container) {
 }
 
 // SEND MESSAGE
-async function sendMessage() {
-	hasUnsavedChat = true;
-
+async function sendMessage(suggestedMessage = null) {
 	const input = document.getElementById("user-input");
-	const message = input.value.trim();
+	const message = (typeof suggestedMessage === "string" ? suggestedMessage : input.value).trim();
 	if (!message) return;
 
+	hasUnsavedChat = true;
 	promptHistory.push(message);
 	historyIndex = promptHistory.length;
 
@@ -152,20 +151,47 @@ function renderLines(text, container, done) {
 	next();
 }
 
-// SOURCE + SUGGESTIONS (UI)
+// SOURCE + CLICKABLE SUGGESTIONS (UI)
 function appendSourceAndSuggestions(wrapper, source, suggestions) {
-	let html = "";
-
 	if (source) {
-		html += `<div><strong>Source:</strong> <a href="${source}" target="_blank">${source}</a></div>`;
+		const sourceRow = document.createElement("div");
+		sourceRow.className = "message-source";
+		const label = document.createElement("strong");
+		label.textContent = "Source: ";
+		const link = document.createElement("a");
+		link.href = source;
+		link.target = "_blank";
+		link.rel = "noopener noreferrer";
+		link.textContent = source;
+		sourceRow.append(label, link);
+		wrapper.appendChild(sourceRow);
 	}
 
-    if (Array.isArray(suggestions) && suggestions.length) {
-        html += `<div style="margin-top:12px;"><strong>Suggestions:</strong></div>`;
-        suggestions.forEach(s => html += `<div>• ${escapeHtml(s)}</div>`);
-    }
+	if (Array.isArray(suggestions) && suggestions.length) {
+		const suggestionSection = document.createElement("div");
+		suggestionSection.className = "message-suggestions";
 
-	wrapper.insertAdjacentHTML("beforeend", html);
+		const heading = document.createElement("strong");
+		heading.textContent = "Suggestions:";
+		suggestionSection.appendChild(heading);
+
+		const buttons = document.createElement("div");
+		buttons.className = "suggestion-buttons";
+
+		suggestions.forEach(suggestion => {
+			if (typeof suggestion !== "string" || !suggestion.trim()) return;
+
+			const button = document.createElement("button");
+			button.type = "button";
+			button.className = "suggestion-btn";
+			button.textContent = suggestion;
+			button.addEventListener("click", () => sendMessage(suggestion));
+			buttons.appendChild(button);
+		});
+
+		suggestionSection.appendChild(buttons);
+		if (buttons.childElementCount) wrapper.appendChild(suggestionSection);
+	}
 }
 
 // COPY HANDLER
