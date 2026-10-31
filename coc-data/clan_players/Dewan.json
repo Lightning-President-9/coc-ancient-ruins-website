@@ -3,28 +3,28 @@
     "name": "Dewan",
     "townHallLevel": 17,
     "townHallWeaponLevel": 5,
-    "expLevel": 185,
+    "expLevel": 187,
     "trophies": 0,
     "bestTrophies": 2991,
-    "warStars": 194,
+    "warStars": 198,
     "attackWins": 0,
     "defenseWins": 0,
     "builderHallLevel": 10,
-    "builderBaseTrophies": 2912,
+    "builderBaseTrophies": 2882,
     "bestBuilderBaseTrophies": 3757,
     "role": "admin",
     "warPreference": "in",
     "donations": 0,
-    "donationsReceived": 648,
-    "clanCapitalContributions": 205117,
+    "donationsReceived": 822,
+    "clanCapitalContributions": 217417,
     "clan": {
         "tag": "#2PP0P22CQ",
         "name": "Ancient Ruins",
-        "clanLevel": 18,
+        "clanLevel": 19,
         "badgeUrls": {
-            "small": "https://api-assets.clashofclans.com/badges/70/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
-            "large": "https://api-assets.clashofclans.com/badges/512/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png",
-            "medium": "https://api-assets.clashofclans.com/badges/200/Ik09kDmZrrLnhjn7A_Jm-8PEfymJKZWvMmfE1OWOI4w.png"
+            "small": "https://api-assets.clashofclans.com/badges/70/gjFWH_mDw0INyip4phYTnItS1Wd0r4GgdXrA5hG9oF4.png",
+            "large": "https://api-assets.clashofclans.com/badges/512/gjFWH_mDw0INyip4phYTnItS1Wd0r4GgdXrA5hG9oF4.png",
+            "medium": "https://api-assets.clashofclans.com/badges/200/gjFWH_mDw0INyip4phYTnItS1Wd0r4GgdXrA5hG9oF4.png"
         }
     },
     "leagueTier": {
@@ -73,10 +73,10 @@
         {
             "name": "Nice and Tidy",
             "stars": 3,
-            "value": 8759,
+            "value": 8893,
             "target": 500,
             "info": "Remove 500 obstacles (trees, rocks, bushes)",
-            "completionInfo": "Total obstacles removed: 8759",
+            "completionInfo": "Total obstacles removed: 8893",
             "village": "home"
         },
         {
@@ -91,19 +91,19 @@
         {
             "name": "Gold Grab",
             "stars": 3,
-            "value": 692906916,
+            "value": 781773769,
             "target": 100000000,
             "info": "Steal 100000000 Gold",
-            "completionInfo": "Total Gold looted: 692906916",
+            "completionInfo": "Total Gold looted: 781773769",
             "village": "home"
         },
         {
             "name": "Elixir Escapade",
             "stars": 3,
-            "value": 721370060,
+            "value": 828468012,
             "target": 100000000,
             "info": "Steal 100000000 elixir",
-            "completionInfo": "Total Elixir looted: 721370060",
+            "completionInfo": "Total Elixir looted: 828468012",
             "village": "home"
         },
         {
@@ -127,46 +127,46 @@
         {
             "name": "Wall Buster",
             "stars": 3,
-            "value": 22771,
+            "value": 24961,
             "target": 2000,
             "info": "Destroy 2000 Walls in Multiplayer battles",
-            "completionInfo": "Total Walls destroyed: 22771",
+            "completionInfo": "Total Walls destroyed: 24961",
             "village": "home"
         },
         {
             "name": "Humiliator",
             "stars": 2,
-            "value": 1022,
+            "value": 1115,
             "target": 2000,
             "info": "Destroy 2000 Town Halls in Multiplayer battles",
-            "completionInfo": "Total Town Halls destroyed: 1022",
+            "completionInfo": "Total Town Halls destroyed: 1115",
             "village": "home"
         },
         {
             "name": "Union Buster",
             "stars": 3,
-            "value": 5221,
+            "value": 5722,
             "target": 2500,
             "info": "Destroy 2500 Builder's Huts in Multiplayer battles",
-            "completionInfo": "Total Builder's Huts destroyed: 5221",
+            "completionInfo": "Total Builder's Huts destroyed: 5722",
             "village": "home"
         },
         {
             "name": "Conqueror",
             "stars": 2,
-            "value": 1344,
+            "value": 1458,
             "target": 5000,
             "info": "Win 5000 Multiplayer battles",
-            "completionInfo": "Total multiplayer battles won: 1344",
+            "completionInfo": "Total multiplayer battles won: 1458",
             "village": "home"
         },
         {
             "name": "Unbreakable",
             "stars": 3,
-            "value": 1072,
+            "value": 1089,
             "target": 500,
             "info": "Successfully defend against 500 attacks",
-            "completionInfo": "Total defenses won: 1072",
+            "completionInfo": "Total defenses won: 1089",
             "village": "home"
         },
         {
@@ -181,19 +181,19 @@
         {
             "name": "Mortar Mauler",
             "stars": 2,
-            "value": 4489,
+            "value": 4909,
             "target": 5000,
             "info": "Destroy 5000 Mortars in Multiplayer battles",
-            "completionInfo": "Total Mortars destroyed: 4489",
+            "completionInfo": "Total Mortars destroyed: 4909",
             "village": "home"
         },
         {
             "name": "Heroic Heist",
             "stars": 3,
-            "value": 6176572,
+            "value": 7029292,
             "target": 1000000,
             "info": "Steal 1000000 Dark Elixir",
-            "completionInfo": "Total Dark Elixir looted: 6176572",
+            "completionInfo": "Total Dark Elixir looted: 7029292",
             "village": "home"
         },
         {
@@ -208,46 +208,46 @@
         {
             "name": "X-Bow Exterminator",
             "stars": 3,
-            "value": 3432,
+            "value": 3840,
             "target": 2500,
             "info": "Destroy 2500 X-Bows in Multiplayer battles",
-            "completionInfo": "Total X-Bows destroyed: 3432",
+            "completionInfo": "Total X-Bows destroyed: 3840",
             "village": "home"
         },
         {
             "name": "Firefighter",
             "stars": 2,
-            "value": 2402,
+            "value": 2696,
             "target": 5000,
             "info": "Destroy 5000 Inferno Towers in Multiplayer battles",
-            "completionInfo": "Total Inferno Towers destroyed: 2402",
+            "completionInfo": "Total Inferno Towers destroyed: 2696",
             "village": "home"
         },
         {
             "name": "War Hero",
             "stars": 2,
-            "value": 194,
+            "value": 198,
             "target": 1000,
             "info": "Score 1000 Stars for your clan in Clan War battles",
-            "completionInfo": "Total Stars scored for clan in Clan War battles: 194",
+            "completionInfo": "Total Stars scored for clan in Clan War battles: 198",
             "village": "home"
         },
         {
             "name": "Clan War Wealth",
             "stars": 3,
-            "value": 351676442,
+            "value": 378721043,
             "target": 100000000,
             "info": "Collect 100000000 Gold from the Clan Castle",
-            "completionInfo": "Total Gold collected in Clan War bonuses: 351676442",
+            "completionInfo": "Total Gold collected in Clan War bonuses: 378721043",
             "village": "home"
         },
         {
             "name": "Anti-Artillery",
             "stars": 2,
-            "value": 841,
+            "value": 935,
             "target": 2000,
             "info": "Destroy 2000 Eagle or Inferno Artilleries in Multiplayer battles",
-            "completionInfo": "Total Eagle or Inferno Artilleries destroyed: 841",
+            "completionInfo": "Total Eagle or Inferno Artilleries destroyed: 935",
             "village": "home"
         },
         {
@@ -289,10 +289,10 @@
         {
             "name": "Un-Build It",
             "stars": 3,
-            "value": 2016,
+            "value": 2017,
             "target": 2000,
             "info": "Destroy 2000 Builder Halls in Builder Battles",
-            "completionInfo": "Total Builder Halls destroyed: 2016",
+            "completionInfo": "Total Builder Halls destroyed: 2017",
             "village": "builderBase"
         },
         {
@@ -325,10 +325,10 @@
         {
             "name": "Games Champion",
             "stars": 2,
-            "value": 68125,
+            "value": 69825,
             "target": 100000,
             "info": "Earn 100000 points in Clan Games",
-            "completionInfo": "Total Clan Games points: 68125",
+            "completionInfo": "Total Clan Games points: 69825",
             "village": "home"
         },
         {
@@ -343,10 +343,10 @@
         {
             "name": "War League Legend",
             "stars": 1,
-            "value": 30,
+            "value": 34,
             "target": 100,
             "info": "Score 100 Stars for your clan in War League battles",
-            "completionInfo": "Total Stars scored for clan in War League battles: 30",
+            "completionInfo": "Total Stars scored for clan in War League battles: 34",
             "village": "home"
         },
         {
@@ -361,37 +361,37 @@
         {
             "name": "Well Seasoned",
             "stars": 3,
-            "value": 73970,
+            "value": 79990,
             "target": 50000,
             "info": "Earn 50000 points in Season Challenges",
-            "completionInfo": "Total Season Challenges points: 73970",
+            "completionInfo": "Total Season Challenges points: 79990",
             "village": "home"
         },
         {
             "name": "Shattered and Scattered",
             "stars": 2,
-            "value": 1517,
+            "value": 1722,
             "target": 4000,
             "info": "Destroy 4000 Scattershots in Multiplayer battles",
-            "completionInfo": "Total Scattershots destroyed: 1517",
+            "completionInfo": "Total Scattershots destroyed: 1722",
             "village": "home"
         },
         {
             "name": "Not So Easy This Time",
             "stars": 2,
-            "value": 732,
+            "value": 825,
             "target": 2000,
             "info": "Destroy 2000 weaponized Town Halls in Multiplayer battles",
-            "completionInfo": "Weaponized Town Halls destroyed: 732",
+            "completionInfo": "Weaponized Town Halls destroyed: 825",
             "village": "home"
         },
         {
             "name": "Bust This!",
             "stars": 3,
-            "value": 2856,
+            "value": 3253,
             "target": 2500,
             "info": "Destroy 2500 weaponized Builder's Huts in Multiplayer battles",
-            "completionInfo": "Total weaponized Builder's Huts destroyed: 2856",
+            "completionInfo": "Total weaponized Builder's Huts destroyed: 3253",
             "village": "home"
         },
         {
@@ -424,28 +424,28 @@
         {
             "name": "Most Valuable Clanmate",
             "stars": 1,
-            "value": 205117,
+            "value": 217417,
             "target": 500000,
             "info": "Contribute 500000 Capital Gold to upgrades in the Clan Capital",
-            "completionInfo": "Total Capital Gold contributed: 205117",
+            "completionInfo": "Total Capital Gold contributed: 217417",
             "village": "clanCapital"
         },
         {
             "name": "Counterspell",
             "stars": 2,
-            "value": 1181,
+            "value": 1382,
             "target": 4000,
             "info": "Destroy 4000 Spell Towers in Multiplayer Battles",
-            "completionInfo": "Total Spell Towers Destroyed: 1181",
+            "completionInfo": "Total Spell Towers Destroyed: 1382",
             "village": "home"
         },
         {
             "name": "Monolith Masher",
             "stars": 2,
-            "value": 541,
+            "value": 636,
             "target": 2000,
             "info": "Destroy 2000 Monoliths in Multiplayer Battles",
-            "completionInfo": "Total Monoliths Destroyed: 541",
+            "completionInfo": "Total Monoliths Destroyed: 636",
             "village": "home"
         },
         {
@@ -469,55 +469,55 @@
         {
             "name": "Multi-Archer Tower Terminator",
             "stars": 2,
-            "value": 682,
+            "value": 872,
             "target": 5000,
             "info": "Destroy 5000 Multi-Archer Towers in Multiplayer Battles",
-            "completionInfo": "Total Multi-Archer Towers Destroyed: 682",
+            "completionInfo": "Total Multi-Archer Towers Destroyed: 872",
             "village": "home"
         },
         {
             "name": "Ricochet Cannon Crusher",
             "stars": 2,
-            "value": 658,
+            "value": 828,
             "target": 5000,
             "info": "Destroy 5000 Ricochet Cannons in Multiplayer Battles",
-            "completionInfo": "Total Ricochet Cannons Destroyed: 658",
+            "completionInfo": "Total Ricochet Cannons Destroyed: 828",
             "village": "home"
         },
         {
             "name": "Firespitter Finisher",
             "stars": 1,
-            "value": 211,
+            "value": 293,
             "target": 400,
             "info": "Destroy 400 Firespitters in Multiplayer Battles",
-            "completionInfo": "Total Firespitters Destroyed: 211",
+            "completionInfo": "Total Firespitters Destroyed: 293",
             "village": "home"
         },
         {
             "name": "Multi-Gear Tower Trampler",
             "stars": 1,
-            "value": 100,
+            "value": 139,
             "target": 200,
             "info": "Destroy 200 Multi-Gear Towers in Multiplayer Battles",
-            "completionInfo": "Total Multi-Gear Towers Destroyed: 100",
+            "completionInfo": "Total Multi-Gear Towers Destroyed: 139",
             "village": "home"
         },
         {
             "name": "Crafting Connoisseur",
             "stars": 1,
-            "value": 11,
+            "value": 14,
             "target": 25,
             "info": "Upgrade Crafted Defenses 25 times",
-            "completionInfo": "Total Crafted Defense upgrades: 11",
+            "completionInfo": "Total Crafted Defense upgrades: 14",
             "village": "home"
         },
         {
             "name": "Crafter’s Nightmare",
             "stars": 1,
-            "value": 88,
+            "value": 169,
             "target": 200,
             "info": "Destroy 200 Crafted Defenses in Multiplayer Battles",
-            "completionInfo": "Total Crafted Defenses Destroyed: 88",
+            "completionInfo": "Total Crafted Defenses Destroyed: 169",
             "village": "home"
         },
         {
@@ -570,7 +570,7 @@
         },
         {
             "name": "Wizard",
-            "level": 7,
+            "level": 8,
             "maxLevel": 14,
             "village": "home"
         },
@@ -624,6 +624,12 @@
         },
         {
             "name": "Baby Dragon",
+            "level": 1,
+            "maxLevel": 12,
+            "village": "home"
+        },
+        {
+            "name": "Miner",
             "level": 1,
             "maxLevel": 12,
             "village": "home"
@@ -840,7 +846,7 @@
         },
         {
             "name": "Mighty Yak",
-            "level": 7,
+            "level": 8,
             "maxLevel": 15,
             "village": "home"
         },
@@ -860,7 +866,7 @@
     "heroes": [
         {
             "name": "Barbarian King",
-            "level": 72,
+            "level": 74,
             "maxLevel": 110,
             "equipment": [
                 {
@@ -880,18 +886,18 @@
         },
         {
             "name": "Archer Queen",
-            "level": 57,
+            "level": 58,
             "maxLevel": 110,
             "equipment": [
                 {
                     "name": "Healer Puppet",
-                    "level": 16,
+                    "level": 18,
                     "maxLevel": 18,
                     "village": "home"
                 },
                 {
                     "name": "Frozen Arrow",
-                    "level": 18,
+                    "level": 21,
                     "maxLevel": 27,
                     "village": "home"
                 }
@@ -900,7 +906,7 @@
         },
         {
             "name": "Grand Warden",
-            "level": 50,
+            "level": 56,
             "maxLevel": 85,
             "equipment": [
                 {
@@ -952,7 +958,7 @@
         },
         {
             "name": "Minion Prince",
-            "level": 46,
+            "level": 47,
             "maxLevel": 95,
             "equipment": [
                 {
@@ -963,7 +969,7 @@
                 },
                 {
                     "name": "Dark Crown",
-                    "level": 16,
+                    "level": 21,
                     "maxLevel": 27,
                     "village": "home"
                 }
@@ -972,7 +978,7 @@
         },
         {
             "name": "Dragon Duke",
-            "level": 7,
+            "level": 8,
             "maxLevel": 25,
             "equipment": [
                 {
@@ -1012,7 +1018,7 @@
         },
         {
             "name": "Frozen Arrow",
-            "level": 18,
+            "level": 21,
             "maxLevel": 27,
             "village": "home"
         },
@@ -1024,13 +1030,25 @@
         },
         {
             "name": "Dark Crown",
-            "level": 16,
+            "level": 21,
+            "maxLevel": 27,
+            "village": "home"
+        },
+        {
+            "name": "Electro Boots",
+            "level": 12,
             "maxLevel": 27,
             "village": "home"
         },
         {
             "name": "Action Figure",
             "level": 1,
+            "maxLevel": 27,
+            "village": "home"
+        },
+        {
+            "name": "Frost Flake",
+            "level": 6,
             "maxLevel": 27,
             "village": "home"
         },
@@ -1108,7 +1126,7 @@
         },
         {
             "name": "Healer Puppet",
-            "level": 16,
+            "level": 18,
             "maxLevel": 18,
             "village": "home"
         },
