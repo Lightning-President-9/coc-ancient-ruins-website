@@ -92,19 +92,67 @@ def get_player_rating(player_name):
 
     percentile = get_player_percentiles(player_name)["Clan Score"]
 
+    if percentile >= 95:
+        return "S+"
+
     if percentile >= 90:
         return "S"
 
-    if percentile >= 70:
+    if percentile >= 85:
+        return "S-"
+
+    if percentile >= 80:
+        return "A+"
+
+    if percentile >= 75:
         return "A"
 
-    if percentile >= 40:
+    if percentile >= 70:
+        return "A-"
+
+    if percentile >= 65:
+        return "B+"
+
+    if percentile >= 60:
         return "B"
 
-    if percentile >= 20:
+    if percentile >= 55:
+        return "B-"
+
+    if percentile >= 50:
+        return "C+"
+
+    if percentile >= 45:
         return "C"
 
-    return "D"
+    if percentile >= 40:
+        return "C-"
+
+    if percentile >= 35:
+        return "D+"
+
+    if percentile >= 30:
+        return "D"
+
+    if percentile >= 25:
+        return "D-"
+
+    if percentile >= 20:
+        return "E+"
+
+    if percentile >= 15:
+        return "E"
+
+    if percentile >= 10:
+        return "E-"
+
+    if percentile >= 5:
+        return "F+"
+
+    if percentile == 0:
+        return "F"
+
+    return "F-"
 
 
 def get_clan_average():
